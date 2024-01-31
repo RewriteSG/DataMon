@@ -6,7 +6,7 @@ public class DataMonAI : MonoBehaviour
 {
     public AI_State AI_state;
     public Transform Target;
-
+    DataMon.IndividualDataMon.DataMon _dataMon;
     [SerializeField] private float NextWaypointDist = 3;
 
     Path path;
@@ -21,33 +21,43 @@ public class DataMonAI : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        _dataMon.GetComponent<DataMon.IndividualDataMon.DataMon>();
     }
 
     Vector2 Dir;
     Vector2 Force;
+    float distance;
     // Update is called once per frame
     void Update()
     {
-        if (reachedEndOfPath)
+        if (reachedEndOfPath && !Target.isNull())
         {
             DataMonDoThings();
         }
+    }
+    private void FixedUpdate()
+    {
+
         if (path == null)
         {
             return;
         }
-        if(currentWaypoint >= path.vectorPath.Count)
+        if (currentWaypoint >= path.vectorPath.Count)
         {
             reachedEndOfPath = true;
             return;
         }
-        else if(!doingSomething)
+        else if (!doingSomething)
         {
             reachedEndOfPath = false;
         }
         Dir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Force = Dir * Speed * Time.deltaTime;
-        
+        Force = Dir * _dataMon.dataMon.BaseAttributes.BaseMoveSpeed * Time.deltaTime;
+        distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
+        if(distance < NextWaypointDist)
+        {
+            currentWaypoint++;
+        }
     }
     void DataMonDoThings()
     {
@@ -85,4 +95,11 @@ public class DataMonAI : MonoBehaviour
 public enum AI_State
 {
     Patrol, Attack, Defense, Produce
+}
+public static class GameObjectExtensions
+{
+    public static bool isNull<T>(this T obj) where T : Transform
+    {
+        return obj.gameObject == null;
+    }
 }

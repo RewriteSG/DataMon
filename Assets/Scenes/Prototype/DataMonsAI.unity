@@ -133,6 +133,8 @@ GameObject:
   - component: {fileID: 437054099}
   - component: {fileID: 437054098}
   - component: {fileID: 437054100}
+  - component: {fileID: 437054102}
+  - component: {fileID: 437054101}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -220,6 +222,42 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &437054101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437054096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847133a8af9ec054980b614351dbd60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataMonData: {fileID: 0}
+  dataMon:
+    DataMonPrefab: {fileID: 0}
+    DataMonAttackProjectiles: []
+    BaseAttributes:
+      BaseHealth: 0
+      BaseAttack: 0
+      BaseProductionSpeed: 0
+      BaseMoveSpeed: 0
+--- !u!114 &437054102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437054096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3db86078fc84844187f31baed0cee2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AI_state: 0
+  Target: {fileID: 0}
+  NextWaypointDist: 3
 --- !u!1 &466078277
 GameObject:
   m_ObjectHideFlags: 0

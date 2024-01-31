@@ -12,6 +12,7 @@ public class DataMonsData : ScriptableObject
     public DataMonBehaviourState MonBehaviourState;
     public DataMonRole MonRole;
 }
+
 public enum DataMonRole
 {
     Production, Attack, Defense, Healer
@@ -35,4 +36,20 @@ public class DataMonAttributes
     public float BaseAttack;
     public float BaseProductionSpeed;
     public float BaseMoveSpeed;
+}
+public static class DataMonsDataExtensions
+{
+    public static DataMonIndividualData GetDataMonInDataArray<T>(this T[] array, GameObject dataMon) where T : DataMonIndividualData    
+    {
+        DataMonIndividualData toReturn = null;
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i].DataMonPrefab == dataMon)
+            {
+                toReturn = array[i];
+                break;
+            }
+        }
+        return toReturn;
+    }
 }
