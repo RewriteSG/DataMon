@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Obstacles
   - 
   - 
   - 
@@ -40,4 +41,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Torso
+    uniqueID: 3405568553
+    locked: 0
+  - name: Arms
+    uniqueID: 2422426365
+    locked: 0
+  - name: Legs
+    uniqueID: 2721770649
+    locked: 0
+  - name: Tails
+    uniqueID: 1136195957
     locked: 0
