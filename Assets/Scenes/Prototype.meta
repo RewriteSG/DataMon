@@ -1,19 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<<< HEAD:Assets/Scenes/Prototype.meta
-guid: 026fffe53d9a7c641b1e53db637c9afa
+guid: 2b94fc08866e2f141887671aa2ea40c4
 folderAsset: yes
-========
-guid: 47ec1e2d0e8b3424ea91b564b0cbefe8
->>>>>>>> origin/Movement:Assets/Scenes/Prototype/MovementTest.unity.meta
-=======
-<<<<<<<< HEAD:Assets/Datamons.meta
-guid: 1791b251b55fb6b4dbd0860ff81c919c
-========
-guid: a8eec5f3e48930f4bb63a00659e3d5d9
->>>>>>>> origin/Movement:Assets/Scenes/Prototype.meta
-folderAsset: yes
->>>>>>> origin/Movement
 DefaultImporter:
   externalObjects: {}
   userData: 
