@@ -153,14 +153,17 @@ MonoBehaviour:
   waves:
   - name: Datamon_1
     enemy: {fileID: 7986514673085368368, guid: ae5609cfb864e214993da9841422096a, type: 3}
-    Count: 2
-    rate: 0.5
+    Count: 4
+    rate: 1.5
   - name: Datamon_2
     enemy: {fileID: 6945658879908264758, guid: b56d55e9b23146c499c05ae8751d20fb, type: 3}
     Count: 2
     rate: 1
+  SpawnPoints:
+  - {fileID: 344987958}
+  - {fileID: 138213990}
+  - {fileID: 886136248}
   timeBetweenWaves: 5
-  waveCountdown: 0
 --- !u!4 &65972370
 Transform:
   m_ObjectHideFlags: 0
