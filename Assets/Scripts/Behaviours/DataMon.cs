@@ -8,8 +8,15 @@ namespace DataMon.IndividualDataMon
 {
     public class DataMon : MonoBehaviour
     {
+        public int tier = 0;
         public DataMonsData dataMonData;
         public DataMonIndividualData dataMon;
+
+        [SerializeField]private GameObject test;
+        private void Start()
+        {
+            SetDataMon(test);
+        }
         /// <summary>
         /// Returns false if dataMonData is null
         /// </summary>
@@ -27,19 +34,19 @@ namespace DataMon.IndividualDataMon
                 return true;
             }
         }
-        public int GetDataMonIndexInData(DataMonIndividualData[] array, GameObject DataMon)
-        {
-            int toReturn = -1;
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i].DataMonPrefab == DataMon)
-                {
-                    toReturn = i;
-                    break;
-                }
-            }
-            return toReturn;
-        }
+        //public int GetDataMonIndexInData(DataMonIndividualData[] array, GameObject DataMon)
+        //{
+        //    int toReturn = -1;
+        //    for (int i = 0; i < array.Length; i++)
+        //    {
+        //        if (array[i].DataMonPrefab == DataMon)
+        //        {
+        //            toReturn = i;
+        //            break;
+        //        }
+        //    }
+        //    return toReturn;
+        //}
         public void SetDataMonData(DataMonsData toData)
         {
             dataMonData = toData;

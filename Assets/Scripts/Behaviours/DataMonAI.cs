@@ -21,7 +21,8 @@ public class DataMonAI : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        _dataMon.GetComponent<DataMon.IndividualDataMon.DataMon>();
+        _dataMon = GetComponent<DataMon.IndividualDataMon.DataMon>();
+        InvokeRepeating("TestAI", 0, .5f);
     }
 
     Vector2 Dir;
@@ -33,6 +34,15 @@ public class DataMonAI : MonoBehaviour
         if (reachedEndOfPath && !Target.isNull())
         {
             DataMonDoThings();
+        }
+    }
+    void TestAI()
+    {
+        if(seeker.IsDone())
+            seeker.StartPath(transform.position, Target.position, OnPathingComplete);
+        if(Vector3.Distance(transform.position,Target.position)> NextWaypointDist)
+        {
+            reachedEndOfPath = false;
         }
     }
     private void FixedUpdate()
@@ -52,13 +62,22 @@ public class DataMonAI : MonoBehaviour
             reachedEndOfPath = false;
         }
         Dir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Force = Dir * _dataMon.dataMon.BaseAttributes.BaseMoveSpeed * Time.deltaTime;
+        Force = Dir * _dataMon.dataMon.BaseAttributes.BaseMoveSpeed * Time.fixedDeltaTime;
+
+        rb.AddForce(Force);
         distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
+
         if(distance < NextWaypointDist)
         {
             currentWaypoint++;
         }
+        if (!reachedEndOfPath)
+        {
+            Quaternion toRotate = Quaternion.LookRotation(transform.forward, Dir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, GameManager.instance.DataMonsRotationSpeed*Time.fixedDeltaTime);
+        }
     }
+
     void DataMonDoThings()
     {
         if (doingSomething)
