@@ -5,6 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public GameObject Player;
+
+    public float PlayerDataMonPatrolMinDist;
+    public float PlayerDataMonPatrolMaxDist;
+    public float MaxDistForCompanionDataMon;
     public float DataMonsRotationSpeed;
     // Start is called before the first frame update
     void Start()
@@ -16,5 +21,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(Player.transform.position, PlayerDataMonPatrolMinDist);
+        Gizmos.DrawWireSphere(Player.transform.position, PlayerDataMonPatrolMaxDist);
+
+        Gizmos.DrawWireSphere(Player.transform.position, MaxDistForCompanionDataMon);
     }
 }

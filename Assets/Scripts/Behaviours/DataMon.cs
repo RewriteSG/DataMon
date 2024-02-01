@@ -16,8 +16,9 @@ namespace DataMon.IndividualDataMon
         private void Start()
         {
             SetDataMon(test);
+            //SetDataMonCompanion();
         }
-        /// <summary>
+        /// <summary> 
         /// Returns false if dataMonData is null
         /// </summary>
         /// <param name="ToDataMon"></param>
@@ -30,7 +31,7 @@ namespace DataMon.IndividualDataMon
             }
             else
             {
-                dataMon = dataMonData._DataMon.GetDataMonInDataArray(ToDataMon);
+                dataMon = new DataMonIndividualData(dataMonData._DataMon.GetDataMonInDataArray(ToDataMon));
                 return true;
             }
         }
@@ -50,6 +51,18 @@ namespace DataMon.IndividualDataMon
         public void SetDataMonData(DataMonsData toData)
         {
             dataMonData = toData;
+        }
+        public void SetDataMonCompanion()
+        {
+            dataMon.MonBehaviourState = DataMonBehaviourState.isCompanion;
+        }
+        public void SetDataMonHostile()
+        {
+            dataMon.MonBehaviourState = DataMonBehaviourState.isHostile;
+        }
+        public void SetDataMonNeutral()
+        {
+            dataMon.MonBehaviourState = DataMonBehaviourState.isNeutral;
         }
     }
 }

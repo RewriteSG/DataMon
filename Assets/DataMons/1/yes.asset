@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cd76db86f1e6c48902b25244c0ea7e, type: 3}
   m_Name: yes
   m_EditorClassIdentifier: 
-  DataMonName: yes
   _DataMon:
-  - DataMonPrefab: {fileID: 8258848450777015259, guid: 549be21259e953244b9ebabddc679a33,
+  - DataMonName: 
+    AttackRange: 5
+    DataMonPrefab: {fileID: 8258848450777015259, guid: 549be21259e953244b9ebabddc679a33,
       type: 3}
     DataMonAttackProjectiles: []
     BaseAttributes:
@@ -22,7 +23,10 @@ MonoBehaviour:
       BaseAttack: 0
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
-  - DataMonPrefab: {fileID: 3720160180207510574, guid: a1cd0defbd70d9b4a9429065abf4e295,
+    MonBehaviourState: 2
+  - DataMonName: keke
+    AttackRange: 2
+    DataMonPrefab: {fileID: 3720160180207510574, guid: a1cd0defbd70d9b4a9429065abf4e295,
       type: 3}
     DataMonAttackProjectiles: []
     BaseAttributes:
@@ -30,5 +34,5 @@ MonoBehaviour:
       BaseAttack: 0
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
-  MonBehaviourState: 0
+    MonBehaviourState: 1
   MonRole: 0

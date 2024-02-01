@@ -6,10 +6,8 @@ using UnityEngine;
 public class DataMonsData : ScriptableObject
 {
     
-    public string DataMonName;
     [Header("Put DataMons from tier 1 to tier 2, and so on..")]
     public DataMonIndividualData[] _DataMon;
-    public DataMonBehaviourState MonBehaviourState;
     public DataMonRole MonRole;
 }
 
@@ -25,9 +23,28 @@ public enum DataMonBehaviourState
 [System.Serializable]
 public class DataMonIndividualData
 {
+    public string DataMonName;
+    public float AttackRange = 1;
     public GameObject DataMonPrefab;
     public GameObject[] DataMonAttackProjectiles;
     public DataMonAttributes BaseAttributes;
+    public DataMonBehaviourState MonBehaviourState;
+    public DataMonIndividualData()
+    {
+
+    }
+    /// <summary>
+    /// Use this to only copy the data
+    /// </summary>
+    public DataMonIndividualData(DataMonIndividualData toCopy)
+    {
+        DataMonName = toCopy.DataMonName;
+        AttackRange = toCopy.AttackRange;
+        DataMonPrefab = toCopy.DataMonPrefab;
+        DataMonAttackProjectiles = toCopy.DataMonAttackProjectiles;
+        BaseAttributes = toCopy.BaseAttributes;
+        MonBehaviourState = toCopy.MonBehaviourState;
+    }
 }
 [System.Serializable]
 public class DataMonAttributes

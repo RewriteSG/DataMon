@@ -23,6 +23,6 @@ public class Movement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.velocity = MovementDirection * MovementSpeed;
+        rb.MovePosition((Vector2)transform.position+(MovementDirection * MovementSpeed*Time.deltaTime));
     }
 }
