@@ -6676,6 +6676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 290785042}
+  - component: {fileID: 290785043}
   m_Layer: 0
   m_Name: Pincer1
   m_TagString: Untagged
@@ -6703,6 +6704,19 @@ Transform:
   m_Father: {fileID: 1702736094}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -38.307003}
+--- !u!114 &290785043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290785041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d69b27ab3e7346ab3a0e326895b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JointColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &291201719
 GameObject:
   m_ObjectHideFlags: 0
@@ -7684,6 +7698,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 329362974}
+  - component: {fileID: 329362975}
   m_Layer: 0
   m_Name: LeftLegTOP
   m_TagString: Untagged
@@ -7706,6 +7721,19 @@ Transform:
   m_Father: {fileID: 641303661}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 117.59701}
+--- !u!114 &329362975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329362973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d69b27ab3e7346ab3a0e326895b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JointColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &329610650
 GameObject:
   m_ObjectHideFlags: 0
@@ -21281,6 +21309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 845910683}
+  - component: {fileID: 845910684}
   m_Layer: 0
   m_Name: Arm1
   m_TagString: Untagged
@@ -21304,6 +21333,19 @@ Transform:
   m_Father: {fileID: 641303661}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 27.685001}
+--- !u!114 &845910684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845910682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d69b27ab3e7346ab3a0e326895b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JointColor: {r: 0, g: 0.61960787, b: 0.11764707, a: 1}
 --- !u!1 &850560669
 GameObject:
   m_ObjectHideFlags: 0
@@ -42550,6 +42592,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1702736094}
+  - component: {fileID: 1702736095}
   m_Layer: 0
   m_Name: Arm2
   m_TagString: Untagged
@@ -42573,6 +42616,19 @@ Transform:
   m_Father: {fileID: 641303661}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 27.685001}
+--- !u!114 &1702736095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702736093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a71d69b27ab3e7346ab3a0e326895b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JointColor: {r: 0, g: 1, b: 0.19350243, a: 1}
 --- !u!1 &1707267752
 GameObject:
   m_ObjectHideFlags: 0

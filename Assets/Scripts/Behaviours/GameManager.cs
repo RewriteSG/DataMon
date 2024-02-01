@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject Player;
 
+    public GameObject Player;
+    [HideInInspector] public Rigidbody2D playerRb;
     public float PlayerDataMonPatrolMinDist;
     public float PlayerDataMonPatrolMaxDist;
     public float MaxDistForCompanionDataMon;
@@ -15,6 +16,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
+        if (Player == null)
+            return;
+        playerRb = Player.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame

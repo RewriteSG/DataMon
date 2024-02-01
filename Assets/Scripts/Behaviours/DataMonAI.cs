@@ -19,6 +19,8 @@ public class DataMonAI : MonoBehaviour
     Rigidbody2D rb;
 
     GameObject patrollingAnchor;
+
+    [HideInInspector] public AggroSystem aggroSystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +48,7 @@ public class DataMonAI : MonoBehaviour
     IEnumerator StartPathing()
     {
         yield return new WaitForEndOfFrame();
-        if(patrollingAnchor == null)
+        if(patrollingAnchor == null && _dataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
         {
             GameObject newPatrolAnchor = new GameObject(_dataMon.dataMon.DataMonName+ "'s Patrolling Anchor");
             newPatrolAnchor.transform.position = (Random.insideUnitCircle.normalized*Random.Range(GameManager.instance.PlayerDataMonPatrolMinDist, 
@@ -54,6 +56,10 @@ public class DataMonAI : MonoBehaviour
             newPatrolAnchor.transform.position += GameManager.instance.Player.transform.position;
             newPatrolAnchor.transform.SetParent(GameManager.instance.Player.transform, true);
             patrollingAnchor = newPatrolAnchor;
+        }
+        if (patrollingAnchor == null && _dataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
+        {
+
         }
         while (this.isActiveAndEnabled)
         {

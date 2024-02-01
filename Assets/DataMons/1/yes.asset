@@ -34,5 +34,5 @@ MonoBehaviour:
       BaseAttack: 0
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
-    MonBehaviourState: 1
+    MonBehaviourState: 2
   MonRole: 0
