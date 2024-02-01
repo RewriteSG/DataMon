@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 MovementDirection;
 
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +21,12 @@ public class Movement : MonoBehaviour
     void Update()
     {
         MovementDirection = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+
+        
     }
     void FixedUpdate()
     {
         rb.velocity = MovementDirection * MovementSpeed;
     }
+    
 }
