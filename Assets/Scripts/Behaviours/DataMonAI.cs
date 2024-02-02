@@ -8,7 +8,7 @@ public class DataMonAI : MonoBehaviour
     public Transform Target;
     DataMon.IndividualDataMon.DataMon _dataMon;
     [SerializeField] private float NextWaypointDist = 3;
-    public float PatrollingDistance;
+    public float PatrollingDistance= 3, WanderingDistance = 8;
 
     Path path;
     int currentWaypoint = 0;
@@ -59,6 +59,9 @@ public class DataMonAI : MonoBehaviour
         }
         if (patrollingAnchor == null && _dataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
         {
+            GameObject newPatrolAnchor = new GameObject(_dataMon.dataMon.DataMonName + "'s Patrolling Anchor");
+            newPatrolAnchor.transform.position = transform.position;
+            patrollingAnchor = newPatrolAnchor;
 
         }
         while (this.isActiveAndEnabled)
@@ -105,7 +108,7 @@ public class DataMonAI : MonoBehaviour
     {
         //Vector3.Distance(transform.position, Target.position) > _dataMon.dataMon.AttackRange
         Dir = (transform.position - Target.position).normalized;
-        allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, _dataMon.dataMon.AttackRange);
+        allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, _dataMon.dataMonAttributes.CurrentAttackRange);
         if (!allCollidersInCircle.ColliderArrayHasTag(Target.tag))
         {
             reachedEndOfPath = false;
@@ -136,7 +139,6 @@ public class DataMonAI : MonoBehaviour
         if(_dataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
         {
             NeutralPatrol();
-            print("why");
             return;
         }
         if (seeker.IsDone() && Vector3.Distance(transform.position, patrollingAnchor.transform.position) > PatrollingDistance)
@@ -154,6 +156,11 @@ public class DataMonAI : MonoBehaviour
     bool NeutralStartPath = true;
     void NeutralPatrol()
     {
+        if(seeker.IsDone()&& Vector3.Distance(transform.position, patrollingAnchor.transform.position) > WanderingDistance)
+        {
+            goingToPos = patrollingAnchor.transform.position;
+            seeker.StartPath(transform.position, goingToPos, OnPathingComplete);
+        }
         if (seeker.IsDone() && (reachedEndOfPath || NeutralStartPath))
         {
             NeutralStartPath = false;

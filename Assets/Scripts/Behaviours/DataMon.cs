@@ -11,6 +11,7 @@ namespace DataMon.IndividualDataMon
         public int tier = 0;
         public DataMonsData dataMonData;
         public DataMonIndividualData dataMon;
+        public DataMonInstancedAttributes dataMonAttributes;
 
         [SerializeField]private GameObject test;
         private void Start()
@@ -32,6 +33,7 @@ namespace DataMon.IndividualDataMon
             else
             {
                 dataMon = new DataMonIndividualData(dataMonData._DataMon.GetDataMonInDataArray(ToDataMon));
+                dataMonAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
                 return true;
             }
         }
@@ -64,6 +66,27 @@ namespace DataMon.IndividualDataMon
         {
             dataMon.MonBehaviourState = DataMonBehaviourState.isNeutral;
         }
+    }
+}
+[System.Serializable]
+public class DataMonInstancedAttributes
+{
+    public float CurrentHealth;
+    public float CurrentAttack;
+    public float CurrentProductionSpeed;
+    public float CurrentMoveSpeed;
+    public float CurrentAttackRange = 1;
+    public float CurrentCaptureChance;
+    public DataMonInstancedAttributes() { }
+    
+    public DataMonInstancedAttributes(DataMonAttributes getAttribute)
+    {
+        CurrentHealth = getAttribute.BaseHealth;
+        CurrentAttack = getAttribute.BaseAttack;
+        CurrentProductionSpeed = getAttribute.BaseProductionSpeed;
+        CurrentMoveSpeed = getAttribute.BaseMoveSpeed;
+        CurrentAttackRange = getAttribute.BaseAttackRange;
+        CurrentCaptureChance = getAttribute.BaseCaptureChance;
     }
 }
 

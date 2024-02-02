@@ -17,7 +17,7 @@ public class FollowMouse : MonoBehaviour
 
         mousePos -= objPos;
         mousePos = mousePos.normalized;
-        print("mos" + mousePos);
+        //print("mos" + mousePos);
         float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
         float RotateSmoothly = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.z, -angle, ref reference, rotateDamp);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, RotateSmoothly));

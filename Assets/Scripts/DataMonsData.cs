@@ -24,7 +24,6 @@ public enum DataMonBehaviourState
 public class DataMonIndividualData
 {
     public string DataMonName;
-    public float AttackRange = 1;
     public GameObject DataMonPrefab;
     public GameObject[] DataMonAttackProjectiles;
     public DataMonAttributes BaseAttributes;
@@ -39,7 +38,6 @@ public class DataMonIndividualData
     public DataMonIndividualData(DataMonIndividualData toCopy)
     {
         DataMonName = toCopy.DataMonName;
-        AttackRange = toCopy.AttackRange;
         DataMonPrefab = toCopy.DataMonPrefab;
         DataMonAttackProjectiles = toCopy.DataMonAttackProjectiles;
         BaseAttributes = toCopy.BaseAttributes;
@@ -53,6 +51,8 @@ public class DataMonAttributes
     public float BaseAttack;
     public float BaseProductionSpeed;
     public float BaseMoveSpeed;
+    public float BaseAttackRange = 1;
+    public float BaseCaptureChance;
 }
 public static class DataMonsDataExtensions
 {

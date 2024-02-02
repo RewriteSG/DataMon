@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _DataMon:
   - DataMonName: 
-    AttackRange: 5
     DataMonPrefab: {fileID: 8258848450777015259, guid: 549be21259e953244b9ebabddc679a33,
       type: 3}
     DataMonAttackProjectiles: []
@@ -23,9 +22,10 @@ MonoBehaviour:
       BaseAttack: 0
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
+      BaseAttackRange: 2
+      BaseCaptureChance: 100
     MonBehaviourState: 2
   - DataMonName: keke
-    AttackRange: 2
     DataMonPrefab: {fileID: 3720160180207510574, guid: a1cd0defbd70d9b4a9429065abf4e295,
       type: 3}
     DataMonAttackProjectiles: []
@@ -34,5 +34,7 @@ MonoBehaviour:
       BaseAttack: 0
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
+      BaseAttackRange: 2
+      BaseCaptureChance: 100
     MonBehaviourState: 2
   MonRole: 0

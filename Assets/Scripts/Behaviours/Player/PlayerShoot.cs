@@ -6,14 +6,17 @@ public class PlayerShoot : MonoBehaviour
 {
     public GameObject gunPoint;
     public GameObject DataBall;
-    public float DestroyBallAtDelay =3;
+    public float _DestroyBallAtDelay =3;
+    public static float DestroyBallAtDelay;
     // Update is called once per frame
     //GameObject spawnedDataBall;
+    
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            Destroy(Instantiate(DataBall, gunPoint.transform.position, gunPoint.transform.rotation),DestroyBallAtDelay);
+            DestroyBallAtDelay = _DestroyBallAtDelay;
+            Instantiate(DataBall, gunPoint.transform.position, gunPoint.transform.rotation);
         }
     }
 }
