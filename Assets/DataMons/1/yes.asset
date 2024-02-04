@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: yes
   m_EditorClassIdentifier: 
   _DataMon:
-  - DataMonName: 
+  - DataMonName: eeee
     DataMonPrefab: {fileID: 8258848450777015259, guid: 549be21259e953244b9ebabddc679a33,
       type: 3}
     DataMonAttackProjectiles: []

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public float PlayerDataMonPatrolMinDist;
     public float PlayerDataMonPatrolMaxDist;
     public float MaxDistForCompanionDataMon;
+    public float CaptureDelay=1;
     public float DataMonsRotationSpeed;
     // Start is called before the first frame update
     void Start()

@@ -9,15 +9,21 @@ namespace DataMon.IndividualDataMon
     public class DataMon : MonoBehaviour
     {
         public int tier = 0;
+        [HideInInspector]public bool isBeingCaptured = false;
         public DataMonsData dataMonData;
-        public DataMonIndividualData dataMon;
-        public DataMonInstancedAttributes dataMonAttributes;
+        [HideInInspector]public DataMonIndividualData dataMon;
+        [HideInInspector]public DataMonAI dataMonAI;
+        public DataMonInstancedAttributes dataMonCurrentAttributes;
 
         [SerializeField]private GameObject test;
         private void Start()
         {
             SetDataMon(test);
             //SetDataMonCompanion();
+        }
+        private void OnEnable()
+        {
+            isBeingCaptured = false;
         }
         /// <summary> 
         /// Returns false if dataMonData is null
@@ -33,7 +39,7 @@ namespace DataMon.IndividualDataMon
             else
             {
                 dataMon = new DataMonIndividualData(dataMonData._DataMon.GetDataMonInDataArray(ToDataMon));
-                dataMonAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
+                dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
                 return true;
             }
         }
@@ -66,6 +72,10 @@ namespace DataMon.IndividualDataMon
         {
             dataMon.MonBehaviourState = DataMonBehaviourState.isNeutral;
         }
+        public DataMonHolder GetDataMonData()
+        {
+            return new DataMonHolder(this);
+        }
     }
 }
 [System.Serializable]
@@ -87,6 +97,15 @@ public class DataMonInstancedAttributes
         CurrentMoveSpeed = getAttribute.BaseMoveSpeed;
         CurrentAttackRange = getAttribute.BaseAttackRange;
         CurrentCaptureChance = getAttribute.BaseCaptureChance;
+    }
+    public DataMonInstancedAttributes(DataMonInstancedAttributes getAttribute)
+    {
+        CurrentHealth = getAttribute.CurrentHealth;
+        CurrentAttack = getAttribute.CurrentAttack;
+        CurrentProductionSpeed = getAttribute.CurrentProductionSpeed;
+        CurrentMoveSpeed = getAttribute.CurrentMoveSpeed;
+        CurrentAttackRange = getAttribute.CurrentAttackRange;
+        CurrentCaptureChance = getAttribute.CurrentCaptureChance;
     }
 }
 

@@ -27,11 +27,15 @@ public class DataMonAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         _dataMon = GetComponent<DataMon.IndividualDataMon.DataMon>();
+        _dataMon.dataMonAI = this;
         //InvokeRepeating("TestAI", 0, .5f);
+    }
+    private void OnEnable()
+    {
         NeutralStartPath = true;
         StartCoroutine(StartPathing());
-    }
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -48,7 +52,7 @@ public class DataMonAI : MonoBehaviour
     IEnumerator StartPathing()
     {
         yield return new WaitForEndOfFrame();
-        if(patrollingAnchor == null && _dataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+        if (patrollingAnchor == null && _dataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
         {
             GameObject newPatrolAnchor = new GameObject(_dataMon.dataMon.DataMonName+ "'s Patrolling Anchor");
             newPatrolAnchor.transform.position = (Random.insideUnitCircle.normalized*Random.Range(GameManager.instance.PlayerDataMonPatrolMinDist, 
@@ -108,7 +112,7 @@ public class DataMonAI : MonoBehaviour
     {
         //Vector3.Distance(transform.position, Target.position) > _dataMon.dataMon.AttackRange
         Dir = (transform.position - Target.position).normalized;
-        allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, _dataMon.dataMonAttributes.CurrentAttackRange);
+        allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, _dataMon.dataMonCurrentAttributes.CurrentAttackRange);
         if (!allCollidersInCircle.ColliderArrayHasTag(Target.tag))
         {
             reachedEndOfPath = false;
