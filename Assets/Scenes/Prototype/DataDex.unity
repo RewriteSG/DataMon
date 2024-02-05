@@ -6590,6 +6590,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b53698052f6aed4db2a54e61f61c9cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Content: {fileID: 1448100499}
+  Label: {fileID: 8211811096134212987, guid: e4b13d92ad0176a42834c67cab0aa487, type: 3}
+  DataMonContainer: {fileID: 6128755075409892428, guid: 4789096ea6802484fbc0ed507472ac7a,
+    type: 3}
+  DataMonInDataDex: {fileID: 6638972877717086647, guid: a3da73119f470fe41a11f472b7fac81c,
+    type: 3}
   AllDataMons:
   - {fileID: 11400000, guid: 8418c7b48189b9b4e8f4f3d838ce55ef, type: 2}
   CompanionsDataMon: []

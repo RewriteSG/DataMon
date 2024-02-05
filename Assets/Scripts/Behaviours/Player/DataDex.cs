@@ -7,7 +7,7 @@ public class DataDex : MonoBehaviour
 {
     public static DataDex instance;
     public Transform Content;
-    public GameObject Label, DataMonContainer;
+    public GameObject Label, DataMonContainer, DataMonInDataDex;
     public List<DataMonsData> AllDataMons = new List<DataMonsData>();
     List<GameObject> DataMonListInDex = new List<GameObject>();
     public List<DataMonHolder> CompanionsDataMon = new List<DataMonHolder>();
@@ -23,8 +23,8 @@ public class DataDex : MonoBehaviour
             for (int x = 0; x < DataMonEvoCount; x++)
             {
                 temp = Instantiate(Label, Content);
-                temp.GetComponentInChildren<TextMeshProUGUI>().text = "Datamon #"+x+" : " + AllDataMons[i]._DataMon[x].DataMonName;
-
+                temp.GetComponentInChildren<TextMeshProUGUI>().text =/* "Datamon #"+x+" : " + */AllDataMons[i]._DataMon[x].DataMonName;
+                DataMonListInDex.Add(Instantiate(DataMonContainer, Content));
             }
         }
     }
@@ -34,6 +34,24 @@ public class DataDex : MonoBehaviour
     {
         
     }
+    int indexOfDataMon;
+    VerticalLayoutGroup verticalLayout;
+    internal void AddToDataDex(DataMonHolder toDataDex)
+    {
+        indexOfDataMon = AllDataMons.IndexOf(toDataDex.dataMonData);
+        Instantiate(DataMonInDataDex,DataMonListInDex[indexOfDataMon].transform);
+        verticalLayout = DataMonListInDex[indexOfDataMon].transform.parent.GetComponent<VerticalLayoutGroup>();
+        StartCoroutine(RearrangeContent(verticalLayout));
+
+    }
+    IEnumerator RearrangeContent(VerticalLayoutGroup toRearrange)
+    {
+        toRearrange.padding.top = 1;
+        yield return new WaitForEndOfFrame();
+
+        toRearrange.padding.top = 0;
+
+    }
 }
 public class DataDexIO
 {
@@ -42,6 +60,7 @@ public class DataDexIO
     public void SendToDataDex()
     {
         DataDex.instance.CompanionsDataMon.Add(toDataDex);
+        DataDex.instance.AddToDataDex(toDataDex);
     }
 }
 [System.Serializable]
