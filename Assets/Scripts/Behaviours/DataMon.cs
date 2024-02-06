@@ -11,7 +11,7 @@ namespace DataMon.IndividualDataMon
         public int tier = 0;
         [HideInInspector]public bool isBeingCaptured = false;
         public DataMonsData dataMonData;
-        [HideInInspector]public DataMonIndividualData dataMon;
+        public DataMonIndividualData dataMon;
         [HideInInspector]public DataMonAI dataMonAI;
         public DataMonInstancedAttributes dataMonCurrentAttributes;
 
@@ -72,40 +72,15 @@ namespace DataMon.IndividualDataMon
         {
             dataMon.MonBehaviourState = DataMonBehaviourState.isNeutral;
         }
-        public DataMonHolder GetDataMonData()
+        private void OnDestroy()
         {
-            return new DataMonHolder(this);
+            if (dataMonAI != null)
+            {
+                Destroy(dataMonAI.patrollingAnchor);
+            }
         }
     }
-}
-[System.Serializable]
-public class DataMonInstancedAttributes
-{
-    public float CurrentHealth;
-    public float CurrentAttack;
-    public float CurrentProductionSpeed;
-    public float CurrentMoveSpeed;
-    public float CurrentAttackRange = 1;
-    public float CurrentCaptureChance;
-    public DataMonInstancedAttributes() { }
     
-    public DataMonInstancedAttributes(DataMonAttributes getAttribute)
-    {
-        CurrentHealth = getAttribute.BaseHealth;
-        CurrentAttack = getAttribute.BaseAttack;
-        CurrentProductionSpeed = getAttribute.BaseProductionSpeed;
-        CurrentMoveSpeed = getAttribute.BaseMoveSpeed;
-        CurrentAttackRange = getAttribute.BaseAttackRange;
-        CurrentCaptureChance = getAttribute.BaseCaptureChance;
-    }
-    public DataMonInstancedAttributes(DataMonInstancedAttributes getAttribute)
-    {
-        CurrentHealth = getAttribute.CurrentHealth;
-        CurrentAttack = getAttribute.CurrentAttack;
-        CurrentProductionSpeed = getAttribute.CurrentProductionSpeed;
-        CurrentMoveSpeed = getAttribute.CurrentMoveSpeed;
-        CurrentAttackRange = getAttribute.CurrentAttackRange;
-        CurrentCaptureChance = getAttribute.CurrentCaptureChance;
-    }
 }
+
 

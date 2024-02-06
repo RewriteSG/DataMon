@@ -28,7 +28,7 @@ public class DataMonIndividualData
     public GameObject[] DataMonAttackProjectiles;
     public DataMonAttributes BaseAttributes;
     public DataMonBehaviourState MonBehaviourState;
-    public DataMonsData derivedData;
+    //public DataMonsData derivedData;
     public DataMonIndividualData()
     {
 
@@ -41,7 +41,7 @@ public class DataMonIndividualData
         DataMonName = toCopy.DataMonName;
         DataMonPrefab = toCopy.DataMonPrefab;
         DataMonAttackProjectiles = toCopy.DataMonAttackProjectiles;
-        BaseAttributes = toCopy.BaseAttributes;
+        BaseAttributes = DataMonInstancedAttributes.ConvertToDataMonAttributes(new DataMonInstancedAttributes(toCopy.BaseAttributes));
         MonBehaviourState = toCopy.MonBehaviourState;
     }
 }
@@ -54,8 +54,50 @@ public class DataMonAttributes
     public float BaseMoveSpeed;
     public float BaseAttackRange = 1;
     public float BaseCaptureChance;
+    
 }
-public static class DataMonsDataExtensions
+[System.Serializable]
+public class DataMonInstancedAttributes
+{
+    public float CurrentHealth;
+    public float CurrentAttack;
+    public float CurrentProductionSpeed;
+    public float CurrentMoveSpeed;
+    public float CurrentAttackRange = 1;
+    public float CurrentCaptureChance;
+    public DataMonInstancedAttributes() { }
+
+    public DataMonInstancedAttributes(DataMonAttributes getAttribute)
+    {
+        CurrentHealth = getAttribute.BaseHealth;
+        CurrentAttack = getAttribute.BaseAttack;
+        CurrentProductionSpeed = getAttribute.BaseProductionSpeed;
+        CurrentMoveSpeed = getAttribute.BaseMoveSpeed;
+        CurrentAttackRange = getAttribute.BaseAttackRange;
+        CurrentCaptureChance = getAttribute.BaseCaptureChance;
+    }
+    public DataMonInstancedAttributes(DataMonInstancedAttributes getAttribute)
+    {
+        CurrentHealth = getAttribute.CurrentHealth;
+        CurrentAttack = getAttribute.CurrentAttack;
+        CurrentProductionSpeed = getAttribute.CurrentProductionSpeed;
+        CurrentMoveSpeed = getAttribute.CurrentMoveSpeed;
+        CurrentAttackRange = getAttribute.CurrentAttackRange;
+        CurrentCaptureChance = getAttribute.CurrentCaptureChance;
+    }
+    public static DataMonAttributes ConvertToDataMonAttributes(DataMonInstancedAttributes instancedAttributes)
+    {
+        DataMonAttributes temp = new DataMonAttributes();
+        temp.BaseHealth = instancedAttributes.CurrentHealth;
+        temp.BaseAttack = instancedAttributes.CurrentAttack;
+        temp.BaseProductionSpeed = instancedAttributes.CurrentProductionSpeed;
+        temp.BaseMoveSpeed = instancedAttributes.CurrentMoveSpeed;
+        temp.BaseAttackRange = instancedAttributes.CurrentAttackRange;
+        temp.BaseCaptureChance = instancedAttributes.CurrentCaptureChance;
+        return temp;
+    }
+}
+    public static class DataMonsDataExtensions
 {
     public static DataMonIndividualData GetDataMonInDataArray<T>(this T[] array, GameObject dataMon) where T : DataMonIndividualData    
     {

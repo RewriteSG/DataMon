@@ -18,7 +18,7 @@ public class DataMonAI : MonoBehaviour
     Seeker seeker;
     Rigidbody2D rb;
 
-    GameObject patrollingAnchor;
+    [HideInInspector]public GameObject patrollingAnchor;
 
     [HideInInspector] public AggroSystem aggroSystem;
     // Start is called before the first frame update

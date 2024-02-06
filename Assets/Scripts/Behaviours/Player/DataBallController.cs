@@ -44,7 +44,7 @@ public class DataBallController : MonoBehaviour
             rb.velocity = Vector2.zero;
             CaptureTarget = new DataDexIO();
 
-            CaptureTarget.toDataDex = dataMon.GetDataMonData();
+            CaptureTarget.toDataDex = new DataMonHolder(dataMon);
             DataMonCaptureChance = CaptureTarget.toDataDex.dataMonAttributes.CurrentCaptureChance;
 
             StartCoroutine(CapturingDataMon(GameManager.instance.CaptureDelay));

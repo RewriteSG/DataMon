@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public float MaxDistForCompanionDataMon;
     public float CaptureDelay=1;
     public float DataMonsRotationSpeed;
+    public int NumberOfDataMonsInTeam = 1;
     // Start is called before the first frame update
     void Start()
     {

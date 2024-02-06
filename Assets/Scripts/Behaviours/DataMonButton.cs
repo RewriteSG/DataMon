@@ -14,15 +14,22 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler
     //public UnityEvent RightClick;
     //public UnityEvent LeftClick;
     public DataMonHolder dataMonHolder;
+    public bool inDataBank;
+    public GameObject DataMonSummoned;
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Right)
+        if(eventData.button == PointerEventData.InputButton.Right && inDataBank)
         {
             AddToTeam(this);
+            print("WHY NO WORk");
         }
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (eventData.button == PointerEventData.InputButton.Left && inDataBank)
         {
-            ClickAndDrag(this);
+            //ClickAndDrag(this);
+        }
+        if (eventData.button == PointerEventData.InputButton.Right && !inDataBank)
+        {
+            RemoveFromTeam(this);
         }
     }
     //public void RegisterToTeam(DataMonIndividualData _dataMon)
