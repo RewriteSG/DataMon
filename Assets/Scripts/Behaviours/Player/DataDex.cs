@@ -9,8 +9,13 @@ public class DataDex : MonoBehaviour
     public Transform Content;
     public GameObject Label, DataMonContainer, DataMonInDataDex;
     public List<DataMonsData> AllDataMons = new List<DataMonsData>();
-    List<GameObject> DataMonListInDex = new List<GameObject>();
     public List<DataMonHolder> CompanionsDataMon = new List<DataMonHolder>();
+    public List<DataMonHolder> DataMonTeam = new List<DataMonHolder>();
+    List<GameObject> DataMonListInDex = new List<GameObject>();
+    List<GameObject> DataMonObtained = new List<GameObject>();
+
+    public delegate void DataMonBtnDelegate(DataMonButton dataMon);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,13 +41,19 @@ public class DataDex : MonoBehaviour
     }
     int indexOfDataMon;
     VerticalLayoutGroup verticalLayout;
+    DataMonButton dataMonBtn;
     internal void AddToDataDex(DataMonHolder toDataDex)
     {
         indexOfDataMon = AllDataMons.IndexOf(toDataDex.dataMonData);
-        Instantiate(DataMonInDataDex,DataMonListInDex[indexOfDataMon].transform);
+        DataMonObtained.Add(Instantiate(DataMonInDataDex,DataMonListInDex[indexOfDataMon].transform));
         verticalLayout = DataMonListInDex[indexOfDataMon].transform.parent.GetComponent<VerticalLayoutGroup>();
-        StartCoroutine(RearrangeContent(verticalLayout));
 
+        dataMonBtn = DataMonObtained[DataMonObtained.Count - 1].AddComponent<DataMonButton>();
+        
+        dataMonBtn.dataMonHolder = new DataMonHolder(toDataDex);
+        dataMonBtn.AddToTeam += DataDexAddToTeam;
+
+        StartCoroutine(RearrangeContent(verticalLayout));
     }
     IEnumerator RearrangeContent(VerticalLayoutGroup toRearrange)
     {
@@ -51,6 +62,11 @@ public class DataDex : MonoBehaviour
 
         toRearrange.padding.top = 0;
 
+    }
+    public void DataDexAddToTeam(DataMonButton dataMonButton)
+    {
+
+        Destroy(dataMonButton.gameObject);
     }
 }
 public class DataDexIO
@@ -75,5 +91,11 @@ public class DataMonHolder
         dataMonData = toHold.dataMonData;
         dataMon = toHold.dataMon;
         dataMonAttributes = new DataMonInstancedAttributes(toHold.dataMonCurrentAttributes);
+    }
+    public DataMonHolder(DataMonHolder toHold)
+    {
+        dataMonData = toHold.dataMonData;
+        dataMon = toHold.dataMon;
+        dataMonAttributes = new DataMonInstancedAttributes(toHold.dataMonAttributes);
     }
 }

@@ -28,6 +28,7 @@ public class DataMonIndividualData
     public GameObject[] DataMonAttackProjectiles;
     public DataMonAttributes BaseAttributes;
     public DataMonBehaviourState MonBehaviourState;
+    public DataMonsData derivedData;
     public DataMonIndividualData()
     {
 
