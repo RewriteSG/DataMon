@@ -45,7 +45,7 @@ public class DataBallController : MonoBehaviour
             CaptureTarget = new DataDexIO();
 
             CaptureTarget.toDataDex = new DataMonHolder(dataMon);
-            DataMonCaptureChance = CaptureTarget.toDataDex.dataMonAttributes.CurrentCaptureChance;
+            DataMonCaptureChance = CaptureTarget.toDataDex.dataMonCurrentAttributes.CurrentCaptureChance;
 
             StartCoroutine(CapturingDataMon(GameManager.instance.CaptureDelay));
             capturingGameObj = collision.transform.parent.gameObject;

@@ -75,6 +75,7 @@ public class DataDex : MonoBehaviour
         if(DataPad.activeInHierarchy!=DisplayDataDex)
             DataPad.SetActive(DisplayDataDex);
     }
+
     int indexOfDataMon;
     VerticalLayoutGroup verticalLayout;
     DataMonButton dataMonBtn;
@@ -171,19 +172,19 @@ public class DataMonHolder
 {
     public DataMonsData dataMonData;
     public DataMonIndividualData dataMon;
-    public DataMonInstancedAttributes dataMonAttributes;
+    public DataMonInstancedAttributes dataMonCurrentAttributes;
     public DataMonHolder() { }
     public DataMonHolder(DataMon.IndividualDataMon.DataMon toHold)
     {
         dataMonData = toHold.dataMonData;
         dataMon = toHold.dataMon;
-        dataMonAttributes = new DataMonInstancedAttributes(toHold.dataMonCurrentAttributes);
+        dataMonCurrentAttributes = new DataMonInstancedAttributes(toHold.dataMonCurrentAttributes);
     }
     public DataMonHolder(DataMonHolder toHold)
     {
         dataMonData = toHold.dataMonData;
         dataMon = toHold.dataMon;
-        dataMonAttributes = new DataMonInstancedAttributes(toHold.dataMonAttributes);
+        dataMonCurrentAttributes = new DataMonInstancedAttributes(toHold.dataMonCurrentAttributes);
     }
 }
 public static class DataMonHolderExtension

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
-public class DataMonButton : MonoBehaviour, IPointerClickHandler
+public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     public DataDex.DataMonBtnDelegate AddToTeam;
@@ -32,6 +32,18 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler
             RemoveFromTeam(this);
         }
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        DataInspector.DataMonHovering = dataMonHolder;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        DataInspector.DataMonHovering = null;
+
+    }
+
     //public void RegisterToTeam(DataMonIndividualData _dataMon)
     //{
 

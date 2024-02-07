@@ -28,7 +28,6 @@ public class DataMonIndividualData
     public GameObject[] DataMonAttackProjectiles;
     public DataMonAttributes BaseAttributes;
     public DataMonBehaviourState MonBehaviourState;
-    //public DataMonsData derivedData;
     public DataMonIndividualData()
     {
 
@@ -97,9 +96,9 @@ public class DataMonInstancedAttributes
         return temp;
     }
 }
-    public static class DataMonsDataExtensions
+public static class DataMonsDataExtensions
 {
-    public static DataMonIndividualData GetDataMonInDataArray<T>(this T[] array, GameObject dataMon) where T : DataMonIndividualData    
+    public static DataMonIndividualData GetDataMonInDataArray<T>(this T[] array, GameObject dataMon) where T : DataMonIndividualData
     {
         DataMonIndividualData toReturn = null;
         for (int i = 0; i < array.Length; i++)
@@ -111,5 +110,31 @@ public class DataMonInstancedAttributes
             }
         }
         return toReturn;
+    }
+    public static DataMonIndividualData GetDataMonInDataArray<T>(this T[] array, DataMonIndividualData dataMon) where T : DataMonIndividualData
+    {
+        DataMonIndividualData toReturn = null;
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i].DataMonPrefab == dataMon.DataMonPrefab)
+            {
+                toReturn = array[i];
+                break;
+            }
+        }
+        return toReturn;
+    }
+    public static int GetDataMonIndexInDataArray<T>(this T[] array, DataMonIndividualData dataMon) where T : DataMonIndividualData
+    {
+        int temp = 0;
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i].DataMonPrefab == dataMon.DataMonPrefab)
+            {
+                temp = i;
+                break;
+            }
+        }
+        return temp;
     }
 }

@@ -3022,6 +3022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 301339619}
   - component: {fileID: 301339618}
+  - component: {fileID: 301339620}
   m_Layer: 0
   m_Name: DataDexManager
   m_TagString: Untagged
@@ -3068,6 +3069,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &301339620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301339617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c074c1a04ef60d245bab2954f88b8aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txt_HP: {fileID: 1476210825}
+  txt_Atk: {fileID: 1278893167}
+  txt_Role: {fileID: 2139698667}
+  txt_Evolution: {fileID: 316849273}
+  txt_DataName: {fileID: 963349858}
+  txt_Ability: {fileID: 0}
 --- !u!1 &303989590
 GameObject:
   m_ObjectHideFlags: 0
@@ -3211,7 +3230,7 @@ GameObject:
   - component: {fileID: 316849274}
   - component: {fileID: 316849273}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: Evolve Tier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4530,6 +4549,7 @@ MonoBehaviour:
   NextWaypointDist: 0.81
   PatrollingDistance: 1.81
   WanderingDistance: 10
+  patrollingAnchor: {fileID: 0}
   aggroSystem: {fileID: 0}
 --- !u!50 &457138472
 Rigidbody2D:
@@ -6510,6 +6530,7 @@ MonoBehaviour:
   NextWaypointDist: 0.81
   PatrollingDistance: 1.81
   WanderingDistance: 10
+  patrollingAnchor: {fileID: 0}
   aggroSystem: {fileID: 0}
 --- !u!50 &589282465
 Rigidbody2D:
@@ -8366,6 +8387,7 @@ MonoBehaviour:
   NextWaypointDist: 0.81
   PatrollingDistance: 1.81
   WanderingDistance: 10
+  patrollingAnchor: {fileID: 0}
   aggroSystem: {fileID: 0}
 --- !u!50 &745859542
 Rigidbody2D:
@@ -12400,7 +12422,7 @@ GameObject:
   - component: {fileID: 1278893168}
   - component: {fileID: 1278893167}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: ATK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14490,7 +14512,7 @@ GameObject:
   - component: {fileID: 1476210826}
   - component: {fileID: 1476210825}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22635,7 +22657,7 @@ GameObject:
   - component: {fileID: 2139698668}
   - component: {fileID: 2139698667}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Role
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
