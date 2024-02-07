@@ -19,13 +19,13 @@ public class PlayerHealth : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TakeDamage(20);
+            TakeDamage(5);
         }
     }
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
+        currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
         healthBar.SetHealth(currentHealth);
     }
 }

@@ -5,19 +5,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject Player;
 
+    public GameObject Player;
+    [HideInInspector] public Rigidbody2D playerRb;
     public float PlayerDataMonPatrolMinDist;
     public float PlayerDataMonPatrolMaxDist;
     public float MaxDistForCompanionDataMon;
+    public float CaptureDelay=1;
     public float DataMonsRotationSpeed;
-
-    public int Databytes_Count;
+    public int NumberOfDataMonsInTeam = 1;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
-        
+        if (Player == null)
+            return;
+        playerRb = Player.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -32,5 +35,4 @@ public class GameManager : MonoBehaviour
 
         Gizmos.DrawWireSphere(Player.transform.position, MaxDistForCompanionDataMon);
     }
-   
 }

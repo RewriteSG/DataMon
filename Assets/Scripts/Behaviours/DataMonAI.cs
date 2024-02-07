@@ -8,7 +8,7 @@ public class DataMonAI : MonoBehaviour
     public Transform Target;
     DataMon.IndividualDataMon.DataMon _dataMon;
     [SerializeField] private float NextWaypointDist = 3;
-    public float PatrollingDistance;
+    public float PatrollingDistance= 3, WanderingDistance = 8;
 
     Path path;
     int currentWaypoint = 0;
@@ -18,18 +18,24 @@ public class DataMonAI : MonoBehaviour
     Seeker seeker;
     Rigidbody2D rb;
 
-    GameObject patrollingAnchor;
+    [HideInInspector]public GameObject patrollingAnchor;
+
+    [HideInInspector] public AggroSystem aggroSystem;
     // Start is called before the first frame update
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         _dataMon = GetComponent<DataMon.IndividualDataMon.DataMon>();
+        _dataMon.dataMonAI = this;
         //InvokeRepeating("TestAI", 0, .5f);
+    }
+    private void OnEnable()
+    {
         NeutralStartPath = true;
         StartCoroutine(StartPathing());
-    }
 
+    }
     // Update is called once per frame
     void Update()
     {
@@ -46,7 +52,7 @@ public class DataMonAI : MonoBehaviour
     IEnumerator StartPathing()
     {
         yield return new WaitForEndOfFrame();
-        if(patrollingAnchor == null)
+        if (patrollingAnchor == null && _dataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
         {
             GameObject newPatrolAnchor = new GameObject(_dataMon.dataMon.DataMonName+ "'s Patrolling Anchor");
             newPatrolAnchor.transform.position = (Random.insideUnitCircle.normalized*Random.Range(GameManager.instance.PlayerDataMonPatrolMinDist, 
@@ -54,6 +60,13 @@ public class DataMonAI : MonoBehaviour
             newPatrolAnchor.transform.position += GameManager.instance.Player.transform.position;
             newPatrolAnchor.transform.SetParent(GameManager.instance.Player.transform, true);
             patrollingAnchor = newPatrolAnchor;
+        }
+        if (patrollingAnchor == null && _dataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
+        {
+            GameObject newPatrolAnchor = new GameObject(_dataMon.dataMon.DataMonName + "'s Patrolling Anchor");
+            newPatrolAnchor.transform.position = transform.position;
+            patrollingAnchor = newPatrolAnchor;
+
         }
         while (this.isActiveAndEnabled)
         {
@@ -99,7 +112,7 @@ public class DataMonAI : MonoBehaviour
     {
         //Vector3.Distance(transform.position, Target.position) > _dataMon.dataMon.AttackRange
         Dir = (transform.position - Target.position).normalized;
-        allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, _dataMon.dataMon.AttackRange);
+        allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, _dataMon.dataMonCurrentAttributes.CurrentAttackRange);
         if (!allCollidersInCircle.ColliderArrayHasTag(Target.tag))
         {
             reachedEndOfPath = false;
@@ -130,7 +143,6 @@ public class DataMonAI : MonoBehaviour
         if(_dataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
         {
             NeutralPatrol();
-            print("why");
             return;
         }
         if (seeker.IsDone() && Vector3.Distance(transform.position, patrollingAnchor.transform.position) > PatrollingDistance)
@@ -148,6 +160,11 @@ public class DataMonAI : MonoBehaviour
     bool NeutralStartPath = true;
     void NeutralPatrol()
     {
+        if(seeker.IsDone()&& Vector3.Distance(transform.position, patrollingAnchor.transform.position) > WanderingDistance)
+        {
+            goingToPos = patrollingAnchor.transform.position;
+            seeker.StartPath(transform.position, goingToPos, OnPathingComplete);
+        }
         if (seeker.IsDone() && (reachedEndOfPath || NeutralStartPath))
         {
             NeutralStartPath = false;

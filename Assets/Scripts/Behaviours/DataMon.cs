@@ -9,14 +9,21 @@ namespace DataMon.IndividualDataMon
     public class DataMon : MonoBehaviour
     {
         public int tier = 0;
+        [HideInInspector]public bool isBeingCaptured = false;
         public DataMonsData dataMonData;
         public DataMonIndividualData dataMon;
+        [HideInInspector]public DataMonAI dataMonAI;
+        public DataMonInstancedAttributes dataMonCurrentAttributes;
 
         [SerializeField]private GameObject test;
         private void Start()
         {
             SetDataMon(test);
             //SetDataMonCompanion();
+        }
+        private void OnEnable()
+        {
+            isBeingCaptured = false;
         }
         /// <summary> 
         /// Returns false if dataMonData is null
@@ -32,6 +39,7 @@ namespace DataMon.IndividualDataMon
             else
             {
                 dataMon = new DataMonIndividualData(dataMonData._DataMon.GetDataMonInDataArray(ToDataMon));
+                dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
                 return true;
             }
         }
@@ -64,6 +72,15 @@ namespace DataMon.IndividualDataMon
         {
             dataMon.MonBehaviourState = DataMonBehaviourState.isNeutral;
         }
+        private void OnDestroy()
+        {
+            if (dataMonAI != null)
+            {
+                Destroy(dataMonAI.patrollingAnchor);
+            }
+        }
     }
+    
 }
+
 
