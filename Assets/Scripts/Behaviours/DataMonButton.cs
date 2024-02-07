@@ -59,4 +59,9 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     {
         
     }
+    private void OnDestroy()
+    {
+        DataInspector.DataMonHovering = null;
+
+    }
 }

@@ -18,9 +18,9 @@ MonoBehaviour:
       type: 3}
     DataMonAttackProjectiles: []
     BaseAttributes:
-      BaseHealth: 0
-      BaseAttack: 0
-      BaseProductionSpeed: 0
+      BaseHealth: 65.02
+      BaseAttack: 5.01
+      BaseProductionSpeed: 4.61
       BaseMoveSpeed: 200
       BaseAttackRange: 2
       BaseCaptureChance: 100
@@ -30,11 +30,11 @@ MonoBehaviour:
       type: 3}
     DataMonAttackProjectiles: []
     BaseAttributes:
-      BaseHealth: 0
-      BaseAttack: 0
-      BaseProductionSpeed: 0
+      BaseHealth: 76.54
+      BaseAttack: 33.88
+      BaseProductionSpeed: 4.4
       BaseMoveSpeed: 200
-      BaseAttackRange: 2
+      BaseAttackRange: 36.8
       BaseCaptureChance: 100
     MonBehaviourState: 2
   MonRole: 0
