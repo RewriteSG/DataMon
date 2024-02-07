@@ -11,10 +11,13 @@ public class GameManager : MonoBehaviour
     public float PlayerDataMonPatrolMaxDist;
     public float MaxDistForCompanionDataMon;
     public float DataMonsRotationSpeed;
+
+    public int Databytes_Count;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+        
     }
 
     // Update is called once per frame
@@ -29,4 +32,5 @@ public class GameManager : MonoBehaviour
 
         Gizmos.DrawWireSphere(Player.transform.position, MaxDistForCompanionDataMon);
     }
+   
 }

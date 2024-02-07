@@ -9,7 +9,9 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 MovementDirection;
 
-    
+    public GameManager gm;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +30,12 @@ public class Movement : MonoBehaviour
     {
         rb.MovePosition((Vector2)transform.position+(MovementDirection * MovementSpeed*Time.deltaTime));
     }
-    
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag=="Databytes")
+        {
+            gm.Databytes_Count += 10;
+            Destroy(collision.gameObject);
+        }
+    }
 }
