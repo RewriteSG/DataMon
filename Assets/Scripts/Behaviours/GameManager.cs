@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public float CaptureDelay=1;
     public float DataMonsRotationSpeed;
     public int NumberOfDataMonsInTeam = 1;
+    public int Databytes_Count = 0;
     // Start is called before the first frame update
     void Start()
     {
