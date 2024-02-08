@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -11,10 +11,13 @@ public class GameManager : MonoBehaviour
     public float PlayerDataMonPatrolMinDist;
     public float PlayerDataMonPatrolMaxDist;
     public float MaxDistForCompanionDataMon;
-    public float CaptureDelay=1;
+    public float CaptureDelay = 1;
     public float DataMonsRotationSpeed;
     public int NumberOfDataMonsInTeam = 1;
     public int Databytes_Count = 0;
+
+    public float RenderDistance = 10f;
+
     // Start is called before the first frame update
     void Start()
     {

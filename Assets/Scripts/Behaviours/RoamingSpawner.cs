@@ -12,13 +12,13 @@ public class RoamingSpawner : MonoBehaviour
     [SerializeField] float MinY;
     [SerializeField] float MaxY;
 
-    private Vector3 hazWANHole;
+    private Vector3 SpawnPosition;
 
-    private int doot_doot;
+    public static int doot_doot;
     // Start is called before the first frame update
     void Start()
     {
-        
+        doot_doot = 0;   
     }
 
     // Update is called once per frame
@@ -29,8 +29,8 @@ public class RoamingSpawner : MonoBehaviour
             var wanted = Random.Range(MinY, MaxY);
             var wanted2 = Random.Range(MinX, MaxX);
 
-            hazWANHole = new Vector3(wanted2, wanted, 0);
-            Instantiate(Datamons_roaming[Random.Range(0, Datamons_roaming.Length)], hazWANHole, Quaternion.identity);
+            SpawnPosition = new Vector3(wanted2, wanted, 0);
+            Instantiate(Datamons_roaming[Random.Range(0, Datamons_roaming.Length)], SpawnPosition, Quaternion.identity);
             doot_doot += 1;
         }
     }
