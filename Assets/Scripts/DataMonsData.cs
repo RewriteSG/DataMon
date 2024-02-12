@@ -13,7 +13,7 @@ public class DataMonsData : ScriptableObject
 
 public enum DataMonRole
 {
-    Production, Attack, Defense, Healer
+    Production, Attack, Support
 }
 public enum DataMonBehaviourState
 {
@@ -50,8 +50,8 @@ public class DataMonAttributes
     public float BaseHealth;
     public float BaseAttack;
     public float BaseProductionSpeed;
-    public float BaseMoveSpeed;
-    public float BaseAttackRange = 1;
+    public float BaseMoveSpeed = 200;
+    public float BaseAttackRange = 3;
     public float BaseCaptureChance;
     
 }
@@ -93,48 +93,6 @@ public class DataMonInstancedAttributes
         temp.BaseMoveSpeed = instancedAttributes.CurrentMoveSpeed;
         temp.BaseAttackRange = instancedAttributes.CurrentAttackRange;
         temp.BaseCaptureChance = instancedAttributes.CurrentCaptureChance;
-        return temp;
-    }
-}
-public static class DataMonsDataExtensions
-{
-    public static DataMonIndividualData GetDataMonInDataArray<T>(this T[] array, GameObject dataMon) where T : DataMonIndividualData
-    {
-        DataMonIndividualData toReturn = null;
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (array[i].DataMonPrefab == dataMon)
-            {
-                toReturn = array[i];
-                break;
-            }
-        }
-        return toReturn;
-    }
-    public static DataMonIndividualData GetDataMonInDataArray<T>(this T[] array, DataMonIndividualData dataMon) where T : DataMonIndividualData
-    {
-        DataMonIndividualData toReturn = null;
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (array[i].DataMonPrefab == dataMon.DataMonPrefab)
-            {
-                toReturn = array[i];
-                break;
-            }
-        }
-        return toReturn;
-    }
-    public static int GetDataMonIndexInDataArray<T>(this T[] array, DataMonIndividualData dataMon) where T : DataMonIndividualData
-    {
-        int temp = 0;
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (array[i].DataMonPrefab == dataMon.DataMonPrefab)
-            {
-                temp = i;
-                break;
-            }
-        }
         return temp;
     }
 }

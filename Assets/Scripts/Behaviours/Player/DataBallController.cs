@@ -9,23 +9,19 @@ public class DataBallController : MonoBehaviour
     [HideInInspector]public bool isCapturing = false;
     private float DataMonCaptureChance = 0;
     public float CaptureProgress = 0;
+    float timer = 0;
     // Start is called before the first frame update
     void Start()
     {
         isCapturing = false;
         rb.AddForce((transform.up * forceWhenShot)+(Vector3)GameManager.instance.playerRb.velocity, ForceMode2D.Impulse);
-        StartCoroutine(DestroyBall(PlayerShoot.DestroyBallAtDelay));
-    }
-    IEnumerator DestroyBall(float destroyAtDelay)
-    {
-        yield return new WaitForSeconds(destroyAtDelay);
-        if (!isCapturing)
-            Destroy(gameObject);
     }
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        if (!isCapturing && timer > PlayerShoot.DestroyBallAtDelay)
+            Destroy(gameObject);
     }
     DataDexIO CaptureTarget;
     GameObject capturingGameObj;
@@ -35,7 +31,7 @@ public class DataBallController : MonoBehaviour
         if (collision.gameObject.tag != "DataMon")
             return;
         dataMon = collision.transform.parent.gameObject.GetComponent<DataMon.IndividualDataMon.DataMon>();
-        if (!dataMon.isBeingCaptured)
+        if (!dataMon.isBeingCaptured && dataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && !isCapturing)
         {
             dataMon.isBeingCaptured = true;
             isCapturing = true;

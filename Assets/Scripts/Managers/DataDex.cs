@@ -9,7 +9,9 @@ public class DataDex : MonoBehaviour
     public Transform Content;
     public GameObject Label, DataMonContainer, DataMonPanel, DataTeamContainer;
 
-    public List<DataMonsData> AllDataMons = new List<DataMonsData>();
+    public List<DataMonsData> AllDataMonsData = new List<DataMonsData>();
+    public List<string> AllDataMons = new List<string>();
+
     public List<DataMonHolder> CompanionsDataMon = new List<DataMonHolder>();
     public DataMonHolder[] DataTeam = new DataMonHolder[] { };
 
@@ -22,20 +24,22 @@ public class DataDex : MonoBehaviour
 
     public bool DisplayDataDex;
     public GameObject DataPad;
+    public Color Testcolor;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         int DataMonEvoCount;
         GameObject temp;
-        for (int i = 0; i < AllDataMons.Count; i++)
+        for (int i = 0; i < AllDataMonsData.Count; i++)
         {
-            DataMonEvoCount = AllDataMons[i]._DataMon.Length;
+            DataMonEvoCount = AllDataMonsData[i]._DataMon.Length;
             for (int x = 0; x < DataMonEvoCount; x++)
             {
                 temp = Instantiate(Label, Content);
-                temp.GetComponentInChildren<TextMeshProUGUI>().text =/* "Datamon #"+x+" : " + */AllDataMons[i]._DataMon[x].DataMonName;
+                temp.GetComponentInChildren<TextMeshProUGUI>().text =/* "Datamon #"+x+" : " + */AllDataMonsData[i]._DataMon[x].DataMonName;
                 DataMonListInDex.Add(Instantiate(DataMonContainer, Content));
+                AllDataMons.Add(AllDataMonsData[i]._DataMon[x].DataMonName);
             }
         }
     }
@@ -65,7 +69,7 @@ public class DataDex : MonoBehaviour
             }
         }
         // Remove DataMonTeamPanels
-        if(DataTeamContainer.transform.childCount < DataTeam.Length)
+        if(DataTeamContainer.transform.childCount > DataTeam.Length)
         {
             AddToDataDex(DataTeamPanels[DataTeamPanels.Count - 1].GetComponent<DataMonButton>().dataMonHolder);
             Destroy(DataTeamPanels[DataTeamPanels.Count - 1]);
@@ -81,7 +85,9 @@ public class DataDex : MonoBehaviour
     DataMonButton dataMonBtn;
     internal void AddToDataDex(DataMonHolder toDataDex)
     {
-        indexOfDataMon = AllDataMons.IndexOf(toDataDex.dataMonData);
+        if (toDataDex.isNull())
+            return;
+        indexOfDataMon = AllDataMons.IndexOf(toDataDex.dataMon.DataMonName);
         DataMonObtained.Add(Instantiate(DataMonPanel, DataMonListInDex[indexOfDataMon].transform));
         verticalLayout = DataMonListInDex[indexOfDataMon].transform.parent.GetComponent<VerticalLayoutGroup>();
 
@@ -109,11 +115,12 @@ public class DataDex : MonoBehaviour
         {
             DataTeam[indexOfDataMon] = dataMonButton.dataMonHolder;
             DataTeamPanels[indexOfDataMon].name = dataMonButton.dataMonHolder.dataMon.DataMonName;
-
+            DataTeamPanels[indexOfDataMon].GetComponent<Image>().color = Testcolor;
             dataMonBtn = DataTeamPanels[indexOfDataMon].GetComponent<DataMonButton>();
             dataMonBtn.dataMonHolder = dataMonButton.dataMonHolder;
             dataMonBtn.DataMonSummoned = Instantiate(dataMonButton.dataMonHolder.dataMon.DataMonPrefab,
                 GameManager.instance.Player.transform.position,Quaternion.identity);
+            dataMonBtn.DataMonSummoned.GetComponent<DataMon.IndividualDataMon.DataMon>().SetDataMonCompanion();
 
 
 
@@ -125,13 +132,15 @@ public class DataDex : MonoBehaviour
     }
     public void DataDexRemoveFromTeam(DataMonButton dataMonButton)
     {
-        if (dataMonBtn.dataMonHolder.isNull())
+        if (dataMonButton.dataMonHolder.isNull())
+        {
             return;
+        }
 
         AddToDataDex(dataMonButton.dataMonHolder);
 
         indexOfDataMon = DataTeam.IndexOf(dataMonButton.dataMonHolder);
-        DataTeam[indexOfDataMon] = null;
+        DataTeam = DataTeam.RemoveAt(indexOfDataMon);
         DataTeamPanels.RemoveAt(indexOfDataMon);
 
         Destroy(dataMonButton.DataMonSummoned);
@@ -185,40 +194,5 @@ public class DataMonHolder
         dataMonData = toHold.dataMonData;
         dataMon = toHold.dataMon;
         dataMonCurrentAttributes = new DataMonInstancedAttributes(toHold.dataMonCurrentAttributes);
-    }
-}
-public static class DataMonHolderExtension
-{
-    public static bool isNull(this DataMonHolder holder)
-    {
-        if(holder !=null)
-            return holder.dataMon.DataMonPrefab == null;
-        return holder == null;
-    }
-}
-public static class ArrayExtensions
-{
-    public static T[] ResizeToArray<T>(this T[] array, int resizeTo)
-    {
-        T[] temp = new T[resizeTo];
-        
-        for (int i = 0; i < array.Length; i++)
-        {
-            temp[i] = array[i];
-        }
-        return temp;
-    }
-    public static int IndexOf<T>(this T[] array, T element)
-    {
-        int index = -1;
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (array[i].Equals(element))
-            {
-                index = i;
-                break;
-            }
-        }
-        return index;
     }
 }

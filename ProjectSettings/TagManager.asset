@@ -9,6 +9,9 @@ TagManager:
   - Companion
   - enemy
   - Databytes
+  - DataMon
+  - DataMonSpawnPoint
+  - PlayerRenderDist
   layers:
   - Default
   - TransparentFX

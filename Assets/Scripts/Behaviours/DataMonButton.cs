@@ -21,7 +21,6 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         if(eventData.button == PointerEventData.InputButton.Right && inDataBank)
         {
             AddToTeam(this);
-            print("WHY NO WORk");
         }
         if (eventData.button == PointerEventData.InputButton.Left && inDataBank)
         {
@@ -29,7 +28,8 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         }
         if (eventData.button == PointerEventData.InputButton.Right && !inDataBank)
         {
-            RemoveFromTeam(this);
+            RemoveFromTeam(this); print((this.dataMonHolder.isNull()) + "dataMonHolder==null ");
+
         }
     }
 
