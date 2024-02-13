@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Databytes : MonoBehaviour
 {
-    DataMon.IndividualDataMon.DataMon dataMon;
+    IndividualDataMon.DataMon dataMon;
     bool isQuitting;
 
     // Start is called before the first frame update
     void Start()
     {
-        dataMon = GetComponent<DataMon.IndividualDataMon.DataMon>();
+        dataMon = GetComponent<IndividualDataMon.DataMon>();
         isQuitting = false;
     }
 

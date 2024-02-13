@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 139525160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 342.4705, y: 342.4705, z: 342.4705}
+  m_LocalScale: {x: 181.3079, y: 181.3079, z: 181.3079}
   m_Children: []
   m_Father: {fileID: 1381013331137174204}
   m_RootOrder: 1
@@ -355,6 +355,7 @@ MonoBehaviour:
   - {fileID: 8519851035581550594, guid: 1a6bb742163fc234ea58abfc7833d8fc, type: 3}
   - {fileID: 7288772485722934236, guid: b6ccc078ca0922945bdfe3f503cfd989, type: 3}
   - {fileID: 329541168242953228, guid: bfa47618281266245a6b9e4c1cab5e3d, type: 3}
+  serializedDoot: 0
 --- !u!114 &542498928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3870,26 +3871,28 @@ MonoBehaviour:
   isCompanion: 0
   dataMonData: {fileID: 11400000, guid: 8418c7b48189b9b4e8f4f3d838ce55ef, type: 2}
   test: {fileID: 3720160180207510574, guid: a1cd0defbd70d9b4a9429065abf4e295, type: 3}
+  selected: 0
   dataMon:
-    DataMonName: 
-    DataMonPrefab: {fileID: 0}
+    DataMonName: eeee
+    DataMonPrefab: {fileID: 8258848450777015259, guid: 549be21259e953244b9ebabddc679a33,
+      type: 3}
     DataMonAttackProjectiles: []
     BaseAttributes:
-      BaseHealth: 0
-      BaseAttack: 0
-      BaseProductionSpeed: 0
-      BaseMoveSpeed: 0
-      BaseAttackRange: 1
-      BaseCaptureChance: 0
-    MonBehaviourState: 0
+      BaseHealth: 65.02
+      BaseAttack: 5.01
+      BaseProductionSpeed: 4.61
+      BaseMoveSpeed: 200
+      BaseAttackRange: 3
+      BaseCaptureChance: 100
+    MonBehaviourState: 2
   dataMonAI: {fileID: 0}
   dataMonCurrentAttributes:
-    CurrentHealth: 0
-    CurrentAttack: 0
-    CurrentProductionSpeed: 0
-    CurrentMoveSpeed: 0
-    CurrentAttackRange: 1
-    CurrentCaptureChance: 0
+    CurrentHealth: 65.02
+    CurrentAttack: 5.01
+    CurrentProductionSpeed: 4.61
+    CurrentMoveSpeed: 200
+    CurrentAttackRange: 3
+    CurrentCaptureChance: 100
   NamePlate: {fileID: 0}
   NamePlateText: {fileID: 0}
 --- !u!1 &1381013331188506913
@@ -3912,7 +3915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1381013331195769081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5305,15 +5308,14 @@ MonoBehaviour:
   playerRb: {fileID: 0}
   PlayerDataMonPatrolMinDist: 1.96
   PlayerDataMonPatrolMaxDist: 4.32
-  DataMonSpawnRadiusFromPlayerInner: 11.1
-  DataMonSpawnRadiusFromPlayerOuter: 16.41
+  DataMonSpawnRadiusFromPlayer: 8.6
   MaxDistForCompanionDataMon: 8.2
   CaptureDelay: 1
   DataMonsRotationSpeed: 200
-  MaxNumberOfWildDataMons: 60
+  MaxNumberOfWildDataMons: 50
   NumberOfDataMonsInTeam: 9
   Databytes_Count: 0
-  RenderDistance: 85
+  RenderDistance: 45
   NeutralColor: {r: 1, g: 1, b: 1, a: 1}
   HostileColor: {r: 1, g: 0.19215687, b: 0.015686275, a: 1}
   CompanionColor: {r: 0.16389823, g: 1, b: 0, a: 1}

@@ -5,7 +5,7 @@ using TMPro;
 /// <summary>
 /// This script is to convert the Data from DataMonsData to raw data for the scripts to use.
 /// </summary>
-namespace DataMon.IndividualDataMon
+namespace IndividualDataMon
 {
     public class DataMon : MonoBehaviour
     {
@@ -13,7 +13,8 @@ namespace DataMon.IndividualDataMon
         [HideInInspector]public bool isBeingCaptured = false;
         [HideInInspector] public bool isCompanion = false;
         public DataMonsData dataMonData;
-        [SerializeField] public GameObject test;
+        public GameObject test;
+        [HideInInspector] public int selected;
         public DataMonIndividualData dataMon;
         [HideInInspector]public DataMonAI dataMonAI;
         public DataMonInstancedAttributes dataMonCurrentAttributes;
@@ -23,11 +24,11 @@ namespace DataMon.IndividualDataMon
         //[SerializeField]private GameObject test;
         private void Awake()
         {
-            if (gameObject.name.Contains("(Clone)"))
-                SetDataMon(gameObject.name.Replace("(Clone)", ""));
-            //SetDataMonCompanion();
-            else
-                SetDataMon(test);
+            //if (gameObject.name.Contains("(Clone)"))
+            //    SetDataMon(gameObject.name.Replace("(Clone)", ""));
+            ////SetDataMonCompanion();
+            //else
+            //    SetDataMon(test);
             if (NamePlateText != null)
             {
                 NamePlateText.text = dataMon.DataMonName;
@@ -46,7 +47,7 @@ namespace DataMon.IndividualDataMon
             {
                 RoamingSpawner.doot_doot--;
                 isBeingCaptured = true;
-                Destroy(this.gameObject);
+                DestroyDataMon();
 
             }
         }
@@ -92,6 +93,11 @@ namespace DataMon.IndividualDataMon
                 return true;
             }
         }
+        public void SetDataMon(DataMonIndividualData _datamon)
+        {
+            dataMon = new DataMonIndividualData(_datamon);
+            dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
+        }
         //public int GetDataMonIndexInData(DataMonIndividualData[] array, GameObject DataMon)
         //{
         //    int toReturn = -1;
@@ -127,20 +133,32 @@ namespace DataMon.IndividualDataMon
             NamePlateText.color = GameManager.instance.NeutralColor;
 
         }
-        private void OnDestroy()
+        //private void OnDestroy()
+        //{
+        //    DestroyPatrolAnchor();
+        //}
+        public void DestroyDataMon()
         {
-            if (dataMonAI != null)
-            {
-                Destroy(dataMonAI.patrollingAnchor);
-            }
+            gameObject.SetActive(false);
+            if (dataMonAI == null)
+                return;
+
+            if (dataMonAI.patrollingAnchor != null)
+                dataMonAI.patrollingAnchor.SetActive(false);
+
+            RoamingSpawner.DataMonsPool.TryGetValue(dataMon.DataMonName, out List<DataMon> temp);
+            temp.Add(this);
         }
+
+
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (collision.gameObject.CompareTag("PlayerRenderDist"))
             {
                 RoamingSpawner.doot_doot--;
                 isBeingCaptured = true;
-                Destroy(this.gameObject);
+                DestroyDataMon();
+
 
             }
         }

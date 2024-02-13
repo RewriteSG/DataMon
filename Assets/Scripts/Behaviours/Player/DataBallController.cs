@@ -25,12 +25,14 @@ public class DataBallController : MonoBehaviour
     }
     DataDexIO CaptureTarget;
     GameObject capturingGameObj;
-    DataMon.IndividualDataMon.DataMon dataMon;
+    IndividualDataMon.DataMon dataMon;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag != "DataMon")
             return;
-        dataMon = collision.transform.parent.gameObject.GetComponent<DataMon.IndividualDataMon.DataMon>();
+        if (isCapturing)
+            return;
+        dataMon = collision.transform.parent.gameObject.GetComponent<IndividualDataMon.DataMon>();
         if (!dataMon.isBeingCaptured && dataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && !isCapturing)
         {
             dataMon.isBeingCaptured = true;
@@ -63,13 +65,12 @@ public class DataBallController : MonoBehaviour
         }
         else
         {
-            capturingGameObj.SetActive(true);
             goto ReturnFromCoroutine;
         }
         if (CaptureProgress>= 100)
         {
             CaptureTarget.SendToDataDex();
-            Destroy(capturingGameObj);
+            dataMon.DestroyDataMon(); 
 
             goto ReturnFromCoroutine;
         }
@@ -80,24 +81,25 @@ public class DataBallController : MonoBehaviour
         print("Second chance " + randomizedChance + " With Chance " + DataMonCaptureChance);
         if (randomizedChance <= DataMonCaptureChance)
         {
-            CaptureProgress += DataMonCaptureChance;
+            CaptureProgress = 100;
         }
         else
         {
-            capturingGameObj.SetActive(true);
             goto ReturnFromCoroutine;
 
         }
         print("captured");
 
         CaptureTarget.SendToDataDex();
-        Destroy(capturingGameObj);
-
+        dataMon.DestroyDataMon();
 
         ReturnFromCoroutine:
         CaptureTarget = null;
         capturingGameObj = null;
-        
+
+        if(CaptureProgress < 100)
+        capturingGameObj.SetActive(true);
+
         Destroy(gameObject);
     }
 }

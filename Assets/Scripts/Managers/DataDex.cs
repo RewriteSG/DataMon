@@ -120,7 +120,7 @@ public class DataDex : MonoBehaviour
             dataMonBtn.dataMonHolder = dataMonButton.dataMonHolder;
             dataMonBtn.DataMonSummoned = Instantiate(dataMonButton.dataMonHolder.dataMon.DataMonPrefab,
                 GameManager.instance.Player.transform.position,Quaternion.identity);
-            dataMonBtn.DataMonSummoned.GetComponent<DataMon.IndividualDataMon.DataMon>().SetDataMonCompanion();
+            dataMonBtn.DataMonSummoned.GetComponent<IndividualDataMon.DataMon>().SetDataMonCompanion();
 
 
 
@@ -183,7 +183,7 @@ public class DataMonHolder
     public DataMonIndividualData dataMon;
     public DataMonInstancedAttributes dataMonCurrentAttributes;
     public DataMonHolder() { }
-    public DataMonHolder(DataMon.IndividualDataMon.DataMon toHold)
+    public DataMonHolder(IndividualDataMon.DataMon toHold)
     {
         dataMonData = toHold.dataMonData;
         dataMon = toHold.dataMon;

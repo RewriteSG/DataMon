@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Rigidbody2D playerRb;
     public float PlayerDataMonPatrolMinDist;
     public float PlayerDataMonPatrolMaxDist;
-    public float DataMonSpawnRadiusFromPlayerInner, DataMonSpawnRadiusFromPlayerOuter;
+    public float DataMonSpawnRadiusFromPlayer;
     public float MaxDistForCompanionDataMon;
     public float CaptureDelay = 1;
     public float DataMonsRotationSpeed;
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             return;
         playerRb = Player.GetComponent<Rigidbody2D>();
         playerShootScript = Player.GetComponent<PlayerShoot>();
-        BulletsPoolGameObject = new GameObject("AAAAAAAAAAAAAAAAAAAAAAAA");
+        BulletsPoolGameObject = new GameObject("BulletPool");
         List<BulletInstance> unactiveBullets = new List<BulletInstance>();
         for (int i = 0; i < NumberOfBulletsInPool; i++)
         {
@@ -52,22 +52,30 @@ public class GameManager : MonoBehaviour
             unactiveBullets[unactiveBullets.Count - 1].gameObject.SetActive(false);
         }
         BulletsPool.Add(false, unactiveBullets);
-        BulletsPool.Add(true, new List<BulletInstance>());
+        BulletsPool.Add(true, new List<BulletInstance>()); 
+        ReferencePlayerRenderDistTrigger();
+
     }
 
     private void OnValidate()
     {
         if (Player == null)
             return;
-        if(PlayerRenderDistTrigger == null || PlayerRenderDistTrigger.transform.parent != Player.transform)
-        {
-            PlayerRenderDistTrigger = Player.transform.FindChildByTag("PlayerRenderDist").gameObject;
-            
-        }
+        ReferencePlayerRenderDistTrigger();
         if (PlayerRenderDistTrigger == null)
             return;
         PlayerRenderDistTrigger.transform.localScale = Player.transform.InverseTransformVector(Vector3.one * RenderDistance);
     }
+
+    private void ReferencePlayerRenderDistTrigger()
+    {
+        if (PlayerRenderDistTrigger == null || PlayerRenderDistTrigger.transform.parent != Player.transform)
+        {
+            PlayerRenderDistTrigger = Player.transform.FindChildByTag("PlayerRenderDist").gameObject;
+
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -79,13 +87,10 @@ public class GameManager : MonoBehaviour
         Gizmos.DrawWireSphere(Player.transform.position, PlayerDataMonPatrolMaxDist);
         Gizmos.DrawWireSphere(Player.transform.position, MaxDistForCompanionDataMon);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(Player.transform.position, DataMonSpawnRadiusFromPlayerInner);
+        Gizmos.DrawWireSphere(Player.transform.position, DataMonSpawnRadiusFromPlayer);
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(Player.transform.position, RenderDistance);
-        Gizmos.color = Color.red;
-
-        Gizmos.DrawWireSphere(Player.transform.position, DataMonSpawnRadiusFromPlayerOuter);
 
     }
     BulletInstance b_instance;

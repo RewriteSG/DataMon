@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DataMonCollision : MonoBehaviour
 {
-    [HideInInspector]public DataMon.IndividualDataMon.DataMon _datamon;
+    [HideInInspector]public IndividualDataMon.DataMon _datamon;
     // Start is called before the first frame update
     void Start()
     {
-        _datamon = transform.parent.GetComponent<DataMon.IndividualDataMon.DataMon>();
+        _datamon = transform.parent.GetComponent<IndividualDataMon.DataMon>();
     }
 
     // Update is called once per frame
