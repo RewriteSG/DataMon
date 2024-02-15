@@ -5,12 +5,13 @@ using UnityEngine;
 public class Databytes : MonoBehaviour
 {
     IndividualDataMon.DataMon dataMon;
-    bool isQuitting;
+    [HideInInspector] public bool isQuitting;
 
     // Start is called before the first frame update
     void Start()
     {
         dataMon = GetComponent<IndividualDataMon.DataMon>();
+        dataMon._databytes = this;
         isQuitting = false;
     }
 
@@ -28,7 +29,7 @@ public class Databytes : MonoBehaviour
     {
         isQuitting = true;
     }
-    private void OnDestroy()
+    public void DataMonIsDestroyed()
     {
         if (dataMon == null || isQuitting)
             return;

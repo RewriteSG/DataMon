@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 329541168242953226}
   - component: {fileID: 329541168242953227}
   - component: {fileID: 1709287292825869611}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Datantite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,26 +122,31 @@ MonoBehaviour:
   isCompanion: 0
   dataMonData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
   test: {fileID: 329541168242953228}
+  selected: 0
+  DataMonNames:
+  - Datant
+  - Datantite
+  - Datantaur
   dataMon:
-    DataMonName: 
-    DataMonPrefab: {fileID: 0}
+    DataMonName: Datantite
+    DataMonPrefab: {fileID: 329541168242953228}
     DataMonAttackProjectiles: []
     BaseAttributes:
-      BaseHealth: 0
+      BaseHealth: 40
       BaseAttack: 0
       BaseProductionSpeed: 0
-      BaseMoveSpeed: 0
-      BaseAttackRange: 1
-      BaseCaptureChance: 0
+      BaseMoveSpeed: 200
+      BaseAttackRange: 0
+      BaseCaptureChance: 100
     MonBehaviourState: 2
   dataMonAI: {fileID: 0}
   dataMonCurrentAttributes:
-    CurrentHealth: 0
+    CurrentHealth: 40
     CurrentAttack: 0
     CurrentProductionSpeed: 0
-    CurrentMoveSpeed: 0
-    CurrentAttackRange: 1
-    CurrentCaptureChance: 0
+    CurrentMoveSpeed: 200
+    CurrentAttackRange: 0
+    CurrentCaptureChance: 100
   NamePlate: {fileID: 6149556114654668756}
   NamePlateText: {fileID: 6149556114524597499}
 --- !u!114 &1709287292825869611
@@ -166,7 +171,8 @@ GameObject:
   m_Component:
   - component: {fileID: 329541168961311994}
   - component: {fileID: 329541168961311993}
-  m_Layer: 0
+  - component: {fileID: 2257932641802603419}
+  m_Layer: 9
   m_Name: Model
   m_TagString: DataMon
   m_Icon: {fileID: 0}
@@ -222,6 +228,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5369463, y: 6.096578}
   m_EdgeRadius: 0
+--- !u!114 &2257932641802603419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329541168961311995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9405ddb41979eb43a9b14bff6a396cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _datamon: {fileID: 329541168242953227}
 --- !u!1 &2684621831575452655
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621831575452652}
   - component: {fileID: 2684621831575452653}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +331,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684621831915735664}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BackLegsRight (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621832361654307}
   - component: {fileID: 2684621832361654304}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621832362348590}
   - component: {fileID: 2684621832362348591}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FrontLegsTopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +525,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684621832447129013}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BackLegsLeft (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621832457596784}
   - component: {fileID: 2684621832457596785}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FrontLegsFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +637,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684621832477752729}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MidLegsLeft (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621832498592724}
   - component: {fileID: 2684621832498592725}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BackLegsFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -731,7 +750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621832542009836}
   - component: {fileID: 2684621832542009837}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FrontLegsTopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -813,7 +832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621832573685223}
   - component: {fileID: 2684621832573685220}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MidLegsFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -893,7 +912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684621832588171566}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Thorax
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -924,7 +943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684621832615488955}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BaseHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -956,7 +975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621832741542156}
   - component: {fileID: 2684621832741542157}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FrontLegsFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1037,7 +1056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621832784958252}
   - component: {fileID: 2684621832784958253}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1118,7 +1137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621832801492836}
   - component: {fileID: 2684621832801492837}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BackLegsFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1198,7 +1217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684621832854428452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MidLegsRight (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1230,7 +1249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621833020897300}
   - component: {fileID: 2684621833020897301}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MidLegsTopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1312,7 +1331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621833027228065}
   - component: {fileID: 2684621833027228254}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MidLegsFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1393,7 +1412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621833038559766}
   - component: {fileID: 2684621833038559767}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MidLegsTopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1474,7 +1493,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684621833136745036}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FrontLegsLeft (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1506,7 +1525,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621833244688127}
   - component: {fileID: 2684621833244688124}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BackLegsTopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1587,7 +1606,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684621833308058885}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Abdomen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1619,7 +1638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2684621833553995227}
   - component: {fileID: 2684621833553995224}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BackLegsTopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1700,7 +1719,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684621833587757432}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FrontLegsRight (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1729,6 +1748,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 329541168242953222}
     m_Modifications:
+    - target: {fileID: 7802660751728996237, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802660752009871415, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7802660752009871416, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1739,10 +1768,20 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7802660752364689901, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7802660753196514651, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}
       propertyPath: m_Name
       value: DataMonsNameplate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802660753196514651, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7802660753196514652, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}
@@ -1813,6 +1852,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 6.2324
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802660753343493746, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802660753485694567, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27, type: 3}

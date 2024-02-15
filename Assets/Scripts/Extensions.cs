@@ -141,4 +141,35 @@ public static class DataMonsDataExtensions
         }
         return temp;
     }
+    public static int GetDataMonIndexInDataArray<T>(this T[] array, string dataMon) where T : DataMonIndividualData
+    {
+        int temp = 0;
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i].DataMonName == dataMon)
+            {
+                temp = i;
+                break;
+            }
+        }
+        return temp;
+    }
+}
+public static class DamageByExtension
+{
+    public static bool GetDamagedByGameObject(this List<DamagedBy> dmgByList,GameObject go, out DamagedBy Result)
+    {
+        bool isNull = false;
+        Result = null;
+        for (int i = 0; i < dmgByList.Count; i++)
+        {
+            if(dmgByList[i].byGameObject == go)
+            {
+                Result = dmgByList[i];
+                isNull = true;
+            }
+        }
+
+        return isNull;
+    }
 }

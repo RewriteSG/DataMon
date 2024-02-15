@@ -33,13 +33,13 @@ public class DataDex : MonoBehaviour
         GameObject temp;
         for (int i = 0; i < AllDataMonsData.Count; i++)
         {
-            DataMonEvoCount = AllDataMonsData[i]._DataMon.Length;
+            DataMonEvoCount = AllDataMonsData[i].DataMons.Length;
             for (int x = 0; x < DataMonEvoCount; x++)
             {
                 temp = Instantiate(Label, Content);
-                temp.GetComponentInChildren<TextMeshProUGUI>().text =/* "Datamon #"+x+" : " + */AllDataMonsData[i]._DataMon[x].DataMonName;
+                temp.GetComponentInChildren<TextMeshProUGUI>().text =/* "Datamon #"+x+" : " + */AllDataMonsData[i].DataMons[x].DataMonName;
                 DataMonListInDex.Add(Instantiate(DataMonContainer, Content));
-                AllDataMons.Add(AllDataMonsData[i]._DataMon[x].DataMonName);
+                AllDataMons.Add(AllDataMonsData[i].DataMons[x].DataMonName);
             }
         }
     }
@@ -118,7 +118,8 @@ public class DataDex : MonoBehaviour
             DataTeamPanels[indexOfDataMon].GetComponent<Image>().color = Testcolor;
             dataMonBtn = DataTeamPanels[indexOfDataMon].GetComponent<DataMonButton>();
             dataMonBtn.dataMonHolder = dataMonButton.dataMonHolder;
-            dataMonBtn.DataMonSummoned = Instantiate(dataMonButton.dataMonHolder.dataMon.DataMonPrefab,
+            dataMonBtn.DataMonSummoned = 
+            Instantiate(dataMonButton.dataMonHolder.dataMonData.DataMons.GetDataMonInDataArray(dataMonButton.dataMonHolder.dataMon.DataMonName).DataMonPrefab,
                 GameManager.instance.Player.transform.position,Quaternion.identity);
             dataMonBtn.DataMonSummoned.GetComponent<IndividualDataMon.DataMon>().SetDataMonCompanion();
 

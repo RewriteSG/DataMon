@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DataMonCollision : MonoBehaviour
 {
-    [HideInInspector]public IndividualDataMon.DataMon _datamon;
+    public IndividualDataMon.DataMon DataMon;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        _datamon = transform.parent.GetComponent<IndividualDataMon.DataMon>();
+        DataMon = transform.parent.GetComponent<IndividualDataMon.DataMon>();
     }
 
     // Update is called once per frame
@@ -22,9 +22,11 @@ public class DataMonCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             damage = float.Parse(collision.gameObject.name);
-            _datamon.dataMonCurrentAttributes.CurrentHealth -= damage;
-            _datamon.dataMonCurrentAttributes.CurrentHealth = 
-                Mathf.Clamp(_datamon.dataMonCurrentAttributes.CurrentHealth,0, _datamon.dataMonCurrentAttributes.CurrentHealth+1);
+            DataMon.dataMonCurrentAttributes.CurrentHealth -= damage;
+            DataMon.dataMonCurrentAttributes.CurrentHealth = 
+                Mathf.Clamp(DataMon.dataMonCurrentAttributes.CurrentHealth,0, DataMon.dataMonCurrentAttributes.CurrentHealth+1);
+            collision.gameObject.SetActive(false);
+            DataMon.dataMonAI.aggroSystem.SetDamageByEntity(GameManager.instance.Player,damage);
         }
     }
 }

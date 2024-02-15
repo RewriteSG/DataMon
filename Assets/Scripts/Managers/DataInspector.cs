@@ -29,7 +29,7 @@ public class DataInspector : MonoBehaviour
         if (DataMonEvolveTier == -1)
         {
             DataInspectorUI.SetActive(true);
-            DataMonEvolveTier = DataMonHovering.dataMonData._DataMon.GetDataMonIndexInDataArray(DataMonHovering.dataMon);
+            DataMonEvolveTier = DataMonHovering.dataMonData.DataMons.GetDataMonIndexInDataArray(DataMonHovering.dataMon.DataMonName);
         }
 
         if(DataInspectorHealthBar.slider.maxValue != DataMonHovering.dataMon.BaseAttributes.BaseHealth)
@@ -46,6 +46,6 @@ public class DataInspector : MonoBehaviour
 
         txt_DataName.text = DataMonHovering.dataMon.DataMonName;
 
-        txt_Role.text = "Role: " + nameof(DataMonHovering.dataMonData.MonRole);
+        txt_Role.text = "Role: " + DataMonHovering.dataMonData.MonRole.ToString();
     }
 }

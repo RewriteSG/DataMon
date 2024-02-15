@@ -4,7 +4,9 @@ using UnityEngine;
 [DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
+    // Global Variables
     public static GameManager instance;
+    public static int TotalDataMonIDs;
 
     public GameObject Player;
     [HideInInspector] public PlayerShoot playerShootScript;
@@ -35,6 +37,11 @@ public class GameManager : MonoBehaviour
     public PlayerProgress player_progress = new PlayerProgress();
 
     GameObject PlayerRenderDistTrigger;
+
+    private void Awake()
+    {
+        TotalDataMonIDs = 0;
+    }
     // Start is called before the first frame update
     void Start()
     {

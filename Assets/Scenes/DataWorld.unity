@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bac3e118f1d7cf4db6a8fd90af1ae57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isQuitting: 0
 --- !u!114 &419308881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +356,7 @@ MonoBehaviour:
   - {fileID: 8519851035581550594, guid: 1a6bb742163fc234ea58abfc7833d8fc, type: 3}
   - {fileID: 7288772485722934236, guid: b6ccc078ca0922945bdfe3f503cfd989, type: 3}
   - {fileID: 329541168242953228, guid: bfa47618281266245a6b9e4c1cab5e3d, type: 3}
+  Datamons_roamingData: []
   serializedDoot: 0
 --- !u!114 &542498928
 MonoBehaviour:
@@ -3639,7 +3641,7 @@ Rigidbody2D:
   m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1381013331137174203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3737,7 +3739,7 @@ GameObject:
   - component: {fileID: 1381013331137174208}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3872,6 +3874,7 @@ MonoBehaviour:
   dataMonData: {fileID: 11400000, guid: 8418c7b48189b9b4e8f4f3d838ce55ef, type: 2}
   test: {fileID: 3720160180207510574, guid: a1cd0defbd70d9b4a9429065abf4e295, type: 3}
   selected: 0
+  DataMonNames: []
   dataMon:
     DataMonName: eeee
     DataMonPrefab: {fileID: 8258848450777015259, guid: 549be21259e953244b9ebabddc679a33,
@@ -3886,6 +3889,7 @@ MonoBehaviour:
       BaseCaptureChance: 100
     MonBehaviourState: 2
   dataMonAI: {fileID: 0}
+  _databytes: {fileID: 0}
   dataMonCurrentAttributes:
     CurrentHealth: 65.02
     CurrentAttack: 5.01
@@ -3895,6 +3899,8 @@ MonoBehaviour:
     CurrentCaptureChance: 100
   NamePlate: {fileID: 0}
   NamePlateText: {fileID: 0}
+  DataMonAttacksID: 0
+  DataMonAttacksParentObj: {fileID: 0}
 --- !u!1 &1381013331188506913
 GameObject:
   m_ObjectHideFlags: 0
@@ -5308,11 +5314,11 @@ MonoBehaviour:
   playerRb: {fileID: 0}
   PlayerDataMonPatrolMinDist: 1.96
   PlayerDataMonPatrolMaxDist: 4.32
-  DataMonSpawnRadiusFromPlayer: 8.6
+  DataMonSpawnRadiusFromPlayer: 13.1
   MaxDistForCompanionDataMon: 8.2
   CaptureDelay: 1
   DataMonsRotationSpeed: 200
-  MaxNumberOfWildDataMons: 50
+  MaxNumberOfWildDataMons: 100
   NumberOfDataMonsInTeam: 9
   Databytes_Count: 0
   RenderDistance: 45

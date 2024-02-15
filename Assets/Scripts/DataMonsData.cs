@@ -7,7 +7,7 @@ public class DataMonsData : ScriptableObject
 {
     
     [Header("Put DataMons from tier 1 to tier 2, and so on..")]
-    public DataMonIndividualData[] _DataMon;
+    public DataMonIndividualData[] DataMons;
     public DataMonRole MonRole;
 }
 
@@ -30,7 +30,7 @@ public class DataMonIndividualData
     public DataMonBehaviourState MonBehaviourState;
     public DataMonIndividualData()
     {
-
+         
     }
     /// <summary>
     /// Use this to only copy the data
@@ -94,5 +94,14 @@ public class DataMonInstancedAttributes
         temp.BaseAttackRange = instancedAttributes.CurrentAttackRange;
         temp.BaseCaptureChance = instancedAttributes.CurrentCaptureChance;
         return temp;
+    }
+    public void ResetAttributes(DataMonAttributes toReset)
+    {
+        CurrentHealth = toReset.BaseHealth;
+        CurrentAttack = toReset.BaseAttack;
+        CurrentProductionSpeed = toReset.BaseProductionSpeed;
+        CurrentMoveSpeed = toReset.BaseMoveSpeed;
+        CurrentAttackRange = toReset.BaseAttackRange;
+        CurrentCaptureChance = toReset.BaseCaptureChance;
     }
 }

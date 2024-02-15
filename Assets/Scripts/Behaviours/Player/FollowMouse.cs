@@ -7,8 +7,6 @@ public class FollowMouse : MonoBehaviour
     public float rotateDamp;
     float reference;
     // Update is called once per frame
-    Vector3 Dir;
-    Vector3 mousePos;
     void Update()
     {
         Vector3 objPos = Camera.main.WorldToScreenPoint(transform.position);

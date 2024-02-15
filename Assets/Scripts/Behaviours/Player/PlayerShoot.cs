@@ -35,7 +35,7 @@ public class PlayerShoot : MonoBehaviour
             {
                 bullet = GameManager.instance.GetAvailableBullet();
                 bullet.transform.SetPositionAndRotation(gunPoint.transform.position, gunPoint.transform.rotation);
-                bullet.transform.Rotate(Vector3.forward * Random.Range(-35, 36));
+                bullet.transform.Rotate(Vector3.forward * Random.Range(-25, 26));
                 bullet.SetDamageAndSpeed(SGBullet.Damage, SGBullet.speed);
             }
         }
@@ -48,7 +48,8 @@ public class PlayerShoot : MonoBehaviour
             bullet = GameManager.instance.GetAvailableBullet();
             bullet.transform.SetPositionAndRotation(gunPoint.transform.position, gunPoint.transform.rotation);
             bullet.SetDamageAndSpeed(HRBullet.Damage, HRBullet.speed);
-
+            bullet.HRBulletCheckPath();
+            bullet.isHR = true;
         }
     }
     public void Shoot_AssaultRifle()

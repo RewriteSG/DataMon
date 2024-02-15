@@ -10,9 +10,10 @@ public class DataMonDataEditor : Editor
     //{
     //    base.OnInspectorGUI();
     //    data = (DataMonsData)target;
-    //    for (int i = 0; i < data._DataMon.Length; i++)
+    //    for (int i = 0; i < data.DataMons.Length; i++)
     //    {
-    //        data._DataMon[i].derivedData = data;
+    //        data.DataMons[i].DataMonPrefab.GetComponent<IndividualDataMon.DataMon>().dataMon = data.DataMons[i];
     //    }
+
     //}
 }

@@ -12,6 +12,7 @@ TagManager:
   - DataMon
   - DataMonSpawnPoint
   - PlayerRenderDist
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -22,9 +23,9 @@ TagManager:
   - 
   - 
   - Obstacles
-  - Hostile
-  - Neutral
-  - Companion
+  - DataMonLayer
+  - 
+  - 
   - 
   - 
   - 

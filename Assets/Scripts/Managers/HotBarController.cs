@@ -122,8 +122,15 @@ public class HotBarController : MonoBehaviour
             case ItemHolding.HuntingRifle:
             case ItemHolding.AssaultRifle:
                 CheckInput(KeyCode.Mouse0, LeftClick);
-                CheckInput(KeyCode.Mouse1, RightClick);
+                if (Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    CameraFollow.isAiming = true;
+                }
+                if (Input.GetKeyUp(KeyCode.Mouse1))
+                {
 
+                    CameraFollow.isAiming = false;
+                }
                 break;
             default:
                 break;

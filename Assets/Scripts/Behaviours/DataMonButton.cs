@@ -44,7 +44,7 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     }
 
-    //public void RegisterToTeam(DataMonIndividualData _dataMon)
+    //public void RegisterToTeam(DataMonIndividualData DataMons)
     //{
 
     //}
