@@ -7,6 +7,7 @@ public class AggroSystem : MonoBehaviour
 {
     public DataMonAI datamonAI;
     public AggroList ListOfTargets = new AggroList();
+    
     // Start is called before the first frame update
     void Start()
     {

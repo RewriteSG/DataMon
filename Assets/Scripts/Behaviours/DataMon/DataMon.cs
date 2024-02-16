@@ -79,33 +79,35 @@ namespace IndividualDataMon
         /// </summary>
         /// <param name="ToDataMon"></param>
         /// <returns></returns>
-        public bool SetDataMon(GameObject ToDataMon)
-        {
-            if (dataMonData == null)
-            {
-                return false;
-            }
-            dataMon = new DataMonIndividualData(dataMonData.DataMons.GetDataMonInDataArray(ToDataMon));
-            dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
+        //public bool SetDataMon(GameObject ToDataMon)
+        //{
+        //    if (dataMonData == null)
+        //    {
+        //        return false;
+        //    }
+        //    dataMon = new DataMonIndividualData(dataMonData.DataMons.GetDataMonInDataArray(ToDataMon));
+        //    dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
             
-            return true;
-        }
-        public bool SetDataMon(string ToDataMon)
+        //    return true;
+        //}
+        //public bool SetDataMon(string ToDataMon)
+        //{
+        //    if (dataMonData == null)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        dataMon = new DataMonIndividualData(dataMonData.DataMons.GetDataMonInDataArray(ToDataMon));
+        //        dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
+        //        return true;
+        //    }
+        //}
+        public void SetDataMon(DataMonIndividualData ToDataMon)
         {
-            if (dataMonData == null)
-            {
-                return false;
-            }
-            else
-            {
-                dataMon = new DataMonIndividualData(dataMonData.DataMons.GetDataMonInDataArray(ToDataMon));
-                dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
-                return true;
-            }
-        }
-        public void SetDataMon(DataMonIndividualData DataMons)
-        {
-            dataMon = new DataMonIndividualData(DataMons);
+            tier = dataMonData.DataMons.GetDataMonIndexInDataArray(ToDataMon);
+
+            dataMon = new DataMonIndividualData(ToDataMon);
             dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
 
         }
@@ -143,9 +145,10 @@ namespace IndividualDataMon
         }
         public void SetDataMonHostile()
         {
+            if (dataMon.MonBehaviourState != DataMonBehaviourState.isHostile)
+                GameManager.HostileDataMons++;
             dataMon.MonBehaviourState = DataMonBehaviourState.isHostile;
             NamePlateText.color = GameManager.instance.HostileColor;
-
         }
         public void SetDataMonNeutral()
         {
@@ -167,7 +170,11 @@ namespace IndividualDataMon
             gameObject.SetActive(false);
             if (dataMonAI == null)
                 return;
-
+            if (dataMon.MonBehaviourState == DataMonBehaviourState.isHostile)
+            {
+                GameManager.HostileDataMons--;
+                GameManager.instance.HostileDataMonsGOs.Remove(gameObject);
+            }
             if (dataMonAI.patrollingAnchor != null)
                 dataMonAI.patrollingAnchor.SetActive(false);
 

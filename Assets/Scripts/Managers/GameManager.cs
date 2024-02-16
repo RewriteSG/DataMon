@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     // Global Variables
     public static GameManager instance;
     public static int TotalDataMonIDs;
-
+    public static int HostileDataMons;
+    public List<GameObject> HostileDataMonsGOs = new List<GameObject>();
     public GameObject Player;
     [HideInInspector] public PlayerShoot playerShootScript;
     [HideInInspector] public Rigidbody2D playerRb;
@@ -61,7 +62,7 @@ public class GameManager : MonoBehaviour
         BulletsPool.Add(false, unactiveBullets);
         BulletsPool.Add(true, new List<BulletInstance>()); 
         ReferencePlayerRenderDistTrigger();
-
+        HostileDataMonsGOs.Clear();
     }
 
     private void OnValidate()
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         NumberOfDataMonsInTeam = Mathf.Clamp(NumberOfDataMonsInTeam, 1, NumberOfDataMonsInTeam+1);
+        print(HostileDataMons);
     }
     void OnDrawGizmos()
     {

@@ -84,6 +84,7 @@ public class RoamingSpawner : MonoBehaviour
         temp[0].gameObject.SetActive(true);
         temp[0].dataMonAI.SetNewPatrollingAnchorPos();
         temp[0].ResetAttributes();
+        temp[0].dataMon.MonBehaviourState = temp[0].dataMonData.DataMons[temp[0].tier].MonBehaviourState;
         temp.RemoveAt(0);
         doot_doot += 1;
         prevSpawnPos = SpawnPosition;

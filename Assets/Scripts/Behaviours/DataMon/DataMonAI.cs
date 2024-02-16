@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using Commands;
 public class DataMonAI : MonoBehaviour
 {
     public AI_State AI_state;
@@ -29,6 +30,7 @@ public class DataMonAI : MonoBehaviour
         DataMon = GetComponent<IndividualDataMon.DataMon>();
         DataMon.dataMonAI = this;
         gameObject.AddComponent<AggroSystem>();
+        timerToChangeTarget = 999;
         //InvokeRepeating("TestAI", 0, .5f);
     }
     private void OnEnable()
@@ -37,6 +39,7 @@ public class DataMonAI : MonoBehaviour
         StartCoroutine(StartPathing());
 
     }
+    float timerToChangeTarget;
     // Update is called once per frame
     void Update()
     {
@@ -44,10 +47,37 @@ public class DataMonAI : MonoBehaviour
         {
             DataMonDoThings();
         }
-        if(DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && 
-            Vector3.Distance(transform.position, GameManager.instance.Player.transform.position)>GameManager.instance.MaxDistForCompanionDataMon)
+        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion &&
+            Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon
+            || GameManager.HostileDataMons <= 0)
         {
+            timerToChangeTarget = 999;
             AI_state = AI_State.Patrol;
+
+        }
+        if(DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && GameManager.HostileDataMons > 0)
+        {
+            switch (DataMonCommand.command)
+            {
+                case DataMonCommands.DontAttack:
+                    break;
+
+                case DataMonCommands.Patrol:
+                case DataMonCommands.TargetEnemy:
+                case DataMonCommands.AttackAggressive:
+                    AI_state = AI_State.Attack;
+                    if(timerToChangeTarget > 30)
+                    {
+                        timerToChangeTarget = 0;
+                        ChangeAttackTargetEnemy(GameManager.instance.HostileDataMonsGOs[Random.Range(0, GameManager.instance.HostileDataMonsGOs.Count)]);
+                        print("why not WORKING!!");
+                    }
+                    else
+                    {
+                        timerToChangeTarget += Time.deltaTime;
+                    }
+                    break;
+            }
         }
     }
     IEnumerator StartPathing()
@@ -80,7 +110,20 @@ public class DataMonAI : MonoBehaviour
         {
             DataMon.SetDataMonHostile();
             AI_state = AI_State.Attack;
+            GameManager.instance.HostileDataMonsGOs.Add(gameObject);
         }
+    }
+    public void ChangeAttackTargetEnemy(GameObject enemy)
+    {
+        if (DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
+            return;
+        if(DataMonCommand.command == DataMonCommands.TargetEnemy && DataMonCommand.ToTarget != null)
+        {
+            Target = DataMonCommand.ToTarget.transform;
+            return;
+        }
+        Target = enemy.transform;
+
     }
     private void CreateNewPatrolAnchor()
     {
@@ -145,25 +188,33 @@ public class DataMonAI : MonoBehaviour
     Collider2D[] allCollidersInCircle = new Collider2D[] { };
     void StartAttack()
     {
-        print("attacking");
+
 
         //Vector3.Distance(transform.position, Target.position) > DataMon.dataMon.AttackRange
-        Dir = (transform.position - Target.position).normalized;
+        if (Target == null)
+            return;
         allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, DataMon.dataMonCurrentAttributes.CurrentAttackRange);
-        if (!allCollidersInCircle.ColliderArrayHasTag(Target.tag))
-        {
-            reachedEndOfPath = false;
-        }
-        else
+        
+        
+        if (DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject))
         {
             reachedEndOfPath = true;
 
             return;
+        }else
+            reachedEndOfPath = false;
+        
+        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject,true))
+        {
+            reachedEndOfPath = true;
+            print("endOfPath");
+            return;
         }
+        else
+            reachedEndOfPath = false;
 
         if (seeker.IsDone())
             seeker.StartPath(transform.position, Target.position, OnPathingComplete);
-        print("attacking moving");
 
     }
     Vector3 randomPatrolDir;
@@ -237,6 +288,8 @@ public class DataMonAI : MonoBehaviour
         {
             reachedEndOfPath = false;
         }
+        if (AI_state == AI_State.Attack && Target == null)
+            return;
 
         if(reachedEndOfPath && AI_state == AI_State.Produce || AI_state == AI_State.Attack)
         {
@@ -250,12 +303,12 @@ public class DataMonAI : MonoBehaviour
             return;
         }
 
-        if (Vector2.Distance(transform.position, GameManager.instance.Player.transform.position) < GameManager.instance.DataMonSpawnRadiusFromPlayer && rb.isKinematic)
-            rb.isKinematic = false;
-        if (Vector2.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.DataMonSpawnRadiusFromPlayer && !rb.isKinematic)
+        if (Vector2.Distance(transform.position, GameManager.instance.Player.transform.position) < GameManager.instance.DataMonSpawnRadiusFromPlayer && rb.bodyType != RigidbodyType2D.Dynamic)
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        if (Vector2.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.DataMonSpawnRadiusFromPlayer && rb.bodyType != RigidbodyType2D.Static)
         {
             rb.velocity = Vector2.zero;
-            rb.isKinematic = true;
+            rb.bodyType = RigidbodyType2D.Static;
         }
 
 

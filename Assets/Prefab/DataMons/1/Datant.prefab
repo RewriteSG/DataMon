@@ -1548,7 +1548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9405ddb41979eb43a9b14bff6a396cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DataMons: {fileID: 8519851035581550597}
+  DataMon: {fileID: 0}
 --- !u!1 &8519851035581550594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,7 +1685,7 @@ MonoBehaviour:
       BaseAttack: 0
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
-      BaseAttackRange: 0
+      BaseAttackRange: 3
       BaseCaptureChance: 100
     MonBehaviourState: 2
   dataMonAI: {fileID: 0}
@@ -1695,7 +1695,7 @@ MonoBehaviour:
     CurrentAttack: 0
     CurrentProductionSpeed: 0
     CurrentMoveSpeed: 200
-    CurrentAttackRange: 0
+    CurrentAttackRange: 3
     CurrentCaptureChance: 100
   NamePlate: {fileID: 5580441581073435431}
   NamePlateText: {fileID: 5580441581203275784}
