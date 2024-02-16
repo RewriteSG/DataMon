@@ -66,7 +66,12 @@ public class DataMonAI : MonoBehaviour
                 case DataMonCommands.TargetEnemy:
                 case DataMonCommands.AttackAggressive:
                     AI_state = AI_State.Attack;
-                    if(timerToChangeTarget > 30)
+                    if (DataMonCommand.ToTarget != null)
+                    {
+                        timerToChangeTarget = Mathf.Clamp(timerToChangeTarget,0,29);
+                        ChangeAttackTargetEnemy(DataMonCommand.ToTarget);
+                    }
+                    if (timerToChangeTarget > 30)
                     {
                         timerToChangeTarget = 0;
                         ChangeAttackTargetEnemy(GameManager.instance.HostileDataMonsGOs[Random.Range(0, GameManager.instance.HostileDataMonsGOs.Count)]);
@@ -117,11 +122,6 @@ public class DataMonAI : MonoBehaviour
     {
         if (DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
             return;
-        if(DataMonCommand.command == DataMonCommands.TargetEnemy && DataMonCommand.ToTarget != null)
-        {
-            Target = DataMonCommand.ToTarget.transform;
-            return;
-        }
         Target = enemy.transform;
 
     }
