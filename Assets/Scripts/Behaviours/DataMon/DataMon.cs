@@ -56,19 +56,30 @@ namespace IndividualDataMon
             //    DestroyDataMon();
 
             //}
+            GameManager.instance.Entity_Updates += ToUpdate;
         }
-        void Update()
+        void ToUpdate()
         {
+
             if (NamePlateText != null)
             {
                 NamePlate.transform.rotation = Quaternion.Euler(Vector3.zero);
                 healthBar.SetHealth(Mathf.RoundToInt(dataMonCurrentAttributes.CurrentHealth));
             }
-            if(dataMonCurrentAttributes.CurrentHealth <= 0)
+            if (!gameObject.activeSelf)
+                return;
+            if(dataMonCurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
+
             {
                 GetComponent<Databytes>().DataMonIsDestroyed();
                 DestroyDataMon();
             }
+            if (dataMonCurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+
+            {
+                Destroy(gameObject);
+            }
+
         }
         private void OnEnable()
         {
@@ -111,6 +122,16 @@ namespace IndividualDataMon
             dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
 
         }
+        public void SetAttributes(DataMonInstancedAttributes instancedAttributes)
+        {
+            dataMonCurrentAttributes.SetAttributes(instancedAttributes);
+
+            if (dataMonAI == null)
+                return;
+            if (dataMonAI.aggroSystem == null)
+                return;
+            dataMonAI.aggroSystem.ListOfTargets.ListOfTargets.Clear();
+        }
         public void ResetAttributes()
         {
             dataMonCurrentAttributes.ResetAttributes(dataMon.BaseAttributes);
@@ -140,7 +161,6 @@ namespace IndividualDataMon
         public void SetDataMonCompanion()
         {
             dataMon.MonBehaviourState = DataMonBehaviourState.isCompanion;
-            RoamingSpawner.doot_doot--;
             NamePlateText.color = GameManager.instance.CompanionColor;
         }
         public void SetDataMonHostile()
@@ -164,13 +184,19 @@ namespace IndividualDataMon
                 return;
             Destroy(dataMonAI.patrollingAnchor);
             Destroy(DataMonAttacksParentObj);
+            GameManager.instance.Entity_Updates -= ToUpdate;
+
         }
         public void DestroyDataMon()
         {
             gameObject.SetActive(false);
+            ResetAttributes();
+            RoamingSpawner.doot_doot--;
+
             if (dataMonAI == null)
                 return;
-            if (dataMon.MonBehaviourState == DataMonBehaviourState.isHostile)
+            
+            if (dataMon.MonBehaviourState == DataMonBehaviourState.isHostile && GameManager.instance.HostileDataMonsGOs.Contains(gameObject))
             {
                 GameManager.HostileDataMons--;
                 GameManager.instance.HostileDataMonsGOs.Remove(gameObject);
@@ -187,7 +213,6 @@ namespace IndividualDataMon
         {
             if (collision.gameObject.CompareTag("PlayerRenderDist"))
             {
-                RoamingSpawner.doot_doot--;
                 isBeingCaptured = true;
                 DestroyDataMon();
 

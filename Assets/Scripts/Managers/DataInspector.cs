@@ -20,6 +20,30 @@ public class DataInspector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch (DataDex.instance.CurrentModule)
+        {
+            case DataPadModules.DataDex:
+                InspectDataMon();
+                break;
+            case DataPadModules.Evolve:
+                InspectDataMonEvolution();
+                break;
+        }
+    }
+    void InspectDataMonEvolution()
+    {
+        if (DataMonHovering == null)
+        {
+            DataMonEvolveTier = -1;
+            return;
+        }
+        if (DataMonEvolveTier == -1)
+        {
+            DataMonEvolveTier = DataMonHovering.dataMonData.DataMons.GetDataMonIndexInDataArray(DataMonHovering.dataMon.DataMonName);
+        }
+    }
+    private void InspectDataMon()
+    {
         if (DataMonHovering == null)
         {
             DataMonEvolveTier = -1;
@@ -32,7 +56,7 @@ public class DataInspector : MonoBehaviour
             DataMonEvolveTier = DataMonHovering.dataMonData.DataMons.GetDataMonIndexInDataArray(DataMonHovering.dataMon.DataMonName);
         }
 
-        if(DataInspectorHealthBar.slider.maxValue != DataMonHovering.dataMon.BaseAttributes.BaseHealth)
+        if (DataInspectorHealthBar.slider.maxValue != DataMonHovering.dataMon.BaseAttributes.BaseHealth)
         {
             DataInspectorHealthBar.SetMaxHealth(Mathf.RoundToInt(DataMonHovering.dataMon.BaseAttributes.BaseHealth));
         }

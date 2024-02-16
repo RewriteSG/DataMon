@@ -104,4 +104,13 @@ public class DataMonInstancedAttributes
         CurrentAttackRange = toReset.BaseAttackRange;
         CurrentCaptureChance = toReset.BaseCaptureChance;
     }
+    public void SetAttributes(DataMonInstancedAttributes instanceAttributes)
+    {
+        CurrentHealth = instanceAttributes.CurrentHealth;
+        CurrentAttack = instanceAttributes.CurrentAttack;
+        CurrentProductionSpeed = instanceAttributes.CurrentProductionSpeed;
+        CurrentMoveSpeed = instanceAttributes.CurrentMoveSpeed;
+        CurrentAttackRange = instanceAttributes.CurrentAttackRange;
+        CurrentCaptureChance = instanceAttributes.CurrentCaptureChance;
+    }
 }
