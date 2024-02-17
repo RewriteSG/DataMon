@@ -88,7 +88,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         NumberOfDataMonsInTeam = Mathf.Clamp(NumberOfDataMonsInTeam, 1, NumberOfDataMonsInTeam+1);
-        print(HostileDataMons);
     }
     void OnDrawGizmos()
     {
