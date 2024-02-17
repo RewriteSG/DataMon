@@ -7,6 +7,12 @@ TagManager:
   - Hostile
   - Neutral
   - Companion
+  - enemy
+  - Databytes
+  - DataMon
+  - DataMonSpawnPoint
+  - PlayerRenderDist
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -17,9 +23,9 @@ TagManager:
   - 
   - 
   - Obstacles
-  - Hostile
-  - Neutral
-  - Companion
+  - DataMonLayer
+  - 
+  - 
   - 
   - 
   - 

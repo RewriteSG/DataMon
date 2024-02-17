@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class DataMonDataEditor : MonoBehaviour
+using UnityEditor;
+[CustomEditor(typeof(DataMonsData))]
+public class DataMonDataEditor : Editor
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    DataMonsData data;
+    //public override void OnInspectorGUI()
+    //{
+    //    base.OnInspectorGUI();
+    //    data = (DataMonsData)target;
+    //    for (int i = 0; i < data.DataMons.Length; i++)
+    //    {
+    //        data.DataMons[i].DataMonPrefab.GetComponent<IndividualDataMon.DataMon>().dataMon = data.DataMons[i];
+    //    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //}
 }
