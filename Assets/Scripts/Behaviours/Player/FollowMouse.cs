@@ -6,8 +6,13 @@ public class FollowMouse : MonoBehaviour
 {
     public float rotateDamp;
     float reference;
+    private void Start()
+    {
+        GameManager.instance.Entity_Updates += ToUpdate;
+
+    }
     // Update is called once per frame
-    void Update()
+    void ToUpdate()
     {
         Vector3 objPos = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 mousePos = Input.mousePosition;
@@ -19,6 +24,11 @@ public class FollowMouse : MonoBehaviour
         float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
         float RotateSmoothly = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.z, -angle, ref reference, rotateDamp);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, RotateSmoothly));
+    }
+    private void OnDestroy()
+    {
+        GameManager.instance.Entity_Updates -= ToUpdate;
+
     }
     //Vector3 objPos = Camera.main.WorldToScreenPoint(transform.position);
     //Vector3 mousePos = Input.mousePosition;

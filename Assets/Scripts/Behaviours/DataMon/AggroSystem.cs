@@ -7,18 +7,13 @@ public class AggroSystem : MonoBehaviour
 {
     public DataMonAI datamonAI;
     public AggroList ListOfTargets = new AggroList();
+    
     // Start is called before the first frame update
     void Start()
     {
         datamonAI = GetComponent<DataMonAI>();
         if(datamonAI !=null)
         datamonAI.aggroSystem = this;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     public void SetDamageByEntity(GameObject entity, float damage)
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public static CameraFollow instance;
+    Camera thisCam;
     public Transform toFollow;
     public float Damp;
     public static bool isAiming;
@@ -15,6 +16,7 @@ public class CameraFollow : MonoBehaviour
         instance = this;
         isAiming = false;
         CenterOfScreen = new Vector3(Screen.width / 2, Screen.height / 2, Camera.main.nearClipPlane);
+        thisCam = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -55,8 +57,11 @@ public class CameraFollow : MonoBehaviour
                 Vector3.Lerp(new Vector3(GameManager.instance.Player.transform.position.x, 
                 GameManager.instance.Player.transform.position.y, transform.position.z)
                 , newMousePos, 0.01f), ref smoothVelocity, Damp);
+            thisCam.orthographicSize = Mathf.Lerp(thisCam.orthographicSize, 7, .3f);
 
-        }
+        }else
+        thisCam.orthographicSize = Mathf.Lerp(thisCam.orthographicSize, 5, .3f);
+
         //vector3NewCamPos = new Vector3(newCamPos.x, newCamPos.y, transform.position.z);
         transform.position = newCamPos;
     }

@@ -34,6 +34,6 @@ public class Databytes : MonoBehaviour
         if (dataMon == null || isQuitting)
             return;
         if (!dataMon.isBeingCaptured && dataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
-            Instantiate(GameManager.instance.Data_bytes, transform.position, Quaternion.identity);
+            Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);
     }
 }

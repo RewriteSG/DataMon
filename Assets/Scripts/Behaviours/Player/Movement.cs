@@ -14,19 +14,25 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        GameManager.instance.Entity_Updates += ToUpdate;
+        GameManager.instance.Entity_FixedUpdates += ToFixedUpdate;
     }
 
     // Update is called once per frame
-    void Update()
+    void ToUpdate()
     {
         MovementDirection = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
 
         
     }
-    void FixedUpdate()
+    void ToFixedUpdate()
     {
         rb.MovePosition((Vector2)transform.position+(MovementDirection * MovementSpeed*Time.deltaTime));
     }
+    private void OnDestroy()
+    {
+        GameManager.instance.Entity_Updates -= ToUpdate;
+        GameManager.instance.Entity_FixedUpdates -= ToFixedUpdate;
 
+    }
 }

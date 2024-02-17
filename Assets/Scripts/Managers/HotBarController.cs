@@ -76,7 +76,7 @@ public class HotBarController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha3) && GameManager.instance.player_progress.Command.isUnlocked)
         {
             holdingItem = ItemHolding.Command;
-
+            LeftClick = DataMonCommand.Patrol;
             SetColorAllItems();
             GameManager.instance.player_progress.Command.ItemInstance.GetComponent<RawImage>().color = SelectedColor;
 
@@ -112,11 +112,18 @@ public class HotBarController : MonoBehaviour
         switch (holdingItem)
         {
             case ItemHolding.Command:
-                break;
             case ItemHolding.Melee:
-                break;
             case ItemHolding.DataBall:
                 CheckInputDown(KeyCode.Mouse0,LeftClick);
+                if (Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    CameraFollow.isAiming = true;
+                }
+                if (Input.GetKeyUp(KeyCode.Mouse1))
+                {
+
+                    CameraFollow.isAiming = false;
+                }
                 break;
             case ItemHolding.Shotgun:
             case ItemHolding.HuntingRifle:
