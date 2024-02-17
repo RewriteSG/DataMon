@@ -8,60 +8,103 @@ public class PlayerShoot : MonoBehaviour
     public GameObject gunPoint;
     public GameObject DataBall;
 
-    public int ClipAmount = 2;
-    public int CurrentClipAmount = 0;
     public int dataBallAmmo = 3; 
-    public int shotgunAmmo = 3; 
-    public int huntingRifleAmmo = 3; 
-    public int assaultRifleAmmo = 3;
+    
+    public WeaponAmmo shotgunAmmo = new WeaponAmmo(); 
+    public WeaponAmmo huntingRifleAmmo = new WeaponAmmo(); 
+    public WeaponAmmo assaultRifleAmmo = new WeaponAmmo();
     public BulletInstance SGBullet;
     public BulletInstance HRBullet;
     public BulletInstance ARBullet;
     public float _DestroyDataBallAtDelay =1;
     public static float DestroyBallAtDelay;
     float timeToShootAnother;
-    public TMP_Text dataBallAmmoText;
-    public TMP_Text shotgunAmmoText;
-    public TMP_Text huntingRifleAmmoText;
-    public TMP_Text assaultRifleAmmoText;
+    public TMP_Text AmmoText;
 
     void Update()
     {
         timeToShootAnother += Time.deltaTime;
         UpdateAmmoUI();
-        
-        if(Input.GetKeyDown(KeyCode.R))
+        ClampAmmoClip(shotgunAmmo);
+        ClampAmmoClip(huntingRifleAmmo);
+        ClampAmmoClip(assaultRifleAmmo);
+
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            Reload(ref shotgunAmmo);
+            switch (HotBarController.holdingItem)
+            {
+                case ItemHolding.AssaultRifle:
+                    Reload(ref assaultRifleAmmo);
+
+                    break;
+                case ItemHolding.Shotgun:
+                    Reload(ref shotgunAmmo);
+
+                    break;
+                case ItemHolding.HuntingRifle:
+
+                    Reload(ref huntingRifleAmmo);
+                    break;
+            }
         }
     }
+
+    private void ClampAmmoClip(WeaponAmmo wepAmmo)
+    {
+        wepAmmo.CurrentClipAmount = Mathf.Clamp(wepAmmo.CurrentClipAmount, 0, wepAmmo.ClipAmount);
+    }
+
     void UpdateAmmoUI()
     {
-        dataBallAmmoText.text = "DataBall Ammo: " + dataBallAmmo.ToString();
-        shotgunAmmoText.text = "Shotgun Ammo: " + shotgunAmmo.ToString();
-        huntingRifleAmmoText.text = "Hunting Rifle Ammo: " + huntingRifleAmmo.ToString();
-        assaultRifleAmmoText.text = "Assault Rifle Ammo: " + assaultRifleAmmo.ToString();
+        switch (HotBarController.holdingItem)
+        {
+            case ItemHolding.DataBall:
+                AmmoText.text = "DataBalls: " + dataBallAmmo;
+                break;
+            case ItemHolding.AssaultRifle:
+                AmmoText.text = "Ammo: " + assaultRifleAmmo.CurrentClipAmount+ " / " + assaultRifleAmmo.ClipAmount;
+                break;
+            case ItemHolding.HuntingRifle:
+                AmmoText.text = "Ammo: " + huntingRifleAmmo.CurrentClipAmount + " / " + huntingRifleAmmo.ClipAmount;
+                break;
+            case ItemHolding.Shotgun:
+                AmmoText.text = "Ammo: " + shotgunAmmo.CurrentClipAmount + " / " + shotgunAmmo.ClipAmount;
+                break;
+        }
     }
 
-    void Reload(ref int CurrentAmmo)
+    void Reload(ref WeaponAmmo CurrentWepAmmo)
     {
-        if(CurrentClipAmount != 0)
-        {
-            int diff = ClipAmount - CurrentClipAmount;
-            CurrentAmmo -= diff;
-            CurrentClipAmount = ClipAmount;
+        if (CurrentWepAmmo.CurrentClipAmount == CurrentWepAmmo.ClipAmount || CurrentWepAmmo.AmmoAmount==0)
             return;
+        if(CurrentWepAmmo.CurrentClipAmount != 0)
+        {
+            int diff = CurrentWepAmmo.ClipAmount - CurrentWepAmmo.CurrentClipAmount;
+            if(diff>= CurrentWepAmmo.AmmoAmount)
+            {
+                CurrentWepAmmo.CurrentClipAmount += CurrentWepAmmo.AmmoAmount;
+                CurrentWepAmmo.AmmoAmount -= CurrentWepAmmo.AmmoAmount;
+                return;
+            }
+            CurrentWepAmmo.AmmoAmount -= diff;
+            CurrentWepAmmo.CurrentClipAmount = CurrentWepAmmo.ClipAmount;
+            return;
+
+
         }
 
-        if((CurrentAmmo-ClipAmount) <= 0)
+        if((CurrentWepAmmo.AmmoAmount - CurrentWepAmmo.ClipAmount) <= 0)
         {
-            CurrentClipAmount = CurrentAmmo;
+            CurrentWepAmmo.CurrentClipAmount = CurrentWepAmmo.AmmoAmount;
+            print("is it doing this?");
         }
         else
         {
-            CurrentClipAmount = ClipAmount;
+            CurrentWepAmmo.CurrentClipAmount = CurrentWepAmmo.ClipAmount;
+            print("Or doing this?");
+
         }
-        CurrentAmmo -= CurrentClipAmount;
+        CurrentWepAmmo.AmmoAmount -= CurrentWepAmmo.CurrentClipAmount;
 
     }
     public void Shoot_Databall()
@@ -76,9 +119,9 @@ public class PlayerShoot : MonoBehaviour
     BulletInstance bullet;
     public void Shoot_Shotgun()
     {
-        if (CurrentClipAmount > 0 && timeToShootAnother >= GameManager.instance.ShotgunDelay)
+        if (shotgunAmmo.CurrentClipAmount > 0 && timeToShootAnother >= GameManager.instance.ShotgunDelay)
         {
-            CurrentClipAmount--;
+            shotgunAmmo.CurrentClipAmount--;
             timeToShootAnother = 0;
 
             for (int i = 0; i < GameManager.instance.ShotgunPelletPerRnd; i++)
@@ -92,9 +135,9 @@ public class PlayerShoot : MonoBehaviour
     }
     public void Shoot_HuntingRifle()
     {
-        if (huntingRifleAmmo > 0 && timeToShootAnother >= GameManager.instance.HuntingRifleDelay)
+        if (huntingRifleAmmo.CurrentClipAmount > 0 && timeToShootAnother >= GameManager.instance.HuntingRifleDelay)
         {
-            huntingRifleAmmo--;
+            huntingRifleAmmo.CurrentClipAmount--;
             timeToShootAnother = 0;
 
             bullet = GameManager.instance.GetAvailableBullet();
@@ -106,9 +149,9 @@ public class PlayerShoot : MonoBehaviour
     }
     public void Shoot_AssaultRifle()
     {
-        if (assaultRifleAmmo > 0 && timeToShootAnother >= GameManager.instance.AssaultRifleDelay)
+        if (assaultRifleAmmo.CurrentClipAmount > 0 && timeToShootAnother >= GameManager.instance.AssaultRifleDelay)
         {
-            assaultRifleAmmo--;
+            assaultRifleAmmo.CurrentClipAmount--;
             timeToShootAnother = 0;
 
             bullet = GameManager.instance.GetAvailableBullet();
@@ -116,5 +159,12 @@ public class PlayerShoot : MonoBehaviour
             bullet.SetDamageAndSpeed(ARBullet.Damage, ARBullet.speed);
         }
     }
+}
+[System.Serializable]
+public class WeaponAmmo
+{
+    public int AmmoAmount;
+    public int ClipAmount = 2;
+    public int CurrentClipAmount = 0;
 }
 

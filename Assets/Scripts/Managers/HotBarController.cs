@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class HotBarController : MonoBehaviour
 {
     public delegate void UseItem();
-    public ItemHolding holdingItem;
+    public static ItemHolding holdingItem;
     public UseItem LeftClick;
 
     public UseItem RightClick;
