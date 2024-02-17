@@ -21,9 +21,15 @@ public class DataWorldSpawnPoints : MonoBehaviour
     {
         points = PoissonDiscSampling.GeneratePoints(radius, regionSize, rejectSamples);
         SpawnPointsRadius = radius;
+        RoamingSpawner.MonsInChunk.Clear();
+        GameObject temp;
         for (int i = 0; i < points.Count; i++)
         {
-            Instantiate(DataMonSpawnPointPrefab, points[i], Quaternion.identity).transform.SetParent(transform);
+            temp = Instantiate(DataMonSpawnPointPrefab, points[i], Quaternion.identity);
+            temp.transform.SetParent(transform);
+            temp.transform.localScale = transform.InverseTransformVector(Vector2.one * SpawnPointsRadius);
+            RoamingSpawner.MonsInChunk.Add(points[i], new DataMonsInChunk(0));
+
         }
         //GeneratedChunks = new GameObject[(int)Mathf.Pow(Chunks, 2)];
         //int index = 0;

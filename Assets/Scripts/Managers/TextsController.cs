@@ -14,6 +14,6 @@ public class TextsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Text_Databytes.text = "x"+GameManager.instance.Databytes_Count;
+        Text_Databytes.text = "x" + GameManager.instance.Databytes;
     }
 }

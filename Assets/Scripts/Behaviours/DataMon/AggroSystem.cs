@@ -15,12 +15,6 @@ public class AggroSystem : MonoBehaviour
         if(datamonAI !=null)
         datamonAI.aggroSystem = this;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void SetDamageByEntity(GameObject entity, float damage)
     {
         if(ListOfTargets.ListOfTargets.GetDamagedByGameObject(entity, out DamagedBy result))

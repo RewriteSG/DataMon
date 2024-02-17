@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cd76db86f1e6c48902b25244c0ea7e, type: 3}
   m_Name: D_Ant
   m_EditorClassIdentifier: 
+  EvolutionCosts: 0700000023000000
   DataMons:
   - DataMonName: Datant
     DataMonPrefab: {fileID: 8519851035581550594, guid: 1a6bb742163fc234ea58abfc7833d8fc,
