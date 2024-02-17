@@ -14,7 +14,7 @@ public class BulletInstance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetName();
+        //SetName();
         GameManager.instance.Entity_Updates += ToUpdate;
 
     }
@@ -72,7 +72,7 @@ public class BulletInstance : MonoBehaviour
     {
         Damage = Dmg;
         speed = Spd;
-        SetName();
+        //SetName();
     }
     private void OnDestroy()
     {

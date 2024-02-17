@@ -11,7 +11,7 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     public DataMonHolder dataMonHolder;
     public bool inDataBank;
     public GameObject DataMonSummoned;
-    UnityEngine.UI.Image image;
+    public UnityEngine.UI.Image image;
     public void OnPointerClick(PointerEventData eventData)
     {
         if(eventData.button == PointerEventData.InputButton.Right)
@@ -55,11 +55,23 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         }
         if (dataMonHolder == null)
             return;
-        if(!inDataBank && dataMonHolder.dataMonData !=null && DataMonSummoned == null && image.color != Color.blue)
+        if (!inDataBank && dataMonHolder.dataMonData != null && DataMonSummoned == null && image.color != Color.blue && image.color != Color.green)
         {
             image.color = Color.blue;
             dataMonHolder.dataMonCurrentAttributes.CurrentHealth = 0;
         }
+        if (!inDataBank && dataMonHolder.dataMonData != null &&
+            DataDex.instance.datamonEvolution.DataMonToEvolve != null && image.color == Color.green && DataMonSummoned != null)
+        {
+            Destroy(DataMonSummoned);
+        }
+        if (!inDataBank && dataMonHolder.dataMonData != null &&
+            DataDex.instance.datamonEvolution.DataMonToEvolve == null && image.color == Color.green && DataMonSummoned == null)
+        {
+            DataMonSummoned = DataDex.instance.SpawnCompanionDataMon(this);
+            image.color = DataDex.instance.Testcolor;
+        }
+
     }
     private void OnDestroy()
     {

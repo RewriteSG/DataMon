@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public float DataMonInDataDexHPRegen = 2;
     public int MaxNumberOfWildDataMons = 15;
     public int NumberOfDataMonsInTeam = 1;
-    public int Databytes_Count = 0;
+    public int Databytes = 0;
     public float RenderDistance = 10f;
     public Color NeutralColor, HostileColor, CompanionColor;
     public delegate void DataMonAIBehaviourStart(DataMonAI dataMonAI);
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     // Prefabs
     public GameObject Bullet;
-    public GameObject Data_bytes;
+    public GameObject DatabytesPrefab;
     public PlayerProgress player_progress = new PlayerProgress();
 
     GameObject PlayerRenderDistTrigger;

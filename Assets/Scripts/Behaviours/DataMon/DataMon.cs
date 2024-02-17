@@ -60,7 +60,8 @@ namespace IndividualDataMon
         }
         void ToUpdate()
         {
-
+            if (gameObject == null)
+                return;
             if (NamePlateText != null)
             {
                 NamePlate.transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -118,7 +119,7 @@ namespace IndividualDataMon
         {
             tier = dataMonData.DataMons.GetDataMonIndexInDataArray(ToDataMon);
 
-            dataMon = new DataMonIndividualData(ToDataMon);
+            dataMon = DataMonIndividualData.CloneDataMonClass(ToDataMon);
             dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
 
         }
@@ -140,6 +141,7 @@ namespace IndividualDataMon
             if (dataMonAI.aggroSystem == null)
                 return;
             dataMonAI.aggroSystem.ListOfTargets.ListOfTargets.Clear();
+            dataMonAI.AI_state = AI_State.Patrol;
         }
         //public int GetDataMonIndexInData(DataMonIndividualData[] array, GameObject DataMon)
         //{
