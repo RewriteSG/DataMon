@@ -8,48 +8,68 @@ public class PlayerShoot : MonoBehaviour
     public GameObject gunPoint;
     public GameObject DataBall;
 
-    public int dataBallAmmo = 3; 
     
-    public WeaponAmmo shotgunAmmo = new WeaponAmmo(); 
-    public WeaponAmmo huntingRifleAmmo = new WeaponAmmo(); 
-    public WeaponAmmo assaultRifleAmmo = new WeaponAmmo();
+    public Animation Fists;
+    
     public BulletInstance SGBullet;
     public BulletInstance HRBullet;
     public BulletInstance ARBullet;
     public float _DestroyDataBallAtDelay =1;
     public static float DestroyBallAtDelay;
-    float timeToShootAnother;
+
+     WeaponType Fists_weapon = new WeaponType();
+     WeaponType DataBallLauncher = new WeaponType();
+     WeaponType huntingRifle = new WeaponType();
+     WeaponType shotgun = new WeaponType();
+     WeaponType assaultRifle = new WeaponType();
+
     public TMP_Text AmmoText;
 
+    public float _FistsDamage;
+    BulletInstance fistsCollision;
+
+
+    FistAttack fistsAttack;
+    float timeToShootAnother;
+    private void Start()
+    {
+        fistsAttack = Fists.GetComponent<FistAttack>();
+        fistsCollision = Fists.transform.GetComponentInChildren<BulletInstance>();
+        Fists_weapon = GameManager.instance.Fists_weapon;
+        DataBallLauncher = GameManager.instance.DataBallLauncher;
+        huntingRifle = GameManager.instance.huntingRifle;
+        shotgun = GameManager.instance.shotgun;
+        assaultRifle = GameManager.instance.assaultRifle;
+    }
     void Update()
     {
         timeToShootAnother += Time.deltaTime;
         UpdateAmmoUI();
-        ClampAmmoClip(shotgunAmmo);
-        ClampAmmoClip(huntingRifleAmmo);
-        ClampAmmoClip(assaultRifleAmmo);
+        ClampAmmoClip(shotgun);
+        ClampAmmoClip(huntingRifle);
+        ClampAmmoClip(assaultRifle);
 
         if (Input.GetKeyDown(KeyCode.R))
         {
             switch (HotBarController.holdingItem)
             {
                 case ItemHolding.AssaultRifle:
-                    Reload(ref assaultRifleAmmo);
+                    Reload(ref assaultRifle);
 
                     break;
                 case ItemHolding.Shotgun:
-                    Reload(ref shotgunAmmo);
+                    Reload(ref shotgun);
 
                     break;
                 case ItemHolding.HuntingRifle:
 
-                    Reload(ref huntingRifleAmmo);
+                    Reload(ref huntingRifle);
                     break;
             }
         }
     }
 
-    private void ClampAmmoClip(WeaponAmmo wepAmmo)
+    private void ClampAmmoClip(WeaponType wepAmmo)
     {
         wepAmmo.CurrentClipAmount = Mathf.Clamp(wepAmmo.CurrentClipAmount, 0, wepAmmo.ClipAmount);
     }
@@ -59,21 +79,70 @@ public class PlayerShoot : MonoBehaviour
         switch (HotBarController.holdingItem)
         {
             case ItemHolding.DataBall:
-                AmmoText.text = "DataBalls: " + dataBallAmmo;
+                AmmoText.text = "DataBalls: " + DataBallLauncher.AmmoAmount;
                 break;
             case ItemHolding.AssaultRifle:
-                AmmoText.text = "Ammo: " + assaultRifleAmmo.CurrentClipAmount+ " / " + assaultRifleAmmo.ClipAmount;
+                AmmoText.text = "Ammo: " + assaultRifle.CurrentClipAmount+ " / " + assaultRifle.ClipAmount;
                 break;
             case ItemHolding.HuntingRifle:
-                AmmoText.text = "Ammo: " + huntingRifleAmmo.CurrentClipAmount + " / " + huntingRifleAmmo.ClipAmount;
+                AmmoText.text = "Ammo: " + huntingRifle.CurrentClipAmount + " / " + huntingRifle.ClipAmount;
                 break;
             case ItemHolding.Shotgun:
-                AmmoText.text = "Ammo: " + shotgunAmmo.CurrentClipAmount + " / " + shotgunAmmo.ClipAmount;
+                AmmoText.text = "Ammo: " + shotgun.CurrentClipAmount + " / " + shotgun.ClipAmount;
                 break;
         }
     }
+    public void ShowWeaponModel()
+    {
+        switch (HotBarController.holdingItem)
+        {
+            case ItemHolding.Melee:
+                SetWeaponModelActive(Fists_weapon, true);
+                SetWeaponModelActive(DataBallLauncher, false);
+                SetWeaponModelActive(huntingRifle, false);
+                SetWeaponModelActive(shotgun, false);
+                SetWeaponModelActive(assaultRifle, false);
+                break;
+            case ItemHolding.DataBall:
 
-    void Reload(ref WeaponAmmo CurrentWepAmmo)
+                SetWeaponModelActive(Fists_weapon, false);
+                print(DataBallLauncher.Model);
+                SetWeaponModelActive(DataBallLauncher, true);
+                //SetWeaponModelActive(huntingRifle, false);
+                //SetWeaponModelActive(shotgun, false);
+                //SetWeaponModelActive(assaultRifle, false);
+                break;
+            case ItemHolding.HuntingRifle:
+                SetWeaponModelActive(Fists_weapon, false);
+
+                SetWeaponModelActive(DataBallLauncher, false);
+                SetWeaponModelActive(huntingRifle, true);
+                //SetWeaponModelActive(shotgun, false);
+                //SetWeaponModelActive(assaultRifle, false);
+                break;
+            case ItemHolding.Shotgun:
+                SetWeaponModelActive(Fists_weapon, false);
+
+                SetWeaponModelActive(DataBallLauncher, false);
+                SetWeaponModelActive(huntingRifle, false);
+                SetWeaponModelActive(shotgun, true);
+                //SetWeaponModelActive(assaultRifle, false);
+                break;
+            case ItemHolding.AssaultRifle:
+                SetWeaponModelActive(Fists_weapon, false);
+
+                SetWeaponModelActive(DataBallLauncher, false);
+                SetWeaponModelActive(huntingRifle, false);
+                SetWeaponModelActive(shotgun, false);
+                SetWeaponModelActive(assaultRifle, true);
+                break;
+        }
+    }
+    void SetWeaponModelActive(WeaponType weapon, bool isActive)
+    {
+        weapon.Model.SetActive(isActive);
+    }
+    void Reload(ref WeaponType CurrentWepAmmo)
     {
         if (CurrentWepAmmo.CurrentClipAmount == CurrentWepAmmo.ClipAmount || CurrentWepAmmo.AmmoAmount==0)
             return;
@@ -107,11 +176,33 @@ public class PlayerShoot : MonoBehaviour
         CurrentWepAmmo.AmmoAmount -= CurrentWepAmmo.CurrentClipAmount;
 
     }
+    public void Shoot_Melee()
+    {
+        fistsCollision.SetDamageAndSpeed(_FistsDamage * GameManager.instance.player_progress.Melee.WeaponModifiers.Damage, 0);
+
+        if (!Fists.isPlaying)
+        {
+            Fists.Play();
+        }
+    }
+    public void StopFistsAnimation()
+    {
+        Fists.Stop();
+        SetFistPositionAndRotation(fistsAttack.LeftFist.transform,
+            fistsAttack.LeftFistDefaultPos, Vector2.zero);
+        SetFistPositionAndRotation(fistsAttack.RightFist.transform,
+            fistsAttack.RightFistDefaultPos, Vector2.zero);
+    }
+    void SetFistPositionAndRotation(Transform fist, Vector2 pos, Vector2 rot)
+    {
+        fist.localPosition = pos;
+        fist.localRotation = Quaternion.Euler(rot);
+    }
     public void Shoot_Databall()
     {
-        if (dataBallAmmo > 0)
+        if (DataBallLauncher.AmmoAmount > 0)
         {
-            dataBallAmmo--;
+            DataBallLauncher.AmmoAmount--;
             DestroyBallAtDelay = _DestroyDataBallAtDelay;
             Instantiate(DataBall, gunPoint.transform.position, gunPoint.transform.rotation);
         }
@@ -119,9 +210,10 @@ public class PlayerShoot : MonoBehaviour
     BulletInstance bullet;
     public void Shoot_Shotgun()
     {
-        if (shotgunAmmo.CurrentClipAmount > 0 && timeToShootAnother >= GameManager.instance.ShotgunDelay)
+        if (shotgun.CurrentClipAmount > 0 && 
+            timeToShootAnother >= GameManager.instance.ShotgunDelay * GameManager.instance.player_progress.Shotgun.WeaponModifiers.fire_Rate)
         {
-            shotgunAmmo.CurrentClipAmount--;
+            shotgun.CurrentClipAmount--;
             timeToShootAnother = 0;
 
             for (int i = 0; i < GameManager.instance.ShotgunPelletPerRnd; i++)
@@ -129,40 +221,43 @@ public class PlayerShoot : MonoBehaviour
                 bullet = GameManager.instance.GetAvailableBullet();
                 bullet.transform.SetPositionAndRotation(gunPoint.transform.position, gunPoint.transform.rotation);
                 bullet.transform.Rotate(Vector3.forward * Random.Range(-25, 26));
-                bullet.SetDamageAndSpeed(SGBullet.Damage, SGBullet.speed);
+                bullet.SetDamageAndSpeed(SGBullet.Damage * GameManager.instance.player_progress.Shotgun.WeaponModifiers.Damage, SGBullet.speed);
             }
         }
     }
     public void Shoot_HuntingRifle()
     {
-        if (huntingRifleAmmo.CurrentClipAmount > 0 && timeToShootAnother >= GameManager.instance.HuntingRifleDelay)
+        if (huntingRifle.CurrentClipAmount > 0 && 
+            timeToShootAnother >= GameManager.instance.HuntingRifleDelay * GameManager.instance.player_progress.HuntingRifle.WeaponModifiers.fire_Rate)
         {
-            huntingRifleAmmo.CurrentClipAmount--;
+            huntingRifle.CurrentClipAmount--;
             timeToShootAnother = 0;
 
             bullet = GameManager.instance.GetAvailableBullet();
             bullet.transform.SetPositionAndRotation(gunPoint.transform.position, gunPoint.transform.rotation);
-            bullet.SetDamageAndSpeed(HRBullet.Damage, HRBullet.speed);
+            bullet.SetDamageAndSpeed(HRBullet.Damage * GameManager.instance.player_progress.HuntingRifle.WeaponModifiers.Damage, HRBullet.speed);
             bullet.HRBulletCheckPath();
             bullet.isHR = true;
         }
     }
     public void Shoot_AssaultRifle()
     {
-        if (assaultRifleAmmo.CurrentClipAmount > 0 && timeToShootAnother >= GameManager.instance.AssaultRifleDelay)
+        if (assaultRifle.CurrentClipAmount > 0 
+            && timeToShootAnother >= GameManager.instance.AssaultRifleDelay * GameManager.instance.player_progress.AssaultRifle.WeaponModifiers.fire_Rate)
         {
-            assaultRifleAmmo.CurrentClipAmount--;
+            assaultRifle.CurrentClipAmount--;
             timeToShootAnother = 0;
 
             bullet = GameManager.instance.GetAvailableBullet();
             bullet.transform.SetPositionAndRotation(gunPoint.transform.position, gunPoint.transform.rotation);
-            bullet.SetDamageAndSpeed(ARBullet.Damage, ARBullet.speed);
+            bullet.SetDamageAndSpeed(ARBullet.Damage * GameManager.instance.player_progress.Shotgun.WeaponModifiers.Damage, ARBullet.speed);
         }
     }
 }
 [System.Serializable]
-public class WeaponAmmo
+public class WeaponType
 {
+    public GameObject Model;
     public int AmmoAmount;
     public int ClipAmount = 2;
     public int CurrentClipAmount = 0;

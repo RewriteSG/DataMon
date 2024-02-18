@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//using System;
 public class HotBarController : MonoBehaviour
 {
     public delegate void UseItem();
     public static ItemHolding holdingItem;
     public UseItem LeftClick;
+    public UseItem LeftClickUp;
 
     public UseItem RightClick;
     public Color SelectedColor;
@@ -55,64 +57,70 @@ public class HotBarController : MonoBehaviour
             SortHotBar();
             isUnsorted = false;
         }
+        if (DataDex.instance.DisplayDataPad)
+            return;
         // Select ITEM
         if (Input.GetKeyDown(KeyCode.Alpha1) && GameManager.instance.player_progress.Melee.isUnlocked)
         {
-            holdingItem = ItemHolding.Melee;
+            LeftClickUp = GameManager.instance.playerShootScript.StopFistsAnimation;
+            
 
-            SetColorAllItems();
-            GameManager.instance.player_progress.Melee.ItemInstance.GetComponent<RawImage>().color = SelectedColor;
+            EquipItem(ItemHolding.Melee, GameManager.instance.playerShootScript.Shoot_Melee,
+                GameManager.instance.player_progress.Melee.ItemInstance.GetComponent<RawImage>());
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && GameManager.instance.player_progress.DataBall.isUnlocked)
         {
-            holdingItem = ItemHolding.DataBall;
-            LeftClick = GameManager.instance.playerShootScript.Shoot_Databall;
-
-            SetColorAllItems();
-            GameManager.instance.player_progress.DataBall.ItemInstance.GetComponent<RawImage>().color = SelectedColor;
+            EquipItem(ItemHolding.DataBall,GameManager.instance.playerShootScript.Shoot_Databall, 
+                GameManager.instance.player_progress.DataBall.ItemInstance.GetComponent<RawImage>());
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && GameManager.instance.player_progress.Command.isUnlocked)
         {
-            holdingItem = ItemHolding.Command;
-            LeftClick = DataMonCommand.Patrol;
-            SetColorAllItems();
-            GameManager.instance.player_progress.Command.ItemInstance.GetComponent<RawImage>().color = SelectedColor;
+            
+            EquipItem(ItemHolding.Command, DataMonCommand.Patrol,
+                GameManager.instance.player_progress.Command.ItemInstance.GetComponent<RawImage>());
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && GameManager.instance.player_progress.HuntingRifle.isUnlocked)
         {
-            holdingItem = ItemHolding.HuntingRifle;
-            LeftClick = GameManager.instance.playerShootScript.Shoot_HuntingRifle;
-
-            SetColorAllItems();
-            GameManager.instance.player_progress.HuntingRifle.ItemInstance.GetComponent<RawImage>().color = SelectedColor;
+            EquipItem(ItemHolding.HuntingRifle, GameManager.instance.playerShootScript.Shoot_HuntingRifle,
+                GameManager.instance.player_progress.HuntingRifle.ItemInstance.GetComponent<RawImage>());
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha5) && GameManager.instance.player_progress.Shotgun.isUnlocked)
         {
-            holdingItem = ItemHolding.Shotgun;
-            LeftClick = GameManager.instance.playerShootScript.Shoot_Shotgun;
-
-            SetColorAllItems();
-            GameManager.instance.player_progress.Shotgun.ItemInstance.GetComponent<RawImage>().color = SelectedColor;
+            EquipItem(ItemHolding.Shotgun, GameManager.instance.playerShootScript.Shoot_Shotgun,
+                GameManager.instance.player_progress.Shotgun.ItemInstance.GetComponent<RawImage>());
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha6) && GameManager.instance.player_progress.AssaultRifle.isUnlocked)
         {
-            holdingItem = ItemHolding.AssaultRifle;
-            LeftClick = GameManager.instance.playerShootScript.Shoot_AssaultRifle;
-
-            SetColorAllItems();
-            GameManager.instance.player_progress.AssaultRifle.ItemInstance.GetComponent<RawImage>().color = SelectedColor;
+            EquipItem(ItemHolding.AssaultRifle, GameManager.instance.playerShootScript.Shoot_AssaultRifle,
+                GameManager.instance.player_progress.AssaultRifle.ItemInstance.GetComponent<RawImage>());
 
         }
+
         // =====================================================================================================
         switch (holdingItem)
         {
-            case ItemHolding.Command:
             case ItemHolding.Melee:
+                CheckInput(KeyCode.Mouse0, LeftClick);
+                if (Input.GetKeyUp(KeyCode.Mouse0))
+                {
+                    LeftClickUp();
+                }
+                if (Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    CameraFollow.isAiming = true;
+                }
+                if (Input.GetKeyUp(KeyCode.Mouse1))
+                {
+
+                    CameraFollow.isAiming = false;
+                }
+                break;
+            case ItemHolding.Command:
             case ItemHolding.DataBall:
                 CheckInputDown(KeyCode.Mouse0,LeftClick);
                 if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -143,6 +151,17 @@ public class HotBarController : MonoBehaviour
                 break;
         }
     }
+
+    private void EquipItem(ItemHolding item, System.Action action, RawImage ItemImage)
+    {
+        holdingItem = item;
+        LeftClick = () => action();
+
+        SetColorAllItems();
+        ItemImage.color = SelectedColor;
+        GameManager.instance.playerShootScript.ShowWeaponModel();
+    }
+
     public void SetColorAllItems()
     {
         if (GameManager.instance.player_progress.Melee.isUnlocked)

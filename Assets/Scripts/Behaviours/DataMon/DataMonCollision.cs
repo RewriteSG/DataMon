@@ -17,16 +17,20 @@ public class DataMonCollision : MonoBehaviour
         
     }
     float damage;
+    BulletInstance bullet;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Bullet") && DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
         {
-            damage = collision.GetComponent<BulletInstance>().Damage;
+            bullet = collision.GetComponent<BulletInstance>();
+            damage = bullet.Damage;
             DataMon.dataMonCurrentAttributes.CurrentHealth -= damage;
             DataMon.dataMonCurrentAttributes.CurrentHealth = 
                 Mathf.Clamp(DataMon.dataMonCurrentAttributes.CurrentHealth,0, DataMon.dataMonCurrentAttributes.CurrentHealth+1);
+            if(!bullet.IsDrivenByAnimation)
             collision.gameObject.SetActive(false);
-            DataMon.dataMonAI.aggroSystem.SetDamageByEntity(GameManager.instance.Player,damage);
+            if (bullet.IsFromPlayer)
+                DataMon.dataMonAI.aggroSystem.SetDamageByEntity(GameManager.instance.Player, damage);
         }
     }
 }

@@ -9,6 +9,10 @@ public class BulletInstance : MonoBehaviour
     public float DestroyBulletAfterSecs = 3;
     float timer;
     public LayerMask datamonLayer;
+    public bool IsDrivenByAnimation = false, IsFromPlayer = false;
+    [HideInInspector] public GameObject ByDataMon;
+    //Animation thisanimator;
+    //public AnimationClip animationAttack;
     bool HRB_Hits;
     public bool isHR;
     // Start is called before the first frame update
@@ -16,7 +20,9 @@ public class BulletInstance : MonoBehaviour
     {
         //SetName();
         GameManager.instance.Entity_Updates += ToUpdate;
-
+        gameObject.tag = "Bullet";
+        //if (IsDrivenByAnimation)
+        //    thisanimator = GetComponent<Animation>();
     }
     private void OnEnable()
     {
@@ -25,7 +31,8 @@ public class BulletInstance : MonoBehaviour
     }
     public void HRBulletCheckPath()
     {
-        hit = Physics2D.Raycast(transform.position, transform.up, Vector2.Distance(transform.position,transform.position + transform.up * speed * Time.deltaTime),datamonLayer);
+        hit = Physics2D.Raycast(transform.position, transform.up, Vector2.Distance(transform.position,transform.position + transform.up * speed * Time.deltaTime),
+            datamonLayer);
         if (hit.collider == null)
             return;
         if (hit.collider.gameObject.CompareTag("DataMon"))
@@ -45,6 +52,11 @@ public class BulletInstance : MonoBehaviour
     {
         if (!gameObject.activeSelf)
             return;
+        if (IsDrivenByAnimation)
+        {
+            AnimationMagic();
+            return;
+        }
         if (isHR)
             HRBulletCheckPath();
         if(!HRB_Hits)
@@ -57,8 +69,17 @@ public class BulletInstance : MonoBehaviour
             
         }
     }
+    void AnimationMagic()
+    {
+        //if (!thisanimator.isPlaying)
+        //{
+        //    thisanimator.Play();
+        //}
+    }
     private void OnDisable()
     {
+        if (IsDrivenByAnimation)
+            return;
         timer = 0;
         isHR = false;
         if(GameManager.instance.BulletsPool.TryGetValue(false, out List<BulletInstance> b))

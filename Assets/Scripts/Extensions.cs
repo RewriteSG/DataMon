@@ -108,6 +108,15 @@ public static class ArrayExtensions
         }
         return temp.ToArray();
     }
+    public static List<T> ToList<T>(this T[] array)
+    {
+        List<T> temp = new List<T>();
+        for (int i = 0; i < array.Length; i++)
+        {
+            temp.Add(array[i]);
+        }
+        return temp;
+    }
 }
 public static class DataMonsDataExtensions
 {

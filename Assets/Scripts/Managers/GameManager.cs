@@ -40,9 +40,16 @@ public class GameManager : MonoBehaviour
     GameObject BulletsPoolGameObject;
     [HideInInspector] public Dictionary<bool, List<BulletInstance>> BulletsPool = new Dictionary<bool, List<BulletInstance>>();
 
+    public WeaponType Fists_weapon = new WeaponType();
+    public WeaponType DataBallLauncher = new WeaponType();
+    public WeaponType huntingRifle = new WeaponType();
+    public WeaponType shotgun = new WeaponType();
+    public WeaponType assaultRifle = new WeaponType();
+
     // Prefabs
     public GameObject Bullet;
     public GameObject DatabytesPrefab;
+    [Header("Player progress")]
     public PlayerProgress player_progress = new PlayerProgress();
 
     GameObject PlayerRenderDistTrigger;
@@ -152,11 +159,18 @@ public class GameManager : MonoBehaviour
 [System.Serializable]
 public class PlayerProgress
 {
+    [Header("-----Melee-------")]
     public Item Melee =  new Item();
+
+    [Header("-----DataBall-------")]
     public Item DataBall = new Item();
+    [Header("-----Command-------")]
     public Item Command = new Item();
+    [Header("-----HuntingRifle-------")]
     public Item HuntingRifle = new Item();
+    [Header("-----Shotgun-------")]
     public Item Shotgun = new Item();
+    [Header("-----AssaultRifle-------")]
     public Item AssaultRifle = new Item();
     public PlayerProgress() { }
 }
@@ -166,9 +180,20 @@ public class Item
     public GameObject ItemPrefab;
     [HideInInspector]public GameObject ItemInstance;
     public bool isUnlocked;
+    public WeaponUpgradeModifiers WeaponModifiers;
     public Item() { }
     public void InstantiatePrefab(Transform Hotbar)
     {
         ItemInstance = Object.Instantiate(ItemPrefab, Hotbar);
     }
+}
+[System.Serializable]
+public class WeaponUpgradeModifiers
+{
+    public int CurrentTier = 1;
+    public float fire_Rate = 1;
+    public float Damage = 1;
+    public float ReloadSpeed = 1;
+    public float ClipAmountUpgradeModifier = 1;
+    public float WeaponUpgradeCostModifier = 1;
 }

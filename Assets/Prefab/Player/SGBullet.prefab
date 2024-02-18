@@ -132,6 +132,10 @@ MonoBehaviour:
   datamonLayer:
     serializedVersion: 2
     m_Bits: 512
+  IsDrivenByAnimation: 0
+  IsFromPlayer: 1
+  animationAttack: {fileID: 0}
+  isHR: 0
 --- !u!70 &-7878680454826111726
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
