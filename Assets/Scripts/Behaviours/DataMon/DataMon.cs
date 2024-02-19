@@ -24,6 +24,8 @@ namespace IndividualDataMon
         public GameObject NamePlate;
         public TextMeshProUGUI NamePlateText;
         HealthBarScript healthBar;
+
+
         public int DataMonAttacksID;
         public GameObject DataMonAttacksParentObj;
 
