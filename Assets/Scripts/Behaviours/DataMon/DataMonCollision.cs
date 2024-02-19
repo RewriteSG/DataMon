@@ -19,9 +19,9 @@ public class DataMonCollision : MonoBehaviour
     float damage;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullet") && DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
         {
-            damage = float.Parse(collision.gameObject.name);
+            damage = collision.GetComponent<BulletInstance>().Damage;
             DataMon.dataMonCurrentAttributes.CurrentHealth -= damage;
             DataMon.dataMonCurrentAttributes.CurrentHealth = 
                 Mathf.Clamp(DataMon.dataMonCurrentAttributes.CurrentHealth,0, DataMon.dataMonCurrentAttributes.CurrentHealth+1);

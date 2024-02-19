@@ -6,30 +6,21 @@ using UnityEngine.Events;
 public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
-    public DataDex.DataMonBtnDelegate AddToTeam;
-
-    public DataDex.DataMonBtnDelegate RemoveFromTeam;
-
-    public DataDex.DataMonBtnDelegate ClickAndDrag;
     //public UnityEvent RightClick;
     //public UnityEvent LeftClick;
     public DataMonHolder dataMonHolder;
     public bool inDataBank;
     public GameObject DataMonSummoned;
+    public UnityEngine.UI.Image image;
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.button == PointerEventData.InputButton.Right && inDataBank)
+        if(eventData.button == PointerEventData.InputButton.Right)
         {
-            AddToTeam(this);
+            DataDex.instance.RightClick(this);
         }
         if (eventData.button == PointerEventData.InputButton.Left && inDataBank)
         {
             //ClickAndDrag(this);
-        }
-        if (eventData.button == PointerEventData.InputButton.Right && !inDataBank)
-        {
-            RemoveFromTeam(this); print((this.dataMonHolder.isNull()) + "dataMonHolder==null ");
-
         }
     }
 
@@ -51,13 +42,36 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     // Start is called before the first frame update
     void Start()
     {
-        
+        image = GetComponent<UnityEngine.UI.Image>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (inDataBank)
+        {
+            dataMonHolder.dataMonCurrentAttributes.CurrentHealth += Time.deltaTime * GameManager.instance.DataMonInDataDexHPRegen;
+            dataMonHolder.dataMonCurrentAttributes.CurrentHealth = Mathf.Clamp(dataMonHolder.dataMonCurrentAttributes.CurrentHealth, -1, dataMonHolder.dataMon.BaseAttributes.BaseHealth);
+        }
+        if (dataMonHolder == null)
+            return;
+        if (!inDataBank && dataMonHolder.dataMonData != null && DataMonSummoned == null && image.color != Color.blue && image.color != Color.green)
+        {
+            image.color = Color.blue;
+            dataMonHolder.dataMonCurrentAttributes.CurrentHealth = 0;
+        }
+        if (!inDataBank && dataMonHolder.dataMonData != null &&
+            DataDex.instance.datamonEvolution.DataMonToEvolve != null && image.color == Color.green && DataMonSummoned != null)
+        {
+            Destroy(DataMonSummoned);
+        }
+        if (!inDataBank && dataMonHolder.dataMonData != null &&
+            DataDex.instance.datamonEvolution.DataMonToEvolve == null && image.color == Color.green && DataMonSummoned == null)
+        {
+            DataMonSummoned = DataDex.instance.SpawnCompanionDataMon(this);
+            image.color = DataDex.instance.Testcolor;
+        }
+
     }
     private void OnDestroy()
     {

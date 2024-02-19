@@ -140,6 +140,7 @@ MonoBehaviour:
       BaseCaptureChance: 100
     MonBehaviourState: 2
   dataMonAI: {fileID: 0}
+  _databytes: {fileID: 0}
   dataMonCurrentAttributes:
     CurrentHealth: 40
     CurrentAttack: 0
@@ -149,6 +150,8 @@ MonoBehaviour:
     CurrentCaptureChance: 100
   NamePlate: {fileID: 6149556114654668756}
   NamePlateText: {fileID: 6149556114524597499}
+  DataMonAttacksID: 0
+  DataMonAttacksParentObj: {fileID: 0}
 --- !u!114 &1709287292825869611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bac3e118f1d7cf4db6a8fd90af1ae57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isQuitting: 0
 --- !u!1 &329541168961311995
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9405ddb41979eb43a9b14bff6a396cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _datamon: {fileID: 329541168242953227}
+  DataMon: {fileID: 0}
 --- !u!1 &2684621831575452655
 GameObject:
   m_ObjectHideFlags: 0

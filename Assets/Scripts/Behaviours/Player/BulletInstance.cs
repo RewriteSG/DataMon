@@ -14,7 +14,9 @@ public class BulletInstance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetName();
+        //SetName();
+        GameManager.instance.Entity_Updates += ToUpdate;
+
     }
     private void OnEnable()
     {
@@ -39,8 +41,10 @@ public class BulletInstance : MonoBehaviour
     }
     RaycastHit2D hit;
     // Update is called once per frame
-    void Update()
+    void ToUpdate()
     {
+        if (!gameObject.activeSelf)
+            return;
         if (isHR)
             HRBulletCheckPath();
         if(!HRB_Hits)
@@ -68,6 +72,11 @@ public class BulletInstance : MonoBehaviour
     {
         Damage = Dmg;
         speed = Spd;
-        SetName();
+        //SetName();
+    }
+    private void OnDestroy()
+    {
+        GameManager.instance.Entity_Updates -= ToUpdate;
+
     }
 }

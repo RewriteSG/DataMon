@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using Commands;
 public class DataMonAI : MonoBehaviour
 {
     public AI_State AI_state;
@@ -29,49 +30,83 @@ public class DataMonAI : MonoBehaviour
         DataMon = GetComponent<IndividualDataMon.DataMon>();
         DataMon.dataMonAI = this;
         gameObject.AddComponent<AggroSystem>();
+        timerToChangeTarget = 999;
         //InvokeRepeating("TestAI", 0, .5f);
     }
     private void OnEnable()
     {
         NeutralStartPath = true;
-        StartCoroutine(StartPathing());
-
+        //StartCoroutine(StartPathing());
     }
+    private void Start()
+    {
+        GameManager.instance.DataMon_StartAI(this);
+        GameManager.instance.Entity_Updates += ToUpdate;
+        GameManager.instance.Entity_FixedUpdates += ToFixedUpdate;
+    }
+    float timerToChangeTarget;
     // Update is called once per frame
-    void Update()
+    void ToUpdate()
     {
         if (reachedEndOfPath && !Target.isNull())
         {
             DataMonDoThings();
         }
-        if(DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && 
-            Vector3.Distance(transform.position, GameManager.instance.Player.transform.position)>GameManager.instance.MaxDistForCompanionDataMon)
+        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion &&
+            Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon
+            || GameManager.HostileDataMons <= 0)
         {
+            timerToChangeTarget = 999;
             AI_state = AI_State.Patrol;
-        }
-    }
-    IEnumerator StartPathing()
-    {
-        yield return new WaitForEndOfFrame();
-        if (patrollingAnchor == null)
-            CreateNewPatrolAnchor();
-        while (this.isActiveAndEnabled)
-        {
-            switch (AI_state)
-            {
-                case AI_State.Attack:
-                case AI_State.Produce:
-                    StartAttack();
-                    break;
-                case AI_State.Patrol:
-                    StartPatrol();
-                    break;
-                case AI_State.Support:
-                    break;
-            }
-            yield return new WaitForSeconds(0.5f);
 
         }
+        if(DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && GameManager.HostileDataMons > 0)
+        {
+            switch (DataMonCommand.command)
+            {
+                case DataMonCommands.DontAttack:
+                    break;
+
+                case DataMonCommands.Patrol:
+                case DataMonCommands.TargetEnemy:
+                case DataMonCommands.AttackAggressive:
+                    AI_state = AI_State.Attack;
+                    if (DataMonCommand.ToTarget != null)
+                    {
+                        timerToChangeTarget = Mathf.Clamp(timerToChangeTarget,0,29);
+                        ChangeAttackTargetEnemy(DataMonCommand.ToTarget);
+                    }
+                    if (timerToChangeTarget > 30)
+                    {
+                        timerToChangeTarget = 0;
+                        ChangeAttackTargetEnemy(GameManager.instance.HostileDataMonsGOs[Random.Range(0, GameManager.instance.HostileDataMonsGOs.Count)]);
+
+                    }
+                    else
+                    {
+                        timerToChangeTarget += Time.deltaTime;
+                    }
+                    break;
+            }
+        }
+    }
+    public void UpdateDatamonAI()
+    {
+        if (patrollingAnchor == null)
+            CreateNewPatrolAnchor();
+        switch (AI_state)
+        {
+            case AI_State.Attack:
+            case AI_State.Produce:
+                StartAttack();
+                break;
+            case AI_State.Patrol:
+                StartPatrol();
+                break;
+            case AI_State.Support:
+                break;
+        }
+
     }
     public void ChangeAggroTarget()
     {
@@ -80,9 +115,17 @@ public class DataMonAI : MonoBehaviour
         {
             DataMon.SetDataMonHostile();
             AI_state = AI_State.Attack;
+            GameManager.instance.HostileDataMonsGOs.Add(gameObject);
         }
     }
-    private void CreateNewPatrolAnchor()
+    public void ChangeAttackTargetEnemy(GameObject enemy)
+    {
+        if (DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
+            return;
+        Target = enemy.transform;
+
+    }
+    public void CreateNewPatrolAnchor()
     {
         if (patrollingAnchor == null && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
         {
@@ -143,32 +186,47 @@ public class DataMonAI : MonoBehaviour
 
     //}
     Collider2D[] allCollidersInCircle = new Collider2D[] { };
-    void StartAttack()
+    Vector2 targetPos;
+    public void StartAttack()
     {
-        print("attacking");
+
 
         //Vector3.Distance(transform.position, Target.position) > DataMon.dataMon.AttackRange
-        Dir = (transform.position - Target.position).normalized;
+        if (Target == null)
+            return;
         allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, DataMon.dataMonCurrentAttributes.CurrentAttackRange);
-        if (!allCollidersInCircle.ColliderArrayHasTag(Target.tag))
+        
+        
+        if (DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject))
         {
+            reachedEndOfPath = true;
+
+
+            return;
+        }else
             reachedEndOfPath = false;
-        }
-        else
+        
+        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject,true))
         {
             reachedEndOfPath = true;
 
             return;
         }
+        else
+            reachedEndOfPath = false;
+        
+        if (seeker.IsDone() && Vector2.Distance(Target.position, targetPos)> DataMon.dataMon.BaseAttributes.BaseAttackRange)
+        {
+            targetPos = Target.position;
+            seeker.StartPath(transform.position, targetPos, OnPathingComplete);
+            //print("Is this?" );
 
-        if (seeker.IsDone())
-            seeker.StartPath(transform.position, Target.position, OnPathingComplete);
-        print("attacking moving");
+        }
 
     }
     Vector3 randomPatrolDir;
     Vector3 goingToPos;
-    void StartPatrol()
+    public void StartPatrol()
     {
         //if (Vector3.Distance(transform.position, goingToPos) > NextWaypointDist)
         //{
@@ -184,13 +242,17 @@ public class DataMonAI : MonoBehaviour
             NeutralPatrol();
             return;
         }
-        if (seeker.IsDone() && Vector3.Distance(transform.position, patrollingAnchor.transform.position) > PatrollingDistance)
+        if (seeker.IsDone() && Vector3.Distance(transform.position, patrollingAnchor.transform.position) > PatrollingDistance 
+            && Vector2.Distance(patrollingAnchor.transform.position, targetPos) > 1)
         {
+            targetPos = patrollingAnchor.transform.position;
             goingToPos = patrollingAnchor.transform.position;
+
             seeker.StartPath(transform.position, goingToPos, OnPathingComplete);
         }
         else if (seeker.IsDone() && reachedEndOfPath)
         {
+
             goingToPos = (Random.insideUnitCircle.normalized * (PatrollingDistance + 1)) + (Vector2)transform.position;
             seeker.StartPath(transform.position, goingToPos, OnPathingComplete);
         }
@@ -213,7 +275,7 @@ public class DataMonAI : MonoBehaviour
         }
     }
     #endregion
-    private void FixedUpdate()
+    private void ToFixedUpdate()
     {
         MoveAI();
     }
@@ -237,6 +299,8 @@ public class DataMonAI : MonoBehaviour
         {
             reachedEndOfPath = false;
         }
+        if (AI_state == AI_State.Attack && Target == null)
+            return;
 
         if(reachedEndOfPath && AI_state == AI_State.Produce || AI_state == AI_State.Attack)
         {
@@ -250,12 +314,12 @@ public class DataMonAI : MonoBehaviour
             return;
         }
 
-        if (Vector2.Distance(transform.position, GameManager.instance.Player.transform.position) < GameManager.instance.DataMonSpawnRadiusFromPlayer && rb.isKinematic)
-            rb.isKinematic = false;
-        if (Vector2.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.DataMonSpawnRadiusFromPlayer && !rb.isKinematic)
+        if (Vector2.Distance(transform.position, GameManager.instance.Player.transform.position) < GameManager.instance.DataMonEnableRbInRadius && rb.bodyType != RigidbodyType2D.Dynamic)
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        if (Vector2.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.DataMonEnableRbInRadius && rb.bodyType != RigidbodyType2D.Static)
         {
             rb.velocity = Vector2.zero;
-            rb.isKinematic = true;
+            rb.bodyType = RigidbodyType2D.Static;
         }
 
 
@@ -272,10 +336,15 @@ public class DataMonAI : MonoBehaviour
             transform.position += (Vector3)Dir*Time.fixedDeltaTime;
         }
         
-        distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
 
-        toRotate= Quaternion.LookRotation(transform.forward, Dir);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, GameManager.instance.DataMonsRotationSpeed * Time.fixedDeltaTime);
+        if (AI_state != AI_State.Produce && AI_state != AI_State.Attack)
+        {
+            toRotate = Quaternion.LookRotation(transform.forward, Dir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, GameManager.instance.DataMonsRotationSpeed * Time.fixedDeltaTime);
+
+        }
+        
+        distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
 
         if (distance < NextWaypointDist)
         {
@@ -331,6 +400,13 @@ public class DataMonAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, NextWaypointDist);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, PatrollingDistance);
+
+    }
+    private void OnDestroy()
+    {
+        GameManager.instance.DataMon_UpdateAI -= UpdateDatamonAI;
+        GameManager.instance.Entity_Updates -= ToUpdate;
+        GameManager.instance.Entity_FixedUpdates -= ToFixedUpdate;
 
     }
 }

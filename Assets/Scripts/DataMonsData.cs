@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Add DataMon", menuName = "DataMon/Add", order = 1)]
 public class DataMonsData : ScriptableObject
 {
-    
+
+    [HideInInspector] public List<int> EvolutionCosts = new List<int>();
     [Header("Put DataMons from tier 1 to tier 2, and so on..")]
     public DataMonIndividualData[] DataMons;
     public DataMonRole MonRole;
@@ -25,7 +26,7 @@ public class DataMonIndividualData
 {
     public string DataMonName;
     public GameObject DataMonPrefab;
-    public GameObject[] DataMonAttackProjectiles;
+    public GameObject[] DataMonAbility;
     public DataMonAttributes BaseAttributes;
     public DataMonBehaviourState MonBehaviourState;
     public DataMonIndividualData()
@@ -35,13 +36,15 @@ public class DataMonIndividualData
     /// <summary>
     /// Use this to only copy the data
     /// </summary>
-    public DataMonIndividualData(DataMonIndividualData toCopy)
+    public static DataMonIndividualData CloneDataMonClass(DataMonIndividualData toCopy)
     {
-        DataMonName = toCopy.DataMonName;
-        DataMonPrefab = toCopy.DataMonPrefab;
-        DataMonAttackProjectiles = toCopy.DataMonAttackProjectiles;
-        BaseAttributes = DataMonInstancedAttributes.ConvertToDataMonAttributes(new DataMonInstancedAttributes(toCopy.BaseAttributes));
-        MonBehaviourState = toCopy.MonBehaviourState;
+        DataMonIndividualData temp = new DataMonIndividualData();
+        temp.DataMonName = toCopy.DataMonName;
+        temp.DataMonPrefab = toCopy.DataMonPrefab;
+        temp.DataMonAbility = toCopy.DataMonAbility;
+        temp.BaseAttributes = DataMonInstancedAttributes.ConvertToDataMonAttributes(new DataMonInstancedAttributes(toCopy.BaseAttributes));
+        temp.MonBehaviourState = toCopy.MonBehaviourState;
+        return temp;
     }
 }
 [System.Serializable]
@@ -103,5 +106,14 @@ public class DataMonInstancedAttributes
         CurrentMoveSpeed = toReset.BaseMoveSpeed;
         CurrentAttackRange = toReset.BaseAttackRange;
         CurrentCaptureChance = toReset.BaseCaptureChance;
+    }
+    public void SetAttributes(DataMonInstancedAttributes instanceAttributes)
+    {
+        CurrentHealth = instanceAttributes.CurrentHealth;
+        CurrentAttack = instanceAttributes.CurrentAttack;
+        CurrentProductionSpeed = instanceAttributes.CurrentProductionSpeed;
+        CurrentMoveSpeed = instanceAttributes.CurrentMoveSpeed;
+        CurrentAttackRange = instanceAttributes.CurrentAttackRange;
+        CurrentCaptureChance = instanceAttributes.CurrentCaptureChance;
     }
 }

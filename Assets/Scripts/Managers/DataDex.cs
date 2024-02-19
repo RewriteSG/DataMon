@@ -15,16 +15,25 @@ public class DataDex : MonoBehaviour
     public List<DataMonHolder> CompanionsDataMon = new List<DataMonHolder>();
     public DataMonHolder[] DataTeam = new DataMonHolder[] { };
 
+    public delegate void DataMonBtnDelegate(DataMonButton dataMon);
+
+    public DataMonBtnDelegate RightClick;
+
+    public DataMonBtnDelegate ClickAndDrag;
+
+    public bool DisplayDataPad;
+    public GameObject DataPad, DataTeamPanel, EvolvePanel, CraftPanel;
+    public Color Testcolor;
+    public DataPadModules CurrentModule;
     List<GameObject> DataMonListInDex = new List<GameObject>();
     List<GameObject> DataMonObtained = new List<GameObject>();
 
     List<GameObject> DataTeamPanels = new List<GameObject>();
+    [HideInInspector] public DatamonEvolution datamonEvolution = null;
+    DataMonButton DataMonOnTeamIsSelectedForEvolve = null;
 
-    public delegate void DataMonBtnDelegate(DataMonButton dataMon);
+    DataMonButton dataMonBtn;
 
-    public bool DisplayDataDex;
-    public GameObject DataPad;
-    public Color Testcolor;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +51,10 @@ public class DataDex : MonoBehaviour
                 AllDataMons.Add(AllDataMonsData[i].DataMons[x].DataMonName);
             }
         }
+        RightClick += DataMonButtonRightClick;
+
+        CurrentModule = DataPadModules.DataDex;
+        datamonEvolution = GetComponent<DatamonEvolution>();
     }
 
     // Update is called once per frame
@@ -49,7 +62,29 @@ public class DataDex : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            DisplayDataDex = !DisplayDataDex;
+            DisplayDataPad = !DisplayDataPad;
+        }
+        switch (CurrentModule)
+        {
+            case DataPadModules.DataDex:
+                DataTeamPanel.SetActive(true);
+                EvolvePanel.SetActive(false);
+                CraftPanel.SetActive(false);
+
+                break;
+
+            case DataPadModules.Evolve:
+                DataTeamPanel.SetActive(true);
+                EvolvePanel.SetActive(true);
+                CraftPanel.SetActive(false);
+                break;
+
+            case DataPadModules.Craft:
+                DataTeamPanel.SetActive(false);
+                EvolvePanel.SetActive(false);
+                CraftPanel.SetActive(true);
+                break;
+
         }
         if (DataTeam.Length != GameManager.instance.NumberOfDataMonsInTeam)
         {
@@ -61,11 +96,7 @@ public class DataDex : MonoBehaviour
         {
             for (int i = 0; i < DataTeam.Length-DataTeamContainer.transform.childCount; i++)
             {
-                DataTeamPanels.Add(Instantiate(DataMonPanel, DataTeamContainer.transform));
-                dataMonBtn = DataTeamPanels[DataTeamPanels.Count - 1].AddComponent<DataMonButton>();
-                dataMonBtn.RemoveFromTeam += DataDexRemoveFromTeam;
-                dataMonBtn.dataMonHolder = null;
-                dataMonBtn.inDataBank = false;
+                AddTeamDataMonPanel();
             }
         }
         // Remove DataMonTeamPanels
@@ -76,14 +107,26 @@ public class DataDex : MonoBehaviour
             DataTeamPanels.RemoveAt(DataTeamPanels.Count - 1);
 
         }
-        if(DataPad.activeInHierarchy!=DisplayDataDex)
-            DataPad.SetActive(DisplayDataDex);
+        if(DataPad.activeInHierarchy!=DisplayDataPad)
+            DataPad.SetActive(DisplayDataPad);
+    }
+
+    private void AddTeamDataMonPanel()
+    {
+        DataTeamPanels.Add(Instantiate(DataMonPanel, DataTeamContainer.transform));
+        dataMonBtn = DataTeamPanels[DataTeamPanels.Count - 1].AddComponent<DataMonButton>();
+        dataMonBtn.dataMonHolder = null;
+        dataMonBtn.inDataBank = false;
     }
 
     int indexOfDataMon;
     VerticalLayoutGroup verticalLayout;
-    DataMonButton dataMonBtn;
-    internal void AddToDataDex(DataMonHolder toDataDex)
+
+    /// <summary>
+    /// Add DataMon To DataDex, Basically Sending the datamon to the Bank
+    /// </summary>
+    /// <param name="toRemove"></param>
+    public void AddToDataDex(DataMonHolder toDataDex)
     {
         if (toDataDex.isNull())
             return;
@@ -94,20 +137,86 @@ public class DataDex : MonoBehaviour
         dataMonBtn = DataMonObtained[DataMonObtained.Count - 1].AddComponent<DataMonButton>();
         
         dataMonBtn.dataMonHolder = new DataMonHolder(toDataDex);
-        dataMonBtn.AddToTeam += DataDexAddToTeam;
         dataMonBtn.inDataBank = true;
         StartCoroutine(RearrangeContent(verticalLayout));
     }
+    public void EvolveDataMon(DataMonHolder EvolvedDataMon)
+    {
+
+        if (DataMonOnTeamIsSelectedForEvolve == null)
+            return;
+
+
+        indexOfDataMon = DataTeam.IndexOf(DataMonOnTeamIsSelectedForEvolve.dataMonHolder);
+        DataTeam = DataTeam.RemoveAt(indexOfDataMon);
+        DataTeamPanels.RemoveAt(indexOfDataMon);
+        RemoveFromDataDex(DataMonOnTeamIsSelectedForEvolve);
+        DataMonOnTeamIsSelectedForEvolve = null;
+        AddTeamDataMonPanel();
+
+        AddToDataDex(EvolvedDataMon);
+
+        DataDexAddToTeam(dataMonBtn);
+        
+    }
+    bool rearrangingContent = false;
     IEnumerator RearrangeContent(VerticalLayoutGroup toRearrange)
     {
         toRearrange.padding.top = 1;
+        if (rearrangingContent)
+            yield break;
+        rearrangingContent = true;
         yield return new WaitForEndOfFrame();
-
+        while (!DisplayDataPad)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
         toRearrange.padding.top = 0;
+        rearrangingContent = false;
 
     }
-  
-    public void DataDexAddToTeam(DataMonButton dataMonButton)
+    /// <summary>
+    /// Removes DataMon From DataDex, Basically Sending the datamon to the abyss
+    /// </summary>
+    /// <param name="toRemove"></param>
+    public void RemoveFromDataDex(DataMonButton toRemove)
+    {
+        if (toRemove.isNull())
+            return;
+
+        Destroy(toRemove.gameObject);
+    }
+    void DataMonButtonRightClick(DataMonButton dataMonButton)
+    {
+        switch (CurrentModule)
+        {
+            case DataPadModules.DataDex:
+                if (dataMonButton.inDataBank)
+                    DataDexAddToTeam(dataMonButton);
+                else
+                    DataDexRemoveFromTeam(dataMonButton);
+                break;
+            case DataPadModules.Evolve:
+                bool isDataMonSelected = datamonEvolution.SelectDataMon(dataMonButton.dataMonHolder);
+                if (!isDataMonSelected)
+                    return;
+                DataMonOnTeamIsSelectedForEvolve = null;
+                if (dataMonButton.inDataBank)
+                {
+                    Destroy(dataMonButton.gameObject);
+                }
+                if(!dataMonButton.inDataBank)
+                {
+                    dataMonButton.image.color = Color.green;
+                    DataMonOnTeamIsSelectedForEvolve = dataMonButton;
+                }
+                
+                break;
+
+        }
+    }
+
+    void DataDexAddToTeam(DataMonButton dataMonButton)
     {
         
         indexOfDataMon = GetEmptySlotInTeam();
@@ -118,11 +227,7 @@ public class DataDex : MonoBehaviour
             DataTeamPanels[indexOfDataMon].GetComponent<Image>().color = Testcolor;
             dataMonBtn = DataTeamPanels[indexOfDataMon].GetComponent<DataMonButton>();
             dataMonBtn.dataMonHolder = dataMonButton.dataMonHolder;
-            dataMonBtn.DataMonSummoned = 
-            Instantiate(dataMonButton.dataMonHolder.dataMonData.DataMons.GetDataMonInDataArray(dataMonButton.dataMonHolder.dataMon.DataMonName).DataMonPrefab,
-                GameManager.instance.Player.transform.position,Quaternion.identity);
-            dataMonBtn.DataMonSummoned.GetComponent<IndividualDataMon.DataMon>().SetDataMonCompanion();
-
+            dataMonBtn.DataMonSummoned = SpawnCompanionDataMon(dataMonBtn);
 
 
             verticalLayout = dataMonButton.transform.parent.parent.GetComponent<VerticalLayoutGroup>();
@@ -131,7 +236,21 @@ public class DataDex : MonoBehaviour
             Destroy(dataMonButton.gameObject);
         }
     }
-    public void DataDexRemoveFromTeam(DataMonButton dataMonButton)
+
+    public GameObject SpawnCompanionDataMon(DataMonButton dataMonButton)
+    {
+        GameObject summoned = Instantiate(dataMonButton.dataMonHolder.dataMonData.DataMons.
+            GetDataMonInDataArray(dataMonButton.dataMonHolder.dataMon.DataMonName).DataMonPrefab,
+                        GameManager.instance.Player.transform.position, Quaternion.identity);
+
+        IndividualDataMon.DataMon dataMon = summoned.GetComponent<IndividualDataMon.DataMon>();
+        dataMon.SetDataMonCompanion();
+        dataMon.SetAttributes(dataMonButton.dataMonHolder.dataMonCurrentAttributes);
+
+        return summoned;
+    }
+
+    void DataDexRemoveFromTeam(DataMonButton dataMonButton)
     {
         if (dataMonButton.dataMonHolder.isNull())
         {
@@ -146,12 +265,8 @@ public class DataDex : MonoBehaviour
 
         Destroy(dataMonButton.DataMonSummoned);
         Destroy(dataMonButton.gameObject);
-
-        
-
-
     }
-    public int GetEmptySlotInTeam()
+    int GetEmptySlotInTeam()
     {
         int temp = -1;
         for (int i = 0; i < DataTeam.Length; i++)
@@ -165,6 +280,28 @@ public class DataDex : MonoBehaviour
         }
         return temp;
     }
+    public void SetDataPadToDataDex()
+    {
+        CurrentModule = DataPadModules.DataDex;
+    }
+    public void SetDataPadToEvolve()
+    {
+        CurrentModule = DataPadModules.Evolve;
+    }
+    public void SetDataPadToCraft()
+    {
+        CurrentModule = DataPadModules.Craft;
+    }
+    private void OnDestroy()
+    {
+        RightClick -= DataMonButtonRightClick;
+
+    }
+}
+
+public enum DataPadModules
+{
+    DataDex, Evolve, Craft
 }
 public class DataDexIO
 {
@@ -196,4 +333,5 @@ public class DataMonHolder
         dataMon = toHold.dataMon;
         dataMonCurrentAttributes = new DataMonInstancedAttributes(toHold.dataMonCurrentAttributes);
     }
+
 }

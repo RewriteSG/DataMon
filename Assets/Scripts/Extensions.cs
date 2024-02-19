@@ -38,6 +38,28 @@ public static class Collider2DExtensions
         }
         return false;
     }
+    public static bool ColliderArrayHasGameObject<T>(this T[] array, GameObject obj) where T : Collider2D
+    {
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i].gameObject == obj)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static bool ColliderArrayHasGameObject<T>(this T[] array, GameObject obj, bool isChildOfObj) where T : Collider2D
+    {
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i].transform.parent == null)
+                continue;
+            if (array[i].transform.parent.gameObject == obj)
+                return true;
+        }
+        return false;
+    }
 }
 public static class DataMonHolderExtensions
 {

@@ -7,22 +7,31 @@ public class GameManager : MonoBehaviour
     // Global Variables
     public static GameManager instance;
     public static int TotalDataMonIDs;
+    public static int HostileDataMons;
 
+    public List<GameObject> HostileDataMonsGOs = new List<GameObject>();
     public GameObject Player;
     [HideInInspector] public PlayerShoot playerShootScript;
     [HideInInspector] public Rigidbody2D playerRb;
     public float PlayerDataMonPatrolMinDist;
     public float PlayerDataMonPatrolMaxDist;
-    public float DataMonSpawnRadiusFromPlayer;
+    public float DataMonSpawnRadiusFromPlayer, DataMonEnableRbInRadius;
     public float MaxDistForCompanionDataMon;
     public float CaptureDelay = 1;
     public float DataMonsRotationSpeed;
+    public float DataMonInDataDexHPRegen = 2;
     public int MaxNumberOfWildDataMons = 15;
     public int NumberOfDataMonsInTeam = 1;
-    public int Databytes_Count = 0;
+    public int Databytes = 0;
     public float RenderDistance = 10f;
     public Color NeutralColor, HostileColor, CompanionColor;
-
+    public delegate void DataMonAIBehaviourStart(DataMonAI dataMonAI);
+    public delegate void DataMonAIBehaviourUpdate();
+    public delegate void EntityUpdates();
+    public DataMonAIBehaviourStart DataMon_StartAI;
+    public DataMonAIBehaviourUpdate DataMon_UpdateAI;
+    public EntityUpdates Entity_Updates;
+    public EntityUpdates Entity_FixedUpdates;
 
     [Header("GUNS")]
     public int NumberOfBulletsInPool;
@@ -33,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     // Prefabs
     public GameObject Bullet;
-    public GameObject Data_bytes;
+    public GameObject DatabytesPrefab;
     public PlayerProgress player_progress = new PlayerProgress();
 
     GameObject PlayerRenderDistTrigger;
@@ -61,6 +70,8 @@ public class GameManager : MonoBehaviour
         BulletsPool.Add(false, unactiveBullets);
         BulletsPool.Add(true, new List<BulletInstance>()); 
         ReferencePlayerRenderDistTrigger();
+        HostileDataMonsGOs.Clear();
+        DataMon_StartAI = StartAI;
 
     }
 
@@ -87,6 +98,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         NumberOfDataMonsInTeam = Mathf.Clamp(NumberOfDataMonsInTeam, 1, NumberOfDataMonsInTeam+1);
+        if (Entity_Updates != null)
+            Entity_Updates();
+    }
+    private void FixedUpdate()
+    {
+        if (Entity_FixedUpdates != null)
+            Entity_FixedUpdates();
     }
     void OnDrawGizmos()
     {
@@ -96,6 +114,8 @@ public class GameManager : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(Player.transform.position, DataMonSpawnRadiusFromPlayer);
 
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Player.transform.position, DataMonEnableRbInRadius);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(Player.transform.position, RenderDistance);
 
@@ -111,6 +131,23 @@ public class GameManager : MonoBehaviour
         b_instance.gameObject.SetActive(true);
         return b_instance;
     }
+
+    void StartAI(DataMonAI dataMonAI)
+    {
+        DataMon_UpdateAI += dataMonAI.UpdateDatamonAI;
+        StartCoroutine(StartPathing());
+    }
+    IEnumerator StartPathing()
+    {
+        yield return new WaitForEndOfFrame();
+        while (true)
+        {
+            DataMon_UpdateAI();
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    
 }
 [System.Serializable]
 public class PlayerProgress

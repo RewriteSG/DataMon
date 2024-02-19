@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9405ddb41979eb43a9b14bff6a396cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DataMons: {fileID: 7288772485722934235}
+  DataMon: {fileID: 0}
 --- !u!1001 &1282802633309633893
 PrefabInstance:
   m_ObjectHideFlags: 0

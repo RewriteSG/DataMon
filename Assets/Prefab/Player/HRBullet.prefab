@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4431ffdca146841bb3120e479f2472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 80
+  speed: 200
   Damage: 2.11
   DestroyBulletAfterSecs: 1.5
   datamonLayer:
     serializedVersion: 2
     m_Bits: 512
+  isHR: 0
 --- !u!70 &1455530645226657306
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

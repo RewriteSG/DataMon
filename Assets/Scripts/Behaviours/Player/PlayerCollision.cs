@@ -19,7 +19,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Databytes")
         {
-            GameManager.instance.Databytes_Count += 1;
+            GameManager.instance.Databytes += 1;
             Destroy(collision.gameObject);
         }
     }
