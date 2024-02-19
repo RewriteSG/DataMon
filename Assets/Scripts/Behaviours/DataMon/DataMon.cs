@@ -26,6 +26,8 @@ namespace IndividualDataMon
         HealthBarScript healthBar;
         public int DataMonAttacksID;
         public GameObject DataMonAttacksParentObj;
+
+        [HideInInspector] public Vector2 SpawnedFromChunk;
         //[SerializeField]private GameObject test;
         private void Awake()
         {
@@ -194,6 +196,10 @@ namespace IndividualDataMon
             gameObject.SetActive(false);
             ResetAttributes();
             RoamingSpawner.doot_doot--;
+            if(RoamingSpawner.MonsInChunk.TryGetValue(SpawnedFromChunk,out DataMonsInChunk value))
+            {
+                value.datamons--;
+            }
 
             if (dataMonAI == null)
                 return;

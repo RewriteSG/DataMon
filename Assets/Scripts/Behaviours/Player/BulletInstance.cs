@@ -31,10 +31,11 @@ public class BulletInstance : MonoBehaviour
     }
     public void HRBulletCheckPath()
     {
-        hit = Physics2D.Raycast(transform.position, transform.up, Vector2.Distance(transform.position,transform.position + transform.up * speed * Time.deltaTime),
+        hit = Physics2D.Raycast(transform.position, transform.up, Vector2.Distance(transform.position, transform.position + transform.up * speed * Time.deltaTime),
             datamonLayer);
         if (hit.collider == null)
             return;
+            print("uhh WIRAEGDIUDSG "+hit.collider.gameObject.transform.position+"  " + (hit.collider != null));
         if (hit.collider.gameObject.CompareTag("DataMon"))
         {
             transform.position = hit.point;
@@ -81,7 +82,7 @@ public class BulletInstance : MonoBehaviour
         if (IsDrivenByAnimation)
             return;
         timer = 0;
-        isHR = false;
+        HRB_Hits = false;
         if(GameManager.instance.BulletsPool.TryGetValue(false, out List<BulletInstance> b))
         {
             b.Add(this);

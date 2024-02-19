@@ -11,6 +11,7 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     public DataMonHolder dataMonHolder;
     public bool inDataBank;
     public GameObject DataMonSummoned;
+    public IndividualDataMon.DataMon dataMon;
     public UnityEngine.UI.Image image;
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -76,6 +77,11 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     private void OnDestroy()
     {
         DataInspector.DataMonHovering = null;
+        if (inDataBank)
+        {
+            DataDex.instance.DataMonObtained.Remove(gameObject);
+            //DataDex.instance.DataMonObtained = DataDex.instance.DataMonObtained.RemoveNullReferencesInList();
 
+        }
     }
 }

@@ -6,14 +6,15 @@ public class WaveSpawner : MonoBehaviour
 {
     public enum SpawnState { Spawning, Waiting, Counting};
 
-    [System.Serializable]
-    public class Wave
-    {
-        public string name;
-        public Transform enemy;
-        public int Count;
-        public float rate;
-    }
+    //[System.Serializable]
+    //public class Wave
+    //{
+    //    public string name;
+    //    public Transform enemy;
+    //    public int Count;
+    //    public float rate;
+    //}
+    public WaveManager wm;
     public Wave[] waves;
     private int NextWave = 0;
 
@@ -29,9 +30,11 @@ public class WaveSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        wm = GetComponent<WaveManager>();
+        waves = wm.Waves.ToArray();
         if (SpawnPoints.Length == 0)
         {
-            Debug.LogError("No spawn points referenced. ");
+            Debug.LogWarning("No spawn points referenced. ");
         }
 
         waveCountdown = timeBetweenWaves;
@@ -40,9 +43,9 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(state == SpawnState.Waiting)
+        if (state == SpawnState.Waiting)
         {
-            if(!EnemyIsAlive())
+            if (!EnemyIsAlive())
             {
                 // begin a new round
 
@@ -53,9 +56,9 @@ public class WaveSpawner : MonoBehaviour
                 return;
             }
         }
-        if(waveCountdown<=0)
+        if (waveCountdown <= 0)
         {
-            if(state!=SpawnState.Spawning)
+            if (state != SpawnState.Spawning)
             {
                 //start spawning wave
                 StartCoroutine(SpawnWave(waves[NextWave]));
@@ -109,19 +112,23 @@ public class WaveSpawner : MonoBehaviour
 
         state = SpawnState.Spawning;
 
-        for (int i = 0;i<_wave.Count;i++)
+        for (int x = 0; x < _wave._EnemiesInWave.Count; x++)
         {
-            SpawnEnemy(_wave.enemy);
+            for (int i = 0; x < _wave._EnemiesInWave[x].Count; i++)
+            {
+                SpawnEnemy(_wave._EnemiesInWave[x].DataMon.DataMonPrefab);
 
-            yield return new WaitForSeconds(1f / _wave.rate);
+                yield return new WaitForSeconds(0.1f);
+            }
         }
+        
 
         state = SpawnState.Waiting;
 
 
         yield break;
     }
-    void SpawnEnemy(Transform _enemy)
+    void SpawnEnemy(GameObject _enemy)
     {
         
         Debug.Log("Spawning enemy: " + _enemy.name);

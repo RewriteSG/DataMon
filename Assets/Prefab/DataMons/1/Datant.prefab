@@ -1534,7 +1534,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7684203, y: 5.8741093}
+  m_Size: {x: 3.555084, y: 5.8741093}
   m_EdgeRadius: 0
 --- !u!114 &3461483628202589170
 MonoBehaviour:
@@ -1565,7 +1565,7 @@ GameObject:
   - component: {fileID: 7284237246730961189}
   m_Layer: 9
   m_Name: Datant
-  m_TagString: Untagged
+  m_TagString: DataMon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1654,6 +1654,7 @@ MonoBehaviour:
   WanderingDistance: 10
   patrollingAnchor: {fileID: 0}
   aggroSystem: {fileID: 0}
+  CurrentTask: 0
 --- !u!114 &8519851035581550597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1679,7 +1680,7 @@ MonoBehaviour:
   dataMon:
     DataMonName: Datant
     DataMonPrefab: {fileID: 8519851035581550594}
-    DataMonAttackProjectiles: []
+    DataMonAbility: []
     BaseAttributes:
       BaseHealth: 20
       BaseAttack: 0
@@ -1701,6 +1702,7 @@ MonoBehaviour:
   NamePlateText: {fileID: 5580441581203275784}
   DataMonAttacksID: 0
   DataMonAttacksParentObj: {fileID: 0}
+  SpawnedFromChunk: {x: 0, y: 0}
 --- !u!114 &7284237246730961189
 MonoBehaviour:
   m_ObjectHideFlags: 0

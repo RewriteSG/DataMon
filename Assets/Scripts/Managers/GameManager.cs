@@ -16,15 +16,20 @@ public class GameManager : MonoBehaviour
     public float PlayerDataMonPatrolMinDist;
     public float PlayerDataMonPatrolMaxDist;
     public float DataMonSpawnRadiusFromPlayer, DataMonEnableRbInRadius;
+    
     public float MaxDistForCompanionDataMon;
     public float CaptureDelay = 1;
     public float DataMonsRotationSpeed;
     public float DataMonInDataDexHPRegen = 2;
     public int MaxNumberOfWildDataMons = 15;
     public int NumberOfDataMonsInTeam = 1;
+    [Header("WorldBorders")]
+    public int DataWorldBorderLeftX,DataWorldBorderRightX, DataWorldBorderDownY, DataWorldBorderUpY;
     public int Databytes = 0;
+    public GameObject RenderDistanceTrigger;
     public float RenderDistance = 10f;
     public Color NeutralColor, HostileColor, CompanionColor;
+    public LayerMask GlitchLayerMask;
     public delegate void DataMonAIBehaviourStart(DataMonAI dataMonAI);
     public delegate void DataMonAIBehaviourUpdate();
     public delegate void EntityUpdates();
@@ -51,11 +56,11 @@ public class GameManager : MonoBehaviour
     public GameObject DatabytesPrefab;
     [Header("Player progress")]
     public PlayerProgress player_progress = new PlayerProgress();
-
-    GameObject PlayerRenderDistTrigger;
+    
 
     private void Awake()
     {
+        instance = this;
         TotalDataMonIDs = 0;
     }
     // Start is called before the first frame update
@@ -87,16 +92,16 @@ public class GameManager : MonoBehaviour
         if (Player == null)
             return;
         ReferencePlayerRenderDistTrigger();
-        if (PlayerRenderDistTrigger == null)
+        if (RenderDistanceTrigger == null)
             return;
-        PlayerRenderDistTrigger.transform.localScale = Player.transform.InverseTransformVector(Vector3.one * RenderDistance);
+        RenderDistanceTrigger.transform.localScale = Player.transform.InverseTransformVector(Vector3.one * RenderDistance);
     }
 
     private void ReferencePlayerRenderDistTrigger()
     {
-        if (PlayerRenderDistTrigger == null || PlayerRenderDistTrigger.transform.parent != Player.transform)
+        if (RenderDistanceTrigger == null || RenderDistanceTrigger.transform.parent != Player.transform)
         {
-            PlayerRenderDistTrigger = Player.transform.FindChildByTag("PlayerRenderDist").gameObject;
+            RenderDistanceTrigger = Player.transform.FindChildByTag("PlayerRenderDist").gameObject;
 
         }
     }
@@ -153,7 +158,19 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
+    Collider2D[] Glitches;
+    public bool CheckForGlitchesInProximity(out Collider2D Glitch)
+    {
+        Glitch = null;
+        Glitches = Physics2D.OverlapCircleAll(instance.Player.transform.position, instance.PlayerDataMonPatrolMaxDist, instance.GlitchLayerMask);
+        if (Glitches.Length >0)
+        {
+            Glitch = Glitches[0];
+            return true;
+        }
 
+        return false;
+    }
     
 }
 [System.Serializable]

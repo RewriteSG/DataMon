@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using IndividualDataMon;
+[DefaultExecutionOrder(2)]
 public class RoamingSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] Datamons_roaming;
     [SerializeField]List<DataMon> Datamons_roamingData = new List<DataMon>();
     public static Dictionary<string, List<DataMon>> DataMonsPool = new Dictionary<string, List<DataMon>>();
     public static Dictionary<Vector2, DataMonsInChunk> MonsInChunk = new Dictionary<Vector2, DataMonsInChunk>();
-    
+    public static List<DataMon> ALLDataMons = new List<DataMon>();
 
     private Vector3 SpawnPosition;
     public float MaxNumberOfDataMonInChunk = 20;
@@ -18,9 +19,10 @@ public class RoamingSpawner : MonoBehaviour
     public static GameObject DataMonPoolGO;
     Vector3 RandomSpawnPoint;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SpawnPointsInRenderDist.Clear();
+        ALLDataMons.Clear();
         doot_doot = 0;
         for (int i = 0; i < Datamons_roaming.Length; i++)
         {
@@ -30,22 +32,28 @@ public class RoamingSpawner : MonoBehaviour
                 GetDataMonInDataArray(Datamons_roamingData[Datamons_roamingData.Count - 1].gameObject.name));
         }
         List<DataMon> temp;
-
         DataMonPoolGO = new GameObject("DataMons");
-        for (int i = 0; i < Datamons_roaming.Length; i++)
-        {
-            temp = new List<DataMon>();
-
-            for (int x = 0; x < GameManager.instance.MaxNumberOfWildDataMons; x++)
+        //DataMonPoolGO.transform.position = new Vector3(0, -9000);
+        DataMon _datamon;
+        if(!SaveLoadManager.instance.DoLoadWorld)
+            for (int i = 0; i < Datamons_roaming.Length; i++)
             {
-                temp.Add(Instantiate(Datamons_roaming[i], DataMonPoolGO.transform).GetComponent<DataMon>());
-                temp[temp.Count - 1].gameObject.SetActive(false);
+                temp = new List<DataMon>();
+
+                for (int x = 0; x < GameManager.instance.MaxNumberOfWildDataMons; x++)
+                {
+                    _datamon = Instantiate(Datamons_roaming[i], DataMonPoolGO.transform).GetComponent<DataMon>();
+                    temp.Add(_datamon);
+                    ALLDataMons.Add(_datamon);
+                    temp[temp.Count - 1].gameObject.SetActive(false);
+                }
+                DataMonsPool.Add(Datamons_roamingData[i].dataMon.DataMonName, temp);
+               
             }
-            DataMonsPool.Add(Datamons_roamingData[i].dataMon.DataMonName, temp);
-        }
-        StartCoroutine(SpawnInBatches(5,10));
+        StartCoroutine(SpawnInBatches(3,10));
     }
     bool isReferenced;
+    int rejected;
     IEnumerator SpawnInBatches(float delay, int DataMonPerBatch)
     {
         while (isActiveAndEnabled)
@@ -62,35 +70,45 @@ public class RoamingSpawner : MonoBehaviour
             //if (Vector2.Distance(RandomSpawnPoint,GameManager.instance.RenderDistance))
             for (int i = 0; i <= DataMonPerBatch; i++)
             {
+                if (doot_doot >= GameManager.instance.MaxNumberOfWildDataMons || SpawnPointsInRenderDist.Count == 0)
+                {
+                    break;
+                }
                 RandomSpawnPoint = SpawnPointsInRenderDist[Random.Range(0, SpawnPointsInRenderDist.Count)].position;
                 isReferenced = MonsInChunk.TryGetValue(RandomSpawnPoint, out DataMonsInChunk value);
                 if(!isReferenced)
                 {
-                    i--;
                     continue;
                 }
 
                 if (value.datamons >= MaxNumberOfDataMonInChunk)
                 {
-                    i--;
                     continue;
                 }
                 SpawnPosition = Random.insideUnitCircle.normalized * Random.Range(1, DataWorldSpawnPoints.SpawnPointsRadius);
                 SpawnPosition += RandomSpawnPoint;
+
+                //SpawnPosition = new Vector2(Mathf.Clamp(SpawnPosition.x, GameManager.instance.DataWorldBorderLeftX,
+                //GameManager.instance.DataWorldBorderRightX),
+                //Mathf.Clamp(SpawnPosition.y, GameManager.instance.DataWorldBorderDownY, GameManager.instance.DataWorldBorderUpY));
                 if (Vector3.Distance(SpawnPosition, GameManager.instance.Player.transform.position) >
                     GameManager.instance.DataMonSpawnRadiusFromPlayer &&
                     Vector3.Distance(SpawnPosition, GameManager.instance.Player.transform.position) <
                     GameManager.instance.RenderDistance)
                 {
-                    SpawnNewDataMon();
+                    value.datamons++;
+                    SpawnNewDataMon(RandomSpawnPoint);
                 }
                 else
+                {
                     i--;
-                yield return new WaitForSeconds(0.01f);
+                    //yield return new WaitForEndOfFrame();
+                }
+
             }
             yield return new WaitForSeconds(delay);
             StopSpawning:
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.1f);
 
         }
 
@@ -110,13 +128,14 @@ public class RoamingSpawner : MonoBehaviour
 
     }
 
-    private void SpawnNewDataMon()
+    private void SpawnNewDataMon(Vector2 _RandomSpawnPoint)
     {
         DataMonsPool.TryGetValue(Datamons_roamingData[Random.Range(0, Datamons_roaming.Length)].dataMon.DataMonName, out List<DataMon> temp);
         temp[0].transform.position = SpawnPosition;
         temp[0].gameObject.SetActive(true);
         temp[0].dataMonAI.SetNewPatrollingAnchorPos();
         temp[0].ResetAttributes();
+        temp[0].SpawnedFromChunk = _RandomSpawnPoint;
         switch (temp[0].dataMonData.DataMons[temp[0].tier].MonBehaviourState)
         {
             case DataMonBehaviourState.isNeutral:

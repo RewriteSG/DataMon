@@ -106,7 +106,6 @@ public class PlayerShoot : MonoBehaviour
             case ItemHolding.DataBall:
 
                 SetWeaponModelActive(Fists_weapon, false);
-                print(DataBallLauncher.Model);
                 SetWeaponModelActive(DataBallLauncher, true);
                 //SetWeaponModelActive(huntingRifle, false);
                 //SetWeaponModelActive(shotgun, false);
@@ -165,13 +164,10 @@ public class PlayerShoot : MonoBehaviour
         if((CurrentWepAmmo.AmmoAmount - CurrentWepAmmo.ClipAmount) <= 0)
         {
             CurrentWepAmmo.CurrentClipAmount = CurrentWepAmmo.AmmoAmount;
-            print("is it doing this?");
         }
         else
         {
             CurrentWepAmmo.CurrentClipAmount = CurrentWepAmmo.ClipAmount;
-            print("Or doing this?");
-
         }
         CurrentWepAmmo.AmmoAmount -= CurrentWepAmmo.CurrentClipAmount;
 

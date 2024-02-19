@@ -7,12 +7,12 @@ TagManager:
   - Hostile
   - Neutral
   - Companion
-  - enemy
   - Databytes
   - DataMon
   - DataMonSpawnPoint
   - PlayerRenderDist
   - Bullet
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX
@@ -25,7 +25,7 @@ TagManager:
   - Obstacles
   - DataMonLayer
   - Pause
-  - 
+  - Glitch
   - 
   - 
   - 

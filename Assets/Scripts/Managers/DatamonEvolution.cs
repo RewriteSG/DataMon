@@ -78,6 +78,10 @@ public class DatamonEvolution : MonoBehaviour
             if (DataMonToEvolve != null)
                 return false;
         }
+
+        if (dataMonHolder.dataMonData == null)
+            return false;
+
         bool toReturn = NextDataMonIsValid(dataMonHolder, out int index);
         if (toReturn)
         {
@@ -110,7 +114,8 @@ public class DatamonEvolution : MonoBehaviour
     }
     public void CancelEvolution()
     {
-        DataDex.instance.AddToDataDex(DataMonToEvolve);
+        if (DataDex.instance.DataMonOnTeamIsSelectedForEvolve == null)
+            DataDex.instance.AddToDataDex(DataMonToEvolve);
         ResetEvolutionPanels();
 
         DataMonToEvolve = null;

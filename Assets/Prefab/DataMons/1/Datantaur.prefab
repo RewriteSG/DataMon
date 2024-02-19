@@ -1485,7 +1485,7 @@ GameObject:
   - component: {fileID: 8506371414355122939}
   m_Layer: 9
   m_Name: Datantaur
-  m_TagString: Untagged
+  m_TagString: DataMon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1574,6 +1574,7 @@ MonoBehaviour:
   WanderingDistance: 10
   patrollingAnchor: {fileID: 0}
   aggroSystem: {fileID: 0}
+  CurrentTask: 0
 --- !u!114 &7288772485722934235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1599,7 +1600,7 @@ MonoBehaviour:
   dataMon:
     DataMonName: Datantaur
     DataMonPrefab: {fileID: 7288772485722934236}
-    DataMonAttackProjectiles: []
+    DataMonAbility: []
     BaseAttributes:
       BaseHealth: 60
       BaseAttack: 0
@@ -1621,6 +1622,7 @@ MonoBehaviour:
   NamePlateText: {fileID: 9044900063782931217}
   DataMonAttacksID: 0
   DataMonAttacksParentObj: {fileID: 0}
+  SpawnedFromChunk: {x: 0, y: 0}
 --- !u!114 &8506371414355122939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1699,7 +1701,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.7485428, y: 6.866022}
+  m_Size: {x: 4.3610477, y: 6.866022}
   m_EdgeRadius: 0
 --- !u!114 &3085390100079833277
 MonoBehaviour:

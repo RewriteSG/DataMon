@@ -6,7 +6,7 @@ using UnityEngine;
 public class DataMonsData : ScriptableObject
 {
 
-    [HideInInspector] public List<int> EvolutionCosts = new List<int>();
+    public List<int> EvolutionCosts = new List<int>();
     [Header("Put DataMons from tier 1 to tier 2, and so on..")]
     public DataMonIndividualData[] DataMons;
     public DataMonRole MonRole;

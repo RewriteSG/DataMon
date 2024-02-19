@@ -32,5 +32,12 @@ public class DataMonCollision : MonoBehaviour
             if (bullet.IsFromPlayer)
                 DataMon.dataMonAI.aggroSystem.SetDamageByEntity(GameManager.instance.Player, damage);
         }
+        if(collision.gameObject.CompareTag("EnemyAttack") && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+        {
+            if(DataMon.dataMonAI.AI_state == AI_State.Produce)
+            {
+                DataMon.dataMonAI.CancelProduction();
+            }
+        }
     }
 }
