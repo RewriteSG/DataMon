@@ -38,6 +38,7 @@ public class DataMonAI : MonoBehaviour
         gameObject.AddComponent<AggroSystem>();
         timerToChangeTarget = 999;
         //InvokeRepeating("TestAI", 0, .5f);
+        
     }
     private void OnEnable()
     {
@@ -69,7 +70,6 @@ public class DataMonAI : MonoBehaviour
         {
             timerToChangeTarget = 999;
             AI_state = AI_State.Patrol;
-            
         }
         if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion &&
             Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon &&
@@ -77,7 +77,6 @@ public class DataMonAI : MonoBehaviour
             && GameManager.HostileDataMons <= 0)
         {
             CancelProduction();
-
         }
         if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && GameManager.HostileDataMons > 0 && AI_state != AI_State.Produce)
         {
@@ -137,7 +136,7 @@ public class DataMonAI : MonoBehaviour
     public void ChangeAggroTarget()
     {
         Target = aggroSystem.ListOfTargets.FindHighestDamageDealer().transform;
-        if(DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
+        if(DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
         {
             DataMon.SetDataMonHostile();
             AI_state = AI_State.Attack;
@@ -147,7 +146,6 @@ public class DataMonAI : MonoBehaviour
     public void ChangeAttackTargetEnemy(GameObject enemy)
     {
         Target = enemy.transform;
-
     }
     public void CreateNewPatrolAnchor()
     {
@@ -158,16 +156,14 @@ public class DataMonAI : MonoBehaviour
                 GameManager.instance.PlayerDataMonPatrolMaxDist)) + (Vector2)GameManager.instance.Player.transform.position;
             //newPatrolAnchor.transform.position += GameManager.instance.Player.transform.position;
             newPatrolAnchor.transform.SetParent(GameManager.instance.Player.transform, true);
-
             patrollingAnchor = newPatrolAnchor;
         }
-        if (patrollingAnchor == null && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
+        if (patrollingAnchor == null && DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
         {
             GameObject newPatrolAnchor = new GameObject(DataMon.dataMon.DataMonName + "'s Patrolling Anchor");
             newPatrolAnchor.transform.position = transform.position;
             newPatrolAnchor.transform.parent = RoamingSpawner.DataMonPoolGO.transform;
             patrollingAnchor = newPatrolAnchor;
-
         }
     }
 
@@ -410,9 +406,11 @@ public class DataMonAI : MonoBehaviour
             case AI_State.Attack:
                 if (DataMon == null)
                     return;
+                print("HUh");
                 if (DataMon.attackObjects.Count == 0)
                     return;
 
+                print("HUh");
                 if (!doingSomething && Vector2.Distance(Target.position,transform.position) < DataMon.attackObjects[DataMon.currentAttackIndex].attackObject.AttackRange &&
                     DataMon.attackObjects[DataMon.currentAttackIndex].isAvailable)
                 {

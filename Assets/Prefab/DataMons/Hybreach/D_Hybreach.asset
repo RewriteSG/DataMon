@@ -14,34 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EvolutionCosts: 
   InherentPassives: []
-  InherentAllDataMonAbility:
-  - AttackPrefab: {fileID: 0}
-    _gameObject: {fileID: 0}
-    attackObject: {fileID: 0}
-    CurrentCD: 0
-    isAvailable: 0
-    AttackCooldown: 0
-    AttackName: 
-    AttackDescription: 
-    AttackDelayDataMonAfterFiring: 0
-  - AttackPrefab: {fileID: 0}
-    _gameObject: {fileID: 0}
-    attackObject: {fileID: 0}
-    CurrentCD: 0
-    isAvailable: 0
-    AttackCooldown: 0
-    AttackName: 
-    AttackDescription: 
-    AttackDelayDataMonAfterFiring: 0
-  - AttackPrefab: {fileID: 0}
-    _gameObject: {fileID: 0}
-    attackObject: {fileID: 0}
-    CurrentCD: 0
-    isAvailable: 0
-    AttackCooldown: 0
-    AttackName: 
-    AttackDescription: 
-    AttackDelayDataMonAfterFiring: 0
+  InherentAllDataMonAbility: []
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: Hybreach

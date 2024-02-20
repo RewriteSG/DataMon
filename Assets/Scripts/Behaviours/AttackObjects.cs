@@ -13,7 +13,7 @@ public class AttackObjects : MonoBehaviour
     public ParticleSystem UnityParticleSystem;
     public delegate void UpdateAttackObject();
     public UpdateAttackObject updateAttack;
-    public bool isMoving, isDashAttack, isSpinningSprite, isSpinningProjectile, isCollisionEffect, onEndAtSeconds;
+    public bool isMoving, isDashAttack, isSpinningSprite, isSpinningProjectile, isCollisionEffect, onEndAtSeconds, isScaledUp;
     public float Speed, RotationSpeed, MaxDistance, DashDamp;
     Vector2 StartDestination,EndDestination;
     Vector3 smoothVelocity = Vector3.zero;
@@ -51,6 +51,12 @@ public class AttackObjects : MonoBehaviour
         }
         if (SpritePNG != null)
             SpritePNG.gameObject.SetActive(true);
+
+        if(isScaledUp)
+        {
+            
+            updateAttack += IncreaseScale;
+        }
         
         timer = 0;
     }
@@ -60,11 +66,15 @@ public class AttackObjects : MonoBehaviour
         {
             Damage = DmgBasedOfStat * AttacksByEntity.CurrentAttributes.CurrentAttack;
         }
-        if (isMoving || isDashAttack)
+        if (isMoving || isDashAttack || isScaledUp)
             updateAttack();
         if (timer >= EndAttackAt && onEndAtSeconds)
         {
             AttackFinished();
+        }
+        else
+        {
+            timer += Time.deltaTime;
         }
     }
     private void OnDisable()
@@ -141,5 +151,10 @@ public class AttackObjects : MonoBehaviour
     {
         if (UnityParticleSystem != null)
             Destroy(UnityParticleSystem.gameObject);
+    }
+    private void IncreaseScale()
+    {
+        
+        transform.localScale += Vector3.one * Speed * Time.deltaTime;
     }
 }

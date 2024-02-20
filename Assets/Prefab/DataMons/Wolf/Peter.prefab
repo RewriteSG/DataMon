@@ -631,7 +631,7 @@ MonoBehaviour:
   AttackPoint: {fileID: 5139332057713274147}
   isBeingCaptured: 0
   isCompanion: 0
-  dataMonData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+  dataMonData: {fileID: 11400000, guid: b3aa1d998ba6e934399993667423202d, type: 2}
   selected: 0
   DataMonNames:
   - Datant
@@ -674,6 +674,7 @@ MonoBehaviour:
   Model: {fileID: 0}
   attackObjects: []
   currentAttackIndex: 0
+  isWaveEnemy: 0
 --- !u!114 &5139332057412728595
 MonoBehaviour:
   m_ObjectHideFlags: 0

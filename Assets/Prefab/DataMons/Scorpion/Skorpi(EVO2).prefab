@@ -157,7 +157,7 @@ MonoBehaviour:
   AttackPoint: {fileID: 4325734023653176573}
   isBeingCaptured: 0
   isCompanion: 0
-  dataMonData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+  dataMonData: {fileID: 11400000, guid: 49d007c20e9b4bd49846e2b3fa9f3e5e, type: 2}
   selected: 0
   DataMonNames:
   - Datant
