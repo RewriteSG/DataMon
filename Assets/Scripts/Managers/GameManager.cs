@@ -192,6 +192,20 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(instance.GlitchRespawnTime);
     }
+    public void RespawnGlitch(GameObject glitch, float delay, GameObject DataBytes, float radius)
+    {
+        StartCoroutine(Respawnglitch(glitch, delay, DataBytes, radius));
+    }
+    IEnumerator Respawnglitch(GameObject glitch, float delay, GameObject DataBytes, float radius)
+    {
+        Databytes databyte;
+        databyte = Instantiate(DataBytes, transform.position, Quaternion.identity).GetComponent<Databytes>();
+        yield return new WaitForEndOfFrame();
+        //databyte.randomPos = (Random.insideUnitCircle * radius) + (Vector2)transform.position;
+
+        yield return new WaitForSeconds(delay);
+        glitch.SetActive(true);
+    }
 
 }
 [System.Serializable]

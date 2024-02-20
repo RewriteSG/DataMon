@@ -48,28 +48,28 @@ public class DataCraft : MonoBehaviour
             return;
         }
         DataBall.UpdateUI(GameManager.instance.DataBallLauncher.AmmoAmount);
-        if (GameManager.instance.player_progress.HuntingRifle.isUnlocked)
-        {
-            HuntingRifle.UpdateUI("Tier: " + GameManager.instance.player_progress.HuntingRifle.WeaponModifiers.CurrentTier);
+        //if (GameManager.instance.player_progress.HuntingRifle.isUnlocked)
+        //{
+        //    HuntingRifle.UpdateUI("Tier: " + GameManager.instance.player_progress.HuntingRifle.WeaponModifiers.CurrentTier);
 
             
-        }
-        else
-            HuntingRifle.UpdateUI("");
-        if (GameManager.instance.player_progress.Shotgun.isUnlocked)
-        {
-            Shotgun.UpdateUI("Tier: " + GameManager.instance.player_progress.Shotgun.WeaponModifiers.CurrentTier);
+        //}
+        //else
+            HuntingRifle.UpdateUI(GameManager.instance.huntingRifle.AmmoAmount);
+        //if (GameManager.instance.player_progress.Shotgun.isUnlocked)
+        //{
+        //    Shotgun.UpdateUI("Tier: " + GameManager.instance.player_progress.Shotgun.WeaponModifiers.CurrentTier);
 
-        }
-        else
-            Shotgun.UpdateUI("");
-        if (GameManager.instance.player_progress.AssaultRifle.isUnlocked)
-        {
-            AssaultRifle.UpdateUI("Tier: "+GameManager.instance.player_progress.AssaultRifle.WeaponModifiers.CurrentTier);
+        //}
+        //else
+            Shotgun.UpdateUI(GameManager.instance.huntingRifle.AmmoAmount);
+        //if (GameManager.instance.player_progress.AssaultRifle.isUnlocked)
+        //{
+        //    AssaultRifle.UpdateUI("Tier: "+GameManager.instance.player_progress.AssaultRifle.WeaponModifiers.CurrentTier);
 
-        }
-        else
-            AssaultRifle.UpdateUI("");
+        //}
+        //else
+            AssaultRifle.UpdateUI(GameManager.instance.huntingRifle.AmmoAmount);
 
         if (SelectedtoCraft == SelectedItemToCraft.None)
         {
@@ -106,8 +106,8 @@ public class DataCraft : MonoBehaviour
 
                 if (GameManager.instance.player_progress.HuntingRifle.isUnlocked)
                 {
-                    DataBytesReq = HuntingRifle.craftRecipe.DataBytesRequired * (GameManager.instance.player_progress.HuntingRifle.WeaponModifiers.CurrentTier + 1);
-                    ButtonText.text = "Upgrade";
+                    DataBytesReq = HuntingRifle.craftRecipe.DataBytesRequired * CraftingQuantity;
+                    ButtonText.text = "Ammo";
                 }
                 else
                     ButtonText.text = "Craft";
@@ -121,9 +121,9 @@ public class DataCraft : MonoBehaviour
 
                 if (GameManager.instance.player_progress.Shotgun.isUnlocked)
                 {
-                    DataBytesReq = Shotgun.craftRecipe.DataBytesRequired * (GameManager.instance.player_progress.Shotgun.WeaponModifiers.CurrentTier + 1);
+                    DataBytesReq = Shotgun.craftRecipe.DataBytesRequired * CraftingQuantity;
 
-                    ButtonText.text = "Upgrade";
+                    ButtonText.text = "Ammo";
                 }
                 else
                     ButtonText.text = "Craft";
@@ -137,8 +137,8 @@ public class DataCraft : MonoBehaviour
 
                 if (GameManager.instance.player_progress.AssaultRifle.isUnlocked)
                 {
-                    DataBytesReq = AssaultRifle.craftRecipe.DataBytesRequired * (GameManager.instance.player_progress.AssaultRifle.WeaponModifiers.CurrentTier + 1);
-                    ButtonText.text = "Upgrade";
+                    DataBytesReq = AssaultRifle.craftRecipe.DataBytesRequired * CraftingQuantity;
+                    ButtonText.text = "Ammo";
                 }
                 else
                     ButtonText.text = "Craft";
@@ -169,28 +169,8 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.Databytes < DataBytesReq)
                     return;
                 print("crafted Meet Req");
-                if (GameManager.instance.CheckForGlitchesInProximity(out Collider2D HR_Glitch))
-                {
-                    IndividualDataMon.DataMon dataMon = DataDex.instance.GetProductionDataMonFromTeam(HuntingRifle.craftRecipe.dataMonsData, HuntingRifle.craftRecipe.DataMonTierRequired, true)?.dataMon;
 
-                    if (dataMon == null)
-                    {
-                        print("No DataMon Available");
-
-                        return;
-                    }
-
-                    dataMon.dataMonAI.Produce
-                        (AI_Tasks.ProducingHuntingRifle, HuntingRifle.craftRecipe.ProductionTimeReq,
-                        DataBytesReq, HR_Glitch.transform, HuntingRifle.PickupItem, HuntingRifle.craftRecipe.GlitchDamageToCraft);
-
-                }
-                else
-                {
-                    print("No Glitches Available");
-
-                    return;
-                }
+                GameManager.instance.huntingRifle.AmmoAmount += CraftingQuantity;
 
 
 
@@ -202,26 +182,8 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.Databytes < DataBytesReq)
                     return;
 
-                if (GameManager.instance.CheckForGlitchesInProximity(out Collider2D SG_Glitch))
-                {
-                    IndividualDataMon.DataMon dataMon = 
-                        DataDex.instance.GetProductionDataMonFromTeam(Shotgun.craftRecipe.dataMonsData, Shotgun.craftRecipe.DataMonTierRequired, true)?.dataMon;
+                GameManager.instance.shotgun.AmmoAmount += CraftingQuantity;
 
-                    if (dataMon == null)
-                    {
-
-                        return;
-                    }
-
-                    dataMon.dataMonAI.Produce
-                        (AI_Tasks.ProducingShotgun, Shotgun.craftRecipe.ProductionTimeReq,
-                        DataBytesReq, SG_Glitch.transform, Shotgun.PickupItem, Shotgun.craftRecipe.GlitchDamageToCraft);
-
-                }
-                else
-                {
-                    return;
-                }
                 GameManager.instance.Databytes -= DataBytesReq;
 
                 break;
@@ -229,26 +191,8 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.Databytes < DataBytesReq)
                     return;
 
-                if (GameManager.instance.CheckForGlitchesInProximity(out Collider2D AR_Glitch))
-                {
-                    IndividualDataMon.DataMon dataMon =
-                        DataDex.instance.GetProductionDataMonFromTeam(AssaultRifle.craftRecipe.dataMonsData, AssaultRifle.craftRecipe.DataMonTierRequired, true)?.dataMon;
 
-                    if (dataMon == null)
-                    {
-
-                        return;
-                    }
-
-                    dataMon.dataMonAI.Produce
-                        (AI_Tasks.ProducingAssaultRifle, AssaultRifle.craftRecipe.ProductionTimeReq,
-                        DataBytesReq, AR_Glitch.transform, AssaultRifle.PickupItem, AssaultRifle.craftRecipe.GlitchDamageToCraft);
-
-                }
-                else
-                {
-                    return;
-                }
+                GameManager.instance.shotgun.AmmoAmount += CraftingQuantity;
 
                 GameManager.instance.Databytes -= DataBytesReq;
                 break;

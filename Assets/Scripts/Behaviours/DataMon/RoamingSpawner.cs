@@ -64,7 +64,7 @@ public class RoamingSpawner : MonoBehaviour
                
             }
         ClearRoamingDataMons = false;
-        StartCoroutine(SpawnInBatches(3, 10));
+        //StartCoroutine(SpawnInBatches(3, 10));
     }
 
     bool isReferenced;

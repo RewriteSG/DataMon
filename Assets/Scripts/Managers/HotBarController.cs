@@ -69,7 +69,7 @@ public class HotBarController : MonoBehaviour
                 GameManager.instance.player_progress.Melee.ItemInstance.GetComponent<RawImage>());
 
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && GameManager.instance.player_progress.DataBall.isUnlocked)
+        if (Input.GetKeyDown(KeyCode.Alpha5) && GameManager.instance.player_progress.DataBall.isUnlocked)
         {
             EquipItem(ItemHolding.DataBall,GameManager.instance.playerShootScript.Shoot_Databall, 
                 GameManager.instance.player_progress.DataBall.ItemInstance.GetComponent<RawImage>());
@@ -82,19 +82,19 @@ public class HotBarController : MonoBehaviour
                 GameManager.instance.player_progress.Command.ItemInstance.GetComponent<RawImage>());
 
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && GameManager.instance.player_progress.HuntingRifle.isUnlocked)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && GameManager.instance.player_progress.HuntingRifle.isUnlocked)
         {
             EquipItem(ItemHolding.HuntingRifle, GameManager.instance.playerShootScript.Shoot_HuntingRifle,
                 GameManager.instance.player_progress.HuntingRifle.ItemInstance.GetComponent<RawImage>());
 
         }
-        if (Input.GetKeyDown(KeyCode.Alpha5) && GameManager.instance.player_progress.Shotgun.isUnlocked)
+        if (Input.GetKeyDown(KeyCode.Alpha3) && GameManager.instance.player_progress.Shotgun.isUnlocked)
         {
             EquipItem(ItemHolding.Shotgun, GameManager.instance.playerShootScript.Shoot_Shotgun,
                 GameManager.instance.player_progress.Shotgun.ItemInstance.GetComponent<RawImage>());
 
         }
-        if (Input.GetKeyDown(KeyCode.Alpha6) && GameManager.instance.player_progress.AssaultRifle.isUnlocked)
+        if (Input.GetKeyDown(KeyCode.Alpha4) && GameManager.instance.player_progress.AssaultRifle.isUnlocked)
         {
             EquipItem(ItemHolding.AssaultRifle, GameManager.instance.playerShootScript.Shoot_AssaultRifle,
                 GameManager.instance.player_progress.AssaultRifle.ItemInstance.GetComponent<RawImage>());

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
-  Damage: 2.11
+  Damage: 10
   DestroyBulletAfterSecs: 1.5
   datamonLayer:
     serializedVersion: 2
@@ -54,6 +54,7 @@ MonoBehaviour:
   IsDrivenByAnimation: 0
   IsFromPlayer: 1
   ByDataMon: {fileID: 0}
+  isFists: 0
   isHR: 1
 --- !u!70 &1455530645226657306
 CapsuleCollider2D:

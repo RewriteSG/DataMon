@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.UI;
 public class PlayerShoot : MonoBehaviour
 {
+
+    public Image ReloadingImage;
+
     public GameObject gunPoint;
     public GameObject DataBall;
 
@@ -28,9 +31,11 @@ public class PlayerShoot : MonoBehaviour
     public float _FistsDamage;
     public BulletInstance fistsCollision;
 
-
+    float timer, ReloadTime;
+    bool isReloading;
     FistAttack fistsAttack;
     float timeToShootAnother;
+    
     private void Start()
     {
         fistsAttack = Fists.GetComponent<FistAttack>();
@@ -41,6 +46,7 @@ public class PlayerShoot : MonoBehaviour
         shotgun = GameManager.instance.shotgun;
         assaultRifle = GameManager.instance.assaultRifle;
         fistsCollision.gameObject.SetActive(false);
+        isReloading = false;
     }
     void Update()
     {
@@ -67,6 +73,15 @@ public class PlayerShoot : MonoBehaviour
                     Reload(ref huntingRifle);
                     break;
             }
+        }
+        if (isReloading)
+        {
+            ReloadingImage.fillAmount = 1 - timer / ReloadTime;
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            ReloadingImage.fillAmount = 0;
         }
     }
 
@@ -144,25 +159,34 @@ public class PlayerShoot : MonoBehaviour
     }
     void Reload(ref WeaponType CurrentWepAmmo)
     {
-        if (CurrentWepAmmo.CurrentClipAmount == CurrentWepAmmo.ClipAmount || CurrentWepAmmo.AmmoAmount==0)
-            return;
-        if(CurrentWepAmmo.CurrentClipAmount != 0)
+        StartCoroutine(ReloadCoroutine(CurrentWepAmmo));
+    }
+    IEnumerator ReloadCoroutine(WeaponType CurrentWepAmmo)
+    {
+        if (CurrentWepAmmo.CurrentClipAmount == CurrentWepAmmo.ClipAmount || CurrentWepAmmo.AmmoAmount == 0)
+            yield break;
+        isReloading = true;
+        timer = 0;
+        ReloadTime = CurrentWepAmmo.reloadTime;
+        yield return new WaitForSeconds(CurrentWepAmmo.reloadTime);
+        isReloading = false;
+        if (CurrentWepAmmo.CurrentClipAmount != 0)
         {
             int diff = CurrentWepAmmo.ClipAmount - CurrentWepAmmo.CurrentClipAmount;
-            if(diff>= CurrentWepAmmo.AmmoAmount)
+            if (diff >= CurrentWepAmmo.AmmoAmount)
             {
                 CurrentWepAmmo.CurrentClipAmount += CurrentWepAmmo.AmmoAmount;
                 CurrentWepAmmo.AmmoAmount -= CurrentWepAmmo.AmmoAmount;
-                return;
+                yield break;
             }
             CurrentWepAmmo.AmmoAmount -= diff;
             CurrentWepAmmo.CurrentClipAmount = CurrentWepAmmo.ClipAmount;
-            return;
+            yield break;
 
 
         }
 
-        if((CurrentWepAmmo.AmmoAmount - CurrentWepAmmo.ClipAmount) <= 0)
+        if ((CurrentWepAmmo.AmmoAmount - CurrentWepAmmo.ClipAmount) <= 0)
         {
             CurrentWepAmmo.CurrentClipAmount = CurrentWepAmmo.AmmoAmount;
         }
@@ -257,6 +281,7 @@ public class WeaponType
     public GameObject Model;
     public int AmmoAmount;
     public int ClipAmount = 2;
+    public float reloadTime;
     public int CurrentClipAmount = 0;
 }
 

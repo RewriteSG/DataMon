@@ -10,9 +10,11 @@ public class BulletInstance : MonoBehaviour
     float timer;
     public LayerMask datamonLayer;
     public bool IsDrivenByAnimation = false, IsFromPlayer = false;
+    
     [HideInInspector] public GameObject ByDataMon;
     //Animation thisanimator;
     //public AnimationClip animationAttack;
+    public bool isFists;
     bool HRB_Hits;
     public bool isHR;
     // Start is called before the first frame update
@@ -20,6 +22,7 @@ public class BulletInstance : MonoBehaviour
     {
         //SetName();
         GameManager.instance.Entity_Updates += ToUpdate;
+        if (!isFists)
         gameObject.tag = "Bullet";
         //if (IsDrivenByAnimation)
         //    thisanimator = GetComponent<Animation>();
@@ -35,7 +38,7 @@ public class BulletInstance : MonoBehaviour
             datamonLayer);
         if (hit.collider == null)
             return;
-            print("uhh WIRAEGDIUDSG "+hit.collider.gameObject.transform.position+"  " + (hit.collider != null));
+            //print("uhh WIRAEGDIUDSG "+hit.collider.gameObject.transform.position+"  " + (hit.collider != null));
         if (hit.collider.gameObject.CompareTag("DataMon"))
         {
             transform.position = hit.point;
@@ -89,6 +92,15 @@ public class BulletInstance : MonoBehaviour
         }
         
         
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Glitch"))
+        {
+            GlitchObject glitch = collision.GetComponent<GlitchObject>();
+            glitch.ShakeGlitch();
+            glitch.DamageGlitch(Damage);
+        }
     }
     public void SetDamageAndSpeed(float Dmg, float Spd)
     {

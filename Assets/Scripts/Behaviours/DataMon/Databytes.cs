@@ -9,7 +9,7 @@ public class Databytes : MonoBehaviour
     public bool isItemPickup;
     [SerializeField]Transform DataByteSprite;
     [SerializeField] float radius, damp;
-    Vector2 randomPos, smoothVelocity = Vector2.zero;
+    public Vector2 randomPos, smoothVelocity = Vector2.zero;
     Vector3 randomRotation;
 
     // Start is called before the first frame update
@@ -19,7 +19,7 @@ public class Databytes : MonoBehaviour
         if (isItemPickup)
         {
             randomPos = Random.insideUnitCircle * Random.Range(0, radius);
-            randomPos += (Vector2)transform.position;
+            //randomPos += (Vector2)transform.position;
             randomRotation = new Vector3(0, 0, Random.Range(0, 361));
             DataByteSprite.transform.rotation = Quaternion.identity;
             return;
@@ -31,8 +31,8 @@ public class Databytes : MonoBehaviour
     {
         if (!isItemPickup)
             return;
-        DataByteSprite.transform.position = Vector2.SmoothDamp(DataByteSprite.transform.position, randomPos, ref smoothVelocity, damp);
-        DataByteSprite.transform.rotation = Quaternion.RotateTowards(DataByteSprite.rotation, Quaternion.Euler(randomRotation), 25);
+        DataByteSprite.transform.localPosition = Vector2.SmoothDamp(DataByteSprite.transform.localPosition, randomPos, ref smoothVelocity, damp);
+        DataByteSprite.transform.localRotation = Quaternion.RotateTowards(DataByteSprite.localRotation, Quaternion.Euler(randomRotation), 25);
 
     }
     //toRotate = Quaternion.LookRotation(transform.forward, -Dir);
