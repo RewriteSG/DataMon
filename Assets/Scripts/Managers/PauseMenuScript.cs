@@ -26,7 +26,23 @@ public class PauseMenuScript : MonoBehaviour
             
         }
     }
+    public void Continue()
+    {
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
+        }
 
+        if (pauseMenu.activeSelf)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+
+    }
     public void PauseMenu()
     {
         if (pauseMenu != null)

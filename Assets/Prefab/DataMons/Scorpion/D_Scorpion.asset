@@ -27,7 +27,7 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 90
     MonBehaviourState: 2
   - DataMonName: Skorpi
     DataMonPrefab: {fileID: 4409438238243139303, guid: 195181ee3ba02e04e9d4f5d52801b819,
@@ -39,7 +39,7 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 90
     MonBehaviourState: 2
   - DataMonName: Skorpike
     DataMonPrefab: {fileID: 8101047146202943333, guid: 8b20c01d96ab0db418f5395247f26e4e,

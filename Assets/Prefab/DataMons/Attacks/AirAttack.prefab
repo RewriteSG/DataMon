@@ -94,9 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ea2ec1f72de6945be0758aeffc909a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DmgBasedOfStat: 0.1
+  DmgBasedOfStat: 1.3
   Damage: 0
   AttackRange: 6
+  StartAttackDelay: 1
   EndAttackAt: 3
   AttacksByEntity: {fileID: 0}
   SpritePNG: {fileID: 0}
@@ -107,6 +108,8 @@ MonoBehaviour:
   isSpinningProjectile: 0
   isCollisionEffect: 0
   onEndAtSeconds: 1
+  isScaledUp: 0
+  isDelayBeforeAttack: 0
   Speed: 2.75
   RotationSpeed: 0
   MaxDistance: 0

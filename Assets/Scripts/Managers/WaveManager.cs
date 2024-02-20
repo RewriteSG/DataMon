@@ -95,7 +95,7 @@ public class Wave
 public class EnemiesInWave
 {
     public string name;
-    [HideInInspector] public DataMonsData _DataMonsData;
+    public DataMonsData _DataMonsData;
     [HideInInspector] public DataMonIndividualData DataMon = new DataMonIndividualData();
     [HideInInspector]public int DataMonsDataIndex = 0;
     public int Count;

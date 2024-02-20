@@ -55,6 +55,8 @@ public class DataMonAI : MonoBehaviour
     // Update is called once per frame
     void ToUpdate()
     {
+        if(!gameObject.activeSelf)
+            return;
         if (reachedEndOfPath && !Target.isNull())
         {
             DataMonDoThings();
@@ -97,6 +99,7 @@ public class DataMonAI : MonoBehaviour
                     if (timerToChangeTarget > 30)
                     {
                         timerToChangeTarget = 0;
+                        GameManager.instance.HostileDataMonsGOs= GameManager.instance.HostileDataMonsGOs.RemoveNullReferencesInList();
                         ChangeAttackTargetEnemy(GameManager.instance.HostileDataMonsGOs[Random.Range(0, GameManager.instance.HostileDataMonsGOs.Count)]);
 
                     }
@@ -131,8 +134,8 @@ public class DataMonAI : MonoBehaviour
             case AI_State.Support:
                 break;
         }
-
     }
+
     public void ChangeAggroTarget()
     {
         Target = aggroSystem.ListOfTargets.FindHighestDamageDealer().transform;
@@ -140,12 +143,13 @@ public class DataMonAI : MonoBehaviour
         {
             DataMon.SetDataMonHostile();
             AI_state = AI_State.Attack;
-            GameManager.instance.HostileDataMonsGOs.Add(gameObject);
         }
     }
     public void ChangeAttackTargetEnemy(GameObject enemy)
     {
         Target = enemy.transform;
+        if (AI_state != AI_State.Attack && DataMon.isWaveEnemy)
+            AI_state = AI_State.Attack;
     }
     public void CreateNewPatrolAnchor()
     {
@@ -212,7 +216,10 @@ public class DataMonAI : MonoBehaviour
 
         //Vector3.Distance(transform.position, Target.position) > DataMon.dataMon.AttackRange
         if (Target == null)
+        {
+            AI_state = AI_State.Patrol;
             return;
+        }
         if (AI_state != AI_State.Produce)
             allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, DataMon.CurrentAttributes.CurrentAttackRange);
         else
@@ -321,14 +328,18 @@ public class DataMonAI : MonoBehaviour
     Vector2 Force;
     float distance;
     Quaternion toRotate;
+    Quaternion newRotation;
     private void MoveAI()
     {
-        if (AI_state == AI_State.Produce || AI_state == AI_State.Attack)
+        
+
+
+        if ((AI_state == AI_State.Produce || AI_state == AI_State.Attack && !doingSomething) && Target !=null)
         {
             Dir = (transform.position - Target.position).normalized;
             toRotate = Quaternion.LookRotation(transform.forward, -Dir);
-            print("why u not looking at object");
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, (GameManager.instance.DataMonsRotationSpeed * 3) * Time.fixedDeltaTime);
+            newRotation = Quaternion.RotateTowards(transform.rotation, toRotate, GameManager.instance.DataMonsTargetingRotationSpeed * Time.fixedDeltaTime);
+            transform.rotation = newRotation;
         }
         if (path == null)
         {
@@ -345,7 +356,7 @@ public class DataMonAI : MonoBehaviour
         }
         if (doingSomething && (AI_state == AI_State.Attack || AI_state == AI_State.Produce))
         {
-            print("Still Attacking");
+
             reachedEndOfPath = true;
             return;
         }
@@ -406,17 +417,19 @@ public class DataMonAI : MonoBehaviour
             case AI_State.Attack:
                 if (DataMon == null)
                     return;
-                print("HUh");
                 if (DataMon.attackObjects.Count == 0)
                     return;
 
-                print("HUh");
-                if (!doingSomething && Vector2.Distance(Target.position,transform.position) < DataMon.attackObjects[DataMon.currentAttackIndex].attackObject.AttackRange &&
-                    DataMon.attackObjects[DataMon.currentAttackIndex].isAvailable)
+                Dir = (transform.position - Target.position).normalized;
+                toRotate = Quaternion.LookRotation(transform.forward, -Dir);
+                //newRotation = Quaternion.RotateTowards(transform.rotation, toRotate, GameManager.instance.DataMonsTargetingRotationSpeed * Time.fixedDeltaTime);
+                if (!doingSomething && Vector2.Distance(Target.position, transform.position) < DataMon.attackObjects[DataMon.currentAttackIndex].attackObject.AttackRange * NextWaypointDist &&
+                    DataMon.attackObjects[DataMon.currentAttackIndex].isAvailable && Quaternion.Angle(transform.rotation, toRotate) < 20)
                 {
                     doingSomething = true;
                     currentAttackingTime = 0;
                     DataMon.StartAttack(Target);
+                    print("Still Attacking");
                 }
                 if (!doingSomething)
                     return;

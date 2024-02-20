@@ -7,13 +7,14 @@ public class AttackObjects : MonoBehaviour
     public float DmgBasedOfStat = 0.1f;
     public float Damage;
     public float AttackRange;
+    public float StartAttackDelay = 1;
     public float EndAttackAt = 3;
     public IndividualDataMon.DataMon AttacksByEntity;
     public SpriteRenderer SpritePNG;
     public ParticleSystem UnityParticleSystem;
     public delegate void UpdateAttackObject();
     public UpdateAttackObject updateAttack;
-    public bool isMoving, isDashAttack, isSpinningSprite, isSpinningProjectile, isCollisionEffect, onEndAtSeconds, isScaledUp;
+    public bool isMoving, isDashAttack, isSpinningSprite, isSpinningProjectile, isCollisionEffect, onEndAtSeconds, isScaledUp, isDelayBeforeAttack;
     public float Speed, RotationSpeed, MaxDistance, DashDamp;
     Vector2 StartDestination,EndDestination;
     Vector3 smoothVelocity = Vector3.zero;
@@ -27,14 +28,16 @@ public class AttackObjects : MonoBehaviour
         if (isMoving)
             updateAttack += MoveBySpeed;
         else
-        if (isDashAttack)
+        if (isDashAttack )
         {
             updateAttack = DashAttack;
             EndDestination = (transform.up * MaxDistance) + transform.position;
             tLerp = 0;
         }
-        if (isSpinningSprite)
+
+        if (isSpinningSprite && !isDelayBeforeAttack)
             updateAttack += SpinByRotatingSpeed;
+        
         if (isCollisionEffect)
         {
             updateAttack += CollisionEffectPlay;
@@ -66,8 +69,16 @@ public class AttackObjects : MonoBehaviour
         {
             Damage = DmgBasedOfStat * AttacksByEntity.CurrentAttributes.CurrentAttack;
         }
-        if (isMoving || isDashAttack || isScaledUp)
+        if ((isMoving || isDashAttack || isScaledUp) && !isDelayBeforeAttack)
             updateAttack();
+        else if((isMoving || isDashAttack || isScaledUp) && isDelayBeforeAttack && timer < StartAttackDelay)
+        {
+            timer += Time.deltaTime;
+        }
+        else if((isMoving || isDashAttack || isScaledUp) && isDelayBeforeAttack)
+        {
+            updateAttack();
+        }
         if (timer >= EndAttackAt && onEndAtSeconds)
         {
             AttackFinished();

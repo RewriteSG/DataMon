@@ -53,7 +53,7 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         timer += Time.deltaTime;
         if (dataMonHolder == null)
             return;
-        if (timer>= (inDataBank ? 1 : 3))
+        if (timer>= (inDataBank ? 3 : 1))
         {
             timer = 0;
             dataMonHolder.dataMonCurrentAttributes.CurrentHealth += GameManager.instance.DataMonInDataDexHPRegen;

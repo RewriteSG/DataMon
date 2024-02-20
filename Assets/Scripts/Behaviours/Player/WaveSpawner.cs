@@ -49,8 +49,8 @@ public class WaveSpawner : MonoBehaviour
         }
 
         waveCountdown = timeBetweenWaves;
-        ChangeDifficulty(Wave.WaveDifficulty.Easy);
         enemyCount = 0;
+        ChangeDifficulty(Wave.WaveDifficulty.Easy);
     }
     public void ChangeDifficulty(Wave.WaveDifficulty toDifficulty)
     {
@@ -70,7 +70,7 @@ public class WaveSpawner : MonoBehaviour
             }
             else
             {
-                waveIncomingText.text = "Wave Incoming: " + waveCountdown.ToString("0.#s");
+                waveIncomingText.text = waves[NextWave].name;
 
                 return;
             }
@@ -80,7 +80,7 @@ public class WaveSpawner : MonoBehaviour
             if (state != SpawnState.Spawning)
             {
                 //start spawning wave
-                //StartCoroutine(SpawnWave(waves[NextWave]));
+                StartCoroutine(SpawnWave(waves[NextWave]));
             }
         }
         else
@@ -93,6 +93,8 @@ public class WaveSpawner : MonoBehaviour
     void WaveCompleted()
     {
         Debug.Log("Wave Completed!");
+
+        RoamingSpawner.ClearRoamingDataMons = false;
 
         state = SpawnState.Counting;
 
@@ -115,9 +117,9 @@ public class WaveSpawner : MonoBehaviour
                 waveCountdown = timeBetweenWaves * 2.7f;
                 break;
         }
-        //waveCountdown = timeBetweenWaves;
+        waveCountdown = timeBetweenWaves;
 
-        if(NextWave +1 == WavesBeforeIncreaseDifficulty)
+        if (NextWave +1 == WavesBeforeIncreaseDifficulty)
         {
             WavesBeforeIncreaseDifficulty *= 2;
             currentDifficulty +=  1;
@@ -144,7 +146,7 @@ public class WaveSpawner : MonoBehaviour
         {
             searchCountDown = 1f;
 
-            if (GameObject.FindGameObjectWithTag("enemy") == null)
+            if (enemyCount <= 0)
             {
                 return false;
             }
@@ -156,11 +158,15 @@ public class WaveSpawner : MonoBehaviour
     {
         Debug.Log("Spawning wave: " + _wave.name);
 
+
+
         state = SpawnState.Spawning;
+
+        RoamingSpawner.ClearRoamingDataMons = true;
 
         for (int x = 0; x < _wave._EnemiesInWave.Count; x++)
         {
-            for (int i = 0; x < _wave._EnemiesInWave[x].Count; i++)
+            for (int i = 0; i < _wave._EnemiesInWave[x].Count; i++)
             {
                 SpawnEnemy(_wave._EnemiesInWave[x].DataMon.DataMonPrefab);
                 enemyCount++;
@@ -181,20 +187,26 @@ public class WaveSpawner : MonoBehaviour
 
         Transform _sp = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
         
-        StartCoroutine(SetEnemyAngry(Instantiate(_enemy, _sp.position, _sp.rotation)));
+        StartCoroutine(SetEnemyAngry(Instantiate(_enemy, (Vector2)_sp.position, _sp.rotation)));
     }
     IndividualDataMon.DataMon dataMon;
     IEnumerator SetEnemyAngry(GameObject enemy)
     {
+
         enemy.AddComponent<WaveEnemyScript>();
 
         dataMon = enemy.GetComponent<IndividualDataMon.DataMon>();
+
+        dataMon.SetAttributes(new DataMonInstancedAttributes(dataMon.dataMon.BaseAttributes));
+
+        dataMon.isWaveEnemy = true;
+
+        yield return new WaitForEndOfFrame();
 
         dataMon.SetDataMonHostile();
 
         dataMon.dataMonAI.ChangeAttackTargetEnemy(GameManager.instance.Player.gameObject);
 
-        yield return new WaitForEndOfFrame();
 
     }
 }

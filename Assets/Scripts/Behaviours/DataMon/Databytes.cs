@@ -6,15 +6,40 @@ public class Databytes : MonoBehaviour
 {
     IndividualDataMon.DataMon dataMon;
     [HideInInspector] public bool isQuitting;
+    public bool isItemPickup;
+    [SerializeField]Transform DataByteSprite;
+    [SerializeField] float radius, damp;
+    Vector2 randomPos, smoothVelocity = Vector2.zero;
+    Vector3 randomRotation;
 
     // Start is called before the first frame update
     void Start()
     {
+        isQuitting = false;
+        if (isItemPickup)
+        {
+            randomPos = Random.insideUnitCircle * Random.Range(0, radius);
+            randomPos += (Vector2)transform.position;
+            randomRotation = new Vector3(0, 0, Random.Range(0, 361));
+            DataByteSprite.transform.rotation = Quaternion.identity;
+            return;
+        }
         dataMon = GetComponent<IndividualDataMon.DataMon>();
         dataMon._databytes = this;
-        isQuitting = false;
     }
+    private void Update()
+    {
+        if (!isItemPickup)
+            return;
+        DataByteSprite.transform.position = Vector2.SmoothDamp(DataByteSprite.transform.position, randomPos, ref smoothVelocity, damp);
+        DataByteSprite.transform.rotation = Quaternion.RotateTowards(DataByteSprite.rotation, Quaternion.Euler(randomRotation), 25);
 
+    }
+    //toRotate = Quaternion.LookRotation(transform.forward, -Dir);
+                //newRotation = Quaternion.RotateTowards(transform.rotation, toRotate, GameManager.instance.DataMonsTargetingRotationSpeed * Time.fixedDeltaTime);
+    //offset = Vector3.forward* transform.position.z;
+    //targetPos = toFollow.position + offset;
+    //    newCamPos = Vector3.SmoothDamp(transform.position, targetPos, ref smoothVelocity, Damp);
     //    // Update is called once per frame
     //    void Update()
     //    {
@@ -25,6 +50,10 @@ public class Databytes : MonoBehaviour
 
     //        }
     //    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, radius);
+    }
     private void OnApplicationQuit()
     {
         isQuitting = true;
@@ -38,7 +67,7 @@ public class Databytes : MonoBehaviour
             Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);
         chanced = Random.Range(0, 100);
         
-        if (!dataMon.isBeingCaptured && dataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && chanced>= GameManager.instance.ChanceForDoubleDrop)
+        if (!dataMon.isBeingCaptured && dataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && chanced <= GameManager.instance.ChanceForDoubleDrop)
         {
 
             Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);

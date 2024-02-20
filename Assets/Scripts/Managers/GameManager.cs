@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public int NumberOfDataMonsInTeam = 1;
     [Header("====================")]
 
+    public float DataMonsTargetingRotationSpeed = 40;
     public float DataMonsRotationSpeed;
     public float DataMonInDataDexHPRegen = 2;
     public int MaxNumberOfWildDataMons = 15;

@@ -28,7 +28,7 @@ MonoBehaviour:
       BaseMoveSpeed: 180
       BaseAttackRange: 0
       BaseCaptureChance: 60
-    MonBehaviourState: 0
+    MonBehaviourState: 2
   - DataMonName: Foliox
     DataMonPrefab: {fileID: 8199447733351373943, guid: 918a46757712ba345bf7956e63309945,
       type: 3}
@@ -40,7 +40,7 @@ MonoBehaviour:
       BaseMoveSpeed: 180
       BaseAttackRange: 0
       BaseCaptureChance: 50
-    MonBehaviourState: 0
+    MonBehaviourState: 2
   - DataMonName: Thornox
     DataMonPrefab: {fileID: 7069348724174970135, guid: af33d81fb76d7174d8c6831b12f1ba68,
       type: 3}
@@ -52,5 +52,5 @@ MonoBehaviour:
       BaseMoveSpeed: 180
       BaseAttackRange: 0
       BaseCaptureChance: 45
-    MonBehaviourState: 0
+    MonBehaviourState: 2
   MonRole: 0

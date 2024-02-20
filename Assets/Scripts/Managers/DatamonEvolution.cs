@@ -13,8 +13,11 @@ public class DatamonEvolution : MonoBehaviour
     public DataMonHolder EvolutionResult;
     int EvolutionCost, toEvolveEvolutionTier, EvolutionResultEvolutionTier;
 
+
     public DataMonStatsTexts HoveringTexts = new DataMonStatsTexts(), ToEvolveText = new DataMonStatsTexts(), EvolutionResultText = new DataMonStatsTexts();
     
+
+
     private void Start()
     {
         //GameManager.instance.ent
@@ -45,7 +48,6 @@ public class DatamonEvolution : MonoBehaviour
                 EvolutionResultText.SetTexts(EvolutionResult.dataMon.BaseAttributes.BaseHealth,
                     EvolutionResult.dataMon.BaseAttributes.BaseAttack, EvolutionResult.dataMonData.MonRole.ToString(),
                     EvolutionResultEvolutionTier, EvolutionResult.dataMon.DataMonName);
-
 #if UNITY_EDITOR
             }
 #endif
@@ -92,7 +94,10 @@ public class DatamonEvolution : MonoBehaviour
             DataMonToEvolve = dataMonHolder;
             EvolutionResult = new DataMonHolder();
             EvolutionResult.dataMonData = dataMonHolder.dataMonData;
+
+            EvolutionResult.dataMonBaseAttributes = dataMonHolder.dataMonBaseAttributes;
             EvolutionResult.dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMonHolder.dataMonData.DataMons[index+1].BaseAttributes);
+            EvolutionResult.dataMonAttacks = Attack.InstanceAttack(dataMonHolder.dataMonAttacks);
             EvolutionResult.dataMon = DataMonIndividualData.CloneDataMonClass(dataMonHolder.dataMonData.DataMons[index+1]);
             EvolutionCost = dataMonHolder.dataMonData.EvolutionCosts[index];
         }

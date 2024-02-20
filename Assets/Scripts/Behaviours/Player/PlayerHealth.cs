@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int MaxHealth = 100;
-    public int currentHealth;
+    public float MaxHealth = 100;
+    public float currentHealth;
     public HealthBarScript healthBar;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
             TakeDamage(5);
         }
     }
-    void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);

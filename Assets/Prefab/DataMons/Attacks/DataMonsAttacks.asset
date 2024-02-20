@@ -22,7 +22,7 @@ MonoBehaviour:
     AttackCooldown: 4
     AttackName: Air Fissure
     AttackDescription: 
-    AttackDelayDataMonAfterFiring: 1
+    AttackDelayDataMonAfterFiring: 3
   - AttackPrefab: {fileID: 1368036933946875657, guid: 9411105d4b3101b49931689553bfc8b6,
       type: 3}
     _gameObject: {fileID: 0}
@@ -32,7 +32,7 @@ MonoBehaviour:
     AttackCooldown: 4
     AttackName: Ice Shard
     AttackDescription: 
-    AttackDelayDataMonAfterFiring: 1
+    AttackDelayDataMonAfterFiring: 3
   - AttackPrefab: {fileID: 9057499543999570315, guid: 8356f471cd94d154a93c928426213a9c,
       type: 3}
     _gameObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
     AttackCooldown: 4
     AttackName: Charge Attack
     AttackDescription: 
-    AttackDelayDataMonAfterFiring: 1
+    AttackDelayDataMonAfterFiring: 3
   - AttackPrefab: {fileID: 3079290086745366368, guid: ce9569e787bcf5c43b21dcb607d981fd,
       type: 3}
     _gameObject: {fileID: 0}
@@ -52,4 +52,4 @@ MonoBehaviour:
     AttackCooldown: 4
     AttackName: SpinReen
     AttackDescription: 
-    AttackDelayDataMonAfterFiring: 1
+    AttackDelayDataMonAfterFiring: 3

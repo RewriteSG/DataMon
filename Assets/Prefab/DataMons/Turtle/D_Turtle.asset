@@ -28,7 +28,7 @@ MonoBehaviour:
       BaseMoveSpeed: 170
       BaseAttackRange: 0
       BaseCaptureChance: 0
-    MonBehaviourState: 0
+    MonBehaviourState: 2
   - DataMonName: Turtyst
     DataMonPrefab: {fileID: 726187970350386918, guid: a131661482287b64d9e8d8cfae3dadb0,
       type: 3}
@@ -40,7 +40,7 @@ MonoBehaviour:
       BaseMoveSpeed: 170
       BaseAttackRange: 0
       BaseCaptureChance: 0
-    MonBehaviourState: 0
+    MonBehaviourState: 2
   - DataMonName: Crysturt
     DataMonPrefab: {fileID: 6312990260497089612, guid: 27de0d69d8bbd4d40bbc9874d030fc9f,
       type: 3}
@@ -52,5 +52,5 @@ MonoBehaviour:
       BaseMoveSpeed: 170
       BaseAttackRange: 0
       BaseCaptureChance: 0
-    MonBehaviourState: 0
+    MonBehaviourState: 2
   MonRole: 0

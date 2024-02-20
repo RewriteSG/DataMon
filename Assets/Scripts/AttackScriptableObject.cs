@@ -61,8 +61,31 @@ public class Attack
         Attack temp = new Attack();
         temp.AttackPrefab = attack.AttackPrefab;
         temp.AttackName = attack.AttackName;
+        temp.AttackCooldown = attack.AttackCooldown;
         temp.AttackDescription = attack.AttackDescription;
         temp.AttackDelayDataMonAfterFiring = attack.AttackDelayDataMonAfterFiring;
         return temp;
+    }
+    public static Attack[] InstanceAttack(Attack[] attack)
+    {
+        Attack temp;
+        List<Attack> list = new List<Attack>();
+        for (int i = 0; i < attack.Length; i++)
+        {
+            temp = InstanceAttack(attack[i]);
+            list.Add(temp);
+        }
+        return list.ToArray();
+    }
+    public static bool ListHasAttack(List<Attack> attacks, Attack attack)
+    {
+        for (int i = 0; i < attacks.Count; i++)
+        {
+            if(attacks[i].AttackName == attack.AttackName)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -145,21 +145,25 @@ public class DataDex : MonoBehaviour
     }
     public void EvolveDataMon(DataMonHolder EvolvedDataMon)
     {
+        bool isOnTeam = DataMonOnTeamIsSelectedForEvolve != null;
 
-        if (DataMonOnTeamIsSelectedForEvolve == null)
-            return;
+        if (DataMonOnTeamIsSelectedForEvolve != null)
+        {
+            indexOfDataMon = DataTeam.IndexOf(DataMonOnTeamIsSelectedForEvolve.dataMonHolder);
+            DataTeam = DataTeam.RemoveAt(indexOfDataMon);
+            DataTeamPanels.RemoveAt(indexOfDataMon);
+            RemoveFromDataDex(DataMonOnTeamIsSelectedForEvolve);
+            DataMonOnTeamIsSelectedForEvolve = null;
+            AddTeamDataMonPanel();
 
-
-        indexOfDataMon = DataTeam.IndexOf(DataMonOnTeamIsSelectedForEvolve.dataMonHolder);
-        DataTeam = DataTeam.RemoveAt(indexOfDataMon);
-        DataTeamPanels.RemoveAt(indexOfDataMon);
-        RemoveFromDataDex(DataMonOnTeamIsSelectedForEvolve);
-        DataMonOnTeamIsSelectedForEvolve = null;
-        AddTeamDataMonPanel();
+        }
 
         AddToDataDex(EvolvedDataMon);
 
+        if(isOnTeam)
         DataDexAddToTeam(dataMonBtn);
+
+
         
     }
     bool rearrangingContent = false;

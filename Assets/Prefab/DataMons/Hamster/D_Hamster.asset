@@ -28,7 +28,7 @@ MonoBehaviour:
       BaseMoveSpeed: 200
       BaseAttackRange: 0
       BaseCaptureChance: 0
-    MonBehaviourState: 1
+    MonBehaviourState: 2
   - DataMonName: Hammunition
     DataMonPrefab: {fileID: 9198753192753908654, guid: c885cd06861c7264da196284f03df7db,
       type: 3}
@@ -40,5 +40,5 @@ MonoBehaviour:
       BaseMoveSpeed: 200
       BaseAttackRange: 0
       BaseCaptureChance: 0
-    MonBehaviourState: 1
+    MonBehaviourState: 2
   MonRole: 0

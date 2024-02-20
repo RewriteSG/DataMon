@@ -45,6 +45,8 @@ public class DataBallController : MonoBehaviour
             CaptureTarget.toDataDex = new DataMonHolder(dataMon);
             DataMonCaptureChance = CaptureTarget.toDataDex.dataMonCurrentAttributes.CurrentCaptureChance;
 
+            DataMonCaptureChance += 25 - 25 * (CaptureTarget.toDataDex.dataMonCurrentAttributes.CurrentHealth / CaptureTarget.toDataDex.dataMonBaseAttributes.BaseHealth);
+
             StartCoroutine(CapturingDataMon(GameManager.instance.CaptureDelay));
             capturingGameObj = collision.transform.parent.gameObject;
             capturingGameObj.SetActive(false);
@@ -94,11 +96,18 @@ public class DataBallController : MonoBehaviour
         dataMon.DestroyDataMon();
 
         ReturnFromCoroutine:
+        if(CaptureProgress < 100)
+        {
+            capturingGameObj.SetActive(true);
+
+        }
+
+
+
         CaptureTarget = null;
         capturingGameObj = null;
 
-        if(CaptureProgress < 100)
-        capturingGameObj.SetActive(true);
+
 
         Destroy(gameObject);
     }

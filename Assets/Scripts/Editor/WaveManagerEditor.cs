@@ -61,10 +61,11 @@ public class WaveManagerEditor : Editor
 
         wm.serializeEnemiesInWave = wm.Waves[SelectedWaveIndex]._EnemiesInWave[SelectedWaveEnemyIndex];
         EditorGUILayout.PropertyField(_EnemiesInWave);
+        serializedObject.ApplyModifiedProperties();
 
         //wm.serializeDataMonData = wm.Waves[SelectedWaveIndex]._EnemiesInWave[SelectedWaveEnemyIndex]._DataMonsData;
-        //EditorGUILayout.PropertyField(_DataMonData, false);
-        serializedObject.ApplyModifiedProperties();
+        //EditorGUILayout.PropertyField(_DataMonData);
+
 
         if (wm.Waves[SelectedWaveIndex]._EnemiesInWave[SelectedWaveEnemyIndex]._DataMonsData == null)
             goto Skip;
@@ -79,7 +80,9 @@ public class WaveManagerEditor : Editor
             _DataMonsData.DataMons[wm.Waves[SelectedWaveIndex]._EnemiesInWave[SelectedWaveEnemyIndex].DataMonsDataIndex].DataMonName)
             Undo.RecordObject(wm, "WHY");
         wm.Waves[SelectedWaveIndex]._EnemiesInWave[SelectedWaveEnemyIndex].
-            SetEnemy(wm.Waves[SelectedWaveIndex]._EnemiesInWave[SelectedWaveEnemyIndex]._DataMonsData.DataMons[SelectedDataMonIndex]);
+            SetEnemy(wm.Waves[SelectedWaveIndex]._EnemiesInWave[SelectedWaveEnemyIndex].
+            _DataMonsData.DataMons[wm.Waves[SelectedWaveIndex]._EnemiesInWave[SelectedWaveEnemyIndex].DataMonsDataIndex]);
+
         wm.Waves[SelectedWaveIndex]._EnemiesInWave[SelectedWaveEnemyIndex].name = wm.Waves[SelectedWaveIndex]._EnemiesInWave[SelectedWaveEnemyIndex].DataMon.DataMonName;
 
 

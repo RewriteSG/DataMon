@@ -82,9 +82,16 @@ namespace IndividualDataMon
             for (int i = AbilityCount; i < 3; i++)
             {
                 attackInstance = dataMonData.AttacksObjects.RandomizeAttack();
+                if(Attack.ListHasAttack(attackObjects,attackInstance))
+                {
+                    i--;
+                    continue;
+                }
                 attackInstance.CreateInstance(DataMonAttacksParentObj.transform, this);
                 attackObjects.Add(attackInstance);
 
+                //print(" Model size" + Model.transform.lossyScale.x + " Divided by math " + (Model.transform.lossyScale.x / 0.7054937403162723f));
+                attackInstance.attackObject.transform.localScale = Vector3.one * (Model.transform.lossyScale.x / 0.7054937403162723f);
                 GameManager.instance.Entity_Updates += attackInstance.AttackCooldownUpdate;
             }
         }
@@ -104,8 +111,8 @@ namespace IndividualDataMon
                 attackInstance = Attack.InstanceAttack(ToAttacks[i]);
                 attackInstance.CreateInstance(DataMonAttacksParentObj.transform, this);
                 attackObjects.Add(attackInstance);
-
-                attackInstance.attackObject.transform.localScale = Vector3.one * (Model.transform.lossyScale.x / 0.7054937403162723f);
+                if (attackInstance.attackObject.isDashAttack)
+                    attackInstance.attackObject.transform.localScale = Vector3.one * (Model.transform.lossyScale.x / 0.7054937403162723f);
 
 
                 GameManager.instance.Entity_Updates += attackInstance.AttackCooldownUpdate;
@@ -139,6 +146,7 @@ namespace IndividualDataMon
             Quaternion toRotate = Quaternion.LookRotation(transform.forward, -Dir);
             attackObjects[currentAttackIndex]._gameObject.transform.rotation = toRotate;
             attackObjects[currentAttackIndex]._gameObject.SetActive(true);
+            attackObjects[currentAttackIndex]._gameObject.tag = dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion ? "AllyAttack" : "EnemyAttack";
             attackObjects[currentAttackIndex].CurrentCD = 0;
             currentAttackIndex++;
             if (currentAttackIndex >= attackObjects.Count)
@@ -178,11 +186,19 @@ namespace IndividualDataMon
             {
                 GetComponent<Databytes>().DataMonIsDestroyed();
                 Destroy(gameObject);
+                if (isBoss)
+                {
+                    SceneChanger.ChangeScene("WinScene");
+                }
             }
             if (CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && !isWaveEnemy)
 
             {
                 GetComponent<Databytes>().DataMonIsDestroyed();
+                DestroyDataMon();
+            }
+            if(dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral && RoamingSpawner.ClearRoamingDataMons)
+            {
                 DestroyDataMon();
             }
             if (CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
@@ -334,6 +350,8 @@ namespace IndividualDataMon
                 GameManager.HostileDataMons++;
             dataMon.MonBehaviourState = DataMonBehaviourState.isHostile;
             NamePlateText.color = GameManager.instance.HostileColor;
+            GameManager.instance.HostileDataMonsGOs.Add(gameObject);
+
         }
         public void SetDataMonNeutral()
         {
@@ -361,7 +379,10 @@ namespace IndividualDataMon
         public void DestroyDataMon()
         {
             if (isWaveEnemy)
+            {
+                Destroy(gameObject);
                 return;
+            }
             gameObject.SetActive(false);
             ResetAttributes();
             RoamingSpawner.doot_doot--;

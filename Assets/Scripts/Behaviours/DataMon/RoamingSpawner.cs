@@ -63,18 +63,22 @@ public class RoamingSpawner : MonoBehaviour
                 DataMonsPool.Add(Datamons_roamingData[i].dataMon.DataMonName, temp);
                
             }
-        //StartCoroutine(SpawnInBatches(3,10));
+        ClearRoamingDataMons = false;
+        StartCoroutine(SpawnInBatches(3, 10));
     }
 
     bool isReferenced;
     int rejected;
+    public static bool ClearRoamingDataMons = false;
     IEnumerator SpawnInBatches(float delay, int DataMonPerBatch)
     {
         while (isActiveAndEnabled)
         {
            
+
+
             doot_doot = Mathf.Clamp(doot_doot, 0, GameManager.instance.MaxNumberOfWildDataMons + 1);
-            if (doot_doot >= GameManager.instance.MaxNumberOfWildDataMons || SpawnPointsInRenderDist.Count == 0)
+            if ((doot_doot >= GameManager.instance.MaxNumberOfWildDataMons || SpawnPointsInRenderDist.Count == 0) || ClearRoamingDataMons)
             {
                 goto StopSpawning;
             }
@@ -122,6 +126,10 @@ public class RoamingSpawner : MonoBehaviour
             }
             yield return new WaitForSeconds(delay);
             StopSpawning:
+            if (ClearRoamingDataMons)
+            {
+
+            }
             yield return new WaitForSeconds(0.1f);
 
         }

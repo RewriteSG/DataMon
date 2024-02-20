@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5363503788750326331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 34.39, y: 2.88, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,9 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ea2ec1f72de6945be0758aeffc909a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DmgBasedOfStat: 0.1
+  DmgBasedOfStat: 1.3
   Damage: 0
   AttackRange: 0
+  StartAttackDelay: 1
   EndAttackAt: 2
   AttacksByEntity: {fileID: 0}
   SpritePNG: {fileID: 0}
@@ -108,6 +109,7 @@ MonoBehaviour:
   isCollisionEffect: 0
   onEndAtSeconds: 1
   isScaledUp: 1
+  isDelayBeforeAttack: 0
   Speed: 3
   RotationSpeed: 0
   MaxDistance: 0
