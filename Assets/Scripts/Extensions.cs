@@ -2,9 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Extensions
+public static class Extensions
 {
+    public static List<DamagedBy> RemoveNullReferencesFromArray(this List<DamagedBy> array)
+    {
+        List<DamagedBy> temp = new List<DamagedBy>();
 
+        for (int i = 0; i < array.Count; i++)
+        {
+            if (array[i].byGameObject != null)
+                    temp.Add(array[i]);
+        }
+        return temp;
+    }
 }
 public static class TransformExtensions
 {
@@ -23,6 +33,26 @@ public static class GameObjectExtensions
     public static bool isNull<T>(this T obj) where T : Object
     {
         return obj == null;
+    }
+    public static List<GameObject> RemoveNullReferencesInList(this List<GameObject> list)
+    {
+        List<GameObject> temp = new List<GameObject>();
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i] != null)
+            temp.Add(list[i]);
+        }
+        return temp;
+    }
+    public static DataMonHolder[] GetDataMonHoldersFromArray(this List<GameObject> array)
+    {
+        List<DataMonHolder> temp = new List<DataMonHolder>();
+
+        for (int i = 0; i < array.Count; i++)
+        {
+            temp.Add(array[i].GetComponent<DataMonButton>().dataMonHolder);
+        }
+        return temp.ToArray();
     }
 }
 public static class Collider2DExtensions
@@ -60,6 +90,7 @@ public static class Collider2DExtensions
         }
         return false;
     }
+   
 }
 public static class DataMonHolderExtensions
 {
@@ -68,6 +99,20 @@ public static class DataMonHolderExtensions
         if (holder != null)
             return holder.dataMon.DataMonPrefab == null;
         return holder == null;
+    }
+    public static DataMonHolder[] RemoveNullReferencesFromArray(this DataMonHolder[] array)
+    {
+        List<DataMonHolder> temp = new List<DataMonHolder>();
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] != null)
+#if UNITY_EDITOR
+                if (array[i].dataMonData != null)
+#endif
+                    temp.Add(array[i]);
+        }
+        return temp.ToArray();
     }
 }
 public static class ArrayExtensions
@@ -107,6 +152,15 @@ public static class ArrayExtensions
 
         }
         return temp.ToArray();
+    }
+    public static List<T> ToList<T>(this T[] array)
+    {
+        List<T> temp = new List<T>();
+        for (int i = 0; i < array.Length; i++)
+        {
+            temp.Add(array[i]);
+        }
+        return temp;
     }
 }
 public static class DataMonsDataExtensions

@@ -11,16 +11,16 @@ public class DataMonDataEditor : Editor
         base.OnInspectorGUI();
         data = (DataMonsData)target;
         GUILayout.Label("-----Evolution Cost-----------");
-        if(data.EvolutionCosts.Count < data.DataMons.Length - 1)
+        if (data.EvolutionCosts.Count < data.DataMons.Length - 1)
         {
-            for (int i = 0; i < data.DataMons.Length-1; i++)
+            for (int i = 0; i < data.DataMons.Length - 1; i++)
             {
                 data.EvolutionCosts.Add(0);
             }
         }
         if (data.EvolutionCosts.Count > data.DataMons.Length - 1)
         {
-            data.EvolutionCosts.RemoveAt(data.EvolutionCosts.Count-1);
+            data.EvolutionCosts.RemoveAt(data.EvolutionCosts.Count - 1);
         }
         for (int i = 0; i < data.EvolutionCosts.Count; i++)
         {

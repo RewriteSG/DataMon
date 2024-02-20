@@ -32,21 +32,31 @@ public class DatamonEvolution : MonoBehaviour
         }
         if (DataMonToEvolve != null)
         {
-            EvolveButton.interactable = GameManager.instance.Databytes >= EvolutionCost;
+#if UNITY_EDITOR
+            if (DataMonToEvolve.dataMonData != null)
+            {
+#endif
+                EvolveButton.interactable = GameManager.instance.Databytes >= EvolutionCost;
 
-            ToEvolveText.SetTexts(DataMonToEvolve.dataMon.BaseAttributes.BaseHealth,
-                DataMonToEvolve.dataMon.BaseAttributes.BaseAttack, DataMonToEvolve.dataMonData.MonRole.ToString(),
-                toEvolveEvolutionTier, DataMonToEvolve.dataMon.DataMonName);
+                ToEvolveText.SetTexts(DataMonToEvolve.dataMon.BaseAttributes.BaseHealth,
+                    DataMonToEvolve.dataMon.BaseAttributes.BaseAttack, DataMonToEvolve.dataMonData.MonRole.ToString(),
+                    toEvolveEvolutionTier, DataMonToEvolve.dataMon.DataMonName);
 
-            EvolutionResultText.SetTexts(EvolutionResult.dataMon.BaseAttributes.BaseHealth,
-                EvolutionResult.dataMon.BaseAttributes.BaseAttack, EvolutionResult.dataMonData.MonRole.ToString(),
-                EvolutionResultEvolutionTier, EvolutionResult.dataMon.DataMonName);
+                EvolutionResultText.SetTexts(EvolutionResult.dataMon.BaseAttributes.BaseHealth,
+                    EvolutionResult.dataMon.BaseAttributes.BaseAttack, EvolutionResult.dataMonData.MonRole.ToString(),
+                    EvolutionResultEvolutionTier, EvolutionResult.dataMon.DataMonName);
+
+#if UNITY_EDITOR
+            }
+#endif
+
         }
         else if(DataInspector.DataMonHovering !=null)
         {
             SelectDataMonName.SetActive(true);
             HoveringTexts.SetTexts(DataInspector.DataMonHovering.dataMon.DataMonName);
         }
+
         if(DataInspector.DataMonHovering == null)
         {
 
@@ -68,6 +78,10 @@ public class DatamonEvolution : MonoBehaviour
             if (DataMonToEvolve != null)
                 return false;
         }
+
+        if (dataMonHolder.dataMonData == null)
+            return false;
+
         bool toReturn = NextDataMonIsValid(dataMonHolder, out int index);
         if (toReturn)
         {
@@ -100,7 +114,8 @@ public class DatamonEvolution : MonoBehaviour
     }
     public void CancelEvolution()
     {
-        DataDex.instance.AddToDataDex(DataMonToEvolve);
+        if (DataDex.instance.DataMonOnTeamIsSelectedForEvolve == null)
+            DataDex.instance.AddToDataDex(DataMonToEvolve);
         ResetEvolutionPanels();
 
         DataMonToEvolve = null;

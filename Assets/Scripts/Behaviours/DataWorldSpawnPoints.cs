@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataWorldSpawnPoints : MonoBehaviour
 {
-    public float radius = 1, displayRadius = 1, NumberOfTreesSpawnOnStart = 30;
+    public Vector2 CellSize;/*, displayRadius = 1, NumberOfTreesSpawnOnStart = 30*/
     public Vector2 regionSize = Vector2.one;
     public int rejectSamples = 30;
     public int Chunks;
@@ -16,21 +16,12 @@ public class DataWorldSpawnPoints : MonoBehaviour
     //public GameObject[] GeneratedChunks;
     //GameObject TreesParent;
     // Start is called before the first frame update
+    public float radius;
     public static float SpawnPointsRadius;
-    void Awake()
+    void Start()
     {
-        points = PoissonDiscSampling.GeneratePoints(radius, regionSize, rejectSamples);
-        SpawnPointsRadius = radius;
-        RoamingSpawner.MonsInChunk.Clear();
-        GameObject temp;
-        for (int i = 0; i < points.Count; i++)
-        {
-            temp = Instantiate(DataMonSpawnPointPrefab, points[i], Quaternion.identity);
-            temp.transform.SetParent(transform);
-            temp.transform.localScale = transform.InverseTransformVector(Vector2.one * SpawnPointsRadius);
-            RoamingSpawner.MonsInChunk.Add(points[i], new DataMonsInChunk(0));
+        StartCoroutine(CreateSpawnPoints());
 
-        }
         //GeneratedChunks = new GameObject[(int)Mathf.Pow(Chunks, 2)];
         //int index = 0;
         //for (int y = 315; y < 560; y += 70)
@@ -82,6 +73,29 @@ public class DataWorldSpawnPoints : MonoBehaviour
         //}
     }
 
+    IEnumerator CreateSpawnPoints()
+    {
+        yield return new WaitForSeconds(0.1f);
+        points = PoissonDiscSampling.GenerateGrid(regionSize, CellSize);
+        SpawnPointsRadius = radius;
+        RoamingSpawner.MonsInChunk.Clear();
+        GameObject temp;
+        GameManager.instance.RenderDistanceTrigger.SetActive(false);
+        for (int i = 0; i < points.Count; i++)
+        {
+            temp = Instantiate(DataMonSpawnPointPrefab, points[i], Quaternion.identity);
+            temp.transform.localScale = CellSize;
+            temp.transform.SetParent(transform);
+            //temp.transform.localScale = transform.InverseTransformVector(Vector2.one * radius);
+            RoamingSpawner.MonsInChunk.Add(temp.transform.position, new DataMonsInChunk(0));
+
+
+        }
+
+        GameManager.instance.RenderDistanceTrigger.SetActive(true);
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -99,8 +113,9 @@ public class DataWorldSpawnPoints : MonoBehaviour
     //}
     private void OnValidate()
     {
-        points = PoissonDiscSampling.GeneratePoints(radius, regionSize, rejectSamples);
+        points = PoissonDiscSampling.GenerateGrid(regionSize, CellSize);
     }
+
     private void OnDrawGizmos()
     {
         if (points != null)
@@ -108,7 +123,7 @@ public class DataWorldSpawnPoints : MonoBehaviour
             Gizmos.DrawWireCube(regionSize / 2, regionSize);
             foreach (Vector2 point in points)
             {
-                Gizmos.DrawSphere(point, displayRadius);
+                Gizmos.DrawWireCube(point, CellSize);
             }
         }
     }

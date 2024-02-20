@@ -4,6 +4,30 @@ using UnityEngine;
 
 public static class PoissonDiscSampling
 {
+    public static List<Vector2> GenerateGrid(Vector2 sampleRegionSize, Vector2 SizeOfGrid)
+    {
+        List<Vector2> points = new List<Vector2>();
+        //List<Vector2> SpawnPoints = new List<Vector2>();
+        float cellSizeX = SizeOfGrid.x;
+        float cellSizeY = SizeOfGrid.y;
+        //Vector2 newPoint = Vector2.zero;
+        float newPointY, newPointX;
+        int TotalGridSizeX = Mathf.CeilToInt(sampleRegionSize.x / cellSizeX);
+        int TotalGridSizeY = Mathf.CeilToInt(sampleRegionSize.y / cellSizeY);
+
+        for (int i = 0; i < TotalGridSizeY; i++)
+        {
+            newPointY = cellSizeY * i;
+            for (int x = 0; x < TotalGridSizeX; x++)
+            {
+                newPointX = cellSizeX * x;
+
+                points.Add(new Vector2(newPointX, newPointY));
+            }
+        }
+
+        return points;
+    }
     public static List<Vector2> GeneratePoints(float radius, Vector2 sampleRegionSize, int numSamplesBeforeRejection = 30)
     {
         float cellSize = radius / Mathf.Sqrt(2);

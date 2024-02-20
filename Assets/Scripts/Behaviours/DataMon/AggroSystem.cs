@@ -12,8 +12,8 @@ public class AggroSystem : MonoBehaviour
     void Start()
     {
         datamonAI = GetComponent<DataMonAI>();
-        if(datamonAI !=null)
-        datamonAI.aggroSystem = this;
+        if (datamonAI != null)
+            datamonAI.aggroSystem = this;
     }
     public void SetDamageByEntity(GameObject entity, float damage)
     {
@@ -41,6 +41,7 @@ public class AggroList
     private GameObject HighestDamageDealer;
     public GameObject FindHighestDamageDealer()
     {
+        ListOfTargets = ListOfTargets.RemoveNullReferencesFromArray();
         HighDamageCount = -999;
         HighestDamageDealer = null;
         for (int i = 0; i < ListOfTargets.Count; i++)

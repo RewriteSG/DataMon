@@ -10,22 +10,35 @@ namespace IndividualDataMon
     public class DataMon : MonoBehaviour
     {
         public int tier = 0;
+        public GameObject AttackPoint;
         [HideInInspector]public bool isBeingCaptured = false;
         [HideInInspector] public bool isCompanion = false;
         public DataMonsData dataMonData;
-        public GameObject test;
         [HideInInspector] public int selected;
         [HideInInspector] public List<string> DataMonNames = new List<string>();
 
         public DataMonIndividualData dataMon;
         [HideInInspector]public DataMonAI dataMonAI;
         [HideInInspector] public Databytes _databytes;
-        public DataMonInstancedAttributes dataMonCurrentAttributes;
+        public DataMonAttributes baseAttributes;
+        public DataMonInstancedAttributes CurrentAttributes;
         public GameObject NamePlate;
-        public TextMeshProUGUI NamePlateText;
+        public TextMeshProUGUI NamePlateText, TaskText;
         HealthBarScript healthBar;
+
+
+
         public int DataMonAttacksID;
         public GameObject DataMonAttacksParentObj;
+
+        [HideInInspector] public Vector2 SpawnedFromChunk;
+
+        public GameObject Model;
+
+        public List<Attack> attackObjects = new List<Attack>();
+
+        public int currentAttackIndex;
+
         //[SerializeField]private GameObject test;
         private void Awake()
         {
@@ -38,14 +51,99 @@ namespace IndividualDataMon
             {
                 NamePlateText.text = dataMon.DataMonName;
                 healthBar = NamePlate.GetComponentInChildren<HealthBarScript>();
-                healthBar.SetMaxHealth(Mathf.RoundToInt(dataMon.BaseAttributes.BaseHealth));
+                baseAttributes = DataMonAttributes.CopyDataMonAttributes(dataMon.BaseAttributes);
+                healthBar.SetMaxHealth(Mathf.RoundToInt(baseAttributes.BaseHealth));
 
             }
             DataMonAttacksID = GameManager.TotalDataMonIDs++;
-            DataMonAttacksParentObj = new GameObject(DataMonAttacksID.ToString());
-            DataMonAttacksParentObj.transform.SetParent(transform.parent);
+
         }
 
+        private void CreateDataMonsAttacks()
+        {
+            if(DataMonAttacksParentObj !=null)
+            {
+                Destroy(DataMonAttacksParentObj);
+                attackObjects.Clear();
+            }
+            DataMonAttacksParentObj = new GameObject(DataMonAttacksID.ToString());
+            DataMonAttacksParentObj.transform.SetParent(transform.parent);
+            Model = GetComponentInChildren<DataMonCollision>().gameObject;
+
+            int AbilityCount = 0;
+            AbilityCount += dataMonData.InherentPassives.Length;
+            AbilityCount += dataMonData.InherentAllDataMonAbility.Length;
+            AbilityCount += dataMonData.DataMons[tier].InherentDataMonAbility.Length;
+            if (AbilityCount >= 3)
+                return;
+            Attack attackInstance;
+            for (int i = AbilityCount; i < 3; i++)
+            {
+                attackInstance = dataMonData.AttacksObjects.RandomizeAttack();
+                attackInstance.CreateInstance(DataMonAttacksParentObj.transform, this);
+                attackObjects.Add(attackInstance);
+
+                GameManager.instance.Entity_Updates += attackInstance.AttackCooldownUpdate;
+            }
+        }
+        public void SetDataMonsAttacks(Attack[] ToAttacks)
+        {
+            if (DataMonAttacksParentObj != null)
+            {
+                Destroy(DataMonAttacksParentObj);
+                attackObjects.Clear();
+            }
+            DataMonAttacksParentObj = new GameObject(DataMonAttacksID.ToString());
+            DataMonAttacksParentObj.transform.SetParent(transform.parent);
+            Model = GetComponentInChildren<DataMonCollision>().gameObject;
+            Attack attackInstance;
+            for (int i = 0; i < ToAttacks.Length; i++)
+            {
+                attackInstance = Attack.InstanceAttack(ToAttacks[i]);
+                attackInstance.CreateInstance(DataMonAttacksParentObj.transform, this);
+                attackObjects.Add(attackInstance);
+
+                attackInstance.attackObject.transform.localScale = Vector3.one * (Model.transform.lossyScale.x / 0.7054937403162723f);
+
+
+                GameManager.instance.Entity_Updates += attackInstance.AttackCooldownUpdate;
+            }
+        }
+        
+        public bool GetAvailableAttack()
+        {
+            if (attackObjects[currentAttackIndex].isAvailable)
+            {
+
+                return true;
+            }
+
+            for (int i = 0; i < attackObjects.Count; i++)
+            {
+                if (attackObjects[i].isAvailable)
+                {
+                    currentAttackIndex = i;
+                    return true;
+                }
+            }
+            return false;
+
+        }
+        public void StartAttack(Transform Target)
+        {
+            attackObjects[currentAttackIndex]._gameObject.transform.position = AttackPoint.transform.position;
+
+            Vector2 Dir = (transform.position - Target.position).normalized;
+            Quaternion toRotate = Quaternion.LookRotation(transform.forward, -Dir);
+            attackObjects[currentAttackIndex]._gameObject.transform.rotation = toRotate;
+            attackObjects[currentAttackIndex]._gameObject.SetActive(true);
+            attackObjects[currentAttackIndex].CurrentCD = 0;
+            currentAttackIndex++;
+            if (currentAttackIndex >= attackObjects.Count)
+            {
+                currentAttackIndex = 0;
+            }
+        }
         private void Start()
         {
             //if (Vector2.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.RenderDistance
@@ -65,26 +163,63 @@ namespace IndividualDataMon
             if (NamePlateText != null)
             {
                 NamePlate.transform.rotation = Quaternion.Euler(Vector3.zero);
-                healthBar.SetHealth(Mathf.RoundToInt(dataMonCurrentAttributes.CurrentHealth));
+                healthBar.SetHealth(Mathf.RoundToInt(CurrentAttributes.CurrentHealth));
             }
             if (!gameObject.activeSelf)
                 return;
-            if(dataMonCurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
+            if(CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
 
             {
                 GetComponent<Databytes>().DataMonIsDestroyed();
                 DestroyDataMon();
             }
-            if (dataMonCurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+            if (CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
 
             {
                 Destroy(gameObject);
             }
+            if (dataMonAI == null)
+            {
+                return;
+            }
+            if (dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+            switch (dataMonAI.CurrentTask)
+            {
+                case AI_Tasks.Attacking:
+                    TaskText.text = "Task: Attacking";
+                    break;
+                case AI_Tasks.Patrolling:
+                    TaskText.text = "Task: Patrolling";
+                    break;
+                case AI_Tasks.ProducingAmmo:
+                    TaskText.text = string.Format("Task: Producing Ammo " +"({0}s / {1}s)", 
+                        dataMonAI.CurrentProductionProgress.ToString("#.0") ,Mathf.RoundToInt(dataMonAI.DataMonProductionTime).ToString("#.0"));
+                    break;
+                case AI_Tasks.ProducingHuntingRifle:
+                    TaskText.text = string.Format("Task: Producing Hunting Rifle" + "({0}s / {1}s)",
+                        dataMonAI.CurrentProductionProgress.ToString("#.0") ,Mathf.RoundToInt(dataMonAI.DataMonProductionTime).ToString("#.0"));
+                    break;
+                case AI_Tasks.ProducingShotgun:
+                    TaskText.text = string.Format("Task: Producing Shotgun" + "({0}s / {1}s)",
+                        dataMonAI.CurrentProductionProgress.ToString("#.0") ,Mathf.RoundToInt(dataMonAI.DataMonProductionTime).ToString("#.0"));
+                    break;
+                case AI_Tasks.ProducingAssaultRifle:
+                    TaskText.text = string.Format("Task: Producing Assault Rifle" + "({0}s / {1}s)",
+                        dataMonAI.CurrentProductionProgress.ToString("#.0") ,Mathf.RoundToInt(dataMonAI.DataMonProductionTime).ToString("#.0"));
+                    break;
+                default:
+                    TaskText.text = "";
 
+                    break;
+            }
+            else
+                TaskText.text = "";
         }
         private void OnEnable()
         {
             isBeingCaptured = false;
+            currentAttackIndex = 0;
+            CreateDataMonsAttacks();
         }
         /// <summary> 
         /// Returns false if dataMonData is null
@@ -120,12 +255,16 @@ namespace IndividualDataMon
             tier = dataMonData.DataMons.GetDataMonIndexInDataArray(ToDataMon);
 
             dataMon = DataMonIndividualData.CloneDataMonClass(ToDataMon);
-            dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
+            CurrentAttributes = new DataMonInstancedAttributes(baseAttributes);
+
+
+            
+
 
         }
         public void SetAttributes(DataMonInstancedAttributes instancedAttributes)
         {
-            dataMonCurrentAttributes.SetAttributes(instancedAttributes);
+            CurrentAttributes = instancedAttributes;
 
             if (dataMonAI == null)
                 return;
@@ -135,7 +274,7 @@ namespace IndividualDataMon
         }
         public void ResetAttributes()
         {
-            dataMonCurrentAttributes.ResetAttributes(dataMon.BaseAttributes);
+            CurrentAttributes.ResetAttributes(baseAttributes);
             if (dataMonAI == null)
                 return;
             if (dataMonAI.aggroSystem == null)
@@ -164,7 +303,21 @@ namespace IndividualDataMon
         {
             dataMon.MonBehaviourState = DataMonBehaviourState.isCompanion;
             NamePlateText.color = GameManager.instance.CompanionColor;
+
+
+
         }
+
+        public void StartPassive()
+        {
+            DataMon _this = this;
+            for (int i = 0; i < dataMonData.InherentPassives.Length; i++)
+            {
+                dataMonData.InherentPassives[i].OwnPassives();
+                dataMonData.InherentPassives[i].CallDelegates(ref _this, ref GameManager.instance, true);
+            }
+        }
+
         public void SetDataMonHostile()
         {
             if (dataMon.MonBehaviourState != DataMonBehaviourState.isHostile)
@@ -184,6 +337,12 @@ namespace IndividualDataMon
                 return;
             if (_databytes.isQuitting)
                 return;
+
+            StartPassive();
+            for (int i = 0; i < attackObjects.Count; i++)
+            {
+                GameManager.instance.Entity_Updates -= attackObjects[i].AttackCooldownUpdate;
+            }
             Destroy(dataMonAI.patrollingAnchor);
             Destroy(DataMonAttacksParentObj);
             GameManager.instance.Entity_Updates -= ToUpdate;
@@ -194,6 +353,15 @@ namespace IndividualDataMon
             gameObject.SetActive(false);
             ResetAttributes();
             RoamingSpawner.doot_doot--;
+            if(RoamingSpawner.MonsInChunk.TryGetValue(SpawnedFromChunk,out DataMonsInChunk value))
+            {
+                value.datamons--;
+            }
+
+            for (int i = 0; i < attackObjects.Count; i++)
+            {
+                GameManager.instance.Entity_Updates -= attackObjects[i].AttackCooldownUpdate;
+            }
 
             if (dataMonAI == null)
                 return;
@@ -220,6 +388,28 @@ namespace IndividualDataMon
 
 
             }
+        }
+        public void SetAttributesByModifier(float modifier)
+        {
+            baseAttributes.BaseHealth = dataMon.BaseAttributes.BaseHealth * modifier;
+            baseAttributes.BaseAttack = dataMon.BaseAttributes.BaseAttack * modifier;
+            healthBar.SetMaxHealth(Mathf.RoundToInt(baseAttributes.BaseHealth));
+
+            if (CurrentAttributes.CurrentHealth >= dataMon.BaseAttributes.BaseHealth)
+            {
+                CurrentAttributes.CurrentHealth = baseAttributes.BaseHealth;
+            }
+        }
+        public void DataMonStartBuff(float buffDuration, float Modifer)
+        {
+            StartCoroutine(BuffDataMon(buffDuration, Modifer));
+        }
+        IEnumerator BuffDataMon(float buffDuration,float Modifier)
+        {
+            SetAttributesByModifier(Modifier);
+            yield return new WaitForSeconds(buffDuration);
+            SetAttributesByModifier(1);
+
         }
     }
     

@@ -8,23 +8,31 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public static int TotalDataMonIDs;
     public static int HostileDataMons;
-
-    public List<GameObject> HostileDataMonsGOs = new List<GameObject>();
+    [Header("Player Variables")]
     public GameObject Player;
     [HideInInspector] public PlayerShoot playerShootScript;
     [HideInInspector] public Rigidbody2D playerRb;
+    public List<GameObject> HostileDataMonsGOs = new List<GameObject>();
     public float PlayerDataMonPatrolMinDist;
     public float PlayerDataMonPatrolMaxDist;
     public float DataMonSpawnRadiusFromPlayer, DataMonEnableRbInRadius;
     public float MaxDistForCompanionDataMon;
     public float CaptureDelay = 1;
+    public int NumberOfDataMonsInTeam = 1;
+    [Header("====================")]
+
     public float DataMonsRotationSpeed;
     public float DataMonInDataDexHPRegen = 2;
     public int MaxNumberOfWildDataMons = 15;
-    public int NumberOfDataMonsInTeam = 1;
+    [Header("WorldBorders")]
+    public int DataWorldBorderLeftX,DataWorldBorderRightX, DataWorldBorderDownY, DataWorldBorderUpY;
+    public float GlitchRespawnTime = 45;
+
     public int Databytes = 0;
+    public GameObject RenderDistanceTrigger;
     public float RenderDistance = 10f;
     public Color NeutralColor, HostileColor, CompanionColor;
+    public LayerMask GlitchLayerMask;
     public delegate void DataMonAIBehaviourStart(DataMonAI dataMonAI);
     public delegate void DataMonAIBehaviourUpdate();
     public delegate void EntityUpdates();
@@ -33,6 +41,14 @@ public class GameManager : MonoBehaviour
     public EntityUpdates Entity_Updates;
     public EntityUpdates Entity_FixedUpdates;
 
+    [Header("Affects by DataMons Passives")]
+    public bool isShielded;
+    public float MaxShieldHealth;
+    public float CurrentShieldHealth;
+    public float ChanceForDoubleDrop = 0;
+    public float PlayerRegenerationRatePerSecond = 1;
+    public float AllDamageModifier = 1;
+
     [Header("GUNS")]
     public int NumberOfBulletsInPool;
     public float ShotgunPelletPerRnd;
@@ -40,15 +56,23 @@ public class GameManager : MonoBehaviour
     GameObject BulletsPoolGameObject;
     [HideInInspector] public Dictionary<bool, List<BulletInstance>> BulletsPool = new Dictionary<bool, List<BulletInstance>>();
 
+    public WeaponType Fists_weapon = new WeaponType();
+    public WeaponType DataBallLauncher = new WeaponType();
+    public WeaponType huntingRifle = new WeaponType();
+    public WeaponType shotgun = new WeaponType();
+    public WeaponType assaultRifle = new WeaponType();
+
     // Prefabs
     public GameObject Bullet;
     public GameObject DatabytesPrefab;
+    [Header("Player progress")]
     public PlayerProgress player_progress = new PlayerProgress();
 
-    GameObject PlayerRenderDistTrigger;
+    public const int MaxLimitOfAbilities = 3;
 
     private void Awake()
     {
+        instance = this;
         TotalDataMonIDs = 0;
     }
     // Start is called before the first frame update
@@ -80,16 +104,16 @@ public class GameManager : MonoBehaviour
         if (Player == null)
             return;
         ReferencePlayerRenderDistTrigger();
-        if (PlayerRenderDistTrigger == null)
+        if (RenderDistanceTrigger == null)
             return;
-        PlayerRenderDistTrigger.transform.localScale = Player.transform.InverseTransformVector(Vector3.one * RenderDistance);
+        RenderDistanceTrigger.transform.localScale = Player.transform.InverseTransformVector(Vector3.one * RenderDistance);
     }
 
     private void ReferencePlayerRenderDistTrigger()
     {
-        if (PlayerRenderDistTrigger == null || PlayerRenderDistTrigger.transform.parent != Player.transform)
+        if (RenderDistanceTrigger == null || RenderDistanceTrigger.transform.parent != Player.transform)
         {
-            PlayerRenderDistTrigger = Player.transform.FindChildByTag("PlayerRenderDist").gameObject;
+            RenderDistanceTrigger = Player.transform.FindChildByTag("PlayerRenderDist").gameObject;
 
         }
     }
@@ -146,17 +170,44 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
+    Collider2D[] Glitches;
+    public bool CheckForGlitchesInProximity(out Collider2D Glitch)
+    {
+        Glitch = null;
+        Glitches = Physics2D.OverlapCircleAll(instance.Player.transform.position, instance.PlayerDataMonPatrolMaxDist, instance.GlitchLayerMask);
+        if (Glitches.Length >0)
+        {
+            Glitch = Glitches[0];
+            return true;
+        }
 
-    
+        return false;
+    }
+    public static IEnumerator GlitchDestroyed(GameObject Glitch, ParticleSystem particle)
+    {
+        particle.transform.SetParent(null);
+        particle.gameObject.SetActive(true);
+        particle.Play();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(instance.GlitchRespawnTime);
+    }
+
 }
 [System.Serializable]
 public class PlayerProgress
 {
+    [Header("-----Melee-------")]
     public Item Melee =  new Item();
+
+    [Header("-----DataBall-------")]
     public Item DataBall = new Item();
+    [Header("-----Command-------")]
     public Item Command = new Item();
+    [Header("-----HuntingRifle-------")]
     public Item HuntingRifle = new Item();
+    [Header("-----Shotgun-------")]
     public Item Shotgun = new Item();
+    [Header("-----AssaultRifle-------")]
     public Item AssaultRifle = new Item();
     public PlayerProgress() { }
 }
@@ -166,9 +217,20 @@ public class Item
     public GameObject ItemPrefab;
     [HideInInspector]public GameObject ItemInstance;
     public bool isUnlocked;
+    public WeaponUpgradeModifiers WeaponModifiers;
     public Item() { }
     public void InstantiatePrefab(Transform Hotbar)
     {
         ItemInstance = Object.Instantiate(ItemPrefab, Hotbar);
     }
+}
+[System.Serializable]
+public class WeaponUpgradeModifiers
+{
+    public int CurrentTier = 1;
+    public float fire_Rate = 1;
+    public float Damage = 1;
+    public float ReloadSpeed = 1;
+    public float ClipAmountUpgradeModifier = 1;
+    public float WeaponUpgradeCostModifier = 1;
 }
