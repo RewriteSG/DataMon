@@ -20,9 +20,10 @@ namespace IndividualDataMon
         public DataMonIndividualData dataMon;
         [HideInInspector]public DataMonAI dataMonAI;
         [HideInInspector] public Databytes _databytes;
-        public DataMonInstancedAttributes dataMonCurrentAttributes;
+        public DataMonAttributes baseAttributes;
+        public DataMonInstancedAttributes CurrentAttributes;
         public GameObject NamePlate;
-        public TextMeshProUGUI NamePlateText;
+        public TextMeshProUGUI NamePlateText, TaskText;
         HealthBarScript healthBar;
 
 
@@ -30,6 +31,10 @@ namespace IndividualDataMon
         public GameObject DataMonAttacksParentObj;
 
         [HideInInspector] public Vector2 SpawnedFromChunk;
+
+
+        public AttackObjects[] attackObjects;
+
         //[SerializeField]private GameObject test;
         private void Awake()
         {
@@ -42,7 +47,8 @@ namespace IndividualDataMon
             {
                 NamePlateText.text = dataMon.DataMonName;
                 healthBar = NamePlate.GetComponentInChildren<HealthBarScript>();
-                healthBar.SetMaxHealth(Mathf.RoundToInt(dataMon.BaseAttributes.BaseHealth));
+                baseAttributes = DataMonAttributes.CopyDataMonAttributes(dataMon.BaseAttributes);
+                healthBar.SetMaxHealth(Mathf.RoundToInt(baseAttributes.BaseHealth));
 
             }
             DataMonAttacksID = GameManager.TotalDataMonIDs++;
@@ -69,22 +75,57 @@ namespace IndividualDataMon
             if (NamePlateText != null)
             {
                 NamePlate.transform.rotation = Quaternion.Euler(Vector3.zero);
-                healthBar.SetHealth(Mathf.RoundToInt(dataMonCurrentAttributes.CurrentHealth));
+                healthBar.SetHealth(Mathf.RoundToInt(CurrentAttributes.CurrentHealth));
             }
             if (!gameObject.activeSelf)
                 return;
-            if(dataMonCurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
+            if(CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
 
             {
                 GetComponent<Databytes>().DataMonIsDestroyed();
                 DestroyDataMon();
             }
-            if (dataMonCurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+            if (CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
 
             {
                 Destroy(gameObject);
             }
+            if (dataMonAI == null)
+            {
+                return;
+            }
+            if (dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+            switch (dataMonAI.CurrentTask)
+            {
+                case AI_Tasks.Attacking:
+                    TaskText.text = "Task: Attacking";
+                    break;
+                case AI_Tasks.Patrolling:
+                    TaskText.text = "Task: Patrolling";
+                    break;
+                case AI_Tasks.ProducingAmmo:
+                    TaskText.text = string.Format("Task: Producing Ammo " +"({0}s / {1}s)", 
+                        dataMonAI.CurrentProductionProgress.ToString("#.0") ,Mathf.RoundToInt(dataMonAI.DataMonProductionTime).ToString("#.0"));
+                    break;
+                case AI_Tasks.ProducingHuntingRifle:
+                    TaskText.text = string.Format("Task: Producing Hunting Rifle" + "({0}s / {1}s)",
+                        dataMonAI.CurrentProductionProgress.ToString("#.0") ,Mathf.RoundToInt(dataMonAI.DataMonProductionTime).ToString("#.0"));
+                    break;
+                case AI_Tasks.ProducingShotgun:
+                    TaskText.text = string.Format("Task: Producing Shotgun" + "({0}s / {1}s)",
+                        dataMonAI.CurrentProductionProgress.ToString("#.0") ,Mathf.RoundToInt(dataMonAI.DataMonProductionTime).ToString("#.0"));
+                    break;
+                case AI_Tasks.ProducingAssaultRifle:
+                    TaskText.text = string.Format("Task: Producing Assault Rifle" + "({0}s / {1}s)",
+                        dataMonAI.CurrentProductionProgress.ToString("#.0") ,Mathf.RoundToInt(dataMonAI.DataMonProductionTime).ToString("#.0"));
+                    break;
+                default:
+                    TaskText.text = "";
 
+                    break;
+            }
+            else
+                TaskText.text = "";
         }
         private void OnEnable()
         {
@@ -124,12 +165,12 @@ namespace IndividualDataMon
             tier = dataMonData.DataMons.GetDataMonIndexInDataArray(ToDataMon);
 
             dataMon = DataMonIndividualData.CloneDataMonClass(ToDataMon);
-            dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMon.BaseAttributes);
+            CurrentAttributes = new DataMonInstancedAttributes(baseAttributes);
 
         }
         public void SetAttributes(DataMonInstancedAttributes instancedAttributes)
         {
-            dataMonCurrentAttributes.SetAttributes(instancedAttributes);
+            CurrentAttributes = instancedAttributes;
 
             if (dataMonAI == null)
                 return;
@@ -139,7 +180,7 @@ namespace IndividualDataMon
         }
         public void ResetAttributes()
         {
-            dataMonCurrentAttributes.ResetAttributes(dataMon.BaseAttributes);
+            CurrentAttributes.ResetAttributes(baseAttributes);
             if (dataMonAI == null)
                 return;
             if (dataMonAI.aggroSystem == null)
@@ -169,6 +210,17 @@ namespace IndividualDataMon
             dataMon.MonBehaviourState = DataMonBehaviourState.isCompanion;
             NamePlateText.color = GameManager.instance.CompanionColor;
         }
+
+        public void StartPassive()
+        {
+            DataMon _this = this;
+            for (int i = 0; i < dataMonData.InherentPassives.Length; i++)
+            {
+                dataMonData.InherentPassives[i].OwnPassives();
+                dataMonData.InherentPassives[i].CallDelegates(ref _this, ref GameManager.instance, true);
+            }
+        }
+
         public void SetDataMonHostile()
         {
             if (dataMon.MonBehaviourState != DataMonBehaviourState.isHostile)
@@ -188,6 +240,9 @@ namespace IndividualDataMon
                 return;
             if (_databytes.isQuitting)
                 return;
+
+            StartPassive();
+
             Destroy(dataMonAI.patrollingAnchor);
             Destroy(DataMonAttacksParentObj);
             GameManager.instance.Entity_Updates -= ToUpdate;
@@ -228,6 +283,28 @@ namespace IndividualDataMon
 
 
             }
+        }
+        public void SetAttributesByModifier(float modifier)
+        {
+            baseAttributes.BaseHealth = dataMon.BaseAttributes.BaseHealth * modifier;
+            baseAttributes.BaseAttack = dataMon.BaseAttributes.BaseAttack * modifier;
+            healthBar.SetMaxHealth(Mathf.RoundToInt(baseAttributes.BaseHealth));
+
+            if (CurrentAttributes.CurrentHealth >= dataMon.BaseAttributes.BaseHealth)
+            {
+                CurrentAttributes.CurrentHealth = baseAttributes.BaseHealth;
+            }
+        }
+        public void DataMonStartBuff(float buffDuration, float Modifer)
+        {
+            StartCoroutine(BuffDataMon(buffDuration, Modifer));
+        }
+        IEnumerator BuffDataMon(float buffDuration,float Modifier)
+        {
+            SetAttributesByModifier(Modifier);
+            yield return new WaitForSeconds(buffDuration);
+            SetAttributesByModifier(1);
+
         }
     }
     

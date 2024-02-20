@@ -10,7 +10,7 @@ public class DataMonAI : MonoBehaviour
     IndividualDataMon.DataMon DataMon;
     [SerializeField] private float NextWaypointDist = 3;
     public float PatrollingDistance= 3, WanderingDistance = 8;
-
+    public float ProductionDistance = 1;
     Path path;
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
@@ -23,10 +23,10 @@ public class DataMonAI : MonoBehaviour
     [HideInInspector] public AggroSystem aggroSystem;
     public AI_Tasks CurrentTask;
 
-    float DataMonProductionTime, CurrentProductionProgress;
+    public float DataMonProductionTime, CurrentProductionProgress, GlitchDamage;
     int DataBytesUsed;
     GameObject ItemCrafted;
-
+    GlitchObject glitch;
     // Start is called before the first frame update
     void Awake()
     {
@@ -62,15 +62,23 @@ public class DataMonAI : MonoBehaviour
             CancelProduction();
         }
         if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion &&
-            Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon
-            || GameManager.HostileDataMons <= 0 &&
-             AI_state != AI_State.Produce)
+            Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon && 
+            AI_state != AI_State.Patrol
+            && GameManager.HostileDataMons <= 0 )
         {
             timerToChangeTarget = 999;
             AI_state = AI_State.Patrol;
+            
+        }
+        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion &&
+            Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon &&
+            AI_state == AI_State.Patrol
+            && GameManager.HostileDataMons <= 0)
+        {
+            CancelProduction();
 
         }
-        if(DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && GameManager.HostileDataMons > 0)
+        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && GameManager.HostileDataMons > 0 && AI_state != AI_State.Produce)
         {
             switch (DataMonCommand.command)
             {
@@ -80,8 +88,6 @@ public class DataMonAI : MonoBehaviour
                 case DataMonCommands.Patrol:
                 case DataMonCommands.TargetEnemy:
                 case DataMonCommands.AttackAggressive:
-                    if (AI_state == AI_State.Produce)
-                        return;
                         AI_state = AI_State.Attack;
                     if (DataMonCommand.ToTarget != null)
                     {
@@ -212,9 +218,13 @@ public class DataMonAI : MonoBehaviour
         //Vector3.Distance(transform.position, Target.position) > DataMon.dataMon.AttackRange
         if (Target == null)
             return;
-        allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, DataMon.dataMonCurrentAttributes.CurrentAttackRange);
-        
-        
+        if (AI_state != AI_State.Produce)
+            allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, DataMon.CurrentAttributes.CurrentAttackRange);
+        else
+            allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, ProductionDistance);
+
+
+
         if (DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject))
         {
             reachedEndOfPath = true;
@@ -244,7 +254,7 @@ public class DataMonAI : MonoBehaviour
         else
             reachedEndOfPath = false;
 
-        if (seeker.IsDone() && Vector2.Distance(Target.position, targetPos)> DataMon.dataMon.BaseAttributes.BaseAttackRange)
+        if (seeker.IsDone() && Vector2.Distance(Target.position, targetPos)> DataMon.baseAttributes.BaseAttackRange)
         {
             targetPos = Target.position;
             seeker.StartPath(transform.position, targetPos, OnPathingComplete);
@@ -366,7 +376,7 @@ public class DataMonAI : MonoBehaviour
         Dir = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         if(Vector2.Distance(transform.position,GameManager.instance.Player.transform.position) < GameManager.instance.DataMonSpawnRadiusFromPlayer)
         {
-            Force = Dir * DataMon.dataMon.BaseAttributes.BaseMoveSpeed * Time.fixedDeltaTime;
+            Force = Dir * DataMon.baseAttributes.BaseMoveSpeed * Time.fixedDeltaTime;
 
             rb.AddForce(Force);
 
@@ -398,7 +408,7 @@ public class DataMonAI : MonoBehaviour
         switch (AI_state)
         {
             case AI_State.Attack:
-                if (!doingSomething && Vector2.Distance(Target.position,transform.position) < DataMon.dataMon.BaseAttributes.BaseAttackRange + 0.2f)
+                if (!doingSomething && Vector2.Distance(Target.position,transform.position) < DataMon.baseAttributes.BaseAttackRange + 0.2f)
                 {
                     doingSomething = true;
                 }
@@ -406,9 +416,10 @@ public class DataMonAI : MonoBehaviour
                 // Instantiate Attack
                 break;
             case AI_State.Produce:
-                if (!doingSomething && Vector2.Distance(Target.position, transform.position) < DataMon.dataMon.BaseAttributes.BaseAttackRange+0.2f)
+                if (!doingSomething && Vector2.Distance(Target.position, transform.position) < ProductionDistance)
                 {
                     doingSomething = true;
+                    rb.velocity = Vector2.zero;
                 }
                 if (!doingSomething)
                     return;
@@ -421,6 +432,7 @@ public class DataMonAI : MonoBehaviour
                 }
                 else
                 {
+                    glitch.ShakeGlitch();
                     CurrentProductionProgress += Time.deltaTime;
                 }
                 // Instantiate Attack
@@ -450,6 +462,9 @@ public class DataMonAI : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, PatrollingDistance);
 
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, ProductionDistance);
+
     }
     private void OnDestroy()
     {
@@ -460,9 +475,10 @@ public class DataMonAI : MonoBehaviour
     }
     public void CraftedItem()
     {
+        glitch.DamageGlitch(GlitchDamage);
         Instantiate(ItemCrafted, transform.position, transform.rotation);
     }
-    public void Produce(AI_Tasks DoTask, float productionTime, int _DataBytesUsed, Transform ResourceTarget, GameObject itemPickupPrefab)
+    public void Produce(AI_Tasks DoTask, float productionTime, int _DataBytesUsed, Transform ResourceTarget, GameObject itemPickupPrefab, float glitchDamage)
     {
         CurrentProductionProgress = 0;
         AI_state = AI_State.Produce;
@@ -470,7 +486,9 @@ public class DataMonAI : MonoBehaviour
         CurrentTask = DoTask;
         DataBytesUsed = _DataBytesUsed;
         Target = ResourceTarget;
+        glitch =Target.gameObject.GetComponent<GlitchObject>();
         ItemCrafted = itemPickupPrefab;
+        GlitchDamage = glitchDamage;
         targetPos = Target.position;
         seeker.StartPath(transform.position, targetPos, OnPathingComplete);
     }

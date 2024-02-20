@@ -103,9 +103,13 @@ MonoBehaviour:
   NextWaypointDist: 0.81
   PatrollingDistance: 1.81
   WanderingDistance: 10
+  ProductionDistance: 0.89
   patrollingAnchor: {fileID: 0}
   aggroSystem: {fileID: 0}
   CurrentTask: 0
+  DataMonProductionTime: 0
+  CurrentProductionProgress: 0
+  GlitchDamage: 0
 --- !u!114 &329541168242953227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847133a8af9ec054980b614351dbd60e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier: 0
+  tier: 1
   isBeingCaptured: 0
   isCompanion: 0
   dataMonData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
@@ -137,7 +141,7 @@ MonoBehaviour:
       BaseAttack: 0
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
-      BaseAttackRange: 0
+      BaseAttackRange: 3
       BaseCaptureChance: 100
     MonBehaviourState: 2
   dataMonAI: {fileID: 0}
@@ -147,10 +151,11 @@ MonoBehaviour:
     CurrentAttack: 0
     CurrentProductionSpeed: 0
     CurrentMoveSpeed: 200
-    CurrentAttackRange: 0
+    CurrentAttackRange: 3
     CurrentCaptureChance: 100
   NamePlate: {fileID: 6149556114654668756}
   NamePlateText: {fileID: 6149556114524597499}
+  TaskText: {fileID: 4867284189135824378}
   DataMonAttacksID: 0
   DataMonAttacksParentObj: {fileID: 0}
   SpawnedFromChunk: {x: 0, y: 0}
@@ -1754,6 +1759,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 329541168242953222}
     m_Modifications:
+    - target: {fileID: 4865741776253088313, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Name
+      value: TaskText
+      objectReference: {fileID: 0}
     - target: {fileID: 7802660751728996237, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}
       propertyPath: m_Layer
@@ -1886,6 +1896,18 @@ Transform:
 --- !u!114 &6149556114524597499 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7802660753343493748, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+    type: 3}
+  m_PrefabInstance: {fileID: 4116010960588266127}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4867284189135824378 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8832424217793970037, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
     type: 3}
   m_PrefabInstance: {fileID: 4116010960588266127}
   m_PrefabAsset: {fileID: 0}

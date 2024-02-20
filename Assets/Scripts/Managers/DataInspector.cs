@@ -56,13 +56,13 @@ public class DataInspector : MonoBehaviour
             DataMonEvolveTier = DataMonHovering.dataMonData.DataMons.GetDataMonIndexInDataArray(DataMonHovering.dataMon.DataMonName);
         }
 
-        if (DataInspectorHealthBar.slider.maxValue != DataMonHovering.dataMon.BaseAttributes.BaseHealth)
+        if (DataInspectorHealthBar.slider.maxValue != DataMonHovering.dataMonBaseAttributes.BaseHealth)
         {
-            DataInspectorHealthBar.SetMaxHealth(Mathf.RoundToInt(DataMonHovering.dataMon.BaseAttributes.BaseHealth));
+            DataInspectorHealthBar.SetMaxHealth(Mathf.RoundToInt(DataMonHovering.dataMonBaseAttributes.BaseHealth));
         }
         DataInspectorHealthBar.SetHealth(Mathf.RoundToInt(DataMonHovering.dataMonCurrentAttributes.CurrentHealth));
         txt_HP.text = "HP: " + Mathf.RoundToInt(DataMonHovering.dataMonCurrentAttributes.CurrentHealth)
-            + "/" + DataMonHovering.dataMon.BaseAttributes.BaseHealth;
+            + "/" + DataMonHovering.dataMonBaseAttributes.BaseHealth;
 
         txt_Atk.text = "ATK: " + DataMonHovering.dataMonCurrentAttributes.CurrentAttack;
 

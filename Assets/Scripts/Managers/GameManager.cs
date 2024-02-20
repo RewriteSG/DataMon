@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     public int NumberOfDataMonsInTeam = 1;
     [Header("WorldBorders")]
     public int DataWorldBorderLeftX,DataWorldBorderRightX, DataWorldBorderDownY, DataWorldBorderUpY;
+    public float GlitchRespawnTime = 45;
+
     public int Databytes = 0;
     public GameObject RenderDistanceTrigger;
     public float RenderDistance = 10f;
@@ -37,6 +39,14 @@ public class GameManager : MonoBehaviour
     public DataMonAIBehaviourUpdate DataMon_UpdateAI;
     public EntityUpdates Entity_Updates;
     public EntityUpdates Entity_FixedUpdates;
+
+    [Header("Affects by DataMons Passives")]
+    public bool isShielded;
+    public float MaxShieldHealth;
+    public float CurrentShieldHealth;
+    public float ChanceForDoubleDrop = 0;
+    public float PlayerRegenerationRatePerSecond = 1;
+    public float AllDamageModifier = 1;
 
     [Header("GUNS")]
     public int NumberOfBulletsInPool;
@@ -56,7 +66,8 @@ public class GameManager : MonoBehaviour
     public GameObject DatabytesPrefab;
     [Header("Player progress")]
     public PlayerProgress player_progress = new PlayerProgress();
-    
+
+    public const int MaxLimitOfAbilities = 3;
 
     private void Awake()
     {
@@ -171,7 +182,15 @@ public class GameManager : MonoBehaviour
 
         return false;
     }
-    
+    public static IEnumerator GlitchDestroyed(GameObject Glitch, ParticleSystem particle)
+    {
+        particle.transform.SetParent(null);
+        particle.gameObject.SetActive(true);
+        particle.Play();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(instance.GlitchRespawnTime);
+    }
+
 }
 [System.Serializable]
 public class PlayerProgress

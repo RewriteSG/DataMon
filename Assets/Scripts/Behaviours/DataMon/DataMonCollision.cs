@@ -24,9 +24,9 @@ public class DataMonCollision : MonoBehaviour
         {
             bullet = collision.GetComponent<BulletInstance>();
             damage = bullet.Damage;
-            DataMon.dataMonCurrentAttributes.CurrentHealth -= damage;
-            DataMon.dataMonCurrentAttributes.CurrentHealth = 
-                Mathf.Clamp(DataMon.dataMonCurrentAttributes.CurrentHealth,0, DataMon.dataMonCurrentAttributes.CurrentHealth+1);
+            DataMon.CurrentAttributes.CurrentHealth -= damage;
+            DataMon.CurrentAttributes.CurrentHealth = 
+                Mathf.Clamp(DataMon.CurrentAttributes.CurrentHealth,0, DataMon.CurrentAttributes.CurrentHealth+1);
             if(!bullet.IsDrivenByAnimation)
             collision.gameObject.SetActive(false);
             if (bullet.IsFromPlayer)

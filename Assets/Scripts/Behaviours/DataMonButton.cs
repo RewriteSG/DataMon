@@ -45,17 +45,20 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     {
         image = GetComponent<UnityEngine.UI.Image>();
     }
+    float timer;
 
     // Update is called once per frame
     void Update()
     {
-        if (inDataBank)
-        {
-            dataMonHolder.dataMonCurrentAttributes.CurrentHealth += Time.deltaTime * GameManager.instance.DataMonInDataDexHPRegen;
-            dataMonHolder.dataMonCurrentAttributes.CurrentHealth = Mathf.Clamp(dataMonHolder.dataMonCurrentAttributes.CurrentHealth, -1, dataMonHolder.dataMon.BaseAttributes.BaseHealth);
-        }
+        timer += Time.deltaTime;
         if (dataMonHolder == null)
             return;
+        if (timer>= (inDataBank ? 1 : 3))
+        {
+            timer = 0;
+            dataMonHolder.dataMonCurrentAttributes.CurrentHealth += GameManager.instance.DataMonInDataDexHPRegen;
+            dataMonHolder.dataMonCurrentAttributes.CurrentHealth = Mathf.Clamp(dataMonHolder.dataMonCurrentAttributes.CurrentHealth, -1, dataMonHolder.dataMonBaseAttributes.BaseHealth);
+        }
         if (!inDataBank && dataMonHolder.dataMonData != null && DataMonSummoned == null && image.color != Color.blue && image.color != Color.green)
         {
             image.color = Color.blue;

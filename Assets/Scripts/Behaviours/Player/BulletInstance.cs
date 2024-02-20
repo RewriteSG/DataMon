@@ -92,7 +92,7 @@ public class BulletInstance : MonoBehaviour
     }
     public void SetDamageAndSpeed(float Dmg, float Spd)
     {
-        Damage = Dmg;
+        Damage = Dmg * GameManager.instance.AllDamageModifier;
         speed = Spd;
         //SetName();
     }

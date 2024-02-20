@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Add DataMon", menuName = "DataMon/Add", order = 1)]
+[CreateAssetMenu(fileName = "Add DataMon", menuName = "DataMon/Add DataMon", order = 1)]
 public class DataMonsData : ScriptableObject
 {
 
     public List<int> EvolutionCosts = new List<int>();
+
+    public AbilitiesScriptableObjects[] InherentPassives;
+    public Attack[] InherentAllDataMonAbility;
+
     [Header("Put DataMons from tier 1 to tier 2, and so on..")]
     public DataMonIndividualData[] DataMons;
     public DataMonRole MonRole;
+
 }
 
 public enum DataMonRole
@@ -26,7 +31,8 @@ public class DataMonIndividualData
 {
     public string DataMonName;
     public GameObject DataMonPrefab;
-    public GameObject[] DataMonAbility;
+    public Attack[] InherentDataMonAbility;
+    public AbilitiesScriptableObjects[] DataMonAbility;
     public DataMonAttributes BaseAttributes;
     public DataMonBehaviourState MonBehaviourState;
     public DataMonIndividualData()
@@ -56,7 +62,18 @@ public class DataMonAttributes
     public float BaseMoveSpeed = 200;
     public float BaseAttackRange = 3;
     public float BaseCaptureChance;
-    
+    public DataMonAttributes() { }
+    public static DataMonAttributes CopyDataMonAttributes(DataMonAttributes toCopy)
+    {
+        DataMonAttributes temp = new DataMonAttributes();
+        temp.BaseHealth = toCopy.BaseHealth;
+        temp.BaseAttack = toCopy.BaseAttack;
+        temp.BaseProductionSpeed = toCopy.BaseProductionSpeed;
+        temp.BaseMoveSpeed = toCopy.BaseMoveSpeed;
+        temp.BaseAttackRange = toCopy.BaseAttackRange;
+        temp.BaseCaptureChance = toCopy.BaseCaptureChance;
+        return temp;
+    }
 }
 [System.Serializable]
 public class DataMonInstancedAttributes
@@ -116,4 +133,5 @@ public class DataMonInstancedAttributes
         CurrentAttackRange = instanceAttributes.CurrentAttackRange;
         CurrentCaptureChance = instanceAttributes.CurrentCaptureChance;
     }
+    
 }

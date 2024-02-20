@@ -29,11 +29,19 @@ public class Databytes : MonoBehaviour
     {
         isQuitting = true;
     }
+    int chanced;
     public void DataMonIsDestroyed()
     {
         if (dataMon == null || isQuitting)
             return;
         if (!dataMon.isBeingCaptured && dataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
             Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);
+        chanced = Random.Range(0, 100);
+        
+        if (!dataMon.isBeingCaptured && dataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && chanced>= GameManager.instance.ChanceForDoubleDrop)
+        {
+
+            Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

@@ -10,7 +10,7 @@ public class DataCraft : MonoBehaviour
     public bool isEditingCraftingQuantity = false;
     public GameObject CraftSelectedPanel;
     public TMP_InputField CurrentQuantityToCraft;
-    public TextMeshProUGUI DataBytesRequired, CurrentDataBytesAmount, ButtonText;
+    public TextMeshProUGUI DataBytesRequiredText, CurrentDataBytesAmount, ButtonText;
 
     public ItemsCraftClass[] ItemsCrafts;
     ItemsCraftClass DataBall, HuntingRifle, Shotgun, AssaultRifle;
@@ -52,6 +52,7 @@ public class DataCraft : MonoBehaviour
         {
             HuntingRifle.UpdateUI("Tier: " + GameManager.instance.player_progress.HuntingRifle.WeaponModifiers.CurrentTier);
 
+            
         }
         else
             HuntingRifle.UpdateUI("");
@@ -101,10 +102,13 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.Databytes != 0)
                     CraftingQuantity =
                     Mathf.Clamp(CraftingQuantity, 0, GameManager.instance.Databytes / HuntingRifle.craftRecipe.DataBytesRequired);
-                DataBytesReq = HuntingRifle.craftRecipe.DataBytesRequired * CraftingQuantity;
+                //DataBytesReq = HuntingRifle.craftRecipe.DataBytesRequired * CraftingQuantity;
 
                 if (GameManager.instance.player_progress.HuntingRifle.isUnlocked)
+                {
+                    DataBytesReq = HuntingRifle.craftRecipe.DataBytesRequired * (GameManager.instance.player_progress.HuntingRifle.WeaponModifiers.CurrentTier + 1);
                     ButtonText.text = "Upgrade";
+                }
                 else
                     ButtonText.text = "Craft";
                 break;
@@ -113,10 +117,14 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.Databytes != 0)
                     CraftingQuantity =
                     Mathf.Clamp(CraftingQuantity, 0, GameManager.instance.Databytes / Shotgun.craftRecipe.DataBytesRequired );
-                DataBytesReq = Shotgun.craftRecipe.DataBytesRequired * CraftingQuantity;
+                //DataBytesReq = Shotgun.craftRecipe.DataBytesRequired * CraftingQuantity;
 
                 if (GameManager.instance.player_progress.Shotgun.isUnlocked)
+                {
+                    DataBytesReq = Shotgun.craftRecipe.DataBytesRequired * (GameManager.instance.player_progress.Shotgun.WeaponModifiers.CurrentTier + 1);
+
                     ButtonText.text = "Upgrade";
+                }
                 else
                     ButtonText.text = "Craft";
                 break;
@@ -125,16 +133,19 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.Databytes != 0)
                     CraftingQuantity =
                     Mathf.Clamp(CraftingQuantity, 0, GameManager.instance.Databytes / AssaultRifle.craftRecipe.DataBytesRequired);
-                DataBytesReq = AssaultRifle.craftRecipe.DataBytesRequired * CraftingQuantity;
+                //DataBytesReq = AssaultRifle.craftRecipe.DataBytesRequired * CraftingQuantity;
 
                 if (GameManager.instance.player_progress.AssaultRifle.isUnlocked)
+                {
+                    DataBytesReq = AssaultRifle.craftRecipe.DataBytesRequired * (GameManager.instance.player_progress.AssaultRifle.WeaponModifiers.CurrentTier + 1);
                     ButtonText.text = "Upgrade";
+                }
                 else
                     ButtonText.text = "Craft";
 
                 break;
         }
-        DataBytesRequired.text = DataBytesReq.ToString();
+        DataBytesRequiredText.text = DataBytesReq.ToString();
         CurrentDataBytesAmount.text = GameManager.instance.Databytes.ToString();
     }
     public void CraftItem()
@@ -160,7 +171,7 @@ public class DataCraft : MonoBehaviour
                 print("crafted Meet Req");
                 if (GameManager.instance.CheckForGlitchesInProximity(out Collider2D HR_Glitch))
                 {
-                    IndividualDataMon.DataMon dataMon = DataDex.instance.GetDataMonFromTeam(HuntingRifle.craftRecipe.dataMonsData, HuntingRifle.craftRecipe.DataMonTierRequired)?.dataMon;
+                    IndividualDataMon.DataMon dataMon = DataDex.instance.GetProductionDataMonFromTeam(HuntingRifle.craftRecipe.dataMonsData, HuntingRifle.craftRecipe.DataMonTierRequired, true)?.dataMon;
 
                     if (dataMon == null)
                     {
@@ -171,7 +182,7 @@ public class DataCraft : MonoBehaviour
 
                     dataMon.dataMonAI.Produce
                         (AI_Tasks.ProducingHuntingRifle, HuntingRifle.craftRecipe.ProductionTimeReq,
-                        DataBytesReq, HR_Glitch.transform, HuntingRifle.PickupItem);
+                        DataBytesReq, HR_Glitch.transform, HuntingRifle.PickupItem, HuntingRifle.craftRecipe.GlitchDamageToCraft);
 
                 }
                 else
@@ -194,7 +205,7 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.CheckForGlitchesInProximity(out Collider2D SG_Glitch))
                 {
                     IndividualDataMon.DataMon dataMon = 
-                        DataDex.instance.GetDataMonFromTeam(Shotgun.craftRecipe.dataMonsData, Shotgun.craftRecipe.DataMonTierRequired)?.dataMon;
+                        DataDex.instance.GetProductionDataMonFromTeam(Shotgun.craftRecipe.dataMonsData, Shotgun.craftRecipe.DataMonTierRequired, true)?.dataMon;
 
                     if (dataMon == null)
                     {
@@ -204,7 +215,7 @@ public class DataCraft : MonoBehaviour
 
                     dataMon.dataMonAI.Produce
                         (AI_Tasks.ProducingShotgun, Shotgun.craftRecipe.ProductionTimeReq,
-                        DataBytesReq, SG_Glitch.transform, Shotgun.PickupItem);
+                        DataBytesReq, SG_Glitch.transform, Shotgun.PickupItem, Shotgun.craftRecipe.GlitchDamageToCraft);
 
                 }
                 else
@@ -221,7 +232,7 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.CheckForGlitchesInProximity(out Collider2D AR_Glitch))
                 {
                     IndividualDataMon.DataMon dataMon =
-                        DataDex.instance.GetDataMonFromTeam(AssaultRifle.craftRecipe.dataMonsData, AssaultRifle.craftRecipe.DataMonTierRequired)?.dataMon;
+                        DataDex.instance.GetProductionDataMonFromTeam(AssaultRifle.craftRecipe.dataMonsData, AssaultRifle.craftRecipe.DataMonTierRequired, true)?.dataMon;
 
                     if (dataMon == null)
                     {
@@ -231,7 +242,7 @@ public class DataCraft : MonoBehaviour
 
                     dataMon.dataMonAI.Produce
                         (AI_Tasks.ProducingAssaultRifle, AssaultRifle.craftRecipe.ProductionTimeReq,
-                        DataBytesReq, AR_Glitch.transform, AssaultRifle.PickupItem);
+                        DataBytesReq, AR_Glitch.transform, AssaultRifle.PickupItem, AssaultRifle.craftRecipe.GlitchDamageToCraft);
 
                 }
                 else
@@ -350,6 +361,7 @@ public class ItemCraftRecipe
     public DataMonsData dataMonsData;
     public float ProductionTimeReq;
     public int DataMonTierRequired;
+    public float GlitchDamageToCraft = 2;
 }
 [System.Serializable]
 public class ItemCraftingUI

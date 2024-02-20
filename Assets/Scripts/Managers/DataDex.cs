@@ -65,6 +65,8 @@ public class DataDex : MonoBehaviour
             DisplayDataPad = !DisplayDataPad;
             StartRearrangeDataBank();
         }
+        if (DisplayDataPad)
+            CameraFollow.isAiming = false;
         switch (CurrentModule)
         {
             case DataPadModules.DataDex:
@@ -240,17 +242,17 @@ public class DataDex : MonoBehaviour
             DataTeamPanels[indexOfDataMon].name = dataMonButton.dataMonHolder.dataMon.DataMonName;
             DataTeamPanels[indexOfDataMon].GetComponent<Image>().color = Testcolor;
             dataMonBtn = DataTeamPanels[indexOfDataMon].GetComponent<DataMonButton>();
-            dataMonBtn.dataMonHolder = dataMonButton.dataMonHolder;
+            dataMonBtn.dataMonHolder = DataTeam[indexOfDataMon];
             dataMonBtn.DataMonSummoned = SpawnCompanionDataMon(dataMonBtn);
             dataMonBtn.dataMon = dataMonBtn.DataMonSummoned.GetComponent<IndividualDataMon.DataMon>();
-
+            dataMonBtn.dataMon.StartPassive();
+            dataMonBtn.dataMonHolder.dataMonBaseAttributes = dataMonBtn.dataMon.baseAttributes;
             verticalLayout = dataMonButton.transform.parent.parent.GetComponent<VerticalLayoutGroup>();
             StartCoroutine(RearrangeContent(verticalLayout));
 
             RemoveFromDataDex(dataMonButton);
         }
     }
-
     public GameObject SpawnCompanionDataMon(DataMonButton dataMonButton)
     {
         GameObject summoned = Instantiate(dataMonButton.dataMonHolder.dataMonData.DataMons.
@@ -258,8 +260,8 @@ public class DataDex : MonoBehaviour
                         GameManager.instance.Player.transform.position, Quaternion.identity);
 
         IndividualDataMon.DataMon dataMon = summoned.GetComponent<IndividualDataMon.DataMon>();
-        dataMon.SetDataMonCompanion();
         dataMon.SetAttributes(dataMonButton.dataMonHolder.dataMonCurrentAttributes);
+        dataMon.SetDataMonCompanion();
 
         return summoned;
     }
@@ -275,8 +277,10 @@ public class DataDex : MonoBehaviour
 
         indexOfDataMon = DataTeam.IndexOf(dataMonButton.dataMonHolder);
         DataTeam = DataTeam.RemoveAt(indexOfDataMon);
-        DataTeamPanels.RemoveAt(indexOfDataMon);
 
+        DataTeamPanels[indexOfDataMon].GetComponent<DataMonButton>().dataMon.SetAttributesByModifier(1);
+
+        DataTeamPanels.RemoveAt(indexOfDataMon);
         Destroy(dataMonButton.DataMonSummoned);
         Destroy(dataMonButton.gameObject);
     }
@@ -311,7 +315,25 @@ public class DataDex : MonoBehaviour
         RightClick -= DataMonButtonRightClick;
 
     }
-    public DataMonButton GetDataMonFromTeam(DataMonsData dataMonsData, int evolution)
+    public DataMonButton[] GetDataMonFromTeam(DataMonsData dataMonsData)
+    {
+        List<DataMonButton> tempList = new List<DataMonButton>();
+        for (int i = 0; i < DataTeam.Length; i++)
+        {
+            if (DataTeam[i] == null)
+                continue;
+#if UNITY_EDITOR
+            if (DataTeam[i].dataMonData == null)
+                continue;
+#endif 
+            if (DataTeam[i].dataMonData != dataMonsData)
+                continue;
+            tempList.Add(DataTeamPanels[i].GetComponent<DataMonButton>());
+
+        }
+        return tempList.ToArray();
+    }
+    public DataMonButton GetProductionDataMonFromTeam(DataMonsData dataMonsData, int evolution, bool isProduction)
     {
         DataMonButton temp = null;
         List<DataMonButton> tempList = new List<DataMonButton>();
@@ -345,6 +367,60 @@ public class DataDex : MonoBehaviour
             temp = tempList[0];
         return temp;
     }
+//    public DataMonButton GetDataMonFromTeam(DataMonsData dataMonsData)
+//    {
+//        DataMonButton temp = null;
+//        List<DataMonButton> tempList = new List<DataMonButton>();
+//        for (int i = 0; i < DataTeam.Length; i++)
+//        {
+//            if (DataTeam[i] == null)
+//                continue;
+//#if UNITY_EDITOR
+//            if (DataTeam[i].dataMonData == null)
+//                continue;
+//#endif 
+//            if (DataTeam[i].dataMonData != dataMonsData)
+//                continue;
+//            temp = DataTeamPanels[i].GetComponent<DataMonButton>();
+//            tempList.Add(temp);
+
+//        }
+//        return temp;
+//    }
+    public int GetDataMonCountFromTeam(DataMonsData dataMonsData)
+    {
+        int count = 0;
+        for (int i = 0; i < DataTeam.Length; i++)
+        {
+            if (DataTeam[i] == null)
+                continue;
+#if UNITY_EDITOR
+            if (DataTeam[i].dataMonData == null)
+                continue;
+#endif 
+            if (DataTeam[i].dataMonData != dataMonsData)
+                continue;
+            count++;
+
+        }
+        return count;
+    }
+//    public void SetDataMonFromTeamByModifier(float modifier, DataMonsData dataMonsData)
+//    {
+//        for (int i = 0; i < DataTeam.Length; i++)
+//        {
+//            if (DataTeam[i] == null)
+//                continue;
+//#if UNITY_EDITOR
+//            if (DataTeam[i].dataMonData == null)
+//                continue;
+//#endif 
+//            if (DataTeam[i].dataMonData != dataMonsData)
+//                continue;
+//            DataTeam[i].CurrentAttributes.SetAttributesByModifier(DataTeam[i].dataMon.BaseAttributes, modifier);
+
+//        }
+    //}
 }
 
 public enum DataPadModules
@@ -367,18 +443,21 @@ public class DataMonHolder
 {
     public DataMonsData dataMonData;
     public DataMonIndividualData dataMon;
+    public DataMonAttributes dataMonBaseAttributes;
     public DataMonInstancedAttributes dataMonCurrentAttributes;
     public DataMonHolder() { }
     public DataMonHolder(IndividualDataMon.DataMon toHold)
     {
         dataMonData = toHold.dataMonData;
         dataMon = toHold.dataMon;
-        dataMonCurrentAttributes = new DataMonInstancedAttributes(toHold.dataMonCurrentAttributes);
+        dataMonBaseAttributes = toHold.baseAttributes;
+        dataMonCurrentAttributes = new DataMonInstancedAttributes(toHold.CurrentAttributes);
     }
     public DataMonHolder(DataMonHolder toHold)
     {
         dataMonData = toHold.dataMonData;
         dataMon = toHold.dataMon;
+        dataMonBaseAttributes = toHold.dataMonBaseAttributes;
         dataMonCurrentAttributes = new DataMonInstancedAttributes(toHold.dataMonCurrentAttributes);
     }
 

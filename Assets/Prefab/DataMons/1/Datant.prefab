@@ -1652,9 +1652,13 @@ MonoBehaviour:
   NextWaypointDist: 0.81
   PatrollingDistance: 1.81
   WanderingDistance: 10
+  ProductionDistance: 0.95
   patrollingAnchor: {fileID: 0}
   aggroSystem: {fileID: 0}
   CurrentTask: 0
+  DataMonProductionTime: 0
+  CurrentProductionProgress: 0
+  GlitchDamage: 0
 --- !u!114 &8519851035581550597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1700,6 +1704,7 @@ MonoBehaviour:
     CurrentCaptureChance: 100
   NamePlate: {fileID: 5580441581073435431}
   NamePlateText: {fileID: 5580441581203275784}
+  TaskText: {fileID: 6605157327373977865}
   DataMonAttacksID: 0
   DataMonAttacksParentObj: {fileID: 0}
   SpawnedFromChunk: {x: 0, y: 0}
@@ -1723,6 +1728,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8519851035581550600}
     m_Modifications:
+    - target: {fileID: 4865741776253088313, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Name
+      value: Tasks Text
+      objectReference: {fileID: 0}
     - target: {fileID: 7802660751728996237, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}
       propertyPath: m_Layer
@@ -1840,6 +1850,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27, type: 3}
+--- !u!114 &6605157327373977865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8832424217793970037, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+    type: 3}
+  m_PrefabInstance: {fileID: 2393989277216896636}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5580441581073435424 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7802660753196514652, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
