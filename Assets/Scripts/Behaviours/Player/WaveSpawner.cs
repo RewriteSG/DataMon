@@ -80,7 +80,7 @@ public class WaveSpawner : MonoBehaviour
             if (state != SpawnState.Spawning)
             {
                 //start spawning wave
-                StartCoroutine(SpawnWave(waves[NextWave]));
+                //StartCoroutine(SpawnWave(waves[NextWave]));
             }
         }
         else

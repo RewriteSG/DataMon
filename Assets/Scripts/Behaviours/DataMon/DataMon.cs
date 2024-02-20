@@ -55,7 +55,7 @@ namespace IndividualDataMon
                 baseAttributes = DataMonAttributes.CopyDataMonAttributes(dataMon.BaseAttributes);
                 healthBar.SetMaxHealth(Mathf.RoundToInt(baseAttributes.BaseHealth));
                 if (isBoss)
-                    NamePlateText.transform.SetParent(null);
+                    NamePlate.transform.SetParent(null);
             }
             DataMonAttacksID = GameManager.TotalDataMonIDs++;
 
