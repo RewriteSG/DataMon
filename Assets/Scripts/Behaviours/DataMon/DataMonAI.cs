@@ -146,8 +146,6 @@ public class DataMonAI : MonoBehaviour
     }
     public void ChangeAttackTargetEnemy(GameObject enemy)
     {
-        if (DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
-            return;
         Target = enemy.transform;
 
     }

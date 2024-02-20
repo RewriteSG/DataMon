@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -23,9 +24,19 @@ public class WaveSpawner : MonoBehaviour
     public float timeBetweenWaves = 5f;
     private float waveCountdown;
 
+    public int WavesBeforeIncreaseDifficulty;
+
     private SpawnState state = SpawnState.Counting;
 
+    public Wave.WaveDifficulty currentDifficulty;
+
+    public RoamingSpawner roamingSpawner;
+
     private float searchCountDown = 1f;
+
+    public TextMeshProUGUI waveIncomingText;
+
+    public static int enemyCount;
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +49,14 @@ public class WaveSpawner : MonoBehaviour
         }
 
         waveCountdown = timeBetweenWaves;
+        ChangeDifficulty(Wave.WaveDifficulty.Easy);
+        enemyCount = 0;
     }
-
+    public void ChangeDifficulty(Wave.WaveDifficulty toDifficulty)
+    {
+        currentDifficulty = toDifficulty;
+        roamingSpawner.AddDataMonToRoamingDatabase(toDifficulty);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -53,6 +70,8 @@ public class WaveSpawner : MonoBehaviour
             }
             else
             {
+                waveIncomingText.text = "Wave Incoming: " + waveCountdown.ToString("0.#s");
+
                 return;
             }
         }
@@ -66,6 +85,7 @@ public class WaveSpawner : MonoBehaviour
         }
         else
         {
+            waveIncomingText.text = "Wave Incoming: " + waveCountdown.ToString("0.#s");
             waveCountdown -= Time.deltaTime;
         }
     }
@@ -76,7 +96,33 @@ public class WaveSpawner : MonoBehaviour
 
         state = SpawnState.Counting;
 
-        waveCountdown = timeBetweenWaves;
+        switch (currentDifficulty)
+        {
+            case Wave.WaveDifficulty.Easy:
+                waveCountdown = timeBetweenWaves;
+                break;
+            case Wave.WaveDifficulty.Normal:
+                waveCountdown = timeBetweenWaves*1.7f;
+                break;
+            case Wave.WaveDifficulty.Hard:
+                waveCountdown = timeBetweenWaves * 2.3f;
+                break;
+            case Wave.WaveDifficulty.Difficult:
+
+                waveCountdown = timeBetweenWaves * 2.5f;
+                break;
+            case Wave.WaveDifficulty.Hell:
+                waveCountdown = timeBetweenWaves * 2.7f;
+                break;
+        }
+        //waveCountdown = timeBetweenWaves;
+
+        if(NextWave +1 == WavesBeforeIncreaseDifficulty)
+        {
+            WavesBeforeIncreaseDifficulty *= 2;
+            currentDifficulty +=  1;
+            roamingSpawner.AddDataMonToRoamingDatabase(currentDifficulty);
+        }
 
         if (NextWave + 1>waves.Length-1)
         {
@@ -117,7 +163,7 @@ public class WaveSpawner : MonoBehaviour
             for (int i = 0; x < _wave._EnemiesInWave[x].Count; i++)
             {
                 SpawnEnemy(_wave._EnemiesInWave[x].DataMon.DataMonPrefab);
-
+                enemyCount++;
                 yield return new WaitForSeconds(0.1f);
             }
         }
@@ -133,8 +179,22 @@ public class WaveSpawner : MonoBehaviour
         
         Debug.Log("Spawning enemy: " + _enemy.name);
 
-        
         Transform _sp = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
-        Instantiate(_enemy, _sp.position, _sp.rotation);
+        
+        StartCoroutine(SetEnemyAngry(Instantiate(_enemy, _sp.position, _sp.rotation)));
+    }
+    IndividualDataMon.DataMon dataMon;
+    IEnumerator SetEnemyAngry(GameObject enemy)
+    {
+        enemy.AddComponent<WaveEnemyScript>();
+
+        dataMon = enemy.GetComponent<IndividualDataMon.DataMon>();
+
+        dataMon.SetDataMonHostile();
+
+        dataMon.dataMonAI.ChangeAttackTargetEnemy(GameManager.instance.Player.gameObject);
+
+        yield return new WaitForEndOfFrame();
+
     }
 }

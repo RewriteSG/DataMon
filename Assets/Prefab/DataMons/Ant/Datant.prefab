@@ -134,8 +134,8 @@ MonoBehaviour:
   - Datantite
   - Datantaur
   dataMon:
-    DataMonName: Datant
-    DataMonPrefab: {fileID: 145781175407673768}
+    DataMonName: aaa
+    DataMonPrefab: {fileID: 0}
     InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 20
@@ -207,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233214863616744370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.7, z: 0}
+  m_LocalPosition: {x: 0, y: 3.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 145781175407673762}
@@ -478,7 +478,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.3962121}
@@ -1837,7 +1837,7 @@ PrefabInstance:
     - target: {fileID: 7802660753196514652, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 7802660753196514652, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}

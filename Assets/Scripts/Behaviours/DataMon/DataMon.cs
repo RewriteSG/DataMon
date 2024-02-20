@@ -38,6 +38,7 @@ namespace IndividualDataMon
         public List<Attack> attackObjects = new List<Attack>();
 
         public int currentAttackIndex;
+        public bool isWaveEnemy;
 
         //[SerializeField]private GameObject test;
         private void Awake()
@@ -167,7 +168,14 @@ namespace IndividualDataMon
             }
             if (!gameObject.activeSelf)
                 return;
-            if(CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
+
+            if (CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && isWaveEnemy)
+
+            {
+                GetComponent<Databytes>().DataMonIsDestroyed();
+                Destroy(gameObject);
+            }
+            if (CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && !isWaveEnemy)
 
             {
                 GetComponent<Databytes>().DataMonIsDestroyed();
@@ -333,12 +341,12 @@ namespace IndividualDataMon
         }
         private void OnDestroy()
         {
-            if (dataMonAI == null || dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion || _databytes == null)
+            if (dataMonAI == null || dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && !isWaveEnemy || _databytes == null)
                 return;
             if (_databytes.isQuitting)
                 return;
-
-            StartPassive();
+            if (!isWaveEnemy)
+                StartPassive();
             for (int i = 0; i < attackObjects.Count; i++)
             {
                 GameManager.instance.Entity_Updates -= attackObjects[i].AttackCooldownUpdate;

@@ -15,7 +15,17 @@ public static class Extensions
         }
         return temp;
     }
+    public static List<T> Add<T>(this List<T> list, List<T> toAdd)
+    {
+
+        for (int i = 0; i < toAdd.Count; i++)
+        {
+            list.Add(toAdd[i]);
+        }
+        return list;
+    }
 }
+
 public static class TransformExtensions
 {
     public static Transform FindChildByTag<T>(this T transform, string tag) where T : Transform

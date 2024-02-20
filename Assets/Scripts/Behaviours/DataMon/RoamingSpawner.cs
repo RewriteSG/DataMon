@@ -5,11 +5,24 @@ using IndividualDataMon;
 [DefaultExecutionOrder(2)]
 public class RoamingSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject[] Datamons_roaming;
-    [SerializeField]List<DataMon> Datamons_roamingData = new List<DataMon>();
+    [SerializeField] GameObject[] AllDataMonPrefabs;
+    List<DataMon> Datamons_roamingData = new List<DataMon>();
     public static Dictionary<string, List<DataMon>> DataMonsPool = new Dictionary<string, List<DataMon>>();
     public static Dictionary<Vector2, DataMonsInChunk> MonsInChunk = new Dictionary<Vector2, DataMonsInChunk>();
     public static List<DataMon> ALLDataMons = new List<DataMon>();
+    
+    //Easy = 1,
+    //    Normal = 2,
+    //    Hard = 3, 
+    //    Difficult = 4,
+    //    Hell = 5
+
+    public List<DataMon> RoamingDataBase = new List<DataMon>();
+
+    public List<DataMon> EasyDataMons = new List<DataMon>(), NormalDataMons = new List<DataMon>(),
+        HardDataMons = new List<DataMon>(), DifficultDataMons = new List<DataMon>(), HellDataMons = new List<DataMon>();
+
+
 
     private Vector3 SpawnPosition;
     public float MaxNumberOfDataMonInChunk = 20;
@@ -24,25 +37,25 @@ public class RoamingSpawner : MonoBehaviour
         SpawnPointsInRenderDist.Clear();
         ALLDataMons.Clear();
         doot_doot = 0;
-        for (int i = 0; i < Datamons_roaming.Length; i++)
+        for (int i = 0; i < AllDataMonPrefabs.Length; i++)
         {
-            Datamons_roamingData.Add(Datamons_roaming[i].GetComponent<DataMon>());
+            Datamons_roamingData.Add(AllDataMonPrefabs[i].GetComponent<DataMon>());
             Datamons_roamingData[Datamons_roamingData.Count - 1].SetDataMon(
                 Datamons_roamingData[Datamons_roamingData.Count - 1].dataMonData.DataMons.
-                GetDataMonInDataArray(Datamons_roamingData[Datamons_roamingData.Count - 1].gameObject.name));
+                GetDataMonInDataArray(Datamons_roamingData[Datamons_roamingData.Count - 1].gameObject));
         }
         List<DataMon> temp;
         DataMonPoolGO = new GameObject("DataMons");
         //DataMonPoolGO.transform.position = new Vector3(0, -9000);
         DataMon _datamon;
         if(!SaveLoadManager.instance.DoLoadWorld)
-            for (int i = 0; i < Datamons_roaming.Length; i++)
+            for (int i = 0; i < AllDataMonPrefabs.Length; i++)
             {
                 temp = new List<DataMon>();
 
                 for (int x = 0; x < GameManager.instance.MaxNumberOfWildDataMons; x++)
                 {
-                    _datamon = Instantiate(Datamons_roaming[i], DataMonPoolGO.transform).GetComponent<DataMon>();
+                    _datamon = Instantiate(AllDataMonPrefabs[i], DataMonPoolGO.transform).GetComponent<DataMon>();
                     temp.Add(_datamon);
                     ALLDataMons.Add(_datamon);
                     temp[temp.Count - 1].gameObject.SetActive(false);
@@ -52,6 +65,7 @@ public class RoamingSpawner : MonoBehaviour
             }
         StartCoroutine(SpawnInBatches(3,10));
     }
+
     bool isReferenced;
     int rejected;
     IEnumerator SpawnInBatches(float delay, int DataMonPerBatch)
@@ -113,6 +127,28 @@ public class RoamingSpawner : MonoBehaviour
         }
 
     }
+    public void AddDataMonToRoamingDatabase(Wave.WaveDifficulty difficulty)
+    {
+        RoamingDataBase.Clear();
+        switch (difficulty)
+        {
+            case Wave.WaveDifficulty.Easy:
+                RoamingDataBase = RoamingDataBase.Add(EasyDataMons);
+                break;
+            case Wave.WaveDifficulty.Normal:
+                RoamingDataBase = RoamingDataBase.Add(NormalDataMons);
+                break;
+            case Wave.WaveDifficulty.Hard:
+                RoamingDataBase = RoamingDataBase.Add(HardDataMons);
+                break;
+            case Wave.WaveDifficulty.Difficult:
+                RoamingDataBase = RoamingDataBase.Add(DifficultDataMons);
+                break;
+            case Wave.WaveDifficulty.Hell:
+                RoamingDataBase = RoamingDataBase.Add(HellDataMons);
+                break;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -130,7 +166,7 @@ public class RoamingSpawner : MonoBehaviour
 
     private void SpawnNewDataMon(Vector2 _RandomSpawnPoint)
     {
-        DataMonsPool.TryGetValue(Datamons_roamingData[Random.Range(0, Datamons_roaming.Length)].dataMon.DataMonName, out List<DataMon> temp);
+        DataMonsPool.TryGetValue(RoamingDataBase[Random.Range(0, RoamingDataBase.Count)].dataMon.DataMonName, out List<DataMon> temp);
         temp[0].transform.position = SpawnPosition;
         temp[0].gameObject.SetActive(true);
         temp[0].dataMonAI.SetNewPatrollingAnchorPos();

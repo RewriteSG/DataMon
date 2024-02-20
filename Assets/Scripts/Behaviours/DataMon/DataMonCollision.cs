@@ -9,6 +9,8 @@ public class DataMonCollision : MonoBehaviour
     void Awake()
     {
         DataMon = transform.parent.GetComponent<IndividualDataMon.DataMon>();
+        if(GetComponent<BoxCollider2D>() !=null)
+            GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     // Update is called once per frame
