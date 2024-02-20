@@ -39,6 +39,7 @@ public class RoamingSpawner : MonoBehaviour
         doot_doot = 0;
         for (int i = 0; i < AllDataMonPrefabs.Length; i++)
         {
+            print(i);
             Datamons_roamingData.Add(AllDataMonPrefabs[i].GetComponent<DataMon>());
             Datamons_roamingData[Datamons_roamingData.Count - 1].SetDataMon(
                 Datamons_roamingData[Datamons_roamingData.Count - 1].dataMonData.DataMons.

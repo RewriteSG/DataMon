@@ -38,7 +38,7 @@ namespace IndividualDataMon
         public List<Attack> attackObjects = new List<Attack>();
 
         public int currentAttackIndex;
-        public bool isWaveEnemy;
+        public bool isWaveEnemy, isBoss;
 
         //[SerializeField]private GameObject test;
         private void Awake()
@@ -54,7 +54,8 @@ namespace IndividualDataMon
                 healthBar = NamePlate.GetComponentInChildren<HealthBarScript>();
                 baseAttributes = DataMonAttributes.CopyDataMonAttributes(dataMon.BaseAttributes);
                 healthBar.SetMaxHealth(Mathf.RoundToInt(baseAttributes.BaseHealth));
-
+                if (isBoss)
+                    NamePlateText.transform.SetParent(null);
             }
             DataMonAttacksID = GameManager.TotalDataMonIDs++;
 
@@ -155,6 +156,9 @@ namespace IndividualDataMon
             //    DestroyDataMon();
 
             //}
+
+            if (isBoss)
+                ResetAttributes();
             GameManager.instance.Entity_Updates += ToUpdate;
         }
         void ToUpdate()
@@ -312,8 +316,6 @@ namespace IndividualDataMon
             dataMon.MonBehaviourState = DataMonBehaviourState.isCompanion;
             NamePlateText.color = GameManager.instance.CompanionColor;
 
-
-
         }
 
         public void StartPassive()
@@ -358,6 +360,8 @@ namespace IndividualDataMon
         }
         public void DestroyDataMon()
         {
+            if (isWaveEnemy)
+                return;
             gameObject.SetActive(false);
             ResetAttributes();
             RoamingSpawner.doot_doot--;

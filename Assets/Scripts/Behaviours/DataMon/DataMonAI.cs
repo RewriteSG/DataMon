@@ -38,6 +38,7 @@ public class DataMonAI : MonoBehaviour
         gameObject.AddComponent<AggroSystem>();
         timerToChangeTarget = 999;
         //InvokeRepeating("TestAI", 0, .5f);
+        
     }
     private void OnEnable()
     {
@@ -161,7 +162,7 @@ public class DataMonAI : MonoBehaviour
 
             patrollingAnchor = newPatrolAnchor;
         }
-        if (patrollingAnchor == null && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
+        if (patrollingAnchor == null && DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
         {
             GameObject newPatrolAnchor = new GameObject(DataMon.dataMon.DataMonName + "'s Patrolling Anchor");
             newPatrolAnchor.transform.position = transform.position;
