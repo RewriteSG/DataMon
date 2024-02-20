@@ -21,6 +21,8 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(5);
         }
+        if (currentHealth <= 0)
+            SceneChanger.ChangeScene("LoseScene");
     }
     public void TakeDamage(float damage)
     {
