@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7cd76db86f1e6c48902b25244c0ea7e, type: 3}
+  m_Name: D_HumanoidReindeer
+  m_EditorClassIdentifier: 
+  EvolutionCosts: 0f00000023000000
+  InherentPassives: []
+  InherentAllDataMonAbility: []
+  AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
+  DataMons:
+  - DataMonName: Arbox
+    DataMonPrefab: {fileID: 1335662195762606950, guid: a1a189a22b453314ba89af933aa44f36,
+      type: 3}
+    InherentDataMonAbility: []
+    BaseAttributes:
+      BaseHealth: 20
+      BaseAttack: 12
+      BaseProductionSpeed: 0
+      BaseMoveSpeed: 180
+      BaseAttackRange: 0
+      BaseCaptureChance: 60
+    MonBehaviourState: 0
+  - DataMonName: Foliox
+    DataMonPrefab: {fileID: 8199447733351373943, guid: 918a46757712ba345bf7956e63309945,
+      type: 3}
+    InherentDataMonAbility: []
+    BaseAttributes:
+      BaseHealth: 25
+      BaseAttack: 12
+      BaseProductionSpeed: 0
+      BaseMoveSpeed: 180
+      BaseAttackRange: 0
+      BaseCaptureChance: 50
+    MonBehaviourState: 0
+  - DataMonName: Thornox
+    DataMonPrefab: {fileID: 7069348724174970135, guid: af33d81fb76d7174d8c6831b12f1ba68,
+      type: 3}
+    InherentDataMonAbility: []
+    BaseAttributes:
+      BaseHealth: 35
+      BaseAttack: 18
+      BaseProductionSpeed: 0
+      BaseMoveSpeed: 180
+      BaseAttackRange: 0
+      BaseCaptureChance: 45
+    MonBehaviourState: 0
+  MonRole: 0

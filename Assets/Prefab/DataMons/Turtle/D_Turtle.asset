@@ -10,48 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7cd76db86f1e6c48902b25244c0ea7e, type: 3}
-  m_Name: D_Ant
+  m_Name: D_Turtle
   m_EditorClassIdentifier: 
-  EvolutionCosts: 0500000014000000
-  InherentPassives:
-  - {fileID: 11400000, guid: 3eb4063afb2de0c4fa20cd765e717821, type: 2}
+  EvolutionCosts: 0a00000019000000
+  InherentPassives: []
   InherentAllDataMonAbility: []
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
-  - DataMonName: Datant
-    DataMonPrefab: {fileID: 145781175407673768, guid: 67a9c31a78d2533408d939ecb8dc2e3d,
+  - DataMonName: Turt
+    DataMonPrefab: {fileID: 5621823419656160950, guid: aeb4441831823144c8d81a83e9af7bdc,
       type: 3}
     InherentDataMonAbility: []
     BaseAttributes:
-      BaseHealth: 8
+      BaseHealth: 12
       BaseAttack: 5
       BaseProductionSpeed: 0
-      BaseMoveSpeed: 200
-      BaseAttackRange: 3
-      BaseCaptureChance: 90
-    MonBehaviourState: 2
-  - DataMonName: Datantite
-    DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
+      BaseMoveSpeed: 170
+      BaseAttackRange: 0
+      BaseCaptureChance: 0
+    MonBehaviourState: 0
+  - DataMonName: Turtyst
+    DataMonPrefab: {fileID: 726187970350386918, guid: a131661482287b64d9e8d8cfae3dadb0,
       type: 3}
     InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 15
-      BaseAttack: 7
+      BaseAttack: 8
       BaseProductionSpeed: 0
-      BaseMoveSpeed: 200
-      BaseAttackRange: 3
-      BaseCaptureChance: 60
-    MonBehaviourState: 2
-  - DataMonName: Datantaur
-    DataMonPrefab: {fileID: 209965498595768710, guid: a750213a5d6068143b7150b0d1f66701,
+      BaseMoveSpeed: 170
+      BaseAttackRange: 0
+      BaseCaptureChance: 0
+    MonBehaviourState: 0
+  - DataMonName: Crysturt
+    DataMonPrefab: {fileID: 6312990260497089612, guid: 27de0d69d8bbd4d40bbc9874d030fc9f,
       type: 3}
     InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 25
-      BaseAttack: 12
+      BaseAttack: 13
       BaseProductionSpeed: 0
-      BaseMoveSpeed: 200
-      BaseAttackRange: 3
-      BaseCaptureChance: 45
-    MonBehaviourState: 2
+      BaseMoveSpeed: 170
+      BaseAttackRange: 0
+      BaseCaptureChance: 0
+    MonBehaviourState: 0
   MonRole: 0

@@ -93,7 +93,7 @@ public class AbilitiesScriptableObjects : ScriptableObject
     void SetAntAttribute(ref DataMon dataMon, int count)
     {
         int evolution = dataMon.tier;
-        modifier = ModifiersByEvolution[evolution] * count;
+        modifier = ModifiersByEvolution[evolution] * count-1;
         dataMon.SetAttributesByModifier(modifier);
     }
     void Passive_Ant(ref DataMon dataMon)

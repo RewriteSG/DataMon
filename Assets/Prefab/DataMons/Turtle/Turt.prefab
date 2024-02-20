@@ -643,7 +643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5621823419656160950}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.284582, y: 39.367046, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.17325479, y: 0.17325479, z: 0.17325479}
   m_Children:
   - {fileID: 2235128002923799239}
@@ -784,6 +784,7 @@ MonoBehaviour:
   Model: {fileID: 0}
   attackObjects: []
   currentAttackIndex: 0
+  isWaveEnemy: 0
 --- !u!114 &6714553492781356945
 MonoBehaviour:
   m_ObjectHideFlags: 0

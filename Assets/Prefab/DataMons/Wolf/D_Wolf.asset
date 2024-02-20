@@ -10,48 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7cd76db86f1e6c48902b25244c0ea7e, type: 3}
-  m_Name: D_Ant
+  m_Name: D_Wolf
   m_EditorClassIdentifier: 
-  EvolutionCosts: 0500000014000000
-  InherentPassives:
-  - {fileID: 11400000, guid: 3eb4063afb2de0c4fa20cd765e717821, type: 2}
+  EvolutionCosts: 0f00000023000000
+  InherentPassives: []
   InherentAllDataMonAbility: []
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
-  - DataMonName: Datant
-    DataMonPrefab: {fileID: 145781175407673768, guid: 67a9c31a78d2533408d939ecb8dc2e3d,
-      type: 3}
-    InherentDataMonAbility: []
-    BaseAttributes:
-      BaseHealth: 8
-      BaseAttack: 5
-      BaseProductionSpeed: 0
-      BaseMoveSpeed: 200
-      BaseAttackRange: 3
-      BaseCaptureChance: 90
-    MonBehaviourState: 2
-  - DataMonName: Datantite
-    DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
+  - DataMonName: ScraPeter
+    DataMonPrefab: {fileID: 4978633443002041284, guid: 8e61f1e77281460468e2bc75cb8542d1,
       type: 3}
     InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 15
-      BaseAttack: 7
+      BaseAttack: 15
       BaseProductionSpeed: 0
-      BaseMoveSpeed: 200
-      BaseAttackRange: 3
-      BaseCaptureChance: 60
+      BaseMoveSpeed: 150
+      BaseAttackRange: 0
+      BaseCaptureChance: 0
     MonBehaviourState: 2
-  - DataMonName: Datantaur
-    DataMonPrefab: {fileID: 209965498595768710, guid: a750213a5d6068143b7150b0d1f66701,
+  - DataMonName: ProtoPeter
+    DataMonPrefab: {fileID: 8909911149548451120, guid: 29b85658bd60899458a88ddb78ff30be,
       type: 3}
     InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 25
-      BaseAttack: 12
+      BaseAttack: 25
+      BaseProductionSpeed: 0
+      BaseMoveSpeed: 160
+      BaseAttackRange: 0
+      BaseCaptureChance: 0
+    MonBehaviourState: 2
+  - DataMonName: Peter
+    DataMonPrefab: {fileID: 5139332057412728592, guid: 207f5fd8f2a4589409f83cb30cf9a4ea,
+      type: 3}
+    InherentDataMonAbility: []
+    BaseAttributes:
+      BaseHealth: 35
+      BaseAttack: 35
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
-      BaseAttackRange: 3
-      BaseCaptureChance: 45
+      BaseAttackRange: 0
+      BaseCaptureChance: 0
     MonBehaviourState: 2
   MonRole: 0

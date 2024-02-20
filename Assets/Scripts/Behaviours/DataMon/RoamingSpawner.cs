@@ -63,7 +63,7 @@ public class RoamingSpawner : MonoBehaviour
                 DataMonsPool.Add(Datamons_roamingData[i].dataMon.DataMonName, temp);
                
             }
-        StartCoroutine(SpawnInBatches(3,10));
+        //StartCoroutine(SpawnInBatches(3,10));
     }
 
     bool isReferenced;
