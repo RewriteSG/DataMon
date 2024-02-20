@@ -10,6 +10,7 @@ public class DataMonsData : ScriptableObject
 
     public AbilitiesScriptableObjects[] InherentPassives;
     public Attack[] InherentAllDataMonAbility;
+    public AttackScriptableObject AttacksObjects;
 
     [Header("Put DataMons from tier 1 to tier 2, and so on..")]
     public DataMonIndividualData[] DataMons;
@@ -32,7 +33,6 @@ public class DataMonIndividualData
     public string DataMonName;
     public GameObject DataMonPrefab;
     public Attack[] InherentDataMonAbility;
-    public AbilitiesScriptableObjects[] DataMonAbility;
     public DataMonAttributes BaseAttributes;
     public DataMonBehaviourState MonBehaviourState;
     public DataMonIndividualData()
@@ -47,7 +47,6 @@ public class DataMonIndividualData
         DataMonIndividualData temp = new DataMonIndividualData();
         temp.DataMonName = toCopy.DataMonName;
         temp.DataMonPrefab = toCopy.DataMonPrefab;
-        temp.DataMonAbility = toCopy.DataMonAbility;
         temp.BaseAttributes = DataMonInstancedAttributes.ConvertToDataMonAttributes(new DataMonInstancedAttributes(toCopy.BaseAttributes));
         temp.MonBehaviourState = toCopy.MonBehaviourState;
         return temp;

@@ -2,9 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Extensions
+public static class Extensions
 {
+    public static List<DamagedBy> RemoveNullReferencesFromArray(this List<DamagedBy> array)
+    {
+        List<DamagedBy> temp = new List<DamagedBy>();
 
+        for (int i = 0; i < array.Count; i++)
+        {
+            if (array[i].byGameObject != null)
+                    temp.Add(array[i]);
+        }
+        return temp;
+    }
 }
 public static class TransformExtensions
 {

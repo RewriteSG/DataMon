@@ -27,6 +27,7 @@ public class DataMonAI : MonoBehaviour
     int DataBytesUsed;
     GameObject ItemCrafted;
     GlitchObject glitch;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -223,7 +224,7 @@ public class DataMonAI : MonoBehaviour
         else
             allCollidersInCircle = Physics2D.OverlapCircleAll(transform.position, ProductionDistance);
 
-
+        DataMon.GetAvailableAttack();
 
         if (DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject))
         {
@@ -350,6 +351,7 @@ public class DataMonAI : MonoBehaviour
         }
         if (doingSomething && (AI_state == AI_State.Attack || AI_state == AI_State.Produce))
         {
+            print("Still Attacking");
             reachedEndOfPath = true;
             return;
         }
@@ -401,18 +403,34 @@ public class DataMonAI : MonoBehaviour
             currentWaypoint++;
         }
     }
-
+    float currentAttackingTime;
     void DataMonDoThings()
     {
         
         switch (AI_state)
         {
             case AI_State.Attack:
-                if (!doingSomething && Vector2.Distance(Target.position,transform.position) < DataMon.baseAttributes.BaseAttackRange + 0.2f)
+                if (DataMon == null)
+                    return;
+                if (DataMon.attackObjects.Count == 0)
+                    return;
+
+                if (!doingSomething && Vector2.Distance(Target.position,transform.position) < DataMon.attackObjects[DataMon.currentAttackIndex].attackObject.AttackRange &&
+                    DataMon.attackObjects[DataMon.currentAttackIndex].isAvailable)
                 {
                     doingSomething = true;
+                    currentAttackingTime = 0;
+                    DataMon.StartAttack(Target);
                 }
-                
+                if (!doingSomething)
+                    return;
+
+                if (currentAttackingTime >= DataMon.attackObjects[DataMon.currentAttackIndex].AttackDelayDataMonAfterFiring)
+                {
+                    doingSomething = false;
+                }
+                else
+                    currentAttackingTime += Time.deltaTime;
                 // Instantiate Attack
                 break;
             case AI_State.Produce:

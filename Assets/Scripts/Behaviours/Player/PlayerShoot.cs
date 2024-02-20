@@ -26,7 +26,7 @@ public class PlayerShoot : MonoBehaviour
     public TMP_Text AmmoText;
 
     public float _FistsDamage;
-    BulletInstance fistsCollision;
+    public BulletInstance fistsCollision;
 
 
     FistAttack fistsAttack;
@@ -40,6 +40,7 @@ public class PlayerShoot : MonoBehaviour
         huntingRifle = GameManager.instance.huntingRifle;
         shotgun = GameManager.instance.shotgun;
         assaultRifle = GameManager.instance.assaultRifle;
+        fistsCollision.gameObject.SetActive(false);
     }
     void Update()
     {

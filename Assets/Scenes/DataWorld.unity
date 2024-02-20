@@ -7317,6 +7317,7 @@ MonoBehaviour:
   isFistProjectile: 1
   LeftFist: {fileID: 1726082625}
   RightFist: {fileID: 0}
+  playerShoot: {fileID: 0}
   LeftFistDefaultPos: {x: 0, y: 0}
   RightFistDefaultPos: {x: 0, y: 0}
   LeftFistDefaultRot: {x: 0, y: 0}
@@ -7519,7 +7520,7 @@ PrefabInstance:
     - target: {fileID: 8519851035581550600, guid: 1a6bb742163fc234ea58abfc7833d8fc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8519851035581550600, guid: 1a6bb742163fc234ea58abfc7833d8fc,
         type: 3}
@@ -10646,36 +10647,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1003124283}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1018252103
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1018252104}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1018252104
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018252103}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 88.479385, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1019828146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11111,6 +11082,7 @@ MonoBehaviour:
   EvolutionCosts: 
   InherentPassives: []
   InherentAllDataMonAbility: []
+  AttacksObjects: {fileID: 0}
   DataMons: []
   MonRole: 0
 --- !u!1 &1082188670
@@ -12961,7 +12933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1279989612
 Transform:
   m_ObjectHideFlags: 0
@@ -13010,6 +12982,7 @@ MonoBehaviour:
   isFistProjectile: 0
   LeftFist: {fileID: 1726082625}
   RightFist: {fileID: 390599165}
+  playerShoot: {fileID: 1381013331137174200}
   LeftFistDefaultPos: {x: 0, y: 0}
   RightFistDefaultPos: {x: 0, y: 0}
   LeftFistDefaultRot: {x: 0, y: 0}
@@ -13158,6 +13131,7 @@ MonoBehaviour:
   isFistProjectile: 1
   LeftFist: {fileID: 1726082625}
   RightFist: {fileID: 0}
+  playerShoot: {fileID: 0}
   LeftFistDefaultPos: {x: 0, y: 0}
   RightFistDefaultPos: {x: 0, y: 0}
   LeftFistDefaultRot: {x: 0, y: 0}
@@ -16507,7 +16481,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616507415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 9000, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 1279989612}
@@ -17171,7 +17145,6 @@ MonoBehaviour:
         DataMonPrefab: {fileID: 8519851035581550594, guid: 1a6bb742163fc234ea58abfc7833d8fc,
           type: 3}
         InherentDataMonAbility: []
-        DataMonAbility: []
         BaseAttributes:
           BaseHealth: 20
           BaseAttack: 0
@@ -17192,7 +17165,6 @@ MonoBehaviour:
         DataMonName: 
         DataMonPrefab: {fileID: 0}
         InherentDataMonAbility: []
-        DataMonAbility: []
         BaseAttributes:
           BaseHealth: 0
           BaseAttack: 0
@@ -17215,7 +17187,6 @@ MonoBehaviour:
         DataMonPrefab: {fileID: 8519851035581550594, guid: 1a6bb742163fc234ea58abfc7833d8fc,
           type: 3}
         InherentDataMonAbility: []
-        DataMonAbility: []
         BaseAttributes:
           BaseHealth: 20
           BaseAttack: 0
@@ -17235,7 +17206,6 @@ MonoBehaviour:
       DataMonPrefab: {fileID: 8519851035581550594, guid: 1a6bb742163fc234ea58abfc7833d8fc,
         type: 3}
       InherentDataMonAbility: []
-      DataMonAbility: []
       BaseAttributes:
         BaseHealth: 20
         BaseAttack: 0
@@ -18951,7 +18921,7 @@ PrefabInstance:
     - target: {fileID: 8519851035581550600, guid: 1a6bb742163fc234ea58abfc7833d8fc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8519851035581550600, guid: 1a6bb742163fc234ea58abfc7833d8fc,
         type: 3}
@@ -19178,6 +19148,7 @@ MonoBehaviour:
   isFistProjectile: 1
   LeftFist: {fileID: 0}
   RightFist: {fileID: 390599165}
+  playerShoot: {fileID: 0}
   LeftFistDefaultPos: {x: 0, y: 0}
   RightFistDefaultPos: {x: 0, y: 0}
   LeftFistDefaultRot: {x: 0, y: 0}
@@ -20415,7 +20386,7 @@ PrefabInstance:
     - target: {fileID: 1945587434936444376, guid: a48b25debb7b001499836914167097d1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1945587434936444376, guid: a48b25debb7b001499836914167097d1,
         type: 3}
@@ -22527,6 +22498,7 @@ MonoBehaviour:
   isFistProjectile: 1
   LeftFist: {fileID: 0}
   RightFist: {fileID: 390599165}
+  playerShoot: {fileID: 0}
   LeftFistDefaultPos: {x: 0, y: 0}
   RightFistDefaultPos: {x: 0, y: 0}
   LeftFistDefaultRot: {x: 0, y: 0}
@@ -25738,6 +25710,7 @@ MonoBehaviour:
   _DestroyDataBallAtDelay: 2
   AmmoText: {fileID: 1779174431}
   _FistsDamage: 2
+  fistsCollision: {fileID: 0}
 --- !u!114 &1381013331137174201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26005,10 +25978,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 0
+  AttackPoint: {fileID: 0}
   isBeingCaptured: 0
   isCompanion: 0
   dataMonData: {fileID: 11400000, guid: 8418c7b48189b9b4e8f4f3d838ce55ef, type: 2}
-  test: {fileID: 3720160180207510574, guid: a1cd0defbd70d9b4a9429065abf4e295, type: 3}
   selected: 0
   DataMonNames: []
   dataMon:
@@ -26016,7 +25989,6 @@ MonoBehaviour:
     DataMonPrefab: {fileID: 8258848450777015259, guid: 549be21259e953244b9ebabddc679a33,
       type: 3}
     InherentDataMonAbility: []
-    DataMonAbility: []
     BaseAttributes:
       BaseHealth: 65.02
       BaseAttack: 5.01
@@ -26047,6 +26019,9 @@ MonoBehaviour:
   DataMonAttacksID: 0
   DataMonAttacksParentObj: {fileID: 0}
   SpawnedFromChunk: {x: 0, y: 0}
+  Model: {fileID: 0}
+  attackObjects: []
+  currentAttackIndex: 0
 --- !u!1 &1381013331188506913
 GameObject:
   m_ObjectHideFlags: 0
@@ -27468,20 +27443,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a90ec1b5f560a4faa4d9a90b67cfd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HostileDataMonsGOs: []
   Player: {fileID: 1381013331137174206}
   playerShootScript: {fileID: 0}
   playerRb: {fileID: 0}
+  HostileDataMonsGOs: []
   PlayerDataMonPatrolMinDist: 1.96
   PlayerDataMonPatrolMaxDist: 7.5
   DataMonSpawnRadiusFromPlayer: 9.22
   DataMonEnableRbInRadius: 16.2
   MaxDistForCompanionDataMon: 8.2
   CaptureDelay: 1
+  NumberOfDataMonsInTeam: 4
   DataMonsRotationSpeed: 200
   DataMonInDataDexHPRegen: 1
   MaxNumberOfWildDataMons: 30
-  NumberOfDataMonsInTeam: 4
   DataWorldBorderLeftX: -4
   DataWorldBorderRightX: 104
   DataWorldBorderDownY: -4
@@ -27907,11 +27882,11 @@ MonoBehaviour:
   EvolveButton: {fileID: 1952757128}
   DataMonToEvolve:
     dataMonData: {fileID: 0}
+    dataMonAttacks: []
     dataMon:
       DataMonName: 
       DataMonPrefab: {fileID: 0}
       InherentDataMonAbility: []
-      DataMonAbility: []
       BaseAttributes:
         BaseHealth: 0
         BaseAttack: 0
@@ -27936,11 +27911,11 @@ MonoBehaviour:
       CurrentCaptureChance: 0
   EvolutionResult:
     dataMonData: {fileID: 0}
+    dataMonAttacks: []
     dataMon:
       DataMonName: 
       DataMonPrefab: {fileID: 0}
       InherentDataMonAbility: []
-      DataMonAbility: []
       BaseAttributes:
         BaseHealth: 0
         BaseAttack: 0

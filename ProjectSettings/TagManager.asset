@@ -13,6 +13,7 @@ TagManager:
   - PlayerRenderDist
   - Bullet
   - EnemyAttack
+  - AllyAttack
   layers:
   - Default
   - TransparentFX

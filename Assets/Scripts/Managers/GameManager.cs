@@ -8,21 +8,22 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public static int TotalDataMonIDs;
     public static int HostileDataMons;
-
-    public List<GameObject> HostileDataMonsGOs = new List<GameObject>();
+    [Header("Player Variables")]
     public GameObject Player;
     [HideInInspector] public PlayerShoot playerShootScript;
     [HideInInspector] public Rigidbody2D playerRb;
+    public List<GameObject> HostileDataMonsGOs = new List<GameObject>();
     public float PlayerDataMonPatrolMinDist;
     public float PlayerDataMonPatrolMaxDist;
     public float DataMonSpawnRadiusFromPlayer, DataMonEnableRbInRadius;
-    
     public float MaxDistForCompanionDataMon;
     public float CaptureDelay = 1;
+    public int NumberOfDataMonsInTeam = 1;
+    [Header("====================")]
+
     public float DataMonsRotationSpeed;
     public float DataMonInDataDexHPRegen = 2;
     public int MaxNumberOfWildDataMons = 15;
-    public int NumberOfDataMonsInTeam = 1;
     [Header("WorldBorders")]
     public int DataWorldBorderLeftX,DataWorldBorderRightX, DataWorldBorderDownY, DataWorldBorderUpY;
     public float GlitchRespawnTime = 45;

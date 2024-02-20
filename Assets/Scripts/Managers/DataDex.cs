@@ -262,6 +262,7 @@ public class DataDex : MonoBehaviour
         IndividualDataMon.DataMon dataMon = summoned.GetComponent<IndividualDataMon.DataMon>();
         dataMon.SetAttributes(dataMonButton.dataMonHolder.dataMonCurrentAttributes);
         dataMon.SetDataMonCompanion();
+        dataMon.SetDataMonsAttacks(dataMonButton.dataMonHolder.dataMonAttacks);
 
         return summoned;
     }
@@ -442,6 +443,7 @@ public class DataDexIO
 public class DataMonHolder
 {
     public DataMonsData dataMonData;
+    public Attack[] dataMonAttacks;
     public DataMonIndividualData dataMon;
     public DataMonAttributes dataMonBaseAttributes;
     public DataMonInstancedAttributes dataMonCurrentAttributes;
@@ -450,6 +452,17 @@ public class DataMonHolder
     {
         dataMonData = toHold.dataMonData;
         dataMon = toHold.dataMon;
+        dataMonAttacks = new Attack[toHold.attackObjects.Count];
+        //Debug.Log("toHold.attackObjects.Count" + toHold.attackObjects.Count);
+        for (int i = 0; i < toHold.attackObjects.Count; i++)
+        {
+            //Debug.Log("AttacksObjects" + toHold.dataMonData.AttacksObjects.GetAttackByName(toHold.attackObjects[i].AttackName));
+
+            dataMonAttacks[i] = toHold.dataMonData.AttacksObjects.GetAttackByName(toHold.attackObjects[i].AttackName);
+
+            //Debug.Log("dataMonAttacks[i] " + dataMonAttacks[i].AttackName);
+        }
+
         dataMonBaseAttributes = toHold.baseAttributes;
         dataMonCurrentAttributes = new DataMonInstancedAttributes(toHold.CurrentAttributes);
     }
@@ -457,6 +470,18 @@ public class DataMonHolder
     {
         dataMonData = toHold.dataMonData;
         dataMon = toHold.dataMon;
+
+        dataMonAttacks = new Attack[toHold.dataMonAttacks.Length];
+        //Debug.Log("toHold.attackObjects.Count" + toHold.dataMonAttacks.Length);
+        for (int i = 0; i < toHold.dataMonAttacks.Length; i++)
+        {
+            //Debug.Log("AttacksObjects" + toHold.dataMonData.AttacksObjects.GetAttackByName(toHold.dataMonAttacks[i].AttackName));
+
+            dataMonAttacks[i] = toHold.dataMonData.AttacksObjects.GetAttackByName(toHold.dataMonAttacks[i].AttackName);
+
+            //Debug.Log("dataMonAttacks[i] " + dataMonAttacks[i].AttackName);
+        }
+
         dataMonBaseAttributes = toHold.dataMonBaseAttributes;
         dataMonCurrentAttributes = new DataMonInstancedAttributes(toHold.dataMonCurrentAttributes);
     }

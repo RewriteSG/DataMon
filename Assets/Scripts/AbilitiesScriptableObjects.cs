@@ -17,7 +17,7 @@ public class AbilitiesScriptableObjects : ScriptableObject
     public delegate void AffectEnemyStatDelegate(ref DataMon dataMon, float floatArg = 0);
     public delegate void AffectPlayerStatDelegate<T>(ref T Player,DataMon dataMon, bool toggle);
     public delegate void AffectStatDelegate(ref DataMon dataMon);
-    //public delegate void AbilityDelegate();
+
     public AffectStatDelegate affectStat;
     public AffectPlayerStatDelegate<GameManager> affectPlayerStat;
     public AffectEnemyStatDelegate affectEnemyStat;
@@ -87,24 +87,24 @@ public class AbilitiesScriptableObjects : ScriptableObject
     int currentEvo;
     private int GetDataMonEvolutionIndex(DataMon dataMon)
     {
-        currentEvo = dataMon.dataMonData.DataMons.GetDataMonIndexInDataArray(dataMon.dataMon.DataMonName);
+        currentEvo = dataMon.tier;
         return currentEvo;
     }
     void SetAntAttribute(ref DataMon dataMon, int count)
     {
-        int evolution = GetDataMonEvolutionIndex(dataMon);
+        int evolution = dataMon.tier;
         modifier = ModifiersByEvolution[evolution] * count;
         dataMon.SetAttributesByModifier(modifier);
     }
     void Passive_Ant(ref DataMon dataMon)
     {
         DataMonButton[] temp =  DataDex.instance.GetDataMonFromTeam(dataMon.dataMonData);
-        Debug.Log("Before ? HP " + dataMon.CurrentAttributes.CurrentHealth);
+        //Debug.Log("Before ? HP " + dataMon.CurrentAttributes.CurrentHealth);
         for (int i = 0; i < temp.Length; i++)
         {
             SetAntAttribute(ref temp[i].dataMon, temp.Length);
         }
-        Debug.Log("working? " + modifier);
+        //Debug.Log("working? " + modifier);
     }
     void Passive_Bee(ref GameManager GM, DataMon dataMon, bool toggle)
     {

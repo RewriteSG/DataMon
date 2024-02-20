@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a739cd647c79344d879225fe3993e22, type: 3}
+  m_Name: DataMonsAttacks
+  m_EditorClassIdentifier: 
+  AllAttacks:
+  - AttackPrefab: {fileID: 4999572076893941980, guid: 22ce197875a48f44293851ba55ec0c68,
+      type: 3}
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 4
+    AttackName: Air Fissure
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 1
+  - AttackPrefab: {fileID: 1368036933946875657, guid: 9411105d4b3101b49931689553bfc8b6,
+      type: 3}
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 4
+    AttackName: Ice Shard
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 1
+  - AttackPrefab: {fileID: 9057499543999570315, guid: 8356f471cd94d154a93c928426213a9c,
+      type: 3}
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 4
+    AttackName: Charge Attack
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 1
+  - AttackPrefab: {fileID: 3079290086745366368, guid: ce9569e787bcf5c43b21dcb607d981fd,
+      type: 3}
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 4
+    AttackName: SpinReen
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 1

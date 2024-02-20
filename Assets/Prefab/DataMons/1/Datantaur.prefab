@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1034140892748624890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6671120712178475215}
+  m_Layer: 9
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6671120712178475215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034140892748624890}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7288772485722934230}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4969046341341275900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1532,7 @@ Transform:
   m_LocalScale: {x: 0.17325479, y: 0.17325479, z: 0.17325479}
   m_Children:
   - {fileID: 7288772486477075242}
+  - {fileID: 6671120712178475215}
   - {fileID: 9044900063913164857}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1592,10 +1623,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 2
+  AttackPoint: {fileID: 1034140892748624890}
   isBeingCaptured: 0
   isCompanion: 0
   dataMonData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
-  test: {fileID: 7288772485722934236}
   selected: 0
   DataMonNames:
   - Datant
@@ -1604,7 +1635,7 @@ MonoBehaviour:
   dataMon:
     DataMonName: Datantaur
     DataMonPrefab: {fileID: 7288772485722934236}
-    DataMonAbility: []
+    InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 60
       BaseAttack: 0
@@ -1615,19 +1646,28 @@ MonoBehaviour:
     MonBehaviourState: 2
   dataMonAI: {fileID: 0}
   _databytes: {fileID: 0}
-  dataMonCurrentAttributes:
-    CurrentHealth: 60
+  baseAttributes:
+    BaseHealth: 0
+    BaseAttack: 0
+    BaseProductionSpeed: 0
+    BaseMoveSpeed: 200
+    BaseAttackRange: 3
+    BaseCaptureChance: 0
+  CurrentAttributes:
+    CurrentHealth: 0
     CurrentAttack: 0
     CurrentProductionSpeed: 0
-    CurrentMoveSpeed: 200
-    CurrentAttackRange: 3
-    CurrentCaptureChance: 100
+    CurrentMoveSpeed: 0
+    CurrentAttackRange: 1
+    CurrentCaptureChance: 0
   NamePlate: {fileID: 9044900063913164862}
   NamePlateText: {fileID: 9044900063782931217}
   TaskText: {fileID: 7736758878275207696}
   DataMonAttacksID: 0
   DataMonAttacksParentObj: {fileID: 0}
   SpawnedFromChunk: {x: 0, y: 0}
+  Model: {fileID: 0}
+  attackObjects: []
 --- !u!114 &8506371414355122939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1806,7 +1846,7 @@ PrefabInstance:
     - target: {fileID: 7802660753196514652, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7802660753196514652, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}

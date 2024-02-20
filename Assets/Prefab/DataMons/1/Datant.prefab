@@ -1583,6 +1583,7 @@ Transform:
   m_Children:
   - {fileID: 5580441581073435424}
   - {fileID: 8519851034827704564}
+  - {fileID: 2266035715029812561}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1672,10 +1673,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 0
+  AttackPoint: {fileID: 8576533720024975896}
   isBeingCaptured: 0
   isCompanion: 0
   dataMonData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
-  test: {fileID: 8519851035581550594}
   selected: 0
   DataMonNames:
   - Datant
@@ -1684,7 +1685,7 @@ MonoBehaviour:
   dataMon:
     DataMonName: Datant
     DataMonPrefab: {fileID: 8519851035581550594}
-    DataMonAbility: []
+    InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 20
       BaseAttack: 0
@@ -1695,19 +1696,28 @@ MonoBehaviour:
     MonBehaviourState: 2
   dataMonAI: {fileID: 0}
   _databytes: {fileID: 0}
-  dataMonCurrentAttributes:
-    CurrentHealth: 20
+  baseAttributes:
+    BaseHealth: 0
+    BaseAttack: 0
+    BaseProductionSpeed: 0
+    BaseMoveSpeed: 200
+    BaseAttackRange: 3
+    BaseCaptureChance: 0
+  CurrentAttributes:
+    CurrentHealth: 0
     CurrentAttack: 0
     CurrentProductionSpeed: 0
-    CurrentMoveSpeed: 200
-    CurrentAttackRange: 3
-    CurrentCaptureChance: 100
+    CurrentMoveSpeed: 0
+    CurrentAttackRange: 1
+    CurrentCaptureChance: 0
   NamePlate: {fileID: 5580441581073435431}
   NamePlateText: {fileID: 5580441581203275784}
   TaskText: {fileID: 6605157327373977865}
   DataMonAttacksID: 0
   DataMonAttacksParentObj: {fileID: 0}
   SpawnedFromChunk: {x: 0, y: 0}
+  Model: {fileID: 0}
+  attackObjects: []
 --- !u!114 &7284237246730961189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1721,6 +1731,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isQuitting: 0
+--- !u!1 &8576533720024975896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2266035715029812561}
+  m_Layer: 9
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2266035715029812561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576533720024975896}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8519851035581550600}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2393989277216896636
 PrefabInstance:
   m_ObjectHideFlags: 0
