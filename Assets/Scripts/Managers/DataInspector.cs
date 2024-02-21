@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Data Inspector
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,25 +13,25 @@ public class DataInspector : MonoBehaviour
     public HealthBarScript DataInspectorHealthBar;
     int DataMonEvolveTier = -1;
     // Start is called before the first frame update
-    //void Start()
-    //{
-    //    DataMonHovering = null;
-    //    DataMonEvolveTier = -1;
-    //}
+    void Start()
+    {
+        DataMonHovering = null;
+        DataMonEvolveTier = -1;
+    }
 
     // Update is called once per frame
-    //void Update()
-    //{
-    //    //switch (DataDex.instance.CurrentModule)
-    //    //{
-    //    //    case DataPadModules.DataDex:
-    //    //        InspectDataMon();
-    //    //        break;
-    //    //    case DataPadModules.Evolve:
-    //    //        InspectDataMonEvolution();
-    //    //        break;
-    //    //}
-    //}
+    void Update()
+    {
+        switch (DataDex.instance.CurrentModule)
+        {
+            case DataPadModules.DataDex:
+                InspectDataMon();
+                break;
+            case DataPadModules.Evolve:
+                InspectDataMonEvolution();
+                break;
+        }
+    }
     void InspectDataMonEvolution()
     {
         if (DataMonHovering == null)

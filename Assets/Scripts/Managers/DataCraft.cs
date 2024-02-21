@@ -7,8 +7,8 @@ public class DataCraft : MonoBehaviour
 {
     public SelectedItemToCraft SelectedtoCraft;
     int CraftingQuantity, DataBytesReq;
-    public bool isEditingCraftingQuantity = false;
-    public GameObject CraftSelectedPanel;
+    public bool isEditingCraftingQuantity = false, DisplayDataPad;
+    public GameObject CraftSelectedPanel, DataPad;
     public TMP_InputField CurrentQuantityToCraft;
     public TextMeshProUGUI DataBytesRequiredText, CurrentDataBytesAmount, ButtonText;
 
@@ -35,6 +35,14 @@ public class DataCraft : MonoBehaviour
                     break;
             }
         }
+        if (DataPad.activeInHierarchy != DisplayDataPad)
+            DataPad.SetActive(DisplayDataPad);
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            DisplayDataPad = !DisplayDataPad;
+        }
+        if (DisplayDataPad)
+            CameraFollow.isAiming = false;
     }
 
     // Update is called once per frame

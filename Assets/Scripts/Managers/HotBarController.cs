@@ -14,6 +14,11 @@ public class HotBarController : MonoBehaviour
     public Color SelectedColor;
     public Color UnselectedColor;
     bool isUnsorted = false;
+
+    public List<ItemInHotBar> ItemsInHotbar = new List<ItemInHotBar>();
+
+    public int selectedItem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -245,9 +250,22 @@ public class HotBarController : MonoBehaviour
     {
 
     }
-}
 
+}
 public enum ItemHolding
 {
     Command, Melee, DataBall, HuntingRifle, Shotgun, AssaultRifle, None
+}
+public class ItemInHotBar
+{
+    public HotBarController.UseItem useItem;
+    public ItemHolding item;
+    public RawImage ItemImage;
+    public ItemInHotBar() { }
+
+    public ItemInHotBar(ItemHolding _item, RawImage _ItemImage)
+    {
+        item = _item;
+        ItemImage = _ItemImage;
+    }
 }
