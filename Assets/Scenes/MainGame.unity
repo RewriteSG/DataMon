@@ -4855,6 +4855,8 @@ MonoBehaviour:
   DataByteSprite: {fileID: 0}
   radius: 0
   damp: 0
+  randomPos: {x: 0, y: 0}
+  smoothVelocity: {x: 0, y: 0}
 --- !u!114 &419308881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4907,6 +4909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectedColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 0.33333334}
   UnselectedColor: {r: 0, g: 0, b: 0, a: 1}
+  selectedItem: 0
 --- !u!1001 &422467359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16491,6 +16494,7 @@ MonoBehaviour:
   IsDrivenByAnimation: 1
   IsFromPlayer: 1
   ByDataMon: {fileID: 0}
+  isFists: 1
   isHR: 0
 --- !u!1001 &1624197741
 PrefabInstance:
@@ -25695,6 +25699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9886b348c6d927145af55262e76d1363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ReloadingImage: {fileID: 0}
   gunPoint: {fileID: 1381013330212530393}
   DataBall: {fileID: 2253522382739557070, guid: 3b4a1298d74e7014aa69b8729df38b7a,
     type: 3}
@@ -27457,26 +27462,31 @@ MonoBehaviour:
     Model: {fileID: 1279989611}
     AmmoAmount: 0
     ClipAmount: 2
+    reloadTime: 0
     CurrentClipAmount: 0
   DataBallLauncher:
     Model: {fileID: 1381013332039376871}
     AmmoAmount: 0
     ClipAmount: 2
+    reloadTime: 0
     CurrentClipAmount: 0
   huntingRifle:
     Model: {fileID: 1381013332039376871}
     AmmoAmount: 5
     ClipAmount: 5
+    reloadTime: 0
     CurrentClipAmount: 0
   shotgun:
     Model: {fileID: 1381013332039376871}
     AmmoAmount: 5
     ClipAmount: 7
+    reloadTime: 0
     CurrentClipAmount: 0
   assaultRifle:
     Model: {fileID: 1381013332039376871}
     AmmoAmount: 5
     ClipAmount: 32
+    reloadTime: 0
     CurrentClipAmount: 0
   Bullet: {fileID: 1071924564739704768, guid: 4e850110e73ae64458bb592d433a9220, type: 3}
   DatabytesPrefab: {fileID: 6751158497521048345, guid: a48b25debb7b001499836914167097d1,
@@ -27813,7 +27823,6 @@ MonoBehaviour:
   CompanionsDataMon: []
   DataTeam: []
   DisplayDataPad: 0
-  DataPad: {fileID: 1294224703}
   DataTeamPanel: {fileID: 1381013330196512172}
   EvolvePanel: {fileID: 1249172151}
   CraftPanel: {fileID: 789225637}
@@ -27952,7 +27961,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectedtoCraft: 4
   isEditingCraftingQuantity: 0
+  DisplayDataPad: 0
   CraftSelectedPanel: {fileID: 2038384976}
+  DataPad: {fileID: 0}
   CurrentQuantityToCraft: {fileID: 1693453777}
   DataBytesRequiredText: {fileID: 1219423895}
   CurrentDataBytesAmount: {fileID: 201492349}

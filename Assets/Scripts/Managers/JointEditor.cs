@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 [UnityEditor.DrawGizmo(UnityEditor.GizmoType.Pickable)]
 public class JointEditor : MonoBehaviour
 {
@@ -11,3 +12,4 @@ public class JointEditor : MonoBehaviour
         Gizmos.DrawSphere(transform.position, 0.1f);
     }
 }
+#endif

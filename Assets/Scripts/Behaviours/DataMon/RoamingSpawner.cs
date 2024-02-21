@@ -6,7 +6,7 @@ using IndividualDataMon;
 public class RoamingSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] AllDataMonPrefabs;
-    List<DataMon> Datamons_roamingData = new List<DataMon>();
+    //List<DataMon> Datamons_roamingData = new List<DataMon>();
     public static Dictionary<string, List<DataMon>> DataMonsPool = new Dictionary<string, List<DataMon>>();
     public static Dictionary<Vector2, DataMonsInChunk> MonsInChunk = new Dictionary<Vector2, DataMonsInChunk>();
     public static List<DataMon> ALLDataMons = new List<DataMon>();
@@ -34,36 +34,30 @@ public class RoamingSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        SpawnPointsInRenderDist.Clear();
-        ALLDataMons.Clear();
-        doot_doot = 0;
-        for (int i = 0; i < AllDataMonPrefabs.Length; i++)
-        {
-            Datamons_roamingData.Add(AllDataMonPrefabs[i].GetComponent<DataMon>());
-            Datamons_roamingData[Datamons_roamingData.Count - 1].SetDataMon(
-                Datamons_roamingData[Datamons_roamingData.Count - 1].dataMonData.DataMons.
-                GetDataMonInDataArray(Datamons_roamingData[Datamons_roamingData.Count - 1].gameObject));
-        }
-        List<DataMon> temp;
-        DataMonPoolGO = new GameObject("DataMons");
-        //DataMonPoolGO.transform.position = new Vector3(0, -9000);
-        DataMon _datamon;
-        if(!SaveLoadManager.instance.DoLoadWorld)
-            for (int i = 0; i < AllDataMonPrefabs.Length; i++)
-            {
-                temp = new List<DataMon>();
+        //SpawnPointsInRenderDist.Clear();
+        //ALLDataMons.Clear();
+        //doot_doot = 0;
 
-                for (int x = 0; x < GameManager.instance.MaxNumberOfWildDataMons; x++)
-                {
-                    _datamon = Instantiate(AllDataMonPrefabs[i], DataMonPoolGO.transform).GetComponent<DataMon>();
-                    temp.Add(_datamon);
-                    ALLDataMons.Add(_datamon);
-                    temp[temp.Count - 1].gameObject.SetActive(false);
-                }
-                DataMonsPool.Add(Datamons_roamingData[i].dataMon.DataMonName, temp);
+        //List<DataMon> temp;
+        //DataMonPoolGO = new GameObject("DataMons");
+        ////DataMonPoolGO.transform.position = new Vector3(0, -9000);
+        //DataMon _datamon;
+        //if(!SaveLoadManager.instance.DoLoadWorld)
+        //    for (int i = 0; i < AllDataMonPrefabs.Length; i++)
+        //    {
+        //        temp = new List<DataMon>();
+
+        //        for (int x = 0; x < GameManager.instance.MaxNumberOfWildDataMons; x++)
+        //        {
+        //            _datamon = Instantiate(AllDataMonPrefabs[i], DataMonPoolGO.transform).GetComponent<DataMon>();
+        //            temp.Add(_datamon);
+        //            ALLDataMons.Add(_datamon);
+        //            temp[temp.Count - 1].gameObject.SetActive(false);
+        //        }
+        //        DataMonsPool.Add(Datamons_roamingData[i].dataMon.DataMonName, temp);
                
-            }
-        ClearRoamingDataMons = false;
+        //    }
+        //ClearRoamingDataMons = false;
         //StartCoroutine(SpawnInBatches(3, 10));
     }
 
@@ -115,7 +109,7 @@ public class RoamingSpawner : MonoBehaviour
                     GameManager.instance.RenderDistance)
                 {
                     value.datamons++;
-                    SpawnNewDataMon(RandomSpawnPoint);
+                    //SpawnNewDataMon(RandomSpawnPoint);
                 }
                 else
                 {
@@ -135,63 +129,63 @@ public class RoamingSpawner : MonoBehaviour
         }
 
     }
-    public void AddDataMonToRoamingDatabase(Wave.WaveDifficulty difficulty)
-    {
-        RoamingDataBase.Clear();
-        switch (difficulty)
-        {
-            case Wave.WaveDifficulty.Easy:
-                RoamingDataBase = RoamingDataBase.Add(EasyDataMons);
-                break;
-            case Wave.WaveDifficulty.Normal:
-                RoamingDataBase = RoamingDataBase.Add(NormalDataMons);
-                break;
-            case Wave.WaveDifficulty.Hard:
-                RoamingDataBase = RoamingDataBase.Add(HardDataMons);
-                break;
-            case Wave.WaveDifficulty.Difficult:
-                RoamingDataBase = RoamingDataBase.Add(DifficultDataMons);
-                break;
-            case Wave.WaveDifficulty.Hell:
-                RoamingDataBase = RoamingDataBase.Add(HellDataMons);
-                break;
-        }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        serializedDoot = doot_doot;
+    //public void AddDataMonToRoamingDatabase(Wave.WaveDifficulty difficulty)
+    //{
+    //    RoamingDataBase.Clear();
+    //    switch (difficulty)
+    //    {
+    //        case Wave.WaveDifficulty.Easy:
+    //            RoamingDataBase = RoamingDataBase.Add(EasyDataMons);
+    //            break;
+    //        case Wave.WaveDifficulty.Normal:
+    //            RoamingDataBase = RoamingDataBase.Add(NormalDataMons);
+    //            break;
+    //        case Wave.WaveDifficulty.Hard:
+    //            RoamingDataBase = RoamingDataBase.Add(HardDataMons);
+    //            break;
+    //        case Wave.WaveDifficulty.Difficult:
+    //            RoamingDataBase = RoamingDataBase.Add(DifficultDataMons);
+    //            break;
+    //        case Wave.WaveDifficulty.Hell:
+    //            RoamingDataBase = RoamingDataBase.Add(HellDataMons);
+    //            break;
+    //    }
+    //}
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    serializedDoot = doot_doot;
         
-        //else
-        //{
-        //    SpawnPosition = prevSpawnPos;
-        //    SpawnNewDataMon();
+    //    //else
+    //    //{
+    //    //    SpawnPosition = prevSpawnPos;
+    //    //    SpawnNewDataMon();
 
-        //}
+    //    //}
 
 
-    }
+    //}
 
-    private void SpawnNewDataMon(Vector2 _RandomSpawnPoint)
-    {
-        DataMonsPool.TryGetValue(RoamingDataBase[Random.Range(0, RoamingDataBase.Count)].dataMon.DataMonName, out List<DataMon> temp);
-        temp[0].transform.position = SpawnPosition;
-        temp[0].gameObject.SetActive(true);
-        temp[0].dataMonAI.SetNewPatrollingAnchorPos();
-        temp[0].ResetAttributes();
-        temp[0].SpawnedFromChunk = _RandomSpawnPoint;
-        switch (temp[0].dataMonData.DataMons[temp[0].tier].MonBehaviourState)
-        {
-            case DataMonBehaviourState.isNeutral:
-                temp[0].SetDataMonNeutral();
-                break;
-            case DataMonBehaviourState.isHostile:
-                temp[0].SetDataMonHostile();
-                break;
-        }
-        temp.RemoveAt(0);
-        doot_doot += 1;
-    }
+    //private void SpawnNewDataMon(Vector2 _RandomSpawnPoint)
+    //{
+    //    DataMonsPool.TryGetValue(RoamingDataBase[Random.Range(0, RoamingDataBase.Count)].dataMon.DataMonName, out List<DataMon> temp);
+    //    temp[0].transform.position = SpawnPosition;
+    //    temp[0].gameObject.SetActive(true);
+    //    temp[0].dataMonAI.SetNewPatrollingAnchorPos();
+    //    temp[0].ResetAttributes();
+    //    temp[0].SpawnedFromChunk = _RandomSpawnPoint;
+    //    switch (temp[0].dataMonData.DataMons[temp[0].tier].MonBehaviourState)
+    //    {
+    //        case DataMonBehaviourState.isNeutral:
+    //            temp[0].SetDataMonNeutral();
+    //            break;
+    //        case DataMonBehaviourState.isHostile:
+    //            temp[0].SetDataMonHostile();
+    //            break;
+    //    }
+    //    temp.RemoveAt(0);
+    //    doot_doot += 1;
+    //}
 
     bool ValidateSpawnPoint(Vector3 spawnpointPos)
     {

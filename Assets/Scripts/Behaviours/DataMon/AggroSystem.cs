@@ -24,7 +24,7 @@ public class AggroSystem : MonoBehaviour
         else
         {
             ListOfTargets.ListOfTargets.Add(new DamagedBy(entity, damage));
-            datamonAI.ChangeAggroTarget();
+            //datamonAI.ChangeAggroTarget();
         }
     }
 }

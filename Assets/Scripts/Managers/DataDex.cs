@@ -13,7 +13,7 @@ public class DataDex : MonoBehaviour
     public List<DataMonsData> AllDataMonsData = new List<DataMonsData>();
     public List<string> AllDataMons = new List<string>();
 
-    public List<DataMonHolder> CompanionsDataMon = new List<DataMonHolder>();
+    public List<DataMonHolder> ToDataHub = new List<DataMonHolder>();
     public DataMonHolder[] DataTeam = new DataMonHolder[] { };
 
     public delegate void DataMonBtnDelegate(DataMonButton dataMon);
@@ -34,6 +34,7 @@ public class DataDex : MonoBehaviour
     public DataMonButton DataMonOnTeamIsSelectedForEvolve = null;
 
     DataMonButton dataMonBtn;
+    public bool isExploring;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,8 @@ public class DataDex : MonoBehaviour
         instance = this;
         int DataMonEvoCount;
         GameObject temp;
+        if (isExploring)
+            return;
         for (int i = 0; i < AllDataMonsData.Count; i++)
         {
             DataMonEvoCount = AllDataMonsData[i].DataMons.Length;
@@ -61,6 +64,8 @@ public class DataDex : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isExploring)
+            return;
         switch (CurrentModule)
         {
             case DataPadModules.DataDex:
@@ -125,6 +130,13 @@ public class DataDex : MonoBehaviour
     {
         if (toDataDex.isNull())
             return;
+
+        if (isExploring)
+        {
+            AddToDataDexInExploring(toDataDex);
+            return;
+        }
+
         indexOfDataMon = AllDataMons.IndexOf(toDataDex.dataMon.DataMonName);
         DataMonObtained.Add(Instantiate(DataMonPanel, DataMonListInDex[indexOfDataMon].transform));
         verticalLayout = DataMonListInDex[indexOfDataMon].transform.parent.GetComponent<VerticalLayoutGroup>();
@@ -134,6 +146,10 @@ public class DataDex : MonoBehaviour
         dataMonBtn.dataMonHolder = new DataMonHolder(toDataDex);
         dataMonBtn.inDataBank = true;
         StartCoroutine(RearrangeContent(verticalLayout));
+    }
+    public void AddToDataDexInExploring(DataMonHolder toDataDex)
+    {
+        ToDataHub.Add(toDataDex);
     }
     public void EvolveDataMon(DataMonHolder EvolvedDataMon)
     {
@@ -241,7 +257,7 @@ public class DataDex : MonoBehaviour
             dataMonBtn.dataMonHolder = DataTeam[indexOfDataMon];
             dataMonBtn.DataMonSummoned = SpawnCompanionDataMon(dataMonBtn);
             dataMonBtn.dataMon = dataMonBtn.DataMonSummoned.GetComponent<IndividualDataMon.DataMon>();
-            dataMonBtn.dataMon.StartPassive();
+            //dataMonBtn.dataMon.StartPassive();
             dataMonBtn.dataMonHolder.dataMonBaseAttributes = dataMonBtn.dataMon.baseAttributes;
             verticalLayout = dataMonButton.transform.parent.parent.GetComponent<VerticalLayoutGroup>();
             StartCoroutine(RearrangeContent(verticalLayout));
@@ -430,8 +446,7 @@ public class DataDexIO
 
     public void SendToDataDex()
     {
-        toDataDex.dataMon.MonBehaviourState = DataMonBehaviourState.isCompanion;
-        DataDex.instance.CompanionsDataMon.Add(toDataDex);
+        //toDataDex.dataMon.MonBehaviourState = DataMonBehaviourState.isCompanion;
         DataDex.instance.AddToDataDex(toDataDex);
     }
 }

@@ -8,7 +8,7 @@ public class Databytes : MonoBehaviour
     [HideInInspector] public bool isQuitting;
     public bool isItemPickup;
     [SerializeField]Transform DataByteSprite;
-    [SerializeField] float radius, damp;
+    public float radius, damp;
     public Vector2 randomPos, smoothVelocity = Vector2.zero;
     Vector3 randomRotation;
 
@@ -63,11 +63,11 @@ public class Databytes : MonoBehaviour
     {
         if (dataMon == null || isQuitting)
             return;
-        if (!dataMon.isBeingCaptured && dataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
+        if (!dataMon.isBeingCaptured)
             Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);
         chanced = Random.Range(0, 100);
         
-        if (!dataMon.isBeingCaptured && dataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && chanced <= GameManager.instance.ChanceForDoubleDrop)
+        if (!dataMon.isBeingCaptured && chanced <= GameManager.instance.ChanceForDoubleDrop)
         {
 
             Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);

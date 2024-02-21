@@ -71,6 +71,13 @@ public class GameManager : MonoBehaviour
 
     public const int MaxLimitOfAbilities = 3;
 
+    public delegate void PassivesAbilitiesEffects(float modifier);
+
+    public PassivesAbilitiesEffects onCollisionPassive;
+    public PassivesAbilitiesEffects onUpdatePassive;
+    public PassivesAbilitiesEffects onAttackEffectPassive;
+    public PassivesAbilitiesEffects onStartPassive;
+
     private void Awake()
     {
         instance = this;

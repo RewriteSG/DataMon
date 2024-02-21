@@ -58,7 +58,7 @@ public class PlayerShoot : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            switch (HotBarController.holdingItem)
+            switch (HotBarController.ItemsInHotbar[HotBarController.selectedItem].item)
             {
                 case ItemHolding.AssaultRifle:
                     Reload(ref assaultRifle);
@@ -92,7 +92,7 @@ public class PlayerShoot : MonoBehaviour
 
     void UpdateAmmoUI()
     {
-        switch (HotBarController.holdingItem)
+        switch (HotBarController.ItemsInHotbar[HotBarController.selectedItem].item)
         {
             case ItemHolding.DataBall:
                 AmmoText.text = "DataBalls: " + DataBallLauncher.AmmoAmount;
@@ -108,9 +108,9 @@ public class PlayerShoot : MonoBehaviour
                 break;
         }
     }
-    public void ShowWeaponModel()
+    public void ShowWeaponModel(ItemHolding itemType)
     {
-        switch (HotBarController.holdingItem)
+        switch (itemType)
         {
             case ItemHolding.Melee:
                 SetWeaponModelActive(Fists_weapon, true);

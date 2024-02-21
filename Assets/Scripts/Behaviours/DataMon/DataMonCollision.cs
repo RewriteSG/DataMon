@@ -25,7 +25,7 @@ public class DataMonCollision : MonoBehaviour
     BulletInstance bullet;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Bullet") && DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
+        if (collision.gameObject.CompareTag("Bullet"))
         {
             bullet = collision.GetComponent<BulletInstance>();
             damage = bullet.Damage;
@@ -37,12 +37,12 @@ public class DataMonCollision : MonoBehaviour
             if (bullet.IsFromPlayer)
                 DataMon.dataMonAI.aggroSystem.SetDamageByEntity(GameManager.instance.Player, damage);
         }
-        if(collision.gameObject.CompareTag("EnemyAttack") && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
-        {
-            if(DataMon.dataMonAI.AI_state == AI_State.Produce)
-            {
-                DataMon.dataMonAI.CancelProduction();
-            }
-        }
+        //if(collision.gameObject.CompareTag("EnemyAttack") && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+        //{
+        //    if(DataMon.dataMonAI.AI_state == AI_State.Produce)
+        //    {
+        //        DataMon.dataMonAI.CancelProduction();
+        //    }
+        //}
     }
 }

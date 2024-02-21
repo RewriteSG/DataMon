@@ -58,9 +58,9 @@ namespace IndividualDataMon
                     NamePlate.transform.SetParent(null);
             }
             DataMonAttacksID = GameManager.TotalDataMonIDs++;
-
+            
         }
-
+        
         private void CreateDataMonsAttacks()
         {
             if(DataMonAttacksParentObj !=null)
@@ -73,11 +73,11 @@ namespace IndividualDataMon
             Model = GetComponentInChildren<DataMonCollision>().gameObject;
 
             int AbilityCount = 0;
-            AbilityCount += dataMonData.InherentPassives.Length;
-            AbilityCount += dataMonData.InherentAllDataMonAbility.Length;
-            AbilityCount += dataMonData.DataMons[tier].InherentDataMonAbility.Length;
-            if (AbilityCount >= 3)
-                return;
+            //AbilityCount += dataMonData.InherentPassives.Length;
+            //AbilityCount += dataMonData.InherentAllDataMonAbility.Length;
+            //AbilityCount += dataMonData.DataMons[tier].InherentDataMonAbility.Length;
+            //if (AbilityCount >= 3)
+            //    return;
             Attack attackInstance;
             for (int i = AbilityCount; i < 3; i++)
             {
@@ -146,13 +146,14 @@ namespace IndividualDataMon
             Quaternion toRotate = Quaternion.LookRotation(transform.forward, -Dir);
             attackObjects[currentAttackIndex]._gameObject.transform.rotation = toRotate;
             attackObjects[currentAttackIndex]._gameObject.SetActive(true);
-            attackObjects[currentAttackIndex]._gameObject.tag = dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion ? "AllyAttack" : "EnemyAttack";
+            attackObjects[currentAttackIndex]._gameObject.tag = "EnemyAttack";
             attackObjects[currentAttackIndex].CurrentCD = 0;
             currentAttackIndex++;
             if (currentAttackIndex >= attackObjects.Count)
             {
                 currentAttackIndex = 0;
             }
+
         }
         private void Start()
         {
@@ -168,6 +169,7 @@ namespace IndividualDataMon
             if (isBoss)
                 ResetAttributes();
             GameManager.instance.Entity_Updates += ToUpdate;
+
         }
         void ToUpdate()
         {
@@ -181,7 +183,7 @@ namespace IndividualDataMon
             if (!gameObject.activeSelf)
                 return;
 
-            if (CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && isWaveEnemy)
+            if (CurrentAttributes.CurrentHealth <= 0)
 
             {
                 GetComponent<Databytes>().DataMonIsDestroyed();
@@ -191,17 +193,17 @@ namespace IndividualDataMon
                     SceneChanger.ChangeScene("WinScene");
                 }
             }
-            if (CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && !isWaveEnemy)
+            //if (CurrentAttributes.CurrentHealth <= 0  && !isWaveEnemy)
 
-            {
-                GetComponent<Databytes>().DataMonIsDestroyed();
-                DestroyDataMon();
-            }
-            if(dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral && RoamingSpawner.ClearRoamingDataMons)
-            {
-                DestroyDataMon();
-            }
-            if (CurrentAttributes.CurrentHealth <= 0 && dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+            //{
+            //    GetComponent<Databytes>().DataMonIsDestroyed();
+            //    DestroyDataMon();
+            //}
+            //if(dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral && RoamingSpawner.ClearRoamingDataMons)
+            //{
+            //    DestroyDataMon();
+            //}
+            if (CurrentAttributes.CurrentHealth <= 0)
 
             {
                 Destroy(gameObject);
@@ -329,20 +331,20 @@ namespace IndividualDataMon
         }
         public void SetDataMonCompanion()
         {
-            dataMon.MonBehaviourState = DataMonBehaviourState.isCompanion;
-            NamePlateText.color = GameManager.instance.CompanionColor;
+            //dataMon.MonBehaviourState = DataMonBehaviourState.isCompanion;
+            //NamePlateText.color = GameManager.instance.CompanionColor;
 
         }
 
-        public void StartPassive()
-        {
-            DataMon _this = this;
-            for (int i = 0; i < dataMonData.InherentPassives.Length; i++)
-            {
-                dataMonData.InherentPassives[i].OwnPassives();
-                dataMonData.InherentPassives[i].CallDelegates(ref _this, ref GameManager.instance, true);
-            }
-        }
+        //public void StartPassive()
+        //{
+        //    //DataMon _this = this;
+        //    //for (int i = 0; i < dataMonData.InherentPassives.Length; i++)
+        //    //{
+        //    //    dataMonData.InherentPassives[i].OwnPassives();
+        //    //    dataMonData.InherentPassives[i].CallDelegates(ref _this, ref GameManager.instance, true);
+        //    //}
+        //}
 
         public void SetDataMonHostile()
         {
@@ -361,12 +363,10 @@ namespace IndividualDataMon
         }
         private void OnDestroy()
         {
-            if (dataMonAI == null || dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && !isWaveEnemy || _databytes == null)
+            if (dataMonAI == null || !isWaveEnemy || _databytes == null)
                 return;
             if (_databytes.isQuitting)
                 return;
-            if (!isWaveEnemy)
-                StartPassive();
             for (int i = 0; i < attackObjects.Count; i++)
             {
                 GameManager.instance.Entity_Updates -= attackObjects[i].AttackCooldownUpdate;
@@ -383,32 +383,32 @@ namespace IndividualDataMon
                 Destroy(gameObject);
                 return;
             }
-            gameObject.SetActive(false);
-            ResetAttributes();
-            RoamingSpawner.doot_doot--;
-            if(RoamingSpawner.MonsInChunk.TryGetValue(SpawnedFromChunk,out DataMonsInChunk value))
-            {
-                value.datamons--;
-            }
+            //gameObject.SetActive(false);
+            //ResetAttributes();
+            //RoamingSpawner.doot_doot--;
+            //if(RoamingSpawner.MonsInChunk.TryGetValue(SpawnedFromChunk,out DataMonsInChunk value))
+            //{
+            //    value.datamons--;
+            //}
 
-            for (int i = 0; i < attackObjects.Count; i++)
-            {
-                GameManager.instance.Entity_Updates -= attackObjects[i].AttackCooldownUpdate;
-            }
+            //for (int i = 0; i < attackObjects.Count; i++)
+            //{
+            //    GameManager.instance.Entity_Updates -= attackObjects[i].AttackCooldownUpdate;
+            //}
 
-            if (dataMonAI == null)
-                return;
+            //if (dataMonAI == null)
+            //    return;
             
-            if (dataMon.MonBehaviourState == DataMonBehaviourState.isHostile && GameManager.instance.HostileDataMonsGOs.Contains(gameObject))
-            {
-                GameManager.HostileDataMons--;
-                GameManager.instance.HostileDataMonsGOs.Remove(gameObject);
-            }
-            if (dataMonAI.patrollingAnchor != null)
-                dataMonAI.patrollingAnchor.SetActive(false);
+            //if (dataMon.MonBehaviourState == DataMonBehaviourState.isHostile && GameManager.instance.HostileDataMonsGOs.Contains(gameObject))
+            //{
+            //    GameManager.HostileDataMons--;
+            //    GameManager.instance.HostileDataMonsGOs.Remove(gameObject);
+            //}
+            //if (dataMonAI.patrollingAnchor != null)
+            //    dataMonAI.patrollingAnchor.SetActive(false);
 
-            RoamingSpawner.DataMonsPool.TryGetValue(dataMon.DataMonName, out List<DataMon> temp);
-            temp.Add(this);
+            //RoamingSpawner.DataMonsPool.TryGetValue(dataMon.DataMonName, out List<DataMon> temp);
+            //temp.Add(this);
         }
 
 
@@ -433,17 +433,17 @@ namespace IndividualDataMon
                 CurrentAttributes.CurrentHealth = baseAttributes.BaseHealth;
             }
         }
-        public void DataMonStartBuff(float buffDuration, float Modifer)
-        {
-            StartCoroutine(BuffDataMon(buffDuration, Modifer));
-        }
-        IEnumerator BuffDataMon(float buffDuration,float Modifier)
-        {
-            SetAttributesByModifier(Modifier);
-            yield return new WaitForSeconds(buffDuration);
-            SetAttributesByModifier(1);
+        //public void DataMonStartBuff(float buffDuration, float Modifer)
+        //{
+        //    StartCoroutine(BuffDataMon(buffDuration, Modifer));
+        //}
+        //IEnumerator BuffDataMon(float buffDuration,float Modifier)
+        //{
+        //    SetAttributesByModifier(Modifier);
+        //    yield return new WaitForSeconds(buffDuration);
+        //    SetAttributesByModifier(1);
 
-        }
+        //}
     }
     
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 public class DataCraft : MonoBehaviour
 {
+    public static DataCraft instance;
     public SelectedItemToCraft SelectedtoCraft;
     int CraftingQuantity, DataBytesReq;
     public bool isEditingCraftingQuantity = false, DisplayDataPad;
@@ -15,6 +16,10 @@ public class DataCraft : MonoBehaviour
     public ItemsCraftClass[] ItemsCrafts;
     ItemsCraftClass DataBall, HuntingRifle, Shotgun, AssaultRifle;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         for (int i = 0; i < ItemsCrafts.Length; i++)
@@ -35,26 +40,19 @@ public class DataCraft : MonoBehaviour
                     break;
             }
         }
-        if (DataPad.activeInHierarchy != DisplayDataPad)
-            DataPad.SetActive(DisplayDataPad);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             DisplayDataPad = !DisplayDataPad;
         }
         if (DisplayDataPad)
             CameraFollow.isAiming = false;
-    }
+        DataPad.SetActive(DisplayDataPad);
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (DataDex.instance.CurrentModule != DataPadModules.Craft)
-        {
-            SelectedtoCraft = SelectedItemToCraft.None;
-            CraftSelectedPanel.SetActive(false);
-
-            return;
-        }
         DataBall.UpdateUI(GameManager.instance.DataBallLauncher.AmmoAmount);
         //if (GameManager.instance.player_progress.HuntingRifle.isUnlocked)
         //{

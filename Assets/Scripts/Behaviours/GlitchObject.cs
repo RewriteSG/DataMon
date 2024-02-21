@@ -68,7 +68,8 @@ public class GlitchObject : MonoBehaviour
         databyte = Instantiate(DataBytes, transform.position, Quaternion.identity).GetComponent<Databytes>();
         yield return new WaitForEndOfFrame();
         print(databyte.transform.position);
-        databyte.randomPos = (Random.insideUnitCircle * radius) + (Vector2)transform.position;
+        databyte.damp = 0.1f;
+        databyte.randomPos = (Random.insideUnitCircle * radius);
         yield return new WaitForSeconds(1f);
         isShakingGlitch = false;
     }

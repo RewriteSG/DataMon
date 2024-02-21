@@ -65,131 +65,131 @@ public class DataMonAI : MonoBehaviour
         {
             CancelProduction();
         }
-        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion &&
-            Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon && 
-            AI_state != AI_State.Patrol
-            && GameManager.HostileDataMons <= 0 )
-        {
-            timerToChangeTarget = 999;
-            AI_state = AI_State.Patrol;
-        }
-        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion &&
-            Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon &&
-            AI_state == AI_State.Patrol
-            && GameManager.HostileDataMons <= 0)
-        {
-            CancelProduction();
-        }
-        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && GameManager.HostileDataMons > 0 && AI_state != AI_State.Produce)
-        {
-            switch (DataMonCommand.command)
-            {
-                case DataMonCommands.DontAttack:
-                    break;
+        //if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion &&
+        //    Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon && 
+        //    AI_state != AI_State.Patrol
+        //    && GameManager.HostileDataMons <= 0 )
+        //{
+        //    timerToChangeTarget = 999;
+        //    AI_state = AI_State.Patrol;
+        //}
+        //if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion &&
+        //    Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon &&
+        //    AI_state == AI_State.Patrol
+        //    && GameManager.HostileDataMons <= 0)
+        //{
+        //    CancelProduction();
+        //}
+        //if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && GameManager.HostileDataMons > 0 && AI_state != AI_State.Produce)
+        //{
+        //    switch (DataMonCommand.command)
+        //    {
+        //        case DataMonCommands.DontAttack:
+        //            break;
 
-                case DataMonCommands.Patrol:
-                case DataMonCommands.TargetEnemy:
-                case DataMonCommands.AttackAggressive:
-                        AI_state = AI_State.Attack;
-                    if (DataMonCommand.ToTarget != null)
-                    {
-                        timerToChangeTarget = Mathf.Clamp(timerToChangeTarget,0,29);
-                        ChangeAttackTargetEnemy(DataMonCommand.ToTarget);
-                    }
-                    if (timerToChangeTarget > 30)
-                    {
-                        timerToChangeTarget = 0;
-                        GameManager.instance.HostileDataMonsGOs= GameManager.instance.HostileDataMonsGOs.RemoveNullReferencesInList();
-                        ChangeAttackTargetEnemy(GameManager.instance.HostileDataMonsGOs[Random.Range(0, GameManager.instance.HostileDataMonsGOs.Count)]);
+        //        case DataMonCommands.Patrol:
+        //        case DataMonCommands.TargetEnemy:
+        //        case DataMonCommands.AttackAggressive:
+        //                AI_state = AI_State.Attack;
+        //            if (DataMonCommand.ToTarget != null)
+        //            {
+        //                timerToChangeTarget = Mathf.Clamp(timerToChangeTarget,0,29);
+        //                ChangeAttackTargetEnemy(DataMonCommand.ToTarget);
+        //            }
+        //            if (timerToChangeTarget > 30)
+        //            {
+        //                timerToChangeTarget = 0;
+        //                GameManager.instance.HostileDataMonsGOs= GameManager.instance.HostileDataMonsGOs.RemoveNullReferencesInList();
+        //                ChangeAttackTargetEnemy(GameManager.instance.HostileDataMonsGOs[Random.Range(0, GameManager.instance.HostileDataMonsGOs.Count)]);
 
-                    }
-                    else
-                    {
-                        timerToChangeTarget += Time.deltaTime;
-                    }
-                    break;
-            }
-        }
+        //            }
+        //            else
+        //            {
+        //                timerToChangeTarget += Time.deltaTime;
+        //            }
+        //            break;
+        //    }
+        //}
     }
     public void UpdateDatamonAI()
     {
-        if (patrollingAnchor == null)
-            CreateNewPatrolAnchor();
+        //if (patrollingAnchor == null)
+        //    CreateNewPatrolAnchor();
         switch (AI_state)
         {
-            case AI_State.Produce:
-                StartAttack();
-                break;
+            //case AI_State.Produce:
+            //    StartAttack();
+            //    break;
             case AI_State.Attack:
                 CurrentTask = AI_Tasks.Attacking;
                 StartAttack();
                 break;
-            case AI_State.Patrol:
-                if (DataMonCommand.command == DataMonCommands.AttackAggressive)
-                    CurrentTask = AI_Tasks.Attacking;
-                else
-                    CurrentTask = AI_Tasks.Patrolling;
-                StartPatrol();
-                break;
-            case AI_State.Support:
-                break;
+            //case AI_State.Patrol:
+            //    if (DataMonCommand.command == DataMonCommands.AttackAggressive)
+            //        CurrentTask = AI_Tasks.Attacking;
+            //    else
+            //        CurrentTask = AI_Tasks.Patrolling;
+            //    StartPatrol();
+            //    break;
+            //case AI_State.Support:
+            //    break;
         }
     }
 
-    public void ChangeAggroTarget()
-    {
-        Target = aggroSystem.ListOfTargets.FindHighestDamageDealer().transform;
-        if(DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
-        {
-            DataMon.SetDataMonHostile();
-            AI_state = AI_State.Attack;
-        }
-    }
+    //public void ChangeAggroTarget()
+    //{
+    //    Target = aggroSystem.ListOfTargets.FindHighestDamageDealer().transform;
+    //    if(DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
+    //    {
+    //        DataMon.SetDataMonHostile();
+    //        AI_state = AI_State.Attack;
+    //    }
+    //}
     public void ChangeAttackTargetEnemy(GameObject enemy)
     {
         Target = enemy.transform;
         if (AI_state != AI_State.Attack && DataMon.isWaveEnemy)
             AI_state = AI_State.Attack;
     }
-    public void CreateNewPatrolAnchor()
-    {
-        if (patrollingAnchor == null && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
-        {
-            GameObject newPatrolAnchor = new GameObject(DataMon.dataMon.DataMonName + "'s Companion Anchor");
-            newPatrolAnchor.transform.position = (Random.insideUnitCircle.normalized * Random.Range(GameManager.instance.PlayerDataMonPatrolMinDist,
-                GameManager.instance.PlayerDataMonPatrolMaxDist)) + (Vector2)GameManager.instance.Player.transform.position;
-            //newPatrolAnchor.transform.position += GameManager.instance.Player.transform.position;
-            newPatrolAnchor.transform.SetParent(GameManager.instance.Player.transform, true);
-            patrollingAnchor = newPatrolAnchor;
-        }
-        if (patrollingAnchor == null && DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
-        {
-            GameObject newPatrolAnchor = new GameObject(DataMon.dataMon.DataMonName + "'s Patrolling Anchor");
-            newPatrolAnchor.transform.position = transform.position;
-            newPatrolAnchor.transform.parent = RoamingSpawner.DataMonPoolGO.transform;
-            patrollingAnchor = newPatrolAnchor;
-        }
-    }
+    //public void CreateNewPatrolAnchor()
+    //{
+    //    //if (patrollingAnchor == null && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+    //    //{
+    //    //    GameObject newPatrolAnchor = new GameObject(DataMon.dataMon.DataMonName + "'s Companion Anchor");
+    //    //    newPatrolAnchor.transform.position = (Random.insideUnitCircle.normalized * Random.Range(GameManager.instance.PlayerDataMonPatrolMinDist,
+    //    //        GameManager.instance.PlayerDataMonPatrolMaxDist)) + (Vector2)GameManager.instance.Player.transform.position;
+    //    //    //newPatrolAnchor.transform.position += GameManager.instance.Player.transform.position;
+    //    //    newPatrolAnchor.transform.SetParent(GameManager.instance.Player.transform, true);
+    //    //    patrollingAnchor = newPatrolAnchor;
+    //    //}
+    //    //if (patrollingAnchor == null && DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion)
+    //    //{
+    //    //    GameObject newPatrolAnchor = new GameObject(DataMon.dataMon.DataMonName + "'s Patrolling Anchor");
+    //    //    newPatrolAnchor.transform.position = transform.position;
+    //    //    newPatrolAnchor.transform.parent = RoamingSpawner.DataMonPoolGO.transform;
+    //    //    patrollingAnchor = newPatrolAnchor;
+    //    //}
+    //}
 
     public void SetNewPatrollingAnchorPos()
     {
-        if (patrollingAnchor == null)
-            CreateNewPatrolAnchor();
+        //if (patrollingAnchor == null)
+        //    CreateNewPatrolAnchor();
 
-        if (!patrollingAnchor.activeSelf && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
-        {
-            patrollingAnchor.SetActive(true);
-            patrollingAnchor.transform.position = (Random.insideUnitCircle.normalized * Random.Range(GameManager.instance.PlayerDataMonPatrolMinDist,
-                GameManager.instance.PlayerDataMonPatrolMaxDist)) + (Vector2)GameManager.instance.Player.transform.position;
-            //patrollingAnchor.transform.position += GameManager.instance.Player.transform.position;
-            patrollingAnchor.transform.SetParent(GameManager.instance.Player.transform, true);
-        }
-        if (!patrollingAnchor.activeSelf && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
-        {
-            patrollingAnchor.SetActive(true);
-            patrollingAnchor.transform.parent = RoamingSpawner.DataMonPoolGO.transform;
-            patrollingAnchor.transform.position = transform.position;
-        }
+        //if (!patrollingAnchor.activeSelf && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
+        //{
+        //    patrollingAnchor.SetActive(true);
+        //    patrollingAnchor.transform.position = (Random.insideUnitCircle.normalized * Random.Range(GameManager.instance.PlayerDataMonPatrolMinDist,
+        //        GameManager.instance.PlayerDataMonPatrolMaxDist)) + (Vector2)GameManager.instance.Player.transform.position;
+        //    //patrollingAnchor.transform.position += GameManager.instance.Player.transform.position;
+        //    patrollingAnchor.transform.SetParent(GameManager.instance.Player.transform, true);
+        //}
+        //if (!patrollingAnchor.activeSelf && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
+        //{
+        //    patrollingAnchor.SetActive(true);
+        //    patrollingAnchor.transform.parent = RoamingSpawner.DataMonPoolGO.transform;
+        //    patrollingAnchor.transform.position = transform.position;
+        //}
     }
 
     #region DifferentAI
@@ -227,34 +227,35 @@ public class DataMonAI : MonoBehaviour
 
         DataMon.GetAvailableAttack();
 
-        if (DataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject))
+        if (allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject))
         {
             reachedEndOfPath = true;
 
-
-            return;
-        }else
-            reachedEndOfPath = false;
-        
-        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject,true)&&
-            AI_state != AI_State.Produce)
-        {
-            reachedEndOfPath = true;
 
             return;
         }
         else
             reachedEndOfPath = false;
 
-        if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject) &&
-            AI_state == AI_State.Produce)
-        {
-            reachedEndOfPath = true;
+        //if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject,true)&&
+        //    AI_state != AI_State.Produce)
+        //{
+        //    reachedEndOfPath = true;
 
-            return;
-        }
-        else
-            reachedEndOfPath = false;
+        //    return;
+        //}
+        //else
+        //    reachedEndOfPath = false;
+
+        //if (DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion && allCollidersInCircle.ColliderArrayHasGameObject(Target.gameObject) &&
+        //    AI_state == AI_State.Produce)
+        //{
+        //    reachedEndOfPath = true;
+
+        //    return;
+        //}
+        //else
+        //    reachedEndOfPath = false;
 
         if (seeker.IsDone() && Vector2.Distance(Target.position, targetPos)> DataMon.baseAttributes.BaseAttackRange)
         {
@@ -276,11 +277,11 @@ public class DataMonAI : MonoBehaviour
         //    reachedEndOfPath = true;
         //    return;
         //}
-        if(DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
-        {
-            NeutralPatrol();
-            return;
-        }
+        //if(DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isNeutral)
+        //{
+        //    NeutralPatrol();
+        //    return;
+        //}
         if (seeker.IsDone() && (Vector3.Distance(transform.position, GameManager.instance.Player.transform.position) > GameManager.instance.MaxDistForCompanionDataMon 
             && Vector2.Distance(patrollingAnchor.transform.position, targetPos) > 1) || NeutralStartPath)
         {

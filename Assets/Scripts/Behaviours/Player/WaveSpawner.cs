@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using IndividualDataMon;
 public class WaveSpawner : MonoBehaviour
 {
+    public DataMonsData[] dataMonsDatas;
+    public GameObject[] AllDataMonPrefabs = new GameObject[] {};
     public enum SpawnState { Spawning, Waiting, Counting};
 
     //[System.Serializable]
@@ -39,6 +41,24 @@ public class WaveSpawner : MonoBehaviour
     public static int enemyCount;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        DataMon dataMon;
+        for (int i = 0; i < dataMonsDatas.Length; i++)
+        {
+            for (int x = 0; x < dataMonsDatas[i].DataMons.Length; x++)
+            {
+                dataMon = dataMonsDatas[i].DataMons[x].DataMonPrefab.GetComponent<DataMon>();
+                dataMon.SetDataMon(dataMon.dataMonData.DataMons.GetDataMonInDataArray(dataMon.gameObject));
+            }
+        }
+
+        //for (int i = 0; i < AllDataMonPrefabs.Length; i++)
+        //{
+        //    dataMon = AllDataMonPrefabs[i].GetComponent<DataMon>();
+        //    dataMon.SetDataMon(dataMon.dataMonData.DataMons.GetDataMonInDataArray(dataMon.gameObject));
+        //}
+    }
     void Start()
     {
         wm = GetComponent<WaveManager>();
@@ -55,7 +75,7 @@ public class WaveSpawner : MonoBehaviour
     public void ChangeDifficulty(Wave.WaveDifficulty toDifficulty)
     {
         currentDifficulty = toDifficulty;
-        roamingSpawner.AddDataMonToRoamingDatabase(toDifficulty);
+        //roamingSpawner.AddDataMonToRoamingDatabase(toDifficulty);
     }
     // Update is called once per frame
     void Update()
@@ -123,7 +143,7 @@ public class WaveSpawner : MonoBehaviour
         {
             WavesBeforeIncreaseDifficulty *= 2;
             currentDifficulty +=  1;
-            roamingSpawner.AddDataMonToRoamingDatabase(currentDifficulty);
+            //roamingSpawner.AddDataMonToRoamingDatabase(currentDifficulty);
         }
 
         if (NextWave + 1>waves.Length-1)

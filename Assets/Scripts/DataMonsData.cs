@@ -8,8 +8,8 @@ public class DataMonsData : ScriptableObject
 
     public List<int> EvolutionCosts = new List<int>();
 
-    public AbilitiesScriptableObjects[] InherentPassives;
-    public Attack[] InherentAllDataMonAbility;
+    public AbilitiesScriptableObjects Passives;
+    public Attack DataMonAbility;
     public AttackScriptableObject AttacksObjects;
 
     [Header("Put DataMons from tier 1 to tier 2, and so on..")]
@@ -24,7 +24,7 @@ public enum DataMonRole
 }
 public enum DataMonBehaviourState
 {
-    isHostile, isCompanion, isNeutral
+    isHostile, isCompanion,isNeutral
 
 }
 [System.Serializable]
@@ -32,7 +32,6 @@ public class DataMonIndividualData
 {
     public string DataMonName;
     public GameObject DataMonPrefab;
-    public Attack[] InherentDataMonAbility;
     public DataMonAttributes BaseAttributes;
     public DataMonBehaviourState MonBehaviourState;
     public DataMonIndividualData()

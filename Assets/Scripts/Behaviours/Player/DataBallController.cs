@@ -33,7 +33,7 @@ public class DataBallController : MonoBehaviour
         if (isCapturing)
             return;
         dataMon = collision.transform.parent.gameObject.GetComponent<IndividualDataMon.DataMon>();
-        if (!dataMon.isBeingCaptured && dataMon.dataMon.MonBehaviourState != DataMonBehaviourState.isCompanion && !isCapturing)
+        if (!dataMon.isBeingCaptured && !isCapturing)
         {
             dataMon.isBeingCaptured = true;
             isCapturing = true;

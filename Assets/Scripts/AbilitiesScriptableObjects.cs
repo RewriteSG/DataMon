@@ -90,29 +90,29 @@ public class AbilitiesScriptableObjects : ScriptableObject
         currentEvo = dataMon.tier;
         return currentEvo;
     }
-    void SetAntAttribute(ref DataMon dataMon, int count)
-    {
-        int evolution = dataMon.tier;
-        modifier = ModifiersByEvolution[evolution] * count-1;
-        dataMon.SetAttributesByModifier(modifier);
-    }
+    //void SetAntAttribute(ref DataMon dataMon, int count)
+    //{
+    //    int evolution = dataMon.tier;
+    //    modifier = ModifiersByEvolution[evolution] * count-1;
+    //    dataMon.SetAttributesByModifier(modifier);
+    //}
     void Passive_Ant(ref DataMon dataMon)
     {
-        DataMonButton[] temp =  DataDex.instance.GetDataMonFromTeam(dataMon.dataMonData);
-        //Debug.Log("Before ? HP " + dataMon.CurrentAttributes.CurrentHealth);
-        for (int i = 0; i < temp.Length; i++)
-        {
-            SetAntAttribute(ref temp[i].dataMon, temp.Length);
-        }
+        //DataMonButton[] temp =  DataDex.instance.GetDataMonFromTeam(dataMon.dataMonData);
+        ////Debug.Log("Before ? HP " + dataMon.CurrentAttributes.CurrentHealth);
+        //for (int i = 0; i < temp.Length; i++)
+        //{
+        //    SetAntAttribute(ref temp[i].dataMon, temp.Length);
+        //}
         //Debug.Log("working? " + modifier);
     }
     void Passive_Bee(ref GameManager GM, DataMon dataMon, bool toggle)
     {
-        GetDataMonEvolutionIndex(dataMon);
-        if (toggle)
-            GM.ChanceForDoubleDrop += ModifiersByEvolution[currentEvo];
-        else
-            GM.ChanceForDoubleDrop -= ModifiersByEvolution[currentEvo];
+        //GetDataMonEvolutionIndex(dataMon);
+        //if (toggle)
+        //    GM.ChanceForDoubleDrop += ModifiersByEvolution[currentEvo];
+        //else
+        //    GM.ChanceForDoubleDrop -= ModifiersByEvolution[currentEvo];
 
     }
     void Passive_Turt(ref DataMon dataMon, float reflectDamage )
@@ -183,7 +183,7 @@ public class AbilitiesScriptableObjects : ScriptableObject
     void ActiveBuff_Wolf(ref DataMon dataMon)
     {
         GetDataMonEvolutionIndex(dataMon);
-        dataMon.DataMonStartBuff(10, ModifiersByEvolution[currentEvo]);
+        //dataMon.DataMonStartBuff(10, ModifiersByEvolution[currentEvo]);
     }
 
     void Passive_Dragon(ref DataMon dataMon)
