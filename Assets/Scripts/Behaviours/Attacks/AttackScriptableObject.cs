@@ -38,6 +38,7 @@ public class AttackScriptableObject : ScriptableObject
 [System.Serializable]
 public class Attack
 {
+    public string name;
     public GameObject AttackPrefab;
     public string AttackPrefabName;
     public GameObject _gameObject;
