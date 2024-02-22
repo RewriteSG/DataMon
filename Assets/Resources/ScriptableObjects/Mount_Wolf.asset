@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7b2b7fbbef09b43b22b5352d955829, type: 3}
   m_Name: Mount_Wolf
   m_EditorClassIdentifier: Assembly-CSharp::Ability_Mount
-  abilityDescriptions: []
+  abilityDescriptions:
+  - Name: 
+    Description: You can ride this mount and look cool, Also get to use some skills
+  - Name: 
+    Description: You can ride this mount and look cool, Also get to use some skills
+  - Name: 
+    Description: You can ride this mount and look cool, Also get to use some skills
   isAbilitySemiAuto: 0
   _AbilityType: 3
   ModifiersByEvolution:
@@ -26,15 +32,15 @@ MonoBehaviour:
   ActiveTime: 0
   ItemPlaceHolder: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
     type: 3}
-  ItemPlaceHolderPrefabName: 
+  ItemPlaceHolderPrefabName: ItemPlaceholder
   ItemImage:
   - {fileID: 21300000, guid: 4f8c7accbaf10ca4fb1f1de69a9a8130, type: 3}
   - {fileID: 21300000, guid: 0de6d46412f2bc84ebfb2ef3865c885a, type: 3}
   - {fileID: 21300000, guid: 5fe4e16c1633a3e42bf9fb9350b61773, type: 3}
   ItemImageName:
-  - 
-  - 
-  - 
+  - Obtained_Scrapeter
+  - Obtained_Protopeter
+  - Obtained_Peter
   ItemObject: {fileID: 5454410355701626907, guid: 0c5687084f31c8443a34e771dad6672c,
     type: 3}
   ItemObjectName: Mount_Peter

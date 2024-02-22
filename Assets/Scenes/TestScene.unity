@@ -4996,6 +4996,77 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 309054390}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &309650749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309650750}
+  - component: {fileID: 309650752}
+  - component: {fileID: 309650751}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &309650750
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309650749}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1373804348}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &309650751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309650749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &309650752
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309650749}
+  m_CullTransparentMesh: 0
 --- !u!1001 &318099822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11345,6 +11416,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 732326245}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &735494454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 735494455}
+  - component: {fileID: 735494457}
+  - component: {fileID: 735494456}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &735494455
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735494454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1373804348}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1.3509064, y: 0}
+  m_SizeDelta: {x: -2.701706, y: -5.4044495}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &735494456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735494454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &735494457
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735494454}
+  m_CullTransparentMesh: 0
 --- !u!1001 &745645388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16998,6 +17143,7 @@ Transform:
   - {fileID: 542498926}
   - {fileID: 1666003320}
   - {fileID: 1645478338}
+  - {fileID: 1426003346}
   m_Father: {fileID: 1610947152621858308}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21911,6 +22057,138 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1370649017}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1373804347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1373804348}
+  - component: {fileID: 1373804350}
+  - component: {fileID: 1373804349}
+  m_Layer: 5
+  m_Name: ShieldBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1373804348
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373804347}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6025, y: 0.6025, z: 0.6025}
+  m_Children:
+  - {fileID: 309650750}
+  - {fileID: 735494455}
+  m_Father: {fileID: 1381013329928551941}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 127.92, y: -17.356}
+  m_SizeDelta: {x: 238.04593, y: 34.487984}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1373804349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373804347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a46e42fef4a34c8eefb8cf0f393b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1373804350}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0.9753853, g: 1, b: 0, a: 1}
+    key2: {r: 1, g: 1, b: 1, a: 1}
+    key3: {r: 0.0016849041, g: 1, b: 0, a: 1}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 20239
+    ctime1: 41827
+    ctime2: 41827
+    ctime3: 65535
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 65535
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 4
+    m_NumAlphaKeys: 2
+  fill: {fileID: 735494456}
+--- !u!114 &1373804350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373804347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 0
+  m_TargetGraphic: {fileID: 0}
+  m_FillRect: {fileID: 735494455}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 20
+  m_WholeNumbers: 1
+  m_Value: 11
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1377206732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22573,6 +22851,841 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419001133}
   m_CullTransparentMesh: 0
+--- !u!1 &1426003345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426003346}
+  - component: {fileID: 1426003348}
+  - component: {fileID: 1426003347}
+  m_Layer: 0
+  m_Name: WaveManager (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1426003346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426003345}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 49.300003, y: 129, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1061895737}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426003347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426003345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09a42ef2180538469fb88a1931f1a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataMonsDatas: []
+  AllDataMonPrefabs:
+  - {fileID: 145781175407673768, guid: 67a9c31a78d2533408d939ecb8dc2e3d, type: 3}
+  - {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f, type: 3}
+  - {fileID: 209965498595768710, guid: a750213a5d6068143b7150b0d1f66701, type: 3}
+  - {fileID: 8199447733351373943, guid: 918a46757712ba345bf7956e63309945, type: 3}
+  - {fileID: 1335662195762606950, guid: a1a189a22b453314ba89af933aa44f36, type: 3}
+  - {fileID: 7069348724174970135, guid: af33d81fb76d7174d8c6831b12f1ba68, type: 3}
+  - {fileID: 2998886106784667176, guid: 0474259a83f7c2c4998146e6986dac7b, type: 3}
+  - {fileID: 9198753192753908654, guid: c885cd06861c7264da196284f03df7db, type: 3}
+  - {fileID: 5139332057412728592, guid: 207f5fd8f2a4589409f83cb30cf9a4ea, type: 3}
+  - {fileID: 8909911149548451120, guid: 29b85658bd60899458a88ddb78ff30be, type: 3}
+  - {fileID: 4978633443002041284, guid: 8e61f1e77281460468e2bc75cb8542d1, type: 3}
+  - {fileID: 3222224288041919963, guid: c754fc9cf358b8043a08021a9bf37d7b, type: 3}
+  - {fileID: 4409438238243139303, guid: 195181ee3ba02e04e9d4f5d52801b819, type: 3}
+  - {fileID: 8101047146202943333, guid: 8b20c01d96ab0db418f5395247f26e4e, type: 3}
+  - {fileID: 1974126115556432739, guid: aa2984add5c6db746bdec3b6c4ee4073, type: 3}
+  - {fileID: 6870387613212311961, guid: 1483339e3ffff5741aef822c192700e4, type: 3}
+  - {fileID: 3256361934947032024, guid: f14c23a328559f74caf40dbe9a5a9d03, type: 3}
+  - {fileID: 3515366441000572780, guid: 276e143271cbf09478e55e791084e833, type: 3}
+  - {fileID: 6053317907334725199, guid: 6af162b2ea145bf4899e026ba97cbfc0, type: 3}
+  - {fileID: 6611149449202018845, guid: 7596b7a23bdda0b4b97d7f931b088fb8, type: 3}
+  - {fileID: 725550477438247732, guid: 09395af896b618b4e9faca1fa0136626, type: 3}
+  - {fileID: 1807219733211062849, guid: e33d147595e5c3742a0555e9ff8956b9, type: 3}
+  - {fileID: 6312990260497089612, guid: 27de0d69d8bbd4d40bbc9874d030fc9f, type: 3}
+  - {fileID: 726187970350386918, guid: a131661482287b64d9e8d8cfae3dadb0, type: 3}
+  - {fileID: 5621823419656160950, guid: aeb4441831823144c8d81a83e9af7bdc, type: 3}
+  - {fileID: 5800908869738802819, guid: 367ceb3a4c497ea41b15062e020100bf, type: 3}
+  wm: {fileID: 1426003348}
+  waves: []
+  SpawnPoints:
+  - {fileID: 1357022488}
+  - {fileID: 705448186}
+  - {fileID: 2136066766}
+  - {fileID: 671668190}
+  - {fileID: 1561495989}
+  - {fileID: 266961174}
+  - {fileID: 1662700671}
+  - {fileID: 27917849}
+  - {fileID: 1161073260}
+  - {fileID: 1999616305}
+  - {fileID: 1608062997}
+  - {fileID: 1175321393}
+  - {fileID: 208219738}
+  timeBetweenWaves: 2
+  WavesBeforeIncreaseDifficulty: 2
+  currentDifficulty: 1
+  roamingSpawner: {fileID: 542498927}
+  waveIncomingText: {fileID: 1381013330037466691}
+--- !u!114 &1426003348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426003345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3888690e08d68a34fa250ecf559519dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IncomingWaveInSeconds: 0
+  Waves:
+  - name: Ant Slaves
+    NumberOfEnemiesInWave: 0
+    _EnemiesInWave:
+    - name: Datant
+      _DataMonsData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+      DataMon:
+        DataMonName: Datant
+        DataMonPrefab: {fileID: 145781175407673768, guid: 67a9c31a78d2533408d939ecb8dc2e3d,
+          type: 3}
+        DataMonPrefabName: Datant
+        UIsprite: {fileID: 21300000, guid: 74ef3196a56eb9041a87030c183449f9, type: 3}
+        UIspriteName: Obtained_Datant
+        BaseAttributes:
+          BaseHealth: 8
+          BaseAttack: 5
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 3
+          BaseCaptureChance: 90
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 2
+    - name: Skorp
+      _DataMonsData: {fileID: 11400000, guid: 49d007c20e9b4bd49846e2b3fa9f3e5e, type: 2}
+      DataMon:
+        DataMonName: Skorp
+        DataMonPrefab: {fileID: 3222224288041919963, guid: c754fc9cf358b8043a08021a9bf37d7b,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 671ac60e5dda2d447b5b578cbef4b73f, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 8
+          BaseAttack: 14
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 0
+          BaseCaptureChance: 90
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 1
+    - name: Turt
+      _DataMonsData: {fileID: 11400000, guid: f1b9dbea49d259145bcf1f953dd54c0e, type: 2}
+      DataMon:
+        DataMonName: Turt
+        DataMonPrefab: {fileID: 5621823419656160950, guid: aeb4441831823144c8d81a83e9af7bdc,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 84ebf23afa994534db512849b06ef612, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 12
+          BaseAttack: 5
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 170
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 1
+    difficulty: 1
+  - name: Stampede
+    NumberOfEnemiesInWave: 0
+    _EnemiesInWave:
+    - name: Hammo
+      _DataMonsData: {fileID: 11400000, guid: a3ea56e2c479e914280499f4387e98f8, type: 2}
+      DataMon:
+        DataMonName: Hammo
+        DataMonPrefab: {fileID: 2998886106784667176, guid: 0474259a83f7c2c4998146e6986dac7b,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 12be2d07a20b99e40baea120b095063b, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 15
+          BaseAttack: 10
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 2
+    - name: Centaurius
+      _DataMonsData: {fileID: 11400000, guid: 5f65049f8e10caa4ba618524c50db530, type: 2}
+      DataMon:
+        DataMonName: Centaurius
+        DataMonPrefab: {fileID: 3256361934947032024, guid: f14c23a328559f74caf40dbe9a5a9d03,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 26eb9edafb1e5a444ac83b2f68c18d03, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 25
+          BaseAttack: 17
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 120
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 1
+    difficulty: 1
+  - name: The Big Boss Incoming
+    NumberOfEnemiesInWave: 0
+    _EnemiesInWave:
+    - name: Turtyst
+      _DataMonsData: {fileID: 11400000, guid: f1b9dbea49d259145bcf1f953dd54c0e, type: 2}
+      DataMon:
+        DataMonName: Turtyst
+        DataMonPrefab: {fileID: 726187970350386918, guid: a131661482287b64d9e8d8cfae3dadb0,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 60f1db21cb335594b991a2342da5d858, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 15
+          BaseAttack: 8
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 170
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 2
+    - name: ScraPeter
+      _DataMonsData: {fileID: 11400000, guid: b3aa1d998ba6e934399993667423202d, type: 2}
+      DataMon:
+        DataMonName: ScraPeter
+        DataMonPrefab: {fileID: 4978633443002041284, guid: 8e61f1e77281460468e2bc75cb8542d1,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 4f8c7accbaf10ca4fb1f1de69a9a8130, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 15
+          BaseAttack: 15
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 150
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 1
+    - name: Datantite
+      _DataMonsData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+      DataMon:
+        DataMonName: Datantite
+        DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: d8747dc39a53fef48959334471c31729, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 15
+          BaseAttack: 7
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 3
+          BaseCaptureChance: 60
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 1
+    - name: Skorpi
+      _DataMonsData: {fileID: 11400000, guid: 49d007c20e9b4bd49846e2b3fa9f3e5e, type: 2}
+      DataMon:
+        DataMonName: Skorpi
+        DataMonPrefab: {fileID: 4409438238243139303, guid: 195181ee3ba02e04e9d4f5d52801b819,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 30f036978b5c5434181f3c6acf4675ca, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 14
+          BaseAttack: 18
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 0
+          BaseCaptureChance: 90
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 1
+    difficulty: 2
+  - name: Must've been easy surviving
+    NumberOfEnemiesInWave: 0
+    _EnemiesInWave:
+    - name: Foliox
+      _DataMonsData: {fileID: 11400000, guid: 0809147a19581d3458edc78436e9cbe2, type: 2}
+      DataMon:
+        DataMonName: Foliox
+        DataMonPrefab: {fileID: 8199447733351373943, guid: 918a46757712ba345bf7956e63309945,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 63d07246315863c4b8260e3c26311610, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 25
+          BaseAttack: 12
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 180
+          BaseAttackRange: 0
+          BaseCaptureChance: 50
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 2
+    - name: Skorpike
+      _DataMonsData: {fileID: 11400000, guid: 49d007c20e9b4bd49846e2b3fa9f3e5e, type: 2}
+      DataMon:
+        DataMonName: Skorpike
+        DataMonPrefab: {fileID: 8101047146202943333, guid: 8b20c01d96ab0db418f5395247f26e4e,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 952061bb18dc3ac40aff44320caa18b4, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 20
+          BaseAttack: 30
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 160
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 2
+      Count: 1
+    - name: Crysturt
+      _DataMonsData: {fileID: 11400000, guid: f1b9dbea49d259145bcf1f953dd54c0e, type: 2}
+      DataMon:
+        DataMonName: Crysturt
+        DataMonPrefab: {fileID: 6312990260497089612, guid: 27de0d69d8bbd4d40bbc9874d030fc9f,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: b53d9f7c050267044828e03dcd241aa5, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 25
+          BaseAttack: 13
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 170
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 2
+      Count: 2
+    difficulty: 2
+  - name: Just lose already
+    NumberOfEnemiesInWave: 0
+    _EnemiesInWave:
+    - name: BuzzQueen
+      _DataMonsData: {fileID: 11400000, guid: ad36bfa93f7bd4a4c8ce8bdb57df944e, type: 2}
+      DataMon:
+        DataMonName: BuzzQueen
+        DataMonPrefab: {fileID: 1807219733211062849, guid: e33d147595e5c3742a0555e9ff8956b9,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: db3b153f1d7c13d4686016f2a24d7775, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 14
+          BaseAttack: 20
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 0
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 1
+    - name: ProtoPeter
+      _DataMonsData: {fileID: 11400000, guid: b3aa1d998ba6e934399993667423202d, type: 2}
+      DataMon:
+        DataMonName: ProtoPeter
+        DataMonPrefab: {fileID: 8909911149548451120, guid: 29b85658bd60899458a88ddb78ff30be,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 0de6d46412f2bc84ebfb2ef3865c885a, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 25
+          BaseAttack: 25
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 160
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 1
+    - name: BumbleBuzz
+      _DataMonsData: {fileID: 11400000, guid: ad36bfa93f7bd4a4c8ce8bdb57df944e, type: 2}
+      DataMon:
+        DataMonName: BumbleBuzz
+        DataMonPrefab: {fileID: 725550477438247732, guid: 09395af896b618b4e9faca1fa0136626,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: a674c8a800148734390e43165be2e934, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 10
+          BaseAttack: 15
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 0
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 4
+    - name: Datantite
+      _DataMonsData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+      DataMon:
+        DataMonName: Datantite
+        DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: d8747dc39a53fef48959334471c31729, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 15
+          BaseAttack: 7
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 3
+          BaseCaptureChance: 60
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 1
+    difficulty: 3
+  - name: Die...
+    NumberOfEnemiesInWave: 0
+    _EnemiesInWave:
+    - name: Stampedian
+      _DataMonsData: {fileID: 11400000, guid: 5f65049f8e10caa4ba618524c50db530, type: 2}
+      DataMon:
+        DataMonName: Stampedian
+        DataMonPrefab: {fileID: 1974126115556432739, guid: aa2984add5c6db746bdec3b6c4ee4073,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: ca58288660c55dd41b2459da4d6c56be, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 35
+          BaseAttack: 27
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 140
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 1
+    - name: Centaurius
+      _DataMonsData: {fileID: 11400000, guid: 5f65049f8e10caa4ba618524c50db530, type: 2}
+      DataMon:
+        DataMonName: Centaurius
+        DataMonPrefab: {fileID: 3256361934947032024, guid: f14c23a328559f74caf40dbe9a5a9d03,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 26eb9edafb1e5a444ac83b2f68c18d03, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 25
+          BaseAttack: 17
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 120
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 2
+    - name: Aureusdrake
+      _DataMonsData: {fileID: 11400000, guid: b93de0bbb35c2a94883c1e3e5a3eceea, type: 2}
+      DataMon:
+        DataMonName: Aureusdrake
+        DataMonPrefab: {fileID: 3515366441000572780, guid: 276e143271cbf09478e55e791084e833,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: e3cf9db88f339de48a296d062bab003b, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 20
+          BaseAttack: 25
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 1
+    - name: Hammunition
+      _DataMonsData: {fileID: 11400000, guid: a3ea56e2c479e914280499f4387e98f8, type: 2}
+      DataMon:
+        DataMonName: Hammunition
+        DataMonPrefab: {fileID: 9198753192753908654, guid: c885cd06861c7264da196284f03df7db,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 26f7b5ea17545d44bb8ba8bdfe8381d3, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 20
+          BaseAttack: 15
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 3
+    - name: Datantaur
+      _DataMonsData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+      DataMon:
+        DataMonName: Datantaur
+        DataMonPrefab: {fileID: 209965498595768710, guid: a750213a5d6068143b7150b0d1f66701,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: fa3af6c32e8e3f44f8aa9deb349a7ccc, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 25
+          BaseAttack: 12
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 3
+          BaseCaptureChance: 45
+        MonBehaviourState: 2
+      DataMonsDataIndex: 2
+      Count: 2
+    difficulty: 3
+  - name: Why dont you die?
+    NumberOfEnemiesInWave: 0
+    _EnemiesInWave:
+    - name: Arbox
+      _DataMonsData: {fileID: 11400000, guid: 0809147a19581d3458edc78436e9cbe2, type: 2}
+      DataMon:
+        DataMonName: Arbox
+        DataMonPrefab: {fileID: 1335662195762606950, guid: a1a189a22b453314ba89af933aa44f36,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 7b328b959cb0a3e4592fe8167ee85e80, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 20
+          BaseAttack: 12
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 180
+          BaseAttackRange: 0
+          BaseCaptureChance: 60
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 2
+    - name: Peter
+      _DataMonsData: {fileID: 11400000, guid: b3aa1d998ba6e934399993667423202d, type: 2}
+      DataMon:
+        DataMonName: Peter
+        DataMonPrefab: {fileID: 5139332057412728592, guid: 207f5fd8f2a4589409f83cb30cf9a4ea,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 5fe4e16c1633a3e42bf9fb9350b61773, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 35
+          BaseAttack: 35
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 2
+      Count: 1
+    - name: Thornox
+      _DataMonsData: {fileID: 11400000, guid: 0809147a19581d3458edc78436e9cbe2, type: 2}
+      DataMon:
+        DataMonName: Thornox
+        DataMonPrefab: {fileID: 7069348724174970135, guid: af33d81fb76d7174d8c6831b12f1ba68,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 2ee6b754cb937fa46adb36158bc2b077, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 35
+          BaseAttack: 18
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 180
+          BaseAttackRange: 0
+          BaseCaptureChance: 45
+        MonBehaviourState: 2
+      DataMonsDataIndex: 2
+      Count: 2
+    - name: Foliox
+      _DataMonsData: {fileID: 11400000, guid: 0809147a19581d3458edc78436e9cbe2, type: 2}
+      DataMon:
+        DataMonName: Foliox
+        DataMonPrefab: {fileID: 8199447733351373943, guid: 918a46757712ba345bf7956e63309945,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 63d07246315863c4b8260e3c26311610, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 25
+          BaseAttack: 12
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 180
+          BaseAttackRange: 0
+          BaseCaptureChance: 50
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 2
+    - name: Hammunition
+      _DataMonsData: {fileID: 11400000, guid: a3ea56e2c479e914280499f4387e98f8, type: 2}
+      DataMon:
+        DataMonName: Hammunition
+        DataMonPrefab: {fileID: 9198753192753908654, guid: c885cd06861c7264da196284f03df7db,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 26f7b5ea17545d44bb8ba8bdfe8381d3, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 20
+          BaseAttack: 15
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 1
+      Count: 1
+    difficulty: 4
+  - name: You should die now
+    NumberOfEnemiesInWave: 0
+    _EnemiesInWave:
+    - name: Aurumdrake
+      _DataMonsData: {fileID: 11400000, guid: b93de0bbb35c2a94883c1e3e5a3eceea, type: 2}
+      DataMon:
+        DataMonName: Aurumdrake
+        DataMonPrefab: {fileID: 6053317907334725199, guid: 6af162b2ea145bf4899e026ba97cbfc0,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 2b5db7ca1a55f08478af7415ccbb81eb, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 40
+          BaseAttack: 45
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 300
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 2
+      Count: 2
+    - name: KingSteed
+      _DataMonsData: {fileID: 11400000, guid: 5f65049f8e10caa4ba618524c50db530, type: 2}
+      DataMon:
+        DataMonName: KingSteed
+        DataMonPrefab: {fileID: 6870387613212311961, guid: 1483339e3ffff5741aef822c192700e4,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: e6a5e67904623df4bad921a34bca91ab, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 44
+          BaseAttack: 37
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 180
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 2
+      Count: 2
+    - name: Thornox
+      _DataMonsData: {fileID: 11400000, guid: 0809147a19581d3458edc78436e9cbe2, type: 2}
+      DataMon:
+        DataMonName: Thornox
+        DataMonPrefab: {fileID: 7069348724174970135, guid: af33d81fb76d7174d8c6831b12f1ba68,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 2ee6b754cb937fa46adb36158bc2b077, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 35
+          BaseAttack: 18
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 180
+          BaseAttackRange: 0
+          BaseCaptureChance: 45
+        MonBehaviourState: 2
+      DataMonsDataIndex: 2
+      Count: 2
+    - name: Peter
+      _DataMonsData: {fileID: 11400000, guid: b3aa1d998ba6e934399993667423202d, type: 2}
+      DataMon:
+        DataMonName: Peter
+        DataMonPrefab: {fileID: 5139332057412728592, guid: 207f5fd8f2a4589409f83cb30cf9a4ea,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 5fe4e16c1633a3e42bf9fb9350b61773, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 35
+          BaseAttack: 35
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 2
+      Count: 2
+    - name: Datantaur
+      _DataMonsData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+      DataMon:
+        DataMonName: Datantaur
+        DataMonPrefab: {fileID: 209965498595768710, guid: a750213a5d6068143b7150b0d1f66701,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: fa3af6c32e8e3f44f8aa9deb349a7ccc, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 25
+          BaseAttack: 12
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 3
+          BaseCaptureChance: 45
+        MonBehaviourState: 2
+      DataMonsDataIndex: 2
+      Count: 2
+    difficulty: 4
+  - name: Hell is here
+    NumberOfEnemiesInWave: 0
+    _EnemiesInWave:
+    - name: Hybreach
+      _DataMonsData: {fileID: 11400000, guid: f69093286d03fc04bb15101da509df7b, type: 2}
+      DataMon:
+        DataMonName: Hybreach
+        DataMonPrefab: {fileID: 5800908869738802819, guid: 367ceb3a4c497ea41b15062e020100bf,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 1b1752d0ae87a5c42a7fa26b7968221a, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 80
+          BaseAttack: 60
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 150
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 1
+    difficulty: 5
+  serializeWave:
+    name: Ant Slaves
+    NumberOfEnemiesInWave: 0
+    _EnemiesInWave:
+    - name: Datant
+      _DataMonsData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+      DataMon:
+        DataMonName: Datant
+        DataMonPrefab: {fileID: 145781175407673768, guid: 67a9c31a78d2533408d939ecb8dc2e3d,
+          type: 3}
+        DataMonPrefabName: Datant
+        UIsprite: {fileID: 21300000, guid: 74ef3196a56eb9041a87030c183449f9, type: 3}
+        UIspriteName: Obtained_Datant
+        BaseAttributes:
+          BaseHealth: 8
+          BaseAttack: 5
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 3
+          BaseCaptureChance: 90
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 2
+    - name: Skorp
+      _DataMonsData: {fileID: 11400000, guid: 49d007c20e9b4bd49846e2b3fa9f3e5e, type: 2}
+      DataMon:
+        DataMonName: Skorp
+        DataMonPrefab: {fileID: 3222224288041919963, guid: c754fc9cf358b8043a08021a9bf37d7b,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 671ac60e5dda2d447b5b578cbef4b73f, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 8
+          BaseAttack: 14
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 200
+          BaseAttackRange: 0
+          BaseCaptureChance: 90
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 1
+    - name: Turt
+      _DataMonsData: {fileID: 11400000, guid: f1b9dbea49d259145bcf1f953dd54c0e, type: 2}
+      DataMon:
+        DataMonName: Turt
+        DataMonPrefab: {fileID: 5621823419656160950, guid: aeb4441831823144c8d81a83e9af7bdc,
+          type: 3}
+        DataMonPrefabName: 
+        UIsprite: {fileID: 21300000, guid: 84ebf23afa994534db512849b06ef612, type: 3}
+        UIspriteName: 
+        BaseAttributes:
+          BaseHealth: 12
+          BaseAttack: 5
+          BaseProductionSpeed: 0
+          BaseMoveSpeed: 170
+          BaseAttackRange: 0
+          BaseCaptureChance: 0
+        MonBehaviourState: 2
+      DataMonsDataIndex: 0
+      Count: 1
+    difficulty: 1
+  serializeEnemiesInWave:
+    name: Datant
+    _DataMonsData: {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+    DataMon:
+      DataMonName: Datant
+      DataMonPrefab: {fileID: 145781175407673768, guid: 67a9c31a78d2533408d939ecb8dc2e3d,
+        type: 3}
+      DataMonPrefabName: Datant
+      UIsprite: {fileID: 21300000, guid: 74ef3196a56eb9041a87030c183449f9, type: 3}
+      UIspriteName: Obtained_Datant
+      BaseAttributes:
+        BaseHealth: 8
+        BaseAttack: 5
+        BaseProductionSpeed: 0
+        BaseMoveSpeed: 200
+        BaseAttackRange: 3
+        BaseCaptureChance: 90
+      MonBehaviourState: 2
+    DataMonsDataIndex: 0
+    Count: 2
+  serializedifficulty: 1
+  serializeDataMonData: {fileID: 0}
 --- !u!1001 &1431614540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25819,7 +26932,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1381013329928551941}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -27267,7 +28380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1666003320
 Transform:
   m_ObjectHideFlags: 0
@@ -27305,9 +28418,9 @@ MonoBehaviour:
         DataMonName: Datantite
         DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
           type: 3}
-        DataMonPrefabName: 
+        DataMonPrefabName: Datantite
         UIsprite: {fileID: 21300000, guid: d8747dc39a53fef48959334471c31729, type: 3}
-        UIspriteName: 
+        UIspriteName: Obtained_Datantite
         BaseAttributes:
           BaseHealth: 15
           BaseAttack: 7
@@ -27833,9 +28946,9 @@ MonoBehaviour:
         DataMonName: Datantite
         DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
           type: 3}
-        DataMonPrefabName: 
+        DataMonPrefabName: Datantite
         UIsprite: {fileID: 21300000, guid: d8747dc39a53fef48959334471c31729, type: 3}
-        UIspriteName: 
+        UIspriteName: Obtained_Datantite
         BaseAttributes:
           BaseHealth: 15
           BaseAttack: 7
@@ -27892,9 +29005,9 @@ MonoBehaviour:
       DataMonName: Datantite
       DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
         type: 3}
-      DataMonPrefabName: 
+      DataMonPrefabName: Datantite
       UIsprite: {fileID: 21300000, guid: d8747dc39a53fef48959334471c31729, type: 3}
-      UIspriteName: 
+      UIspriteName: Obtained_Datantite
       BaseAttributes:
         BaseHealth: 15
         BaseAttack: 7
@@ -29874,8 +30987,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Ammo: \n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5053c8d9d710f3240b422dd57fe749f9, type: 2}
+  m_sharedMaterial: {fileID: -2415302705006750286, guid: 5053c8d9d710f3240b422dd57fe749f9,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -35820,6 +36934,7 @@ RectTransform:
   - {fileID: 1779174430}
   - {fileID: 2048892830}
   - {fileID: 1510331417}
+  - {fileID: 1373804348}
   - {fileID: 1560103980}
   m_Father: {fileID: 1610947152621858308}
   m_RootOrder: 9
@@ -35937,8 +37052,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wave Incoming
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5053c8d9d710f3240b422dd57fe749f9, type: 2}
+  m_sharedMaterial: {fileID: -2415302705006750286, guid: 5053c8d9d710f3240b422dd57fe749f9,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -35962,8 +37078,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15.78
-  m_fontSizeBase: 15.78
+  m_fontSize: 26.39
+  m_fontSizeBase: 26.39
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -36020,8 +37136,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20.956543}
-  m_SizeDelta: {x: 304.20526, y: 41.913086}
+  m_AnchoredPosition: {x: 4.1, y: -27.493}
+  m_SizeDelta: {x: 396.373, y: 54.9853}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1381013330037466693
 GameObject:
@@ -36070,8 +37186,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: x88
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5053c8d9d710f3240b422dd57fe749f9, type: 2}
+  m_sharedMaterial: {fileID: -2415302705006750286, guid: 5053c8d9d710f3240b422dd57fe749f9,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -36095,8 +37212,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12.2
-  m_fontSizeBase: 12.2
+  m_fontSize: 33.2
+  m_fontSizeBase: 33.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -36153,7 +37270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 116.3, y: -34.424}
+  m_AnchoredPosition: {x: 127.92001, y: -46.308975}
   m_SizeDelta: {x: 78.974304, y: 17.35263}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1381013330110985647
@@ -36522,7 +37639,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: 75df44d9bf95fe54daff7e9d1a9a9b8f, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -36545,8 +37662,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 64, y: -33.237}
-  m_SizeDelta: {x: 17, y: 17}
+  m_AnchoredPosition: {x: 69.7, y: -46.309}
+  m_SizeDelta: {x: 23.417206, y: 23.417206}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1381013331076514380
 GameObject:
@@ -36906,6 +38023,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tier: 0
   AttackPoint: {fileID: 0}
+  AttackPoint2: {fileID: 0}
+  AttackPoint3: {fileID: 0}
   isBeingCaptured: 0
   isCompanion: 0
   dataMonData: {fileID: 0}
@@ -37024,8 +38143,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 27.900024, y: -24.099976}
-  m_SizeDelta: {x: 38, y: 38}
+  m_AnchoredPosition: {x: 27.900024, y: -31.700012}
+  m_SizeDelta: {x: 50.645134, y: 50.645134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1381013331278218695
 GameObject:
@@ -37586,12 +38705,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   isShielded: 0
+  ShieldBar: {fileID: 1381013331976969959}
   MaxShieldHealth: 0
+  timeShieldToRegen: 0
   CurrentShieldHealth: 0
   ChanceForDoubleDrop: 0
   PlayerRegenerationRatePerSecond: 1
   AllDamageModifier: 1
   isHealedByNatureGuy: 0
+  isHamsterPassive: 0
   NumberOfBulletsInPool: 70
   ShotgunPelletPerRnd: 8
   MeleeDelay: 0.1
@@ -37994,8 +39116,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 104.94, y: -12.450012}
-  m_SizeDelta: {x: 164.91824, y: 23.89328}
+  m_AnchoredPosition: {x: 127.92, y: -17.356}
+  m_SizeDelta: {x: 238.04593, y: 34.487984}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1381013331976969961
 GameObject:

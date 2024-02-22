@@ -31,7 +31,7 @@ public class DataDex : MonoBehaviour
     public DataMonBtnDelegate ClickAndDrag;
 
     public bool DisplayDataPad;
-    public GameObject DataTeamPanel, EvolvePanel, CraftPanel;
+    public GameObject DataTeamPanel, EvolvePanel, CraftPanel, ExpeditionPanel;
     public Color Testcolor;
     public DataPadModules CurrentModule;
     List<GameObject> DataMonListInDex = new List<GameObject>();
@@ -139,19 +139,27 @@ public class DataDex : MonoBehaviour
                 DataTeamPanel.SetActive(true);
                 EvolvePanel.SetActive(false);
                 CraftPanel.SetActive(false);
-
+                ExpeditionPanel.SetActive(false);
                 break;
 
             case DataPadModules.Evolve:
                 DataTeamPanel.SetActive(true);
                 EvolvePanel.SetActive(true);
                 CraftPanel.SetActive(false);
+                ExpeditionPanel.SetActive(false);
                 break;
 
             case DataPadModules.Craft:
                 DataTeamPanel.SetActive(false);
                 EvolvePanel.SetActive(false);
                 CraftPanel.SetActive(true);
+                ExpeditionPanel.SetActive(false);
+                break;
+            case DataPadModules.ConfirmToExpedition:
+                DataTeamPanel.SetActive(false);
+                EvolvePanel.SetActive(false);
+                CraftPanel.SetActive(true);
+                ExpeditionPanel.SetActive(false);
                 break;
 
         }
@@ -551,7 +559,7 @@ public class DataDex : MonoBehaviour
 
 public enum DataPadModules
 {
-    DataDex, Evolve, Craft, None
+    DataDex, Evolve, Craft,None, ConfirmToExpedition
 }
 public class DataDexIO
 {

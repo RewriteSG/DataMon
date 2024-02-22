@@ -10,13 +10,16 @@ public class SaveLoadManager : MonoBehaviour
     public string[] AllSavesFile;
     public const string SaveFile = "GameProgress";
     public static string SavesFilePath;
+    public static bool LoadWorld;
     public bool DoLoadWorld = false;
     public static SavedData savedData;
     // Start is called before the first frame update
     public ResourceLoadManager _loadManager;
     private void Awake()
     {
-        instance = this; FileDirectory = Application.persistentDataPath;
+        instance = this; 
+        
+        FileDirectory = Application.persistentDataPath;
 
         SavesFilePath = FileDirectory + "/" + SaveFile;
         print(SavesFilePath);
@@ -33,6 +36,15 @@ public class SaveLoadManager : MonoBehaviour
             AllSavesFile = System.IO.Directory.GetFiles(FileDirectory);
         }
 #endif
+        if (LoadWorld)
+        {
+
+            if (DeserializeSaveData(out SavedData _loadedSave))
+                savedData = _loadedSave;
+            else
+                savedData = null;
+            return;
+        }
         if (!DoLoadWorld)
         {
 

@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6c7b3ae25542240a22f64441f57994, type: 3}
   m_Name: Active_Turtle
   m_EditorClassIdentifier: Assembly-CSharp::Ability_ActiveWeapon
-  abilityDescriptions: []
+  abilityDescriptions:
+  - Name: 
+    Description: Spin them and they became beyblades
+  - Name: 
+    Description: Spin them and they became beyblades
+  - Name: 
+    Description: Spin them and they became beyblades
   isAbilitySemiAuto: 0
   _AbilityType: 2
   ModifiersByEvolution:
@@ -24,9 +30,19 @@ MonoBehaviour:
   - 0
   - 0
   ActiveTime: 0
-  ItemImage: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
-    type: 3}
+  ItemPlaceHolder: {fileID: 0}
+  ItemPlaceHolderPrefabName: 
+  ItemImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ItemImageName:
+  - 
+  - 
+  - 
   ItemObject: {fileID: 8092741967821563707, guid: 45888dfce079446429d8fe7a682516a5,
     type: 3}
+  ItemObjectName: TurtCannon
   AbilityPrefab: {fileID: 6041312759581533806, guid: a95e0da0c2157504487632f3416ac62c,
     type: 3}
+  AbilityPrefabName: SpinningGreenThingy

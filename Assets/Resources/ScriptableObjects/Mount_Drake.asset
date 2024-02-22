@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7b2b7fbbef09b43b22b5352d955829, type: 3}
   m_Name: Mount_Drake
   m_EditorClassIdentifier: 
-  abilityDescriptions: []
+  abilityDescriptions:
+  - Name: 
+    Description: You can ride this mount and look cool, Also get to use some skills
+  - Name: 
+    Description: You can ride this mount and look cool, Also get to use some skills
+  - Name: 
+    Description: You can ride this mount and look cool, Also get to use some skills
   isAbilitySemiAuto: 0
   _AbilityType: 3
   ModifiersByEvolution:
@@ -26,15 +32,15 @@ MonoBehaviour:
   ActiveTime: 0
   ItemPlaceHolder: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
     type: 3}
-  ItemPlaceHolderPrefabName: 
+  ItemPlaceHolderPrefabName: ItemPlaceholder
   ItemImage:
   - {fileID: 21300000, guid: e3cf9db88f339de48a296d062bab003b, type: 3}
   - {fileID: 21300000, guid: 9e62eea1ffe34a2458ae638cc574b7b1, type: 3}
   - {fileID: 21300000, guid: 2b5db7ca1a55f08478af7415ccbb81eb, type: 3}
   ItemImageName:
-  - 
-  - 
-  - 
+  - Obtained_CopperDrake
+  - Obtained_SilverDrake
+  - Obtained_GoldenDrake
   ItemObject: {fileID: 8383916978022676167, guid: 04b8bf7e714953341b3ff578f3ee7cd0,
     type: 3}
   ItemObjectName: Mount_Aurumdrake

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityDescriptions:
   - Name: Spinning Scorpion
-    Description: 
+    Description: Spinning Scorpion
   - Name: Spinning Scorpion
-    Description: 
+    Description: Spinning Scorpion
   - Name: Spinning Scorpion
-    Description: 
+    Description: Spinning Scorpion
   isAbilitySemiAuto: 0
   _AbilityType: 2
   ModifiersByEvolution:
@@ -30,9 +30,13 @@ MonoBehaviour:
   - 1.5
   - 1
   ActiveTime: 0
-  ItemImage: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
-    type: 3}
-  ItemImageName: 
+  ItemPlaceHolder: {fileID: 0}
+  ItemPlaceHolderPrefabName: 
+  ItemImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ItemImageName: []
   ItemObject: {fileID: 6547043216910807693, guid: c0433c64dda887041aec1ec6560d4fc8,
     type: 3}
   ItemObjectName: 

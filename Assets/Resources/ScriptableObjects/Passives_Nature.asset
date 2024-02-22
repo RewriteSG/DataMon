@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityDescriptions:
   - Name: Increases Player Hp Regen And boosts ALL Damage
-    Description: 
+    Description: Increases Player Hp Regen And boosts ALL Damage
   - Name: Increases Player Hp Regen And boosts ALL Damage
-    Description: 
+    Description: Increases Player Hp Regen And boosts ALL Damage
   - Name: Increases Player Hp Regen And boosts ALL Damage
-    Description: 
+    Description: Increases Player Hp Regen And boosts ALL Damage
   isAbilitySemiAuto: 0
   _AbilityType: 1
   ModifiersByEvolution:

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityDescriptions:
   - Name: All Weapons Have chance of 1/3 of not consuming Ammo
-    Description: 
+    Description: All Weapons Have chance of 1/3 of not consuming Ammo
   - Name: All Weapons Have chance of 1/3 of not consuming Ammo
-    Description: 
+    Description: All Weapons Have chance of 1/3 of not consuming Ammo
   - Name: All Weapons Have chance of 1/3 of not consuming Ammo
-    Description: 
+    Description: All Weapons Have chance of 1/3 of not consuming Ammo
   isAbilitySemiAuto: 0
   _AbilityType: 1
   ModifiersByEvolution:
