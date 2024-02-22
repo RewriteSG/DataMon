@@ -20,6 +20,7 @@ namespace IndividualDataMon
         [HideInInspector] public List<string> DataMonNames = new List<string>();
 
         public DataMonIndividualData dataMon;
+        public GameObject ShockWave;
 
         [HideInInspector] public DataMonAI dataMonAI;
         [HideInInspector] public Databytes _databytes;
@@ -43,8 +44,11 @@ namespace IndividualDataMon
         public int currentAttackIndex;
         public bool isWaveEnemy, isBoss;
 
+        public bool isInVicinity;
+        public const float randomMinShockWaveStartTime = 2, randomMaxShockWaveStartTime = 5;
+        public float timeToShockWave = 0;
         //[SerializeField]private GameObject test;
-        private void Awake()
+        private void ActivateNamePlates()
         {
             //if (gameObject.name.Contains("(Clone)"))
             //    SetDataMon(gameObject.name.Replace("(Clone)", ""));
@@ -221,6 +225,18 @@ namespace IndividualDataMon
                     SceneChanger.ChangeScene("WinScene");
                 }
             }
+            if (timeToShockWave < 0 && isInVicinity && isBoss)
+            {
+                timeToShockWave = Random.Range(randomMinShockWaveStartTime, randomMaxShockWaveStartTime);
+                AttackObjects temp = Instantiate(ShockWave, transform.position, Quaternion.identity).GetComponent<AttackObjects>();
+                temp.Damage = temp.DmgBasedOfStat * CurrentAttributes.CurrentAttack;
+                temp.EndAttackAt = 7f;
+                
+            }
+            else if( isInVicinity && isBoss)
+            {
+                timeToShockWave -= Time.deltaTime;
+            }
             //if (CurrentAttributes.CurrentHealth <= 0  && !isWaveEnemy)
 
             //{
@@ -312,7 +328,7 @@ namespace IndividualDataMon
         {
             tier = dataMonData.DataMons.GetDataMonIndexInDataArray(ToDataMon);
             dataMon = DataMonIndividualData.CloneDataMonClass(ToDataMon);
-
+            ActivateNamePlates();
             CurrentAttributes = new DataMonInstancedAttributes(baseAttributes);
 
 
@@ -447,7 +463,15 @@ namespace IndividualDataMon
             //temp.Add(this);
         }
 
-
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player") && isBoss)
+            {
+                print("oh no");
+                isInVicinity = true;
+                timeToShockWave = Random.Range(randomMinShockWaveStartTime, randomMaxShockWaveStartTime);
+            }
+        }
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (collision.gameObject.CompareTag("PlayerRenderDist"))
@@ -455,7 +479,13 @@ namespace IndividualDataMon
                 isBeingCaptured = true;
                 DestroyDataMon();
 
+            }
 
+            if (collision.CompareTag("Player") && isBoss)
+            {
+                print("ah crap");
+                isInVicinity = false;
+                timeToShockWave = 9;
             }
         }
         public void SetAttributesByModifier(float modifier)

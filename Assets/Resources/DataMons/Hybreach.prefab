@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AI_state: 0
   Target: {fileID: 0}
-  NextWaypointDist: 6.41
+  NextWaypointDist: 15
   PatrollingDistance: 9.23
   WanderingDistance: 10
   ProductionDistance: 0
@@ -188,10 +188,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 0
-  AttackPoints:
-  - {fileID: 9084032461040485249}
-  - {fileID: 5888904545556968601}
-  - {fileID: 1690523462508867868}
+  AttackPoint: {fileID: 9084032461040485249}
+  AttackPoint2: {fileID: 5888904545556968601}
+  AttackPoint3: {fileID: 1690523462508867868}
   isBeingCaptured: 0
   isCompanion: 0
   dataMonData: {fileID: 11400000, guid: f69093286d03fc04bb15101da509df7b, type: 2}
@@ -201,7 +200,7 @@ MonoBehaviour:
   - Datantite
   - Datantaur
   dataMon:
-    DataMonName: wa
+    DataMonName: Hybreach
     DataMonPrefab: {fileID: 5800908869738802819}
     DataMonPrefabName: 
     UIsprite: {fileID: 0}
@@ -212,17 +211,19 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 150
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 45
     MonBehaviourState: 2
+  ShockWave: {fileID: 5363503788750326331, guid: 94c955597fa4dba43a27c4845a118d92,
+    type: 3}
   dataMonAI: {fileID: 0}
   _databytes: {fileID: 0}
   baseAttributes:
-    BaseHealth: 0
-    BaseAttack: 0
+    BaseHealth: 80
+    BaseAttack: 60
     BaseProductionSpeed: 0
-    BaseMoveSpeed: 200
-    BaseAttackRange: 3
-    BaseCaptureChance: 0
+    BaseMoveSpeed: 224.97
+    BaseAttackRange: 0
+    BaseCaptureChance: 45
   CurrentAttributes:
     CurrentHealth: 0
     CurrentAttack: 0
@@ -241,7 +242,8 @@ MonoBehaviour:
   currentAttackIndex: 0
   isWaveEnemy: 0
   isBoss: 1
-  isAttacking: 0
+  isInVicinity: 0
+  timeToShockWave: 0
 --- !u!114 &4875902713662357412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1243,6 +1245,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7802660752009871417, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.0016849041
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802660752009871417, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7802660752364689901, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}
       propertyPath: m_Layer
@@ -1381,9 +1393,7 @@ PrefabInstance:
     - target: {fileID: 7802660753343493748, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}
       propertyPath: m_text
-      value: 'Hybridge
-
-'
+      value: Hybreach
       objectReference: {fileID: 0}
     - target: {fileID: 7802660753343493748, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
         type: 3}
@@ -1419,6 +1429,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 36.48119
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802660753485694570, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 7802660753485694570, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27,
+        type: 3}
+      propertyPath: m_Value
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d6a59d3b0553a04fb9e97cb41e1ae27, type: 3}

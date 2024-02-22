@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8618148452514149853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.57449, y: 0.57449, z: 0.57449}
   m_Children:
   - {fileID: 8618148452987068157}
   m_Father: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DmgBasedOfStat: 1.9
   Damage: 0
-  AttackRange: 0
+  AttackRange: 5
   StartAttackDelay: 1.7
   EndAttackAt: 0.4
   Speed: 1
@@ -56,6 +56,7 @@ MonoBehaviour:
   DashDamp: 0
   AttacksByEntity: {fileID: 0}
   AttacksByEntityGameObject: {fileID: 0}
+  ExplosionAnimation: {fileID: 0}
   SpritePNG: {fileID: 8618148452987068146}
   UnityParticleSystem: {fileID: 0}
   isMoving: 0
@@ -68,6 +69,8 @@ MonoBehaviour:
   isScaledUp: 1
   isDotAttack: 0
   isFireBreath: 0
+  isExplosion: 0
+  ALLcollider: []
 --- !u!58 &4329855075784206127
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -83,7 +86,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3.27
+  m_Radius: 2.32
 --- !u!1 &8618148452987068147
 GameObject:
   m_ObjectHideFlags: 0

@@ -4900,7 +4900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DmgBasedOfStat: 1
   Damage: 0
-  AttackRange: 3
+  AttackRange: 10
   StartAttackDelay: 1
   EndAttackAt: 3
   Speed: 2.75
@@ -4923,3 +4923,4 @@ MonoBehaviour:
   isDotAttack: 1
   isFireBreath: 1
   isExplosion: 0
+  ALLcollider: []

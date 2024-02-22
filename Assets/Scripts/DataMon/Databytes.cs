@@ -66,11 +66,8 @@ public class Databytes : MonoBehaviour
         if (!dataMon.isBeingCaptured)
             Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);
         chanced = Random.Range(0, 100);
-        
-        if (!dataMon.isBeingCaptured && chanced <= GameManager.instance.ChanceForDoubleDrop)
-        {
 
-            Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);
-        }
+        Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);
+        Instantiate(GameManager.instance.DatabytesPrefab, transform.position, Quaternion.identity);
     }
 }

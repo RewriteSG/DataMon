@@ -4883,15 +4883,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DmgBasedOfStat: 2.5
   Damage: 0
-  AttackRange: 6
+  AttackRange: 26.18
   StartAttackDelay: 1.7
-  EndAttackAt: 3
-  Speed: 7.22
+  EndAttackAt: 5
+  Speed: 15
   RotationSpeed: 100
   MaxDistance: 0
   DashDamp: 0
   AttacksByEntity: {fileID: 0}
   AttacksByEntityGameObject: {fileID: 0}
+  ExplosionAnimation: {fileID: 0}
   SpritePNG: {fileID: 1368036933247496486}
   UnityParticleSystem: {fileID: 0}
   isMoving: 1
@@ -4904,6 +4905,8 @@ MonoBehaviour:
   isScaledUp: 0
   isDotAttack: 0
   isFireBreath: 0
+  isExplosion: 0
+  ALLcollider: []
 --- !u!58 &3046043640483730350
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EvolutionCosts: 
   Ability: {fileID: 11400000, guid: 3628c84c16d31ef478c3cb675921802a, type: 2}
-  AbilityName: 
+  AbilityName: Passives_Nature
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: Hybreach
@@ -24,10 +24,10 @@ MonoBehaviour:
     UIsprite: {fileID: 21300000, guid: 1b1752d0ae87a5c42a7fa26b7968221a, type: 3}
     UIspriteName: Obtained_Hydra
     BaseAttributes:
-      BaseHealth: 80
-      BaseAttack: 60
+      BaseHealth: 210
+      BaseAttack: 80
       BaseProductionSpeed: 0
-      BaseMoveSpeed: 150
+      BaseMoveSpeed: 205.1
       BaseAttackRange: 0
       BaseCaptureChance: 45
     MonBehaviourState: 2

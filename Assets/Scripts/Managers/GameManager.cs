@@ -304,6 +304,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         while (true)
         {
+            if(DataMon_UpdateAI!=null)
             DataMon_UpdateAI();
             yield return new WaitForSeconds(1f);
         }

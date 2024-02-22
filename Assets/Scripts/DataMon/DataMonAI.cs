@@ -337,7 +337,7 @@ public class DataMonAI : MonoBehaviour
         
 
 
-        if ((AI_state == AI_State.Produce || AI_state == AI_State.Attack && !doingSomething || !AttackLaunched) && Target !=null )
+        if (((AI_state == AI_State.Attack && !doingSomething) || !AttackLaunched) && Target !=null )
         {
             Dir = (transform.position - Target.position).normalized;
             toRotate = Quaternion.LookRotation(transform.forward, -Dir);
@@ -434,7 +434,7 @@ public class DataMonAI : MonoBehaviour
                     currentAttackingTime = 0;
                     DataMon.StartAttack(Target);
                     AttackLaunched = false;
-                    //print("Still Attacking");
+                    print("Still Attacking");
                 }
                 if (!doingSomething)
                     return;
@@ -448,31 +448,31 @@ public class DataMonAI : MonoBehaviour
                     currentAttackingTime += Time.deltaTime;
                 // Instantiate Attack
                 break;
-            case AI_State.Produce:
-                if (!doingSomething && Vector2.Distance(Target.position, transform.position) < ProductionDistance)
-                {
-                    doingSomething = true;
-                    rb.velocity = Vector2.zero;
-                }
-                if (!doingSomething)
-                    return;
-                if(CurrentProductionProgress>= DataMonProductionTime)
-                {
-                    CraftedItem();
-                    DataBytesUsed = 0;
-                    CancelProduction();
-                    doingSomething = false;
-                }
-                else
-                {
-                    glitch.ShakeGlitch();
-                    CurrentProductionProgress += Time.deltaTime;
-                }
-                // Instantiate Attack
-                break;
-            case AI_State.Patrol:
-                doingSomething = false;
-                break;
+            //case AI_State.Produce:
+            //    if (!doingSomething && Vector2.Distance(Target.position, transform.position) < ProductionDistance)
+            //    {
+            //        doingSomething = true;
+            //        rb.velocity = Vector2.zero;
+            //    }
+            //    if (!doingSomething)
+            //        return;
+            //    if(CurrentProductionProgress>= DataMonProductionTime)
+            //    {
+            //        CraftedItem();
+            //        DataBytesUsed = 0;
+            //        CancelProduction();
+            //        doingSomething = false;
+            //    }
+            //    else
+            //    {
+            //        glitch.ShakeGlitch();
+            //        CurrentProductionProgress += Time.deltaTime;
+            //    }
+            //    // Instantiate Attack
+            //    break;
+            //case AI_State.Patrol:
+            //    doingSomething = false;
+            //    break;
         }
     }
    

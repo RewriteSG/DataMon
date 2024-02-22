@@ -50,6 +50,7 @@ public class DataMonIndividualData
     {
         DataMonIndividualData temp = new DataMonIndividualData();
         temp.DataMonName = toCopy.DataMonName;
+        Debug.Log(temp.DataMonName);
         temp.DataMonPrefab = toCopy.DataMonPrefab;
         temp.BaseAttributes = DataMonInstancedAttributes.ConvertToDataMonAttributes(new DataMonInstancedAttributes(toCopy.BaseAttributes));
         temp.MonBehaviourState = toCopy.MonBehaviourState;

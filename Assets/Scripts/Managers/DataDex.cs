@@ -158,9 +158,16 @@ public class DataDex : MonoBehaviour
             case DataPadModules.ConfirmToExpedition:
                 DataTeamPanel.SetActive(false);
                 EvolvePanel.SetActive(false);
-                CraftPanel.SetActive(true);
+                CraftPanel.SetActive(false);
+                ExpeditionPanel.SetActive(true);
+                break;
+            case DataPadModules.None:
+                DataTeamPanel.SetActive(false);
+                EvolvePanel.SetActive(false);
+                CraftPanel.SetActive(false);
                 ExpeditionPanel.SetActive(false);
                 break;
+
 
         }
         if (DataTeam.Length != GameManager.instance.NumberOfDataMonsInTeam)
@@ -432,6 +439,15 @@ public class DataDex : MonoBehaviour
     public void SetDataPadToCraft()
     {
         CurrentModule = DataPadModules.Craft;
+    }
+    public void SetDataPadToExpedition()
+    {
+        CurrentModule = DataPadModules.ConfirmToExpedition;
+    }
+
+    public void SetDataPadToNone()
+    {
+        CurrentModule = DataPadModules.None;
     }
     private void OnDestroy()
     {

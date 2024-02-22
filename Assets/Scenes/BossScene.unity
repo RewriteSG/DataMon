@@ -2998,12 +2998,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 187597627}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &191814577 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5888904545556968601, guid: 367ceb3a4c497ea41b15062e020100bf,
-    type: 3}
-  m_PrefabInstance: {fileID: 525181310}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &201492347
 GameObject:
   m_ObjectHideFlags: 0
@@ -6968,26 +6962,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hybreach (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5800908869738802820, guid: 367ceb3a4c497ea41b15062e020100bf,
-        type: 3}
-      propertyPath: AttackPoint
-      value: 
-      objectReference: {fileID: 606155280}
-    - target: {fileID: 5800908869738802820, guid: 367ceb3a4c497ea41b15062e020100bf,
-        type: 3}
-      propertyPath: AttackPoint2
-      value: 
-      objectReference: {fileID: 191814577}
-    - target: {fileID: 5800908869738802820, guid: 367ceb3a4c497ea41b15062e020100bf,
-        type: 3}
-      propertyPath: AttackPoint3
-      value: 
-      objectReference: {fileID: 2101694435}
-    - target: {fileID: 5800908869738802821, guid: 367ceb3a4c497ea41b15062e020100bf,
-        type: 3}
-      propertyPath: NextWaypointDist
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 5800908869738802825, guid: 367ceb3a4c497ea41b15062e020100bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7042,6 +7016,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768100831774408334, guid: 367ceb3a4c497ea41b15062e020100bf,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -18.400024
       objectReference: {fileID: 0}
     - target: {fileID: 7768100832604686533, guid: 367ceb3a4c497ea41b15062e020100bf,
         type: 3}
@@ -8260,12 +8239,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7562426852709025667, guid: caa8638022cd0c94ca8dc83ae4af07ca,
     type: 3}
   m_PrefabInstance: {fileID: 599267119}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &606155280 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9084032461040485249, guid: 367ceb3a4c497ea41b15062e020100bf,
-    type: 3}
-  m_PrefabInstance: {fileID: 525181310}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &606640252
 GameObject:
@@ -30688,12 +30661,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2096230980}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2101694435 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1690523462508867868, guid: 367ceb3a4c497ea41b15062e020100bf,
-    type: 3}
-  m_PrefabInstance: {fileID: 525181310}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2104721928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33243,6 +33210,7 @@ MonoBehaviour:
   InHub: 0
   Player: {fileID: 1381013331137174206}
   canvas: {fileID: 1381013329928551942}
+  playerHealth: {fileID: 0}
   hotBarController: {fileID: 419308887}
   NumberOfDataMonsInTeam: 4
   playerShootScript: {fileID: 0}
@@ -33289,11 +33257,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   isShielded: 0
+  ShieldBar: {fileID: 0}
   MaxShieldHealth: 0
+  timeShieldToRegen: 0
   CurrentShieldHealth: 0
   ChanceForDoubleDrop: 0
   PlayerRegenerationRatePerSecond: 1
   AllDamageModifier: 1
+  isHealedByNatureGuy: 0
+  isHamsterPassive: 0
   NumberOfBulletsInPool: 70
   ShotgunPelletPerRnd: 8
   MeleeDelay: 0.1
@@ -33517,6 +33489,7 @@ MonoBehaviour:
   DataTeamPanel: {fileID: 0}
   EvolvePanel: {fileID: 0}
   CraftPanel: {fileID: 0}
+  ExpeditionPanel: {fileID: 0}
   Testcolor: {r: 0, g: 0, b: 0, a: 0}
   CurrentModule: 0
   DataMonObtained: []
@@ -38889,6 +38862,7 @@ MonoBehaviour:
   DashDamp: 0
   AttacksByEntity: {fileID: 0}
   AttacksByEntityGameObject: {fileID: 0}
+  ExplosionAnimation: {fileID: 0}
   SpritePNG: {fileID: 8088750149815081106}
   UnityParticleSystem: {fileID: 1626646129978154158}
   isMoving: 1
@@ -38901,6 +38875,8 @@ MonoBehaviour:
   isScaledUp: 0
   isDotAttack: 0
   isFireBreath: 0
+  isExplosion: 0
+  ALLcollider: []
 --- !u!212 &8088750149815081106
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -38,6 +38,11 @@ public class GameplayProgress : MonoBehaviour
         SaveLoadManager.LoadWorld = false;
         SceneChanger.ChangeScene("TestScene");
     }
+
+    public void LoadWorldTrue()
+    {
+        SaveLoadManager.LoadWorld = true;
+    }
     
     //// Start is called before the first frame update
     //void Start()

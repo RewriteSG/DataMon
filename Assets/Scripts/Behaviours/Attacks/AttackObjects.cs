@@ -81,7 +81,7 @@ public class AttackObjects : MonoBehaviour
         {
             ExplosionAnimation.gameObject.SetActive(false);
         }
-        delayAfterAttack = EndAttackAt;
+        //delayAfterAttack = EndAttackAt;
         if (AttacksByEntity == null)
             return;
         ALLcollider = transform.GetComponentsInChildren<Collider2D>();
@@ -97,6 +97,7 @@ public class AttackObjects : MonoBehaviour
         {
             ALLcollider[i].enabled = false;
         }
+        gameObject.GetComponent<Collider2D>().enabled = false;
         
         AttacksByEntity.dataMonAI.AttackLaunched = false;
         allSpritePNG = transform.GetComponentsInChildren<SpriteRenderer>();
@@ -106,7 +107,7 @@ public class AttackObjects : MonoBehaviour
         }
     }
 
-    float delayAfterAttack;
+    //float delayAfterAttack;
     private void Update()
     {
         if(timer > 0 && AttacksByEntityGameObject != GameManager.instance.Player)
@@ -133,11 +134,15 @@ public class AttackObjects : MonoBehaviour
             //UnityParticleSystem.loop = false;
             transform.parent = isFireBreath ? transform.parent : null;
             //print(AttacksByEntity.dataMonAI == null);
-            if(!AttacksByEntity.dataMonAI.AttackLaunched)
+            if (!AttacksByEntity.dataMonAI.AttackLaunched)
+            {
                 for (int i = 0; i < ALLcollider.Length; i++)
                 {
                     ALLcollider[i].enabled = true;
                 }
+
+                gameObject.GetComponent<Collider2D>().enabled = true;
+            }
             AttacksByEntity.dataMonAI.AttackLaunched = true;
             ParticleBeforeAttack.transform.position = Vector3.up * 500;
         }
@@ -170,22 +175,22 @@ public class AttackObjects : MonoBehaviour
         if (isExplosion)
         {
 
-            if (delayAfterAttack <= 0 && onEndAtSeconds)
+            if (EndAttackAt <= 0 && onEndAtSeconds)
             {
                 ExplosionPlay();
             }
             else
-                delayAfterAttack -= Time.deltaTime;
+                EndAttackAt -= Time.deltaTime;
 
             return;
         }
 
-        if (delayAfterAttack <= 0 && onEndAtSeconds)
+        if (EndAttackAt <= 0 && onEndAtSeconds)
         {
             AttackFinished();
         }
         else
-            delayAfterAttack -= Time.deltaTime;
+            EndAttackAt -= Time.deltaTime;
 
     }
     private void OnDisable()
@@ -234,7 +239,10 @@ public class AttackObjects : MonoBehaviour
 
             if (AttacksByEntityGameObject != null && isDashAttack && !isMoveAtDistance)
                 GameManager.instance.PlayerisDashing = false;
-            Destroy(gameObject);
+            if (AttacksByEntity == null)
+                Destroy(gameObject);
+            else
+                gameObject.SetActive(false);
         }
 
     }

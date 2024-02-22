@@ -90,7 +90,10 @@ public class WaveSpawner : MonoBehaviour
             }
             else
             {
-                waveIncomingText.text = waves[NextWave].name;
+                if (NextWave != waves.Length - 1)
+                    waveIncomingText.text = waves[NextWave].name;
+                else
+                    waveIncomingText.text = "";
 
                 return;
             }
@@ -100,7 +103,11 @@ public class WaveSpawner : MonoBehaviour
             if (state != SpawnState.Spawning)
             {
                 //start spawning wave
+#if UNITY_EDITOR
+                NextWave = waves.Length - 1;
+#endif
                 StartCoroutine(SpawnWave(waves[NextWave]));
+
             }
         }
         else
@@ -118,25 +125,25 @@ public class WaveSpawner : MonoBehaviour
 
         state = SpawnState.Counting;
 
-        switch (currentDifficulty)
-        {
-            case Wave.WaveDifficulty.Easy:
-                waveCountdown = timeBetweenWaves;
-                break;
-            case Wave.WaveDifficulty.Normal:
-                waveCountdown = timeBetweenWaves*1.7f;
-                break;
-            case Wave.WaveDifficulty.Hard:
-                waveCountdown = timeBetweenWaves * 2.3f;
-                break;
-            case Wave.WaveDifficulty.Difficult:
+        //switch (currentDifficulty)
+        //{
+        //    case Wave.WaveDifficulty.Easy:
+        //        waveCountdown = timeBetweenWaves;
+        //        break;
+        //    case Wave.WaveDifficulty.Normal:
+        //        waveCountdown = timeBetweenWaves*1.3f;
+        //        break;
+        //    case Wave.WaveDifficulty.Hard:
+        //        waveCountdown = timeBetweenWaves * 1.5f;
+        //        break;
+        //    case Wave.WaveDifficulty.Difficult:
 
-                waveCountdown = timeBetweenWaves * 2.5f;
-                break;
-            case Wave.WaveDifficulty.Hell:
-                waveCountdown = timeBetweenWaves * 2.7f;
-                break;
-        }
+        //        waveCountdown = timeBetweenWaves * 1.6f;
+        //        break;
+        //    case Wave.WaveDifficulty.Hell:
+        //        waveCountdown = timeBetweenWaves * 1.7f;
+        //        break;
+        //}
         waveCountdown = timeBetweenWaves;
 
         if (NextWave +1 == WavesBeforeIncreaseDifficulty)
@@ -186,12 +193,7 @@ public class WaveSpawner : MonoBehaviour
 
         for (int x = 0; x < _wave._EnemiesInWave.Count; x++)
         {
-            for (int i = 0; i < _wave._EnemiesInWave[x].Count; i++)
-            {
-                SpawnEnemy(_wave._EnemiesInWave[x].DataMon.DataMonPrefab);
-                enemyCount++;
-                yield return new WaitForSeconds(0.1f);
-            }
+            SpawnEnemy(_wave._EnemiesInWave[x]);
         }
         
 
@@ -200,29 +202,59 @@ public class WaveSpawner : MonoBehaviour
 
         yield break;
     }
-    void SpawnEnemy(GameObject _enemy)
+    void SpawnEnemy(EnemiesInWave _Enemy)
     {
         
-        Debug.Log("Spawning enemy: " + _enemy.name);
-
-        Transform _sp = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+        Debug.Log("Spawning enemy: " + _Enemy.name);
+        Transform _sp; 
+        for (int i = 0; i < _Enemy.Count; i++)
+        {
+            _sp = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+            weTryNormalMethod(Instantiate(_Enemy.DataMon.DataMonPrefab, (Vector2)_sp.position, _sp.rotation), _Enemy._DataMonsData, _Enemy.DataMon);
+            enemyCount++;
+        }
         
-        StartCoroutine(SetEnemyAngry(Instantiate(_enemy, (Vector2)_sp.position, _sp.rotation)));
+        //StartCoroutine(SetEnemyAngry(Instantiate(, (Vector2)_sp.position, _sp.rotation)));
     }
     IndividualDataMon.DataMon dataMon;
-    IEnumerator SetEnemyAngry(GameObject enemy)
+    void weTryNormalMethod(GameObject enemy, DataMonsData dataMonsData, DataMonIndividualData dataMonIndividualData)
     {
+        print("Object is destroyed?");
+        dataMon = enemy.GetComponent<DataMon>();
 
-        enemy.AddComponent<WaveEnemyScript>();
+        dataMon.SetDataMonData(dataMonsData);
 
-        dataMon = enemy.GetComponent<IndividualDataMon.DataMon>();
+        dataMon.SetDataMon(dataMonIndividualData);
 
         dataMon.SetAttributes(new DataMonInstancedAttributes(dataMon.dataMon.BaseAttributes));
 
+        dataMon.gameObject.AddComponent<WaveEnemyScript>();
+
+
         dataMon.isWaveEnemy = true;
+        Debug.Log("How are ");
+        dataMon.SetDataMonHostile();
+
+        dataMon.dataMonAI.ChangeAttackTargetEnemy(GameManager.instance.Player.gameObject);
+    }
+
+    IEnumerator SetEnemyAngry(GameObject enemy, DataMonsData dataMonsData, DataMonIndividualData dataMonIndividualData)
+    {
+
+        print("Object is destroyed?");
+        dataMon = enemy.GetComponent<DataMon>();
+
+        dataMon.SetDataMonData(dataMonsData);
+
+        dataMon.SetDataMon(dataMonIndividualData);
+
+        dataMon.SetAttributes(new DataMonInstancedAttributes(dataMon.dataMon.BaseAttributes));
+
 
         yield return new WaitForEndOfFrame();
 
+        dataMon.isWaveEnemy = true;
+        Debug.Log("How are ");
         dataMon.SetDataMonHostile();
 
         dataMon.dataMonAI.ChangeAttackTargetEnemy(GameManager.instance.Player.gameObject);
