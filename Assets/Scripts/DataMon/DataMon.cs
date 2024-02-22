@@ -11,6 +11,8 @@ namespace IndividualDataMon
     {
         public int tier = 0;
         public GameObject AttackPoint;
+        public GameObject AttackPoint2;
+        public GameObject AttackPoint3;
         [HideInInspector]public bool isBeingCaptured = false;
         [HideInInspector] public bool isCompanion = false;
         public DataMonsData dataMonData;
@@ -19,7 +21,7 @@ namespace IndividualDataMon
 
         public DataMonIndividualData dataMon;
 
-        [HideInInspector]public DataMonAI dataMonAI;
+        [HideInInspector] public DataMonAI dataMonAI;
         [HideInInspector] public Databytes _databytes;
         public DataMonAttributes baseAttributes;
         public DataMonInstancedAttributes CurrentAttributes;
@@ -142,8 +144,29 @@ namespace IndividualDataMon
         }
         public void StartAttack(Transform Target)
         {
-            attackObjects[currentAttackIndex]._gameObject.transform.position = AttackPoint.transform.position;
-
+            if (dataMon.DataMonName == "Hybreach") // 3 headed dragon rawr
+            {
+                int Rand = Random.Range(0, 3);
+                switch (Rand)
+                {
+                    case 0:
+                        attackObjects[currentAttackIndex]._gameObject.transform.position = AttackPoint.transform.position;
+                        Rand = Random.Range(0, 3);
+                        break;
+                    case 1:
+                        attackObjects[currentAttackIndex]._gameObject.transform.position = AttackPoint2.transform.position;
+                        Rand = Random.Range(0, 3);
+                        break;
+                    case 2:
+                        attackObjects[currentAttackIndex]._gameObject.transform.position = AttackPoint3.transform.position;
+                        Rand = Random.Range(0, 3);
+                        break;
+                }
+            }
+            else
+            {
+                attackObjects[currentAttackIndex]._gameObject.transform.position = AttackPoint.transform.position;
+            }
             Vector2 Dir = (transform.position - Target.position).normalized;
             Quaternion toRotate = Quaternion.LookRotation(transform.forward, -Dir);
             attackObjects[currentAttackIndex]._gameObject.transform.rotation = toRotate;
