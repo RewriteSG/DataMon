@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ea2ec1f72de6945be0758aeffc909a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DmgBasedOfStat: 1.3
+  DmgBasedOfStat: 1.9
   Damage: 0
   AttackRange: 0
   StartAttackDelay: 1.7
@@ -78,7 +78,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

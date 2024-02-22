@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1907587350687574131}
   - component: {fileID: 1907587350687574130}
   - component: {fileID: 1907587350687574128}
+  - component: {fileID: 2083708718028825161}
   m_Layer: 0
   m_Name: Projectile2Fireball
   m_TagString: EnemyAttack
@@ -95,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ea2ec1f72de6945be0758aeffc909a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DmgBasedOfStat: 1.3
+  DmgBasedOfStat: 2
   Damage: 0
   AttackRange: 3
   StartAttackDelay: 1.7
@@ -118,6 +119,22 @@ MonoBehaviour:
   isScaledUp: 0
   isDotAttack: 0
   isFireBreath: 0
+--- !u!58 &2083708718028825161
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907587350687574141}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.012763755, y: -0.0000002704128}
+  serializedVersion: 2
+  m_Radius: 2.0622356
 --- !u!1 &3175605943379089834
 GameObject:
   m_ObjectHideFlags: 0

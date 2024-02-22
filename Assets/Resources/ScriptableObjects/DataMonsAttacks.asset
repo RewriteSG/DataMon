@@ -13,40 +13,104 @@ MonoBehaviour:
   m_Name: DataMonsAttacks
   m_EditorClassIdentifier: 
   AllAttacks:
-  - AttackPrefab: {fileID: 4999572076893941980, guid: 22ce197875a48f44293851ba55ec0c68,
+  - name: Red Air Attack
+    AttackPrefab: {fileID: 4999572076893941980, guid: 22ce197875a48f44293851ba55ec0c68,
       type: 3}
     AttackPrefabName: 
     _gameObject: {fileID: 0}
     attackObject: {fileID: 0}
     CurrentCD: 0
     isAvailable: 0
-    AttackCooldown: 4
-    AttackName: Air Fissure
+    AttackCooldown: 5
+    AttackName: Red Air Attack
     AttackDescription: 
-    AttackDelayDataMonAfterFiring: 1
-  - AttackPrefab: {fileID: 1368036933946875657, guid: 9411105d4b3101b49931689553bfc8b6,
+    AttackDelayDataMonAfterFiring: 2
+  - name: Black Bullet
+    AttackPrefab: {fileID: 8953152859297999828, guid: 211bbb1ff4f8ce0478d5257a9939e805,
       type: 3}
     AttackPrefabName: 
     _gameObject: {fileID: 0}
     attackObject: {fileID: 0}
     CurrentCD: 0
     isAvailable: 0
-    AttackCooldown: 4
-    AttackName: Ice Shard
+    AttackCooldown: 3
+    AttackName: Black Bullet
     AttackDescription: 
-    AttackDelayDataMonAfterFiring: 1
-  - AttackPrefab: {fileID: 9057499543999570315, guid: 8356f471cd94d154a93c928426213a9c,
+    AttackDelayDataMonAfterFiring: 2
+  - name: Charge Dash Attack
+    AttackPrefab: {fileID: 9057499543999570315, guid: 8356f471cd94d154a93c928426213a9c,
       type: 3}
     AttackPrefabName: 
     _gameObject: {fileID: 0}
     attackObject: {fileID: 0}
     CurrentCD: 0
     isAvailable: 0
-    AttackCooldown: 4
-    AttackName: Charge Attack
+    AttackCooldown: 3
+    AttackName: Charge Dash Attack
     AttackDescription: 
     AttackDelayDataMonAfterFiring: 3
-  - AttackPrefab: {fileID: 3079290086745366368, guid: ce9569e787bcf5c43b21dcb607d981fd,
+  - name: Dark Bomb
+    AttackPrefab: {fileID: 3623201904519695190, guid: 8d89b76e05123d640bcd680f9c99aa1c,
+      type: 3}
+    AttackPrefabName: 
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 10
+    AttackName: Dark Bomb
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 4
+  - name: Ice Attack
+    AttackPrefab: {fileID: 1368036933946875657, guid: 9411105d4b3101b49931689553bfc8b6,
+      type: 3}
+    AttackPrefabName: 
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 5
+    AttackName: Ice Attack
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 2
+  - name: Fireball
+    AttackPrefab: {fileID: 1907587350687574141, guid: 7d30fdcf201908745a49711ab26c374b,
+      type: 3}
+    AttackPrefabName: 
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 3
+    AttackName: Fireball
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 2
+  - name: Shock Wave
+    AttackPrefab: {fileID: 2137941719559454596, guid: ffce612afcced0242a22c45b4703605f,
+      type: 3}
+    AttackPrefabName: 
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 6
+    AttackName: Shock Wave
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 4
+  - name: ShockWave Quake
+    AttackPrefab: {fileID: 5363503788750326331, guid: 94c955597fa4dba43a27c4845a118d92,
+      type: 3}
+    AttackPrefabName: 
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 10
+    AttackName: ShockWave Quake
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 5
+  - name: Spinning Attack
+    AttackPrefab: {fileID: 8618148452514149853, guid: 79cf1668ab5680e4697533fe1aabad93,
       type: 3}
     AttackPrefabName: 
     _gameObject: {fileID: 0}
@@ -54,6 +118,30 @@ MonoBehaviour:
     CurrentCD: 0
     isAvailable: 0
     AttackCooldown: 4
-    AttackName: SpinReen
+    AttackName: Spinning Attack
     AttackDescription: 
-    AttackDelayDataMonAfterFiring: 1
+    AttackDelayDataMonAfterFiring: 2
+  - name: Spinning Grassblade
+    AttackPrefab: {fileID: 3079290086745366368, guid: ce9569e787bcf5c43b21dcb607d981fd,
+      type: 3}
+    AttackPrefabName: 
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 4
+    AttackName: Spinning Grassblade
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 2
+  - name: Tornado
+    AttackPrefab: {fileID: 8209846115472453567, guid: 98e0385232280e54da856792a155fa50,
+      type: 3}
+    AttackPrefabName: 
+    _gameObject: {fileID: 0}
+    attackObject: {fileID: 0}
+    CurrentCD: 0
+    isAvailable: 0
+    AttackCooldown: 10
+    AttackName: Tornado
+    AttackDescription: 
+    AttackDelayDataMonAfterFiring: 5
