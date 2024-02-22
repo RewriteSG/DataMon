@@ -51,7 +51,13 @@ public class PlayerShoot : MonoBehaviour
     }
     void Update()
     {
+
+        Vector3 mousePosition = Input.mousePosition;
+
+        RectTransform ammoTextRectTransform = AmmoText.GetComponent<RectTransform>();
+        ammoTextRectTransform.position = mousePosition + new Vector3(-90, -20, 0);
         timeToShootAnother += Time.deltaTime;
+
         UpdateAmmoUI();
         ClampAmmoClip(shotgun);
         ClampAmmoClip(huntingRifle);
