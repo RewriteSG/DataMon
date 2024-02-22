@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EvolutionCosts: 0000000000000000
   Ability: {fileID: 11400000, guid: 3c38d67243516a2438f8b9627d67539f, type: 2}
-  AbilityName: 
+  AbilityName: Mount_Drake
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: Aureusdrake
@@ -29,7 +29,7 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 90
     MonBehaviourState: 2
   - DataMonName: Argentidrake
     DataMonPrefab: {fileID: 6611149449202018845, guid: 7596b7a23bdda0b4b97d7f931b088fb8,
@@ -43,7 +43,7 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 60
     MonBehaviourState: 2
   - DataMonName: Aurumdrake
     DataMonPrefab: {fileID: 6053317907334725199, guid: 6af162b2ea145bf4899e026ba97cbfc0,
@@ -57,6 +57,6 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 300
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 45
     MonBehaviourState: 2
   MonRole: 0

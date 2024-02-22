@@ -47,13 +47,13 @@ public class ResourceLoadManager : MonoBehaviour
         }
         for (int i = 0; i < AbilitiesScriptableObjects.Length; i++)
         {
-            if(AbilitiesScriptableObjects[i].ItemPlaceHolder == null)
+            if(AbilitiesScriptableObjects[i].ItemPlaceHolder != null)
             AbilitiesScriptableObjects[i].ItemPlaceHolderPrefabName = AbilitiesScriptableObjects[i].ItemPlaceHolder.name;
             AbilitiesScriptableObjects[i].ItemImageName = new string[AbilitiesScriptableObjects[i].ItemImage.Length];
             for (int x = 0; x < AbilitiesScriptableObjects[i].ItemImage.Length; x++)
             {
 
-                if (AbilitiesScriptableObjects[i].ItemImage != null)
+                if (AbilitiesScriptableObjects[i].ItemImage[x] != null)
                     AbilitiesScriptableObjects[i].ItemImageName[x] = AbilitiesScriptableObjects[i].ItemImage[x].name;
             }
 

@@ -13,50 +13,50 @@ MonoBehaviour:
   m_Name: D_Centaur
   m_EditorClassIdentifier: 
   EvolutionCosts: 0f0000001e000000
-  Ability: {fileID: 0}
+  Ability: {fileID: 11400000, guid: 4291914480a0dbc4fb31af8f2bbdff23, type: 2}
   AbilityName: 
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: Centaurius
     DataMonPrefab: {fileID: 3256361934947032024, guid: f14c23a328559f74caf40dbe9a5a9d03,
       type: 3}
-    DataMonPrefabName: 
+    DataMonPrefabName: Centaurius
     UIsprite: {fileID: 21300000, guid: 26eb9edafb1e5a444ac83b2f68c18d03, type: 3}
-    UIspriteName: 
+    UIspriteName: Obtained_Centaurian
     BaseAttributes:
       BaseHealth: 25
       BaseAttack: 17
       BaseProductionSpeed: 0
       BaseMoveSpeed: 120
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 90
     MonBehaviourState: 2
   - DataMonName: Stampedian
     DataMonPrefab: {fileID: 1974126115556432739, guid: aa2984add5c6db746bdec3b6c4ee4073,
       type: 3}
-    DataMonPrefabName: 
+    DataMonPrefabName: Stampedian
     UIsprite: {fileID: 21300000, guid: ca58288660c55dd41b2459da4d6c56be, type: 3}
-    UIspriteName: 
+    UIspriteName: Obtained_Stampedian
     BaseAttributes:
       BaseHealth: 35
       BaseAttack: 27
       BaseProductionSpeed: 0
       BaseMoveSpeed: 140
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 60
     MonBehaviourState: 2
   - DataMonName: KingSteed
     DataMonPrefab: {fileID: 6870387613212311961, guid: 1483339e3ffff5741aef822c192700e4,
       type: 3}
-    DataMonPrefabName: 
+    DataMonPrefabName: KingSteed
     UIsprite: {fileID: 21300000, guid: e6a5e67904623df4bad921a34bca91ab, type: 3}
-    UIspriteName: 
+    UIspriteName: Obtained_Kingsteed
     BaseAttributes:
       BaseHealth: 44
       BaseAttack: 37
       BaseProductionSpeed: 0
       BaseMoveSpeed: 180
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 45
     MonBehaviourState: 2
   MonRole: 2

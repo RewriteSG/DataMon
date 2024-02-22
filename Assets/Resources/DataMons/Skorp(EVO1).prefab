@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3222224288041919963}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.17325479, y: 0.17325479, z: 0.17325479}
   m_Children:
@@ -111,6 +111,7 @@ MonoBehaviour:
   DataMonProductionTime: 0
   CurrentProductionProgress: 0
   GlitchDamage: 0
+  AttackLaunched: 0
 --- !u!114 &3222224288041919964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +137,9 @@ MonoBehaviour:
   dataMon:
     DataMonName: Datant
     DataMonPrefab: {fileID: 3222224288041919963}
-    InherentDataMonAbility: []
+    DataMonPrefabName: 
+    UIsprite: {fileID: 0}
+    UIspriteName: 
     BaseAttributes:
       BaseHealth: 20
       BaseAttack: 0
@@ -171,6 +174,7 @@ MonoBehaviour:
   attackObjects: []
   currentAttackIndex: 0
   isWaveEnemy: 0
+  isBoss: 0
 --- !u!114 &4584096678186546428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +188,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isQuitting: 0
+  isItemPickup: 0
+  DataByteSprite: {fileID: 0}
+  radius: 0
+  damp: 0
+  randomPos: {x: 0, y: 0}
+  smoothVelocity: {x: 0, y: 0}
 --- !u!1 &3282776067734339521
 GameObject:
   m_ObjectHideFlags: 0

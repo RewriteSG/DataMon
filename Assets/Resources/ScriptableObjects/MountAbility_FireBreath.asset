@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityDescriptions: []
   isAbilitySemiAuto: 0
-  _AbilityType: 0
+  _AbilityType: 2
   ModifiersByEvolution:
   - 0
   - 0
   - 0
   AbilityCooldown:
-  - 53.52
-  - 0
-  - 0
+  - 30
+  - 40
+  - 50
   ActiveTime: 0
   ItemPlaceHolder: {fileID: 0}
   ItemPlaceHolderPrefabName: 

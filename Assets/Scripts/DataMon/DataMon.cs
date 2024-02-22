@@ -299,7 +299,7 @@ namespace IndividualDataMon
                 healthBar = NamePlate.GetComponentInChildren<HealthBarScript>();
                 baseAttributes = DataMonAttributes.CopyDataMonAttributes(dataMon.BaseAttributes);
                 healthBar.SetMaxHealth(Mathf.RoundToInt(baseAttributes.BaseHealth));
-                NamePlate.transform.SetParent(null);
+                //NamePlate.transform.SetParent(null);
 
             }
 

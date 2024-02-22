@@ -27,8 +27,15 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
 
-        AudioManager.instance.PlayAudioClip(AudioManager.instance.PlayerHurt);
-        currentHealth -= damage;
+        if (damage > 0)
+        {
+            GameManager.instance.timeShieldToRegen = GameManager.TimeOutOfCombat;
+            AudioManager.instance.PlayAudioClip(AudioManager.instance.PlayerHurt);
+        }
+
+        if ((GameManager.instance.isShielded && GameManager.instance.CurrentShieldHealth < 0) || !GameManager.instance.isShielded)
+            currentHealth -= damage;
+
         currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
         healthBar.SetHealth(currentHealth);
     }

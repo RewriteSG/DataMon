@@ -64,7 +64,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Affects by DataMons Passives")]
     public bool isShielded;
+    public HealthBarScript ShieldBar;
     public float MaxShieldHealth;
+    public const float TimeOutOfCombat = 2;
+    public float timeShieldToRegen;
     public float CurrentShieldHealth;
     public float ChanceForDoubleDrop = 0;
     public float PlayerRegenerationRatePerSecond = 1;
@@ -239,6 +242,18 @@ public class GameManager : MonoBehaviour
             SceneChanger.ChangeScene("DataHub");
         }
 
+        if (isShielded && timeShieldToRegen < 0)
+        {
+            CurrentShieldHealth += PlayerRegenerationRatePerSecond * 0.5f * Time.deltaTime;
+
+            CurrentShieldHealth = Mathf.Clamp(CurrentShieldHealth, -1, MaxShieldHealth);
+        }
+        else if (isShielded)
+        {
+            timeShieldToRegen -= Time.deltaTime;
+        }
+        ShieldBar.gameObject.SetActive(isShielded);
+        ShieldBar.SetHealth(CurrentShieldHealth);
         if (Entity_Updates != null)
             Entity_Updates();
     }

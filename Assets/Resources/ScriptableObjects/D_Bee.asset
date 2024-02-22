@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EvolutionCosts: 0a000000
   Ability: {fileID: 11400000, guid: 97f401b87737f8045b0ac2279f2598ef, type: 2}
-  AbilityName: 
+  AbilityName: Active_Bee
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: BumbleBuzz
@@ -29,7 +29,7 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 0
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 90
     MonBehaviourState: 2
   - DataMonName: BuzzQueen
     DataMonPrefab: {fileID: 1807219733211062849, guid: e33d147595e5c3742a0555e9ff8956b9,
@@ -43,6 +43,6 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 0
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 60
     MonBehaviourState: 2
   MonRole: 0

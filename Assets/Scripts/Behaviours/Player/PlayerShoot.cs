@@ -116,6 +116,10 @@ public class PlayerShoot : MonoBehaviour
             case ItemHolding.Shotgun:
                 AmmoText.text = "Ammo: " + shotgun.CurrentClipAmount + " / " + shotgun.AmmoAmount;
                 break;
+            case ItemHolding.Melee:
+
+                AmmoText.text = "";
+                break;
         }
     }
     public void ShowWeaponModel(ItemHolding itemType)

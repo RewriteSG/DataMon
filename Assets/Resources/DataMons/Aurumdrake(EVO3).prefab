@@ -466,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 1443415226721410768}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 1443415225503368886}
   - {fileID: 1443415227061952443}
@@ -673,9 +673,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6053317907334725199}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.17325479, y: 0.17325479, z: 0.17325479}
+  m_LocalScale: {x: 0.11644628, y: 0.11644628, z: 0.11644628}
   m_Children:
   - {fileID: 1443415226721410769}
   - {fileID: 8019949953949689197}
@@ -746,16 +746,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AI_state: 0
   Target: {fileID: 0}
-  NextWaypointDist: 0.81
-  PatrollingDistance: 1.81
+  NextWaypointDist: 4.62
+  PatrollingDistance: 5.7
   WanderingDistance: 10
-  ProductionDistance: 0.95
+  ProductionDistance: 0
   patrollingAnchor: {fileID: 0}
   aggroSystem: {fileID: 0}
   CurrentTask: 0
   DataMonProductionTime: 0
   CurrentProductionProgress: 0
   GlitchDamage: 0
+  AttackLaunched: 0
 --- !u!114 &6053317907334725192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +782,9 @@ MonoBehaviour:
   dataMon:
     DataMonName: Datant
     DataMonPrefab: {fileID: 6053317907334725199}
-    InherentDataMonAbility: []
+    DataMonPrefabName: 
+    UIsprite: {fileID: 0}
+    UIspriteName: 
     BaseAttributes:
       BaseHealth: 20
       BaseAttack: 0
@@ -816,6 +819,7 @@ MonoBehaviour:
   attackObjects: []
   currentAttackIndex: 0
   isWaveEnemy: 0
+  isBoss: 0
 --- !u!114 &5128453040113119080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,6 +833,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isQuitting: 0
+  isItemPickup: 0
+  DataByteSprite: {fileID: 0}
+  radius: 0
+  damp: 0
+  randomPos: {x: 0, y: 0}
+  smoothVelocity: {x: 0, y: 0}
 --- !u!1 &6140891234322408533
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EvolutionCosts: 0a00000023000000
   Ability: {fileID: 11400000, guid: 1ade66a021c34e445ba7988bff737d59, type: 2}
-  AbilityName: 
+  AbilityName: Active_Scorpion
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: Skorp
@@ -43,7 +43,7 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 200
       BaseAttackRange: 0
-      BaseCaptureChance: 90
+      BaseCaptureChance: 60
     MonBehaviourState: 2
   - DataMonName: Skorpike
     DataMonPrefab: {fileID: 8101047146202943333, guid: 8b20c01d96ab0db418f5395247f26e4e,
@@ -57,6 +57,6 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 160
       BaseAttackRange: 0
-      BaseCaptureChance: 0
+      BaseCaptureChance: 45
     MonBehaviourState: 2
   MonRole: 1

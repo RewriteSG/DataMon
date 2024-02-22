@@ -388,9 +388,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1974126115556432739}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.17325479, y: 0.17325479, z: 0.17325479}
+  m_LocalScale: {x: 0.2039618, y: 0.2039618, z: 0.2039618}
   m_Children:
   - {fileID: 8587554850661477350}
   - {fileID: 1974126116190703854}
@@ -461,16 +461,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AI_state: 0
   Target: {fileID: 0}
-  NextWaypointDist: 0.81
-  PatrollingDistance: 1.81
+  NextWaypointDist: 2.85
+  PatrollingDistance: 3.8
   WanderingDistance: 10
-  ProductionDistance: 0.95
+  ProductionDistance: 0
   patrollingAnchor: {fileID: 0}
   aggroSystem: {fileID: 0}
   CurrentTask: 0
   DataMonProductionTime: 0
   CurrentProductionProgress: 0
   GlitchDamage: 0
+  AttackLaunched: 0
 --- !u!114 &1974126115556432737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,7 +497,9 @@ MonoBehaviour:
   dataMon:
     DataMonName: Datant
     DataMonPrefab: {fileID: 1974126115556432739}
-    InherentDataMonAbility: []
+    DataMonPrefabName: 
+    UIsprite: {fileID: 0}
+    UIspriteName: 
     BaseAttributes:
       BaseHealth: 20
       BaseAttack: 0
@@ -531,6 +534,7 @@ MonoBehaviour:
   attackObjects: []
   currentAttackIndex: 0
   isWaveEnemy: 0
+  isBoss: 0
 --- !u!114 &1974126115556432736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +548,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isQuitting: 0
+  isItemPickup: 0
+  DataByteSprite: {fileID: 0}
+  radius: 0
+  damp: 0
+  randomPos: {x: 0, y: 0}
+  smoothVelocity: {x: 0, y: 0}
 --- !u!1 &1974126115611869046
 GameObject:
   m_ObjectHideFlags: 0

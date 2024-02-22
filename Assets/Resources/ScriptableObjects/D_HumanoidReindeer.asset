@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EvolutionCosts: 0f00000023000000
   Ability: {fileID: 11400000, guid: d2eedbd7bbc8a574fb1cf15c06159f6e, type: 2}
-  AbilityName: 
+  AbilityName: Passives_Ant
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: Arbox
@@ -29,7 +29,7 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 180
       BaseAttackRange: 0
-      BaseCaptureChance: 60
+      BaseCaptureChance: 90
     MonBehaviourState: 2
   - DataMonName: Foliox
     DataMonPrefab: {fileID: 8199447733351373943, guid: 918a46757712ba345bf7956e63309945,
@@ -43,7 +43,7 @@ MonoBehaviour:
       BaseProductionSpeed: 0
       BaseMoveSpeed: 180
       BaseAttackRange: 0
-      BaseCaptureChance: 50
+      BaseCaptureChance: 60
     MonBehaviourState: 2
   - DataMonName: Thornox
     DataMonPrefab: {fileID: 7069348724174970135, guid: af33d81fb76d7174d8c6831b12f1ba68,
