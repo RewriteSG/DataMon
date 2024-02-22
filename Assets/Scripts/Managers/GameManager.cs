@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public static int TotalDataMonIDs;
     public static int HostileDataMons;
+    public static bool LoseGame;
 
     [Header("Important: Set this true if its in DataHub")]
     public bool InHub = false;
@@ -110,13 +111,15 @@ public class GameManager : MonoBehaviour
         if (SaveLoadManager.instance.DoLoadWorld)
         {
             Databytes = SaveLoadManager.LoadDataBytes();
-            player_progress = SaveLoadManager.LoadPlayerProgress();
+            player_progress = SaveLoadManager.LoadPlayerProgress(player_progress.Melee);
+            Fists_weapon.ModelInstance = Fists_weapon.Model;
+            //player_progress.Melee.
             WeaponType[] weaponTypes = SaveLoadManager.LoadWeaponTypes();
             for (int i = 0; i < weaponTypes.Length; i++)
             {
-                print(weaponTypes[i].type);
-                if (weaponTypes[i].Model.isNull())
-                    continue;
+                print(weaponTypes[i].Model);
+                //if (weaponTypes[i].Model.isNull())
+                //    continue;
                 if (InHub)
                     weaponTypes[i].ModelInstance = Instantiate(weaponTypes[i].Model, Vector3.zero, Quaternion.identity);
                 else
@@ -140,11 +143,13 @@ public class GameManager : MonoBehaviour
         }
         else if(!InHub)
         {
+
+            Fists_weapon.ModelInstance = Instantiate(Fists_weapon.Model, Player.transform);
             assaultRifle.ModelInstance = Instantiate(assaultRifle.Model, Player.transform);
             shotgun.ModelInstance = Instantiate(shotgun.Model, Player.transform);
             huntingRifle.ModelInstance = Instantiate(huntingRifle.Model, Player.transform);
-            print(DataBallLauncher.Model.name);
             DataBallLauncher.ModelInstance = Instantiate(DataBallLauncher.Model, Player.transform);
+            print(DataBallLauncher.Model.name);
         }
 
         if (Player == null || InHub)
@@ -188,6 +193,7 @@ public class GameManager : MonoBehaviour
             ParticlesBeforeEveryAttackPool.Add(Instantiate(ParticlesBeforeEveryAttack.gameObject, Vector3.up * 500, Quaternion.identity).GetComponent<ParticleSystem>());
         }
         isInteractingNPC = false;
+        LoseGame = false;
     }
 
 #if UNITY_EDITOR

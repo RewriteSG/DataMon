@@ -575,6 +575,9 @@ public class DataMonHolder
         dataMonDataName = toHold.dataMonData.name;
         abilitiesName = dataMonData.Ability.name;
         dataMon = toHold.dataMon;
+
+        dataMon.UIsprite = toHold.dataMon.UIsprite;
+        dataMon.UIspriteName = toHold.dataMon.UIsprite.name;
         dataMonAttacks = new Attack[toHold.attackObjects.Count];
         //Debug.Log("toHold.attackObjects.Count" + toHold.attackObjects.Count);
         for (int i = 0; i < toHold.attackObjects.Count; i++)

@@ -12,6 +12,7 @@ public class ResourceLoadManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        LoadAllResources();
     }
     // Start is called before the first frame update
     public void LoadAllResources()
@@ -40,7 +41,9 @@ public class ResourceLoadManager : MonoBehaviour
             for (int x = 0; x < dataMonsData[i].DataMons.Length; x++)
             {
                 dataMonsData[i].DataMons[x].DataMonPrefabName = dataMonsData[i].DataMons[x].DataMonPrefab.name;
+                dataMonsData[i].DataMons[x].UIspriteName = dataMonsData[i].DataMons[x].UIsprite.name;
             }
+
         }
         for (int i = 0; i < AbilitiesScriptableObjects.Length; i++)
         {
@@ -55,8 +58,8 @@ public class ResourceLoadManager : MonoBehaviour
             if(AbilitiesScriptableObjects[i] is Mount)
             {
                 Mount mount = (Mount)AbilitiesScriptableObjects[i];
-                if(mount.AbilityPrefab != null)
-                mount.AbilityPrefabName = mount.AbilityPrefab.name;
+                if(mount.HotbarPrefab != null)
+                mount.HotbarPrefabName = mount.HotbarPrefab.name;
             }
         }
     }

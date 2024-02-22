@@ -36,13 +36,20 @@ public class DataMonCollision : MonoBehaviour
             collision.gameObject.SetActive(false);
             if (bullet.IsFromPlayer)
                 DataMon.dataMonAI.aggroSystem.SetDamageByEntity(GameManager.instance.Player, damage);
+            AudioManager.instance.PlayAudioClip(AudioManager.instance.DataMonHit);
         }
-        //if(collision.gameObject.CompareTag("EnemyAttack") && DataMon.dataMon.MonBehaviourState == DataMonBehaviourState.isCompanion)
-        //{
-        //    if(DataMon.dataMonAI.AI_state == AI_State.Produce)
-        //    {
-        //        DataMon.dataMonAI.CancelProduction();
-        //    }
-        //}
+        if (collision.gameObject.CompareTag("AllyAttack"))
+        {
+
+            damage = collision.GetComponent<AttackObjects>().Damage;
+
+            DataMon.CurrentAttributes.CurrentHealth -= damage;
+
+            DataMon.CurrentAttributes.CurrentHealth =
+                Mathf.Clamp(DataMon.CurrentAttributes.CurrentHealth, 0, DataMon.CurrentAttributes.CurrentHealth + 1);
+
+            AudioManager.instance.PlayAudioClip(AudioManager.instance.DataMonHit);
+            //= bullet.Damage;
+        }
     }
 }

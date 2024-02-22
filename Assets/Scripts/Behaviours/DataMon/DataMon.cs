@@ -150,6 +150,9 @@ namespace IndividualDataMon
             attackObjects[currentAttackIndex]._gameObject.SetActive(true);
             attackObjects[currentAttackIndex]._gameObject.tag = "EnemyAttack";
             attackObjects[currentAttackIndex].CurrentCD = 0;
+            attackObjects[currentAttackIndex].attackObject.Damage = attackObjects[currentAttackIndex].attackObject.DmgBasedOfStat * CurrentAttributes.CurrentAttack;
+
+
             currentAttackIndex++;
             if (currentAttackIndex >= attackObjects.Count)
             {

@@ -22,6 +22,8 @@ public class Ability_Scorpion : AbilitiesScriptableObjects
         AttackObjects attack = Instantiate(AbilityPrefab, Gunpoint.position, Gunpoint.rotation).GetComponent<AttackObjects>();
         attack.AttacksByEntityGameObject = Player.Player.gameObject;
         attack.gameObject.tag = "AllyAttack";
+        attack.Damage = attack.DmgBasedOfStat * dataMon.BaseAttributes.BaseAttack;
+
         return attack.gameObject;
     }
     public override void Deactivate(DataMonsData dataMonData, DataMonIndividualData dataMon, GameManager Player, bool toggle)

@@ -20,6 +20,7 @@ public class ActiveAbility : AbilitiesScriptableObjects
         AttackObjects attack = Instantiate(AbilityPrefab, Gunpoint.position, Gunpoint.rotation).GetComponent<AttackObjects>();
         attack.AttacksByEntityGameObject = Player.Player.gameObject;
         attack.gameObject.tag = "AllyAttack";
+        attack.Damage = attack.DmgBasedOfStat * dataMon.BaseAttributes.BaseAttack;
         return attack.gameObject;
     }
     //public override void UseAbility(DataMonsData dataMonData, DataMonIndividualData dataMon, GameManager Player, bool toggle, Transform Gunpoint = default)

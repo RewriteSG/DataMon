@@ -37,6 +37,7 @@ public class MountAbility : AbilitiesScriptableObjects
         Debug.Log(attack.name);
         attack.Damage = dataMon.BaseAttributes.BaseAttack * ModifiersByEvolution[dataMonData.DataMons.GetDataMonIndexInDataArray(dataMon)];
         attack.gameObject.tag = "AllyAttack";
+        attack.Damage = attack.DmgBasedOfStat * dataMon.BaseAttributes.BaseAttack;
         return attack.gameObject;
     }
     public override void Deactivate(DataMonsData dataMonData, DataMonIndividualData dataMon, GameManager Player, bool toggle)

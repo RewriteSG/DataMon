@@ -21,7 +21,8 @@ MonoBehaviour:
     DataMonPrefab: {fileID: 4978633443002041284, guid: 8e61f1e77281460468e2bc75cb8542d1,
       type: 3}
     DataMonPrefabName: 
-    UI: {fileID: 0}
+    UIsprite: {fileID: 21300000, guid: 4f8c7accbaf10ca4fb1f1de69a9a8130, type: 3}
+    UIspriteName: 
     BaseAttributes:
       BaseHealth: 15
       BaseAttack: 15
@@ -34,7 +35,8 @@ MonoBehaviour:
     DataMonPrefab: {fileID: 8909911149548451120, guid: 29b85658bd60899458a88ddb78ff30be,
       type: 3}
     DataMonPrefabName: 
-    UI: {fileID: 0}
+    UIsprite: {fileID: 21300000, guid: 0de6d46412f2bc84ebfb2ef3865c885a, type: 3}
+    UIspriteName: 
     BaseAttributes:
       BaseHealth: 25
       BaseAttack: 25
@@ -47,7 +49,8 @@ MonoBehaviour:
     DataMonPrefab: {fileID: 5139332057412728592, guid: 207f5fd8f2a4589409f83cb30cf9a4ea,
       type: 3}
     DataMonPrefabName: 
-    UI: {fileID: 0}
+    UIsprite: {fileID: 21300000, guid: 5fe4e16c1633a3e42bf9fb9350b61773, type: 3}
+    UIspriteName: 
     BaseAttributes:
       BaseHealth: 35
       BaseAttack: 35

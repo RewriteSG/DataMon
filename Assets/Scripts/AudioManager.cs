@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioManager instance;
+    public static AudioManager instance;
     public AudioClip[] Explosions;
-    public AudioClip DataMonHurt, turtleSpin, ShieldFull, PlayerDeath, Dash, Healing;
+    public AudioClip DataMonHit , PlayerHurt;
+    public AudioClip  turtleSpin, ShieldFull, PlayerDeath, Dash, Healing, Stomp;
+    public AudioSource audioSrc;
     private void Awake()
     {
         instance = this;
+    }
+    public void PlayAudioClip(AudioClip audioClip)
+    {
+        audioSrc.PlayOneShot(audioClip);
     }
 }

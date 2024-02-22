@@ -64,7 +64,7 @@ public class SaveLoadManager : MonoBehaviour
 
             return 0;
     }
-    public static PlayerProgress LoadPlayerProgress()
+    public static PlayerProgress LoadPlayerProgress(Item melee)
     {
         if (!IsDataUnkown())
         {
@@ -73,7 +73,7 @@ public class SaveLoadManager : MonoBehaviour
             loadedPlayerProgress.DataBall = savedData.playerProgress.savedProgress.DataBall;
             loadedPlayerProgress.Shotgun = savedData.playerProgress.savedProgress.Shotgun;
             loadedPlayerProgress.HuntingRifle = savedData.playerProgress.savedProgress.HuntingRifle;
-            loadedPlayerProgress.Melee = savedData.playerProgress.savedProgress.Melee;
+            loadedPlayerProgress.Melee = melee;
             return loadedPlayerProgress;
         }
         else
@@ -135,6 +135,10 @@ public class SaveLoadManager : MonoBehaviour
 
                 DeserializedData.DataMons.DataMons[i].dataMonData =
                 Resources.Load<DataMonsData>("ScriptableObjects/"+DeserializedData.DataMons.DataMons[i].dataMonDataName);
+
+                DeserializedData.DataMons.DataMons[i].dataMon.UIsprite =
+                Resources.Load<Sprite>("UI/" + DeserializedData.DataMons.DataMons[i].dataMon.UIspriteName);
+
                 for (int x = 0; x < DeserializedData.DataMons.DataMons[i].dataMonAttacks.Length; x++)
                 {
                     DeserializedData.DataMons.DataMons[i].dataMonAttacks[x].AttackPrefab =
@@ -153,15 +157,23 @@ public class SaveLoadManager : MonoBehaviour
                 DeserializedData.DataMons.DataMonsInTeam[i].abilities =
                 Resources.Load<AbilitiesScriptableObjects>("ScriptableObjects/" + DeserializedData.DataMons.DataMons[i].abilitiesName);
 
+
+
                 DeserializedData.DataMons.DataMonsInTeam[i].dataMonData =
                 Resources.Load<DataMonsData>("ScriptableObjects/" + DeserializedData.DataMons.DataMons[i].dataMonDataName);
+
+                DeserializedData.DataMons.DataMonsInTeam[i].dataMon.UIsprite =
+                Resources.Load<Sprite>("UI/" + DeserializedData.DataMons.DataMonsInTeam[i].dataMon.UIspriteName);
+
                 for (int x = 0; x < DeserializedData.DataMons.DataMons[i].dataMonAttacks.Length; x++)
                 {
                     DeserializedData.DataMons.DataMonsInTeam[i].dataMonAttacks[x].AttackPrefab =
-                Resources.Load<GameObject>("Attacks/" + DeserializedData.DataMons.DataMons[i].dataMonAttacks[x].AttackPrefabName);
+                Resources.Load<GameObject>("Attacks/" + DeserializedData.DataMons.DataMonsInTeam[i].dataMonAttacks[x].AttackPrefabName);
                 }
                 DeserializedData.DataMons.DataMonsInTeam[i].dataMon.DataMonPrefab =
-                Resources.Load<GameObject>("DataMons/" + DeserializedData.DataMons.DataMons[i].dataMon.DataMonPrefabName);
+                Resources.Load<GameObject>("DataMons/" + DeserializedData.DataMons.DataMonsInTeam[i].dataMon.DataMonPrefabName);
+
+
                 //for (int x = 0; x < ; x++)
                 //{
                 //    DeserializedData.DataMons.DataMons[i].dataMonAttacks[x].AttackPrefab =

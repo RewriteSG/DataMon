@@ -94,6 +94,7 @@ public class AttackObjects : MonoBehaviour
         }
         delayAfterAttack = EndAttackAt;
     }
+
     float delayAfterAttack;
     private void Update()
     {
@@ -122,10 +123,9 @@ public class AttackObjects : MonoBehaviour
             ParticleBeforeAttack.transform.position = Vector3.up * 500;
         }
 
-        if (AttacksByEntity != null)
-        {
-            Damage = DmgBasedOfStat * AttacksByEntity.CurrentAttributes.CurrentAttack;
-        }
+        //if (AttacksByEntity != null)
+        //{
+        //}
         if (AttacksByEntityGameObject != null && isDashAttack && !isMoveAtDistance)
             GameManager.instance.PlayerisDashing = AttacksByEntityGameObject == GameManager.instance.Player;
         if(isFireBreath && !UnityParticleSystem.isNull())

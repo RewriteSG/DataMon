@@ -22,10 +22,11 @@ public class PlayerHealth : MonoBehaviour
             TakeDamage(5);
         }
         if (currentHealth <= 0)
-            SceneChanger.ChangeScene("LoseScene");
+            GameManager.LoseGame = true;
     }
     public void TakeDamage(float damage)
     {
+
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
         healthBar.SetHealth(currentHealth);
