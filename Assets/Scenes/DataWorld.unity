@@ -5179,6 +5179,8 @@ MonoBehaviour:
   DataByteSprite: {fileID: 0}
   radius: 0
   damp: 0
+  randomPos: {x: 0, y: 0}
+  smoothVelocity: {x: 0, y: 0}
 --- !u!114 &419308881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5231,6 +5233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectedColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 0.33333334}
   UnselectedColor: {r: 0, g: 0, b: 0, a: 1}
+  prevSelectedItem: 0
 --- !u!1001 &420784471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12037,8 +12040,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EvolutionCosts: 
-  InherentPassives: []
-  InherentAllDataMonAbility: []
+  Ability: {fileID: 0}
+  AbilityName: 
   AttacksObjects: {fileID: 0}
   DataMons: []
   MonRole: 0
@@ -17995,6 +17998,7 @@ MonoBehaviour:
   IsDrivenByAnimation: 1
   IsFromPlayer: 1
   ByDataMon: {fileID: 0}
+  isFists: 0
   isHR: 0
 --- !u!1001 &1623177287
 PrefabInstance:
@@ -18689,7 +18693,9 @@ MonoBehaviour:
         DataMonName: Datant
         DataMonPrefab: {fileID: 145781175407673768, guid: 67a9c31a78d2533408d939ecb8dc2e3d,
           type: 3}
-        InherentDataMonAbility: []
+        DataMonPrefabName: 
+        UIsprite: {fileID: 0}
+        UIspriteName: 
         BaseAttributes:
           BaseHealth: 8
           BaseAttack: 5
@@ -18709,7 +18715,9 @@ MonoBehaviour:
       DataMon:
         DataMonName: 
         DataMonPrefab: {fileID: 0}
-        InherentDataMonAbility: []
+        DataMonPrefabName: 
+        UIsprite: {fileID: 0}
+        UIspriteName: 
         BaseAttributes:
           BaseHealth: 0
           BaseAttack: 0
@@ -18731,7 +18739,9 @@ MonoBehaviour:
         DataMonName: Datant
         DataMonPrefab: {fileID: 145781175407673768, guid: 67a9c31a78d2533408d939ecb8dc2e3d,
           type: 3}
-        InherentDataMonAbility: []
+        DataMonPrefabName: 
+        UIsprite: {fileID: 0}
+        UIspriteName: 
         BaseAttributes:
           BaseHealth: 8
           BaseAttack: 5
@@ -18750,7 +18760,9 @@ MonoBehaviour:
       DataMonName: Datant
       DataMonPrefab: {fileID: 145781175407673768, guid: 67a9c31a78d2533408d939ecb8dc2e3d,
         type: 3}
-      InherentDataMonAbility: []
+      DataMonPrefabName: 
+      UIsprite: {fileID: 0}
+      UIspriteName: 
       BaseAttributes:
         BaseHealth: 8
         BaseAttack: 5
@@ -18775,6 +18787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09a42ef2180538469fb88a1931f1a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataMonsDatas: []
+  AllDataMonPrefabs: []
   wm: {fileID: 0}
   waves: []
   SpawnPoints:
@@ -22142,6 +22156,7 @@ MonoBehaviour:
   FileDirectory: 
   AllSavesFile: []
   DoLoadWorld: 0
+  _loadManager: {fileID: 0}
 --- !u!1001 &1937222189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27761,6 +27776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9886b348c6d927145af55262e76d1363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ReloadingImage: {fileID: 0}
   gunPoint: {fileID: 1381013330212530393}
   DataBall: {fileID: 2253522382739557070, guid: 3b4a1298d74e7014aa69b8729df38b7a,
     type: 3}
@@ -27820,7 +27836,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 917b3d503fc4e1e45af79129c9b29b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 4
 --- !u!4 &1381013331137174204
 Transform:
   m_ObjectHideFlags: 0
@@ -28028,6 +28043,7 @@ MonoBehaviour:
   DataMonProductionTime: 0
   CurrentProductionProgress: 0
   GlitchDamage: 0
+  AttackLaunched: 0
 --- !u!114 &1381013331188506912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28044,14 +28060,16 @@ MonoBehaviour:
   AttackPoint: {fileID: 0}
   isBeingCaptured: 0
   isCompanion: 0
-  dataMonData: {fileID: 11400000, guid: 8418c7b48189b9b4e8f4f3d838ce55ef, type: 2}
+  dataMonData: {fileID: 0}
   selected: 0
   DataMonNames: []
   dataMon:
     DataMonName: eeee
     DataMonPrefab: {fileID: 8258848450777015259, guid: 549be21259e953244b9ebabddc679a33,
       type: 3}
-    InherentDataMonAbility: []
+    DataMonPrefabName: 
+    UIsprite: {fileID: 0}
+    UIspriteName: 
     BaseAttributes:
       BaseHealth: 65.02
       BaseAttack: 5.01
@@ -29508,17 +29526,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a90ec1b5f560a4faa4d9a90b67cfd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InHub: 0
   Player: {fileID: 1381013331137174206}
+  canvas: {fileID: 0}
+  hotBarController: {fileID: 0}
+  NumberOfDataMonsInTeam: 4
   playerShootScript: {fileID: 0}
   playerRb: {fileID: 0}
   HostileDataMonsGOs: []
+  MovementSpeed: 6
   PlayerDataMonPatrolMinDist: 1.96
   PlayerDataMonPatrolMaxDist: 7.5
   DataMonSpawnRadiusFromPlayer: 9.22
   DataMonEnableRbInRadius: 16.2
   MaxDistForCompanionDataMon: 8.2
   CaptureDelay: 1
-  NumberOfDataMonsInTeam: 4
+  PlayerisRiding: 0
+  PlayerisDashing: 0
+  ridingDataMonAttackPoint: {fileID: 0}
+  DataMonMount: {fileID: 0}
+  DataMonHotBar: {fileID: 0}
+  DataTeam: []
+  DataMonAbilities: []
   DataMonsTargetingRotationSpeed: 40
   DataMonsRotationSpeed: 200
   DataMonInDataDexHPRegen: 1
@@ -29529,6 +29558,8 @@ MonoBehaviour:
   DataWorldBorderUpY: 104
   GlitchRespawnTime: 45
   Databytes: 0
+  ParticlesBeforeEveryAttack: {fileID: 0}
+  ParticlesBeforeEveryAttackPool: []
   RenderDistanceTrigger: {fileID: 139525160}
   RenderDistance: 30.25
   NeutralColor: {r: 1, g: 1, b: 1, a: 1}
@@ -29537,6 +29568,12 @@ MonoBehaviour:
   GlitchLayerMask:
     serializedVersion: 2
     m_Bits: 2048
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  DataMonLayer:
+    serializedVersion: 2
+    m_Bits: 0
   isShielded: 0
   MaxShieldHealth: 0
   CurrentShieldHealth: 0
@@ -29550,29 +29587,49 @@ MonoBehaviour:
   ShotgunDelay: 0.5
   AssaultRifleDelay: 0.05
   Fists_weapon:
+    type: 0
     Model: {fileID: 1279989611}
+    ModelName: 
+    ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 2
+    reloadTime: 0
     CurrentClipAmount: 0
   DataBallLauncher:
+    type: 0
     Model: {fileID: 1381013332039376871}
+    ModelName: 
+    ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 2
+    reloadTime: 0
     CurrentClipAmount: 0
   huntingRifle:
+    type: 0
     Model: {fileID: 1381013332039376871}
+    ModelName: 
+    ModelInstance: {fileID: 0}
     AmmoAmount: 261
     ClipAmount: 5
+    reloadTime: 0
     CurrentClipAmount: 0
   shotgun:
+    type: 0
     Model: {fileID: 1381013332039376871}
+    ModelName: 
+    ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 7
+    reloadTime: 0
     CurrentClipAmount: 0
   assaultRifle:
+    type: 0
     Model: {fileID: 1381013332039376871}
+    ModelName: 
+    ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 32
+    reloadTime: 0
     CurrentClipAmount: 0
   Bullet: {fileID: 1071924564739704768, guid: 4e850110e73ae64458bb592d433a9220, type: 3}
   DatabytesPrefab: {fileID: 6751158497521048345, guid: a48b25debb7b001499836914167097d1,
@@ -29581,7 +29638,7 @@ MonoBehaviour:
     Melee:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
-      ItemInstance: {fileID: 0}
+      prefabName: 
       isUnlocked: 1
       WeaponModifiers:
         CurrentTier: 1
@@ -29593,19 +29650,7 @@ MonoBehaviour:
     DataBall:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
-      ItemInstance: {fileID: 0}
-      isUnlocked: 0
-      WeaponModifiers:
-        CurrentTier: 1
-        fire_Rate: 1
-        Damage: 1
-        ReloadSpeed: 1
-        ClipAmountUpgradeModifier: 1
-        WeaponUpgradeCostModifier: 1
-    Command:
-      ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
-        type: 3}
-      ItemInstance: {fileID: 0}
+      prefabName: 
       isUnlocked: 0
       WeaponModifiers:
         CurrentTier: 1
@@ -29617,7 +29662,7 @@ MonoBehaviour:
     HuntingRifle:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
-      ItemInstance: {fileID: 0}
+      prefabName: 
       isUnlocked: 0
       WeaponModifiers:
         CurrentTier: 1
@@ -29629,7 +29674,7 @@ MonoBehaviour:
     Shotgun:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
-      ItemInstance: {fileID: 0}
+      prefabName: 
       isUnlocked: 0
       WeaponModifiers:
         CurrentTier: 1
@@ -29641,7 +29686,7 @@ MonoBehaviour:
     AssaultRifle:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
-      ItemInstance: {fileID: 0}
+      prefabName: 
       isUnlocked: 0
       WeaponModifiers:
         CurrentTier: 1
@@ -29650,6 +29695,7 @@ MonoBehaviour:
         ReloadSpeed: 1
         ClipAmountUpgradeModifier: 1
         WeaponUpgradeCostModifier: 1
+  isInteractingNPC: 0
 --- !u!4 &1381013331916039719
 Transform:
   m_ObjectHideFlags: 0
@@ -29886,6 +29932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b53698052f6aed4db2a54e61f61c9cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isExploring: 0
   Content: {fileID: 1381013330975399724}
   Label: {fileID: 8211811096134212987, guid: e4b13d92ad0176a42834c67cab0aa487, type: 3}
   DataMonContainer: {fileID: 6128755075409892428, guid: 4789096ea6802484fbc0ed507472ac7a,
@@ -29895,12 +29942,10 @@ MonoBehaviour:
   DataTeamContainer: {fileID: 1381013330792017297}
   AllDataMonsData:
   - {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
-  - {fileID: 11400000, guid: 8418c7b48189b9b4e8f4f3d838ce55ef, type: 2}
-  AllDataMons: []
-  CompanionsDataMon: []
+  - {fileID: 0}
+  ToDataHub: []
   DataTeam: []
   DisplayDataPad: 0
-  DataPad: {fileID: 1294224703}
   DataTeamPanel: {fileID: 1381013330196512172}
   EvolvePanel: {fileID: 1249172151}
   CraftPanel: {fileID: 789225637}
@@ -29948,11 +29993,16 @@ MonoBehaviour:
   EvolveButton: {fileID: 1952757128}
   DataMonToEvolve:
     dataMonData: {fileID: 0}
+    dataMonDataName: 
+    abilities: {fileID: 0}
+    abilitiesName: 
     dataMonAttacks: []
     dataMon:
       DataMonName: 
       DataMonPrefab: {fileID: 0}
-      InherentDataMonAbility: []
+      DataMonPrefabName: 
+      UIsprite: {fileID: 0}
+      UIspriteName: 
       BaseAttributes:
         BaseHealth: 0
         BaseAttack: 0
@@ -29975,13 +30025,22 @@ MonoBehaviour:
       CurrentMoveSpeed: 0
       CurrentAttackRange: 1
       CurrentCaptureChance: 0
+    inBank: 0
+  Sacrifices: []
+  DataBytesCost: {fileID: 0}
+  SacrificesPNG: []
   EvolutionResult:
     dataMonData: {fileID: 0}
+    dataMonDataName: 
+    abilities: {fileID: 0}
+    abilitiesName: 
     dataMonAttacks: []
     dataMon:
       DataMonName: 
       DataMonPrefab: {fileID: 0}
-      InherentDataMonAbility: []
+      DataMonPrefabName: 
+      UIsprite: {fileID: 0}
+      UIspriteName: 
       BaseAttributes:
         BaseHealth: 0
         BaseAttack: 0
@@ -30004,6 +30063,7 @@ MonoBehaviour:
       CurrentMoveSpeed: 0
       CurrentAttackRange: 1
       CurrentCaptureChance: 0
+    inBank: 0
   HoveringTexts:
     txt_HP: {fileID: 0}
     txt_Atk: {fileID: 0}
@@ -30039,7 +30099,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectedtoCraft: 4
   isEditingCraftingQuantity: 0
+  DisplayDataPad: 0
   CraftSelectedPanel: {fileID: 2038384976}
+  DataPad: {fileID: 0}
   CurrentQuantityToCraft: {fileID: 1693453777}
   DataBytesRequiredText: {fileID: 1219423895}
   CurrentDataBytesAmount: {fileID: 201492349}
