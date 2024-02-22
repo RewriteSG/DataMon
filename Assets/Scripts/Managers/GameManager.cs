@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        else
+        else if(!InHub)
         {
             assaultRifle.ModelInstance = Instantiate(assaultRifle.Model, Player.transform);
             shotgun.ModelInstance = Instantiate(shotgun.Model, Player.transform);

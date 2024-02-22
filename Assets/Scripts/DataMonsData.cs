@@ -35,7 +35,8 @@ public class DataMonIndividualData
     public string DataMonName;
     public GameObject DataMonPrefab;
     public string DataMonPrefabName;
-    public GameObject UI;
+    public Sprite UIsprite;
+    public string UIspriteName;
     public DataMonAttributes BaseAttributes;
     public DataMonBehaviourState MonBehaviourState;
     public DataMonIndividualData()
