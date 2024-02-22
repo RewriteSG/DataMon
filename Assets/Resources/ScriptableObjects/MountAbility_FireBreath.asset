@@ -24,10 +24,16 @@ MonoBehaviour:
   - 0
   - 0
   ActiveTime: 0
-  ItemImage: {fileID: 0}
+  ItemPlaceHolder: {fileID: 0}
+  ItemPlaceHolderPrefabName: 
+  ItemImage:
+  - {fileID: 0}
+  ItemImageName: []
   ItemObject: {fileID: 0}
+  ItemObjectName: 
   AbilityPrefab: {fileID: 2919494206552189688, guid: 114f7d915b274cf4f8d4e0512582cdf3,
     type: 3}
+  AbilityPrefabName: FireBreath
   ChargeTime: 6
   FuelUseThreshold: 1
   modelScale: {x: 1, y: 1}

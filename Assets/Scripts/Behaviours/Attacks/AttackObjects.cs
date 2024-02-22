@@ -12,17 +12,19 @@ public class AttackObjects : MonoBehaviour
     public float Speed, RotationSpeed, MaxDistance, DashDamp;
     public IndividualDataMon.DataMon AttacksByEntity;
     public GameObject AttacksByEntityGameObject;
+    public Animation ExplosionAnimation;
     public SpriteRenderer SpritePNG;
     SpriteRenderer[] allSpritePNG;
     public ParticleSystem UnityParticleSystem;
     public delegate void UpdateAttackObject();
     public UpdateAttackObject updateAttack;
     public bool isMoving, isDashAttack, isMoveAtDistance, isSpinningSprite, isSpinningProjectile, isCollisionEffect, onEndAtSeconds, isScaledUp,
-        isDotAttack, isFireBreath;
+        isDotAttack, isFireBreath, isExplosion;
     Vector2 StartDestination,EndDestination;
     Vector3 smoothVelocity = Vector3.zero;
 
     ParticleSystem ParticleBeforeAttack;
+    public Collider2D[] ALLcollider;
 
     // divide Model world Scale 0.1732548 /  with constant 0.7054937403162723f
     public const float ScaledOfDataMon = 0.7054937403162723f;
@@ -75,9 +77,14 @@ public class AttackObjects : MonoBehaviour
             
             updateAttack += IncreaseScale;
         }
-        delayAfterAttack = 0;
+        if (isExplosion)
+        {
+            ExplosionAnimation.gameObject.SetActive(false);
+        }
+        delayAfterAttack = EndAttackAt;
         if (AttacksByEntity == null)
             return;
+        ALLcollider = transform.GetComponentsInChildren<Collider2D>();
         timer = StartAttackDelay;
         if(GameManager.instance.GetParticleFromPool(StartAttackDelay,out ParticleSystem particleSystem))
         {
@@ -86,13 +93,17 @@ public class AttackObjects : MonoBehaviour
             
             //ParticleBeforeAttack.loop = true;
         }
+        for (int i = 0; i < ALLcollider.Length; i++)
+        {
+            ALLcollider[i].enabled = false;
+        }
+        
         AttacksByEntity.dataMonAI.AttackLaunched = false;
         allSpritePNG = transform.GetComponentsInChildren<SpriteRenderer>();
         for (int i = 0; i < allSpritePNG.Length; i++)
         {
             allSpritePNG[i].color = new Color(allSpritePNG[i].color.r, allSpritePNG[i].color.b, allSpritePNG[i].color.g, 0);
         }
-        delayAfterAttack = EndAttackAt;
     }
 
     float delayAfterAttack;
@@ -104,6 +115,9 @@ public class AttackObjects : MonoBehaviour
             if(ParticleBeforeAttack != null)
             ParticleBeforeAttack.transform.position = transform.position;
             transform.parent = AttacksByEntity == null ? AttacksByEntityGameObject.transform : AttacksByEntity.transform;
+
+
+
             allSpritePNG = transform.GetComponentsInChildren<SpriteRenderer>();
             for (int i = 0; i < allSpritePNG.Length; i++)
             {
@@ -118,7 +132,12 @@ public class AttackObjects : MonoBehaviour
         {
             //UnityParticleSystem.loop = false;
             transform.parent = isFireBreath ? transform.parent : null;
-            print(AttacksByEntity.dataMonAI == null);
+            //print(AttacksByEntity.dataMonAI == null);
+            if(!AttacksByEntity.dataMonAI.AttackLaunched)
+                for (int i = 0; i < ALLcollider.Length; i++)
+                {
+                    ALLcollider[i].enabled = true;
+                }
             AttacksByEntity.dataMonAI.AttackLaunched = true;
             ParticleBeforeAttack.transform.position = Vector3.up * 500;
         }
@@ -148,6 +167,19 @@ public class AttackObjects : MonoBehaviour
         {
             updateAttack();
         }
+        if (isExplosion)
+        {
+
+            if (delayAfterAttack <= 0 && onEndAtSeconds)
+            {
+                ExplosionPlay();
+            }
+            else
+                delayAfterAttack -= Time.deltaTime;
+
+            return;
+        }
+
         if (delayAfterAttack <= 0 && onEndAtSeconds)
         {
             AttackFinished();
@@ -209,6 +241,24 @@ public class AttackObjects : MonoBehaviour
     void SpinByRotatingSpeed()
     {
         SpritePNG.transform.Rotate(Vector3.forward * RotationSpeed * Time.deltaTime);
+    }
+    void ExplosionPlay()
+    {
+        ExplosionAnimation.gameObject.SetActive(true);
+        StartCoroutine(DestroyGameObjectAtDelay(ExplosionAnimation.clip.length));
+        if (!ExplosionAnimation.isPlaying)
+        {
+            transform.position = Vector3.up * 500;
+            ExplosionAnimation.transform.SetParent(null);
+            ExplosionAnimation.Play();
+        }
+    }
+    IEnumerator DestroyGameObjectAtDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
+        if (isExplosion)
+        Destroy(ExplosionAnimation);
     }
     void CollisionEffectPlay()
     {

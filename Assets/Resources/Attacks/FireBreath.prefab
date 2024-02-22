@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2229062815822551854}
   m_Layer: 0
   m_Name: Particle System (2)
-  m_TagString: Untagged
+  m_TagString: AllyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4909,6 +4909,7 @@ MonoBehaviour:
   DashDamp: 0
   AttacksByEntity: {fileID: 0}
   AttacksByEntityGameObject: {fileID: 0}
+  ExplosionAnimation: {fileID: 0}
   SpritePNG: {fileID: 2919494206552189687}
   UnityParticleSystem: {fileID: 2229062815822551849}
   isMoving: 0
@@ -4919,6 +4920,6 @@ MonoBehaviour:
   isCollisionEffect: 0
   onEndAtSeconds: 0
   isScaledUp: 0
-  isDelayBeforeAttack: 0
   isDotAttack: 1
   isFireBreath: 1
+  isExplosion: 0

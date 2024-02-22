@@ -15,14 +15,32 @@ MonoBehaviour:
   abilityDescriptions: []
   isAbilitySemiAuto: 0
   _AbilityType: 3
-  ModifiersByEvolution: []
-  AbilityCooldown: []
+  ModifiersByEvolution:
+  - 2
+  - 3
+  - 4
+  AbilityCooldown:
+  - 3
+  - 2
+  - 1
   ActiveTime: 0
-  ItemImage: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
+  ItemPlaceHolder: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
     type: 3}
+  ItemPlaceHolderPrefabName: 
+  ItemImage:
+  - {fileID: 21300000, guid: 4f8c7accbaf10ca4fb1f1de69a9a8130, type: 3}
+  - {fileID: 21300000, guid: 0de6d46412f2bc84ebfb2ef3865c885a, type: 3}
+  - {fileID: 21300000, guid: 5fe4e16c1633a3e42bf9fb9350b61773, type: 3}
+  ItemImageName:
+  - 
+  - 
+  - 
   ItemObject: {fileID: 5454410355701626907, guid: 0c5687084f31c8443a34e771dad6672c,
     type: 3}
+  ItemObjectName: Mount_Peter
   AbilityPrefab: {fileID: 0}
+  AbilityPrefabName: 
   HotbarPrefab: {fileID: 4408068098515949231, guid: b4335c83db69a1440b0bbe367810d2ba,
     type: 3}
+  HotbarPrefabName: WolfHotbar
   AttackPoint: {x: 0, y: 9.4}

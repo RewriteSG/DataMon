@@ -18,8 +18,11 @@ public class AbilitiesScriptableObjects : ScriptableObject
     public float ActiveTime;
     //public string AttackName;
     //public string AttackDescription;
-    public GameObject ItemImage;
-    public string ItemImageName;
+
+    public GameObject ItemPlaceHolder;
+    public string ItemPlaceHolderPrefabName;
+   [HideInInspector] public Sprite[] ItemImage;
+    [HideInInspector] public string[] ItemImageName;
     public GameObject ItemObject;
     public string ItemObjectName;
 
@@ -45,14 +48,20 @@ public class AbilitiesScriptableObjects : ScriptableObject
     public virtual void Activate(DataMonsData dataMonData, DataMonIndividualData dataMon, GameManager Player, bool toggle)
     {
 
-        ItemInHotBar newItem = new ItemInHotBar(isAbilitySemiAuto ? ItemHolding.DataMonSemiAuto : ItemHolding.DataMonAuto, ItemImage);
+        ItemInHotBar newItem = new ItemInHotBar(isAbilitySemiAuto ? ItemHolding.DataMonSemiAuto : ItemHolding.DataMonAuto, 
+            dataMonData.Ability.ItemPlaceHolder);
         DataMonItemAbility temp = newItem.ItemImage.gameObject.AddComponent<DataMonItemAbility>();
         temp.SetValue(dataMonData, dataMon, Player, toggle, GetAbility());
         newItem.SelectedItem = temp.ItemSelected;
         newItem.UnselectItem = temp.ItemUnselected;
         newItem.useItem = temp.UseItem;
-        Debug.Log("activated");
+        newItem.ItemImage.transform.GetComponentInChildren<SpriteSet>().GetComponent<UnityEngine.UI.Image>().sprite = dataMon.UIsprite;
 
+
+
+        //temp.transform.GetComponentInChildren<SpriteSet>().GetComponent<UnityEngine.UI.Image>().sprite = dataMon.UIsprite;
+
+        Debug.Log("activated");
         HotBarController.ItemsInHotbar.Add(newItem);
 
         //affectStat(ref dataMon);

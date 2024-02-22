@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6c7b3ae25542240a22f64441f57994, type: 3}
+  m_Name: Active_Scorpion
+  m_EditorClassIdentifier: 
+  abilityDescriptions:
+  - Name: Spinning Scorpion
+    Description: 
+  - Name: Spinning Scorpion
+    Description: 
+  - Name: Spinning Scorpion
+    Description: 
+  isAbilitySemiAuto: 0
+  _AbilityType: 2
+  ModifiersByEvolution:
+  - 1.4
+  - 2
+  - 3
+  AbilityCooldown:
+  - 2
+  - 1.5
+  - 1
+  ActiveTime: 0
+  ItemImage: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
+    type: 3}
+  ItemImageName: 
+  ItemObject: {fileID: 6547043216910807693, guid: c0433c64dda887041aec1ec6560d4fc8,
+    type: 3}
+  ItemObjectName: 
+  AbilityPrefab: {fileID: 3052634787038919241, guid: 8c7677fb930b4e144b9ebba8d46b5407,
+    type: 3}
+  AbilityPrefabName: 
