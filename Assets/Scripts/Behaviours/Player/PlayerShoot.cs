@@ -108,13 +108,13 @@ public class PlayerShoot : MonoBehaviour
                 AmmoText.text = "DataBalls: " + DataBallLauncher.AmmoAmount;
                 break;
             case ItemHolding.AssaultRifle:
-                AmmoText.text = "Ammo: " + assaultRifle.CurrentClipAmount+ " / " + assaultRifle.ClipAmount;
+                AmmoText.text = "Ammo: " + assaultRifle.CurrentClipAmount+ " / " + assaultRifle.AmmoAmount;
                 break;
             case ItemHolding.HuntingRifle:
-                AmmoText.text = "Ammo: " + huntingRifle.CurrentClipAmount + " / " + huntingRifle.ClipAmount;
+                AmmoText.text = "Ammo: " + huntingRifle.CurrentClipAmount + " / " + huntingRifle.AmmoAmount;
                 break;
             case ItemHolding.Shotgun:
-                AmmoText.text = "Ammo: " + shotgun.CurrentClipAmount + " / " + shotgun.ClipAmount;
+                AmmoText.text = "Ammo: " + shotgun.CurrentClipAmount + " / " + shotgun.AmmoAmount;
                 break;
         }
     }
@@ -260,12 +260,17 @@ public class PlayerShoot : MonoBehaviour
         GameManager.instance.MovementSpeed = prevPlayerMoveSpeed;
     }
     BulletInstance bullet;
+    int RandomChance;
     public void Shoot_Shotgun()
     {
+        RandomChance = 0;
         if (shotgun.CurrentClipAmount > 0 && 
             timeToShootAnother >= GameManager.instance.ShotgunDelay * GameManager.instance.player_progress.Shotgun.WeaponModifiers.fire_Rate)
         {
-            shotgun.CurrentClipAmount--;
+            if (GameManager.instance.isHamsterPassive)
+                RandomChance = Random.Range(1, 4);
+            if (RandomChance == 1 || RandomChance == 2)
+                shotgun.CurrentClipAmount--;
             timeToShootAnother = 0;
 
             for (int i = 0; i < GameManager.instance.ShotgunPelletPerRnd; i++)
@@ -280,10 +285,14 @@ public class PlayerShoot : MonoBehaviour
     }
     public void Shoot_HuntingRifle()
     {
+        RandomChance = 0;
         if (huntingRifle.CurrentClipAmount > 0 && 
             timeToShootAnother >= GameManager.instance.HuntingRifleDelay * GameManager.instance.player_progress.HuntingRifle.WeaponModifiers.fire_Rate)
         {
-            huntingRifle.CurrentClipAmount--;
+            if (GameManager.instance.isHamsterPassive)
+                RandomChance = Random.Range(1, 4);
+            if (RandomChance == 1 || RandomChance == 2)
+                huntingRifle.CurrentClipAmount--;
             timeToShootAnother = 0;
 
             bullet = GameManager.instance.GetAvailableBullet();
@@ -296,10 +305,14 @@ public class PlayerShoot : MonoBehaviour
     }
     public void Shoot_AssaultRifle()
     {
+        RandomChance = 0;
         if (assaultRifle.CurrentClipAmount > 0 
             && timeToShootAnother >= GameManager.instance.AssaultRifleDelay * GameManager.instance.player_progress.AssaultRifle.WeaponModifiers.fire_Rate)
         {
-            assaultRifle.CurrentClipAmount--;
+            if (GameManager.instance.isHamsterPassive)
+                RandomChance = Random.Range(1, 4);
+            if (RandomChance == 1 || RandomChance == 2)
+                assaultRifle.CurrentClipAmount--;
             timeToShootAnother = 0;
 
             bullet = GameManager.instance.GetAvailableBullet();

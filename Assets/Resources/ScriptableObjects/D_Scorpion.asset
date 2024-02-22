@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: D_Scorpion
   m_EditorClassIdentifier: 
   EvolutionCosts: 0a00000023000000
-  Ability: {fileID: 0}
+  Ability: {fileID: 11400000, guid: 1ade66a021c34e445ba7988bff737d59, type: 2}
   AbilityName: 
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: Skorp
     DataMonPrefab: {fileID: 3222224288041919963, guid: c754fc9cf358b8043a08021a9bf37d7b,
       type: 3}
-    DataMonPrefabName: 
+    DataMonPrefabName: Skorp(EVO1)
     UIsprite: {fileID: 21300000, guid: 671ac60e5dda2d447b5b578cbef4b73f, type: 3}
-    UIspriteName: 
+    UIspriteName: Obtained_Skorp
     BaseAttributes:
       BaseHealth: 8
       BaseAttack: 14
@@ -34,9 +34,9 @@ MonoBehaviour:
   - DataMonName: Skorpi
     DataMonPrefab: {fileID: 4409438238243139303, guid: 195181ee3ba02e04e9d4f5d52801b819,
       type: 3}
-    DataMonPrefabName: 
+    DataMonPrefabName: Skorpi(EVO2)
     UIsprite: {fileID: 21300000, guid: 30f036978b5c5434181f3c6acf4675ca, type: 3}
-    UIspriteName: 
+    UIspriteName: Obtained_Skorpi
     BaseAttributes:
       BaseHealth: 14
       BaseAttack: 18
@@ -48,9 +48,9 @@ MonoBehaviour:
   - DataMonName: Skorpike
     DataMonPrefab: {fileID: 8101047146202943333, guid: 8b20c01d96ab0db418f5395247f26e4e,
       type: 3}
-    DataMonPrefabName: 
+    DataMonPrefabName: Skorpike(EVO3)
     UIsprite: {fileID: 21300000, guid: 952061bb18dc3ac40aff44320caa18b4, type: 3}
-    UIspriteName: 
+    UIspriteName: Obtained_Skorpike
     BaseAttributes:
       BaseHealth: 20
       BaseAttack: 30

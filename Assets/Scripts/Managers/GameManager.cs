@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject Player;
     public Canvas canvas;
+    public PlayerHealth playerHealth;
     public HotBarController hotBarController;
     public int NumberOfDataMonsInTeam = 1;
     [HideInInspector] public PlayerShoot playerShootScript;
@@ -68,6 +69,8 @@ public class GameManager : MonoBehaviour
     public float ChanceForDoubleDrop = 0;
     public float PlayerRegenerationRatePerSecond = 1;
     public float AllDamageModifier = 1;
+    public bool isHealedByNatureGuy;
+    public bool isHamsterPassive = false;
 
     [Header("GUNS")]
     public int NumberOfBulletsInPool;
@@ -98,6 +101,7 @@ public class GameManager : MonoBehaviour
     public PassivesAbilitiesEffects onStartPassive;
 
     public bool isInteractingNPC;
+
 
     private void Awake()
     {
@@ -144,7 +148,7 @@ public class GameManager : MonoBehaviour
         else if(!InHub)
         {
 
-            Fists_weapon.ModelInstance = Instantiate(Fists_weapon.Model, Player.transform);
+            //Fists_weapon.ModelInstance = Instantiate(Fists_weapon.Model, Player.transform);
             assaultRifle.ModelInstance = Instantiate(assaultRifle.Model, Player.transform);
             shotgun.ModelInstance = Instantiate(shotgun.Model, Player.transform);
             huntingRifle.ModelInstance = Instantiate(huntingRifle.Model, Player.transform);
@@ -156,6 +160,8 @@ public class GameManager : MonoBehaviour
             return;
         playerRb = Player.GetComponent<Rigidbody2D>();
         playerShootScript = Player.GetComponent<PlayerShoot>();
+        playerHealth = Player.GetComponent<PlayerHealth>();
+        StartCoroutine(RegeneratePlayer());
         BulletsPoolGameObject = new GameObject("BulletPool");
         List<BulletInstance> unactiveBullets = new List<BulletInstance>();
         for (int i = 0; i < NumberOfBulletsInPool; i++)
@@ -337,6 +343,16 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
         glitch.SetActive(true);
+    }
+    IEnumerator RegeneratePlayer()
+    {
+        while (true)
+        {
+            playerHealth.TakeDamage(-PlayerRegenerationRatePerSecond);
+            if(isHealedByNatureGuy && !AudioManager.instance.audioSrc2.isPlaying)
+            AudioManager.instance.PlayAudioClip(AudioManager.instance.Healing);
+            yield return new WaitForSeconds(1);
+        }
     }
 }
 [System.Serializable]

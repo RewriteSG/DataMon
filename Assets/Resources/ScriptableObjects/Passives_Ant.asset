@@ -33,7 +33,18 @@ MonoBehaviour:
   - 0
   - 0
   ActiveTime: 0
-  ItemImage: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
+  ItemPlaceHolder: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
     type: 3}
+  ItemPlaceHolderPrefabName: 
+  ItemImage:
+  - {fileID: 21300000, guid: 74ef3196a56eb9041a87030c183449f9, type: 3}
+  - {fileID: 21300000, guid: d8747dc39a53fef48959334471c31729, type: 3}
+  - {fileID: 21300000, guid: fa3af6c32e8e3f44f8aa9deb349a7ccc, type: 3}
+  ItemImageName:
+  - 
+  - 
+  - 
   ItemObject: {fileID: 0}
+  ItemObjectName: 
   AbilityPrefab: {fileID: 0}
+  AbilityPrefabName: 

@@ -5,7 +5,6 @@ using System.Text;
 [DefaultExecutionOrder(-1)]
 public class SaveLoadManager : MonoBehaviour
 {
-    
     public static SaveLoadManager instance;
     public string FileDirectory;
     public string[] AllSavesFile;
@@ -136,8 +135,18 @@ public class SaveLoadManager : MonoBehaviour
                 DeserializedData.DataMons.DataMons[i].abilities =
                 Resources.Load<AbilitiesScriptableObjects>("ScriptableObjects/" + DeserializedData.DataMons.DataMons[i].abilitiesName);
 
+                //DeserializedData.DataMons.DataMons[i].abilities.
+
+                for (int x = 0; x < DeserializedData.DataMons.DataMons[i].abilities.ItemImage.Length; x++)
+                {
+                    DeserializedData.DataMons.DataMons[i].abilities.ItemImage[x] =
+                Resources.Load<Sprite>("UI/" + DeserializedData.DataMons.DataMons[i].abilities.ItemImageName[x]);
+                }
+
                 DeserializedData.DataMons.DataMons[i].dataMonData =
                 Resources.Load<DataMonsData>("ScriptableObjects/"+DeserializedData.DataMons.DataMons[i].dataMonDataName);
+
+
 
                 DeserializedData.DataMons.DataMons[i].dataMon.UIsprite =
                 Resources.Load<Sprite>("UI/" + DeserializedData.DataMons.DataMons[i].dataMon.UIspriteName);
@@ -160,9 +169,13 @@ public class SaveLoadManager : MonoBehaviour
             for (int i = 0; i < DeserializedData.DataMons.DataMonsInTeam.Length; i++)
             {
                 DeserializedData.DataMons.DataMonsInTeam[i].abilities =
-                Resources.Load<AbilitiesScriptableObjects>("ScriptableObjects/" + DeserializedData.DataMons.DataMons[i].abilitiesName);
+                Resources.Load<AbilitiesScriptableObjects>("ScriptableObjects/" + DeserializedData.DataMons.DataMonsInTeam[i].abilitiesName);
 
-
+                for (int x = 0; x < DeserializedData.DataMons.DataMonsInTeam[i].abilities.ItemImage.Length; x++)
+                {
+                    DeserializedData.DataMons.DataMonsInTeam[i].abilities.ItemImage[x] =
+                Resources.Load<Sprite>("UI/" + DeserializedData.DataMons.DataMonsInTeam[i].abilities.ItemImageName[x]);
+                }
 
                 DeserializedData.DataMons.DataMonsInTeam[i].dataMonData =
                 Resources.Load<DataMonsData>("ScriptableObjects/" + DeserializedData.DataMons.DataMons[i].dataMonDataName);

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6c7b3ae25542240a22f64441f57994, type: 3}
+  m_Name: Active_Bee
+  m_EditorClassIdentifier: 
+  abilityDescriptions:
+  - Name: 
+    Description: Bee Bomb
+  - Name: 
+    Description: Bee Bomb
+  - Name: 
+    Description: Bee Bomb
+  isAbilitySemiAuto: 1
+  _AbilityType: 2
+  ModifiersByEvolution:
+  - 3
+  - 2
+  - 1
+  AbilityCooldown:
+  - 3
+  - 2
+  - 1
+  ActiveTime: 0
+  ItemImage: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
+    type: 3}
+  ItemImageName: 
+  ItemObject: {fileID: 3901964752167042534, guid: fe07e6fe4e0402246a7fa19efe454168,
+    type: 3}
+  ItemObjectName: 
+  AbilityPrefab: {fileID: 5430765030606966955, guid: 73d13eda6efed794fb45f872804a57bc,
+    type: 3}
+  AbilityPrefabName: 

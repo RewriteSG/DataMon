@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: D_Turtle
   m_EditorClassIdentifier: 
   EvolutionCosts: 0a00000019000000
-  Ability: {fileID: 0}
+  Ability: {fileID: 11400000, guid: b45240490fa617244a6ec5f933464f34, type: 2}
   AbilityName: 
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: Turt
     DataMonPrefab: {fileID: 5621823419656160950, guid: aeb4441831823144c8d81a83e9af7bdc,
       type: 3}
-    DataMonPrefabName: 
+    DataMonPrefabName: Turt
     UIsprite: {fileID: 21300000, guid: 84ebf23afa994534db512849b06ef612, type: 3}
-    UIspriteName: 
+    UIspriteName: Obtained_Turt
     BaseAttributes:
       BaseHealth: 12
       BaseAttack: 5
@@ -34,9 +34,9 @@ MonoBehaviour:
   - DataMonName: Turtyst
     DataMonPrefab: {fileID: 726187970350386918, guid: a131661482287b64d9e8d8cfae3dadb0,
       type: 3}
-    DataMonPrefabName: 
+    DataMonPrefabName: Turtyst
     UIsprite: {fileID: 21300000, guid: 60f1db21cb335594b991a2342da5d858, type: 3}
-    UIspriteName: 
+    UIspriteName: Obtained_Turtyst
     BaseAttributes:
       BaseHealth: 15
       BaseAttack: 8
@@ -48,9 +48,9 @@ MonoBehaviour:
   - DataMonName: Crysturt
     DataMonPrefab: {fileID: 6312990260497089612, guid: 27de0d69d8bbd4d40bbc9874d030fc9f,
       type: 3}
-    DataMonPrefabName: 
+    DataMonPrefabName: Crysturt
     UIsprite: {fileID: 21300000, guid: b53d9f7c050267044828e03dcd241aa5, type: 3}
-    UIspriteName: 
+    UIspriteName: Obtained_Crysturt
     BaseAttributes:
       BaseHealth: 25
       BaseAttack: 13

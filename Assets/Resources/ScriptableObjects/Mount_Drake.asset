@@ -24,11 +24,23 @@ MonoBehaviour:
   - 0
   - 0
   ActiveTime: 0
-  ItemImage: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
+  ItemPlaceHolder: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
     type: 3}
+  ItemPlaceHolderPrefabName: 
+  ItemImage:
+  - {fileID: 21300000, guid: e3cf9db88f339de48a296d062bab003b, type: 3}
+  - {fileID: 21300000, guid: 9e62eea1ffe34a2458ae638cc574b7b1, type: 3}
+  - {fileID: 21300000, guid: 2b5db7ca1a55f08478af7415ccbb81eb, type: 3}
+  ItemImageName:
+  - 
+  - 
+  - 
   ItemObject: {fileID: 8383916978022676167, guid: 04b8bf7e714953341b3ff578f3ee7cd0,
     type: 3}
+  ItemObjectName: Mount_Aurumdrake
   AbilityPrefab: {fileID: 0}
+  AbilityPrefabName: 
   HotbarPrefab: {fileID: 2975105121674832050, guid: 14710fb5b161d7842bce1e37d7239b2a,
     type: 3}
+  HotbarPrefabName: DragonHotbar
   AttackPoint: {x: 0, y: 0}

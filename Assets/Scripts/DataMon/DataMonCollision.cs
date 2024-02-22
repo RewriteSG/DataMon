@@ -9,8 +9,8 @@ public class DataMonCollision : MonoBehaviour
     void Awake()
     {
         DataMon = transform.GetComponentInParent<IndividualDataMon.DataMon>();
-        if (GetComponent<Animator>() != null)
-            Destroy(GetComponent<Animator>());
+        //if (GetComponent<Animator>() != null)
+        //    GetComponent<Animator>().;
 
         if (GetComponent<BoxCollider2D>() !=null)
             GetComponent<BoxCollider2D>().isTrigger = true;
