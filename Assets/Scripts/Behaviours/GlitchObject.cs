@@ -61,12 +61,14 @@ public class GlitchObject : MonoBehaviour
         isShakingGlitch = true;
         random = Random.Range(0, 1);
         yield return new WaitForEndOfFrame();
+        AudioManager.instance.PlayAudioClip(AudioManager.instance.DataMonHit);
         GlitchParticleSytem.gameObject.SetActive(true);
         GlitchParticleSytem.Play();
         GlitchPNG.transform.localPosition = new Vector3(random == 1 ? 0.05f : -0.05f, 0, 0);
         yield return new WaitForSeconds(0.1f);
         GlitchPNG.transform.localPosition = new Vector3(random == 1 ? -0.05f : 0.05f, 0, 0);
         yield return new WaitForSeconds(0.1f);
+
         GlitchPNG.transform.localPosition = Vector3.zero;
 
         databyte = Instantiate(DataBytes, transform.position, Quaternion.identity).GetComponent<Databytes>();
@@ -76,5 +78,6 @@ public class GlitchObject : MonoBehaviour
         databyte.randomPos = (Random.insideUnitCircle * radius);
         yield return new WaitForSeconds(1f);
         isShakingGlitch = false;
+
     }
 }

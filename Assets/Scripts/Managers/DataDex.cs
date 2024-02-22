@@ -182,6 +182,7 @@ public class DataDex : MonoBehaviour
     {
         DataTeamPanels.Add(Instantiate(DataMonPanel, DataTeamContainer.transform));
         dataMonBtn = DataTeamPanels[DataTeamPanels.Count - 1].AddComponent<DataMonButton>();
+        dataMonBtn.transform.GetComponentInChildren<SpriteSet>().gameObject.GetComponent<Image>().sprite = null;
         dataMonBtn.dataMonHolder = null;
         dataMonBtn.inDataBank = false;
         //dataMonBtn.dataMonHolder.inBank = false; 
@@ -208,7 +209,8 @@ public class DataDex : MonoBehaviour
         verticalLayout = DataMonListInDex[indexOfDataMon].transform.parent.GetComponent<VerticalLayoutGroup>();
 
         dataMonBtn = DataMonObtained[DataMonObtained.Count - 1].AddComponent<DataMonButton>();
-
+        dataMonBtn.transform.GetComponentInChildren<SpriteSet>().GetComponent<Image>().sprite = toDataDex.dataMon.UIsprite;
+        dataMonBtn.transform.GetComponentInChildren<SpriteSet>().GetComponent<Image>().color = Color.white;
         dataMonBtn.dataMonHolder = new DataMonHolder(toDataDex);
 
         dataMonBtn.dataMonHolder.dataMon.DataMonPrefab = 
@@ -317,9 +319,11 @@ public class DataDex : MonoBehaviour
                         dataMonButton.image.color = Color.blue;
                     }
                 }
-                else if(!isDataMonSelected)
+                if(!isDataMonSelected)
                     return;
-
+                //if (datamonEvolution.DataMonToEvolve != null)
+                //    return;
+                print("oh hey");
                 DataMonOnTeamIsSelectedForEvolve = null;
                 if (dataMonButton.inDataBank)
                 {
@@ -354,6 +358,9 @@ public class DataDex : MonoBehaviour
             //dataMonBtn.dataMon.StartPassive();
             dataMonBtn.dataMonHolder.dataMonBaseAttributes = dataMonButton.dataMonHolder.dataMonBaseAttributes;
             verticalLayout = dataMonButton.transform.parent.parent.GetComponent<VerticalLayoutGroup>();
+
+            dataMonBtn.transform.GetComponentInChildren<SpriteSet>().GetComponent<Image>().sprite = dataMonBtn.dataMonHolder.dataMon.UIsprite;
+            dataMonBtn.transform.GetComponentInChildren<SpriteSet>().GetComponent<Image>().color = Color.white;
             StartCoroutine(RearrangeContent(verticalLayout));
 
             RemoveFromDataDex(dataMonButton);
@@ -573,11 +580,14 @@ public class DataMonHolder
     {
         dataMonData = toHold.dataMonData;
         dataMonDataName = toHold.dataMonData.name;
+        if(dataMonData.Ability != null)
         abilitiesName = dataMonData.Ability.name;
         dataMon = toHold.dataMon;
 
-        dataMon.UIsprite = toHold.dataMon.UIsprite;
-        dataMon.UIspriteName = toHold.dataMon.UIsprite.name;
+        dataMon.UIsprite = toHold.dataMonData.DataMons.GetDataMonInDataArray(toHold.dataMon.DataMonName).UIsprite;
+        dataMon.UIspriteName = toHold.dataMonData.DataMons.GetDataMonInDataArray(toHold.dataMon.DataMonName).UIsprite.name;
+        dataMon.DataMonPrefabName = toHold.dataMonData.DataMons.GetDataMonInDataArray(toHold.dataMon.DataMonName).DataMonPrefab.name;
+
         dataMonAttacks = new Attack[toHold.attackObjects.Count];
         //Debug.Log("toHold.attackObjects.Count" + toHold.attackObjects.Count);
         for (int i = 0; i < toHold.attackObjects.Count; i++)
@@ -609,6 +619,10 @@ public class DataMonHolder
 
             //Debug.Log("dataMonAttacks[i] " + dataMonAttacks[i].AttackName);
         }
+
+        dataMon.UIsprite = toHold.dataMonData.DataMons.GetDataMonInDataArray(toHold.dataMon.DataMonName).UIsprite;
+        dataMon.UIspriteName = toHold.dataMonData.DataMons.GetDataMonInDataArray(toHold.dataMon.DataMonName).UIsprite.name;
+        dataMon.DataMonPrefabName = toHold.dataMonData.DataMons.GetDataMonInDataArray(toHold.dataMon.DataMonName).DataMonPrefab.name;
 
         dataMonBaseAttributes = toHold.dataMonBaseAttributes;
         dataMonCurrentAttributes = new DataMonInstancedAttributes(toHold.dataMonCurrentAttributes);

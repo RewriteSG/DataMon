@@ -14,6 +14,7 @@ public class SaveLoadManager : MonoBehaviour
     public bool DoLoadWorld = false;
     public static SavedData savedData;
     // Start is called before the first frame update
+    public ResourceLoadManager _loadManager;
     private void Awake()
     {
         instance = this; FileDirectory = Application.persistentDataPath;
@@ -111,6 +112,8 @@ public class SaveLoadManager : MonoBehaviour
     private static bool DeserializeSaveData(out SavedData DeserializedData)
     {
         DeserializedData = null;
+        if(instance._loadManager != null)
+            instance._loadManager.LoadAllResources();
         try
         {
 
@@ -138,6 +141,8 @@ public class SaveLoadManager : MonoBehaviour
 
                 DeserializedData.DataMons.DataMons[i].dataMon.UIsprite =
                 Resources.Load<Sprite>("UI/" + DeserializedData.DataMons.DataMons[i].dataMon.UIspriteName);
+
+                print("Load ASset"+DeserializedData.DataMons.DataMons[i].dataMon.UIspriteName);
 
                 for (int x = 0; x < DeserializedData.DataMons.DataMons[i].dataMonAttacks.Length; x++)
                 {

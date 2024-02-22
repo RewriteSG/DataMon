@@ -73,5 +73,7 @@ public class DataInspector : MonoBehaviour
         txt_DataName.text = DataMonHovering.dataMon.DataMonName;
 
         txt_Role.text = "Role: " + DataMonHovering.dataMonData.MonRole.ToString();
+
+        txt_Ability.text = DataMonHovering.dataMonData.Ability.abilityDescriptions[DataMonEvolveTier].Description;
     }
 }

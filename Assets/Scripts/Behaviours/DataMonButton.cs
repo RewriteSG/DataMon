@@ -75,7 +75,7 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         //    Destroy(DataMonSummoned);
         //}
         if (!inDataBank && dataMonHolder.dataMonData != null &&
-            DataDex.instance.datamonEvolution.DataMonToEvolve == null && image.color == Color.green /*&& DataMonSummoned == null*/)
+            DataDex.instance.datamonEvolution.DataMonToEvolve == null && (image.color == Color.green || image.color == Color.blue) /*&& DataMonSummoned == null*/)
         {
             //DataMonSummoned = DataDex.instance.SpawnCompanionDataMon(this);
             image.color = DataDex.instance.Testcolor;

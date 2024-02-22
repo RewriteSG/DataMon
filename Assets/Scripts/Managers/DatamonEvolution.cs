@@ -111,6 +111,11 @@ public class DatamonEvolution : MonoBehaviour
             EvolutionResult.dataMonCurrentAttributes = new DataMonInstancedAttributes(dataMonHolder.dataMonData.DataMons[index + 1].BaseAttributes);
             EvolutionResult.dataMonAttacks = Attack.InstanceAttack(dataMonHolder.dataMonAttacks);
             EvolutionResult.dataMon = DataMonIndividualData.CloneDataMonClass(dataMonHolder.dataMonData.DataMons[index + 1]);
+            EvolutionResult.dataMon.DataMonPrefab = dataMonHolder.dataMonData.DataMons[EvolutionResultEvolutionTier].DataMonPrefab;
+            EvolutionResult.dataMon.DataMonPrefabName = dataMonHolder.dataMonData.DataMons[EvolutionResultEvolutionTier].DataMonPrefab.name;
+            EvolutionResult.dataMon.UIsprite = dataMonHolder.dataMonData.DataMons[EvolutionResultEvolutionTier].UIsprite;
+            EvolutionResult.dataMon.UIspriteName = dataMonHolder.dataMonData.DataMons[EvolutionResultEvolutionTier].UIsprite.name;
+
             EvolutionCost = dataMonHolder.dataMonData.EvolutionCosts[index];
 
             Sacrifices.Clear();
@@ -189,7 +194,7 @@ public class DatamonEvolution : MonoBehaviour
         }
         for (int i = 0; i < Sacrifices.Count; i++)
         {
-            if (!Sacrifices[i].inBank)
+            if (Sacrifices[i].inBank)
                 DataDex.instance.AddToDataDex(Sacrifices[i]);
         }
         ResetEvolutionPanels();

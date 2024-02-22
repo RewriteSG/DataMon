@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScene.unity
     guid: f7cff5d22c737af4e94367444e2db745
   - enabled: 1
+    path: Assets/Scenes/DataHub.unity
+    guid: 0b38b632127f69645bf9d3b415be306f
+  - enabled: 1
     path: Assets/Scenes/LoseScene.unity
     guid: cb6532da71db58c4bbf1a5f8abc6e55a
   - enabled: 1

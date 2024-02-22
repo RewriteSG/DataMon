@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
             WeaponType[] weaponTypes = SaveLoadManager.LoadWeaponTypes();
             for (int i = 0; i < weaponTypes.Length; i++)
             {
-                print(weaponTypes[i].Model);
+                //print(weaponTypes[i].Model);
                 //if (weaponTypes[i].Model.isNull())
                 //    continue;
                 if (InHub)
@@ -227,7 +227,11 @@ public class GameManager : MonoBehaviour
         if (InHub)
             return;
         NumberOfDataMonsInTeam = Mathf.Clamp(NumberOfDataMonsInTeam, 1, NumberOfDataMonsInTeam+1);
-       
+        if (LoseGame)
+        {
+            SaveLoadManager.EndExploration();
+            SceneChanger.ChangeScene("DataHub");
+        }
 
         if (Entity_Updates != null)
             Entity_Updates();

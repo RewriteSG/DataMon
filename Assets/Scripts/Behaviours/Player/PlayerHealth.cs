@@ -27,6 +27,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
 
+        AudioManager.instance.PlayAudioClip(AudioManager.instance.PlayerHurt);
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
         healthBar.SetHealth(currentHealth);
