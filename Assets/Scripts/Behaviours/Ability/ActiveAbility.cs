@@ -21,6 +21,9 @@ public class ActiveAbility : AbilitiesScriptableObjects
         attack.AttacksByEntityGameObject = Player.Player.gameObject;
         attack.gameObject.tag = "AllyAttack";
         attack.Damage = attack.DmgBasedOfStat * dataMon.BaseAttributes.BaseAttack;
+        int index = dataMonData.DataMons.GetDataMonIndexInDataArray(dataMon);
+        attack.GetComponent<MountChanger>().currentTier = index;
+        attack.SpritePNG = attack.GetComponent<MountChanger>().Mount_Evolutions[index].GetComponent<SpriteRenderer>();
         return attack.gameObject;
     }
     //public override void UseAbility(DataMonsData dataMonData, DataMonIndividualData dataMon, GameManager Player, bool toggle, Transform Gunpoint = default)

@@ -28,8 +28,9 @@ public class DataMonItemAbility : MonoBehaviour
             case AbilitiesScriptableObjects.AbilityType.ActiveAbility:
 
                 GM.playerShootScript.ShowWeaponModel(ItemHolding.None);
-                weaponInstance = Instantiate(ability.ItemObject, GM.Player.transform);
 
+                weaponInstance = Instantiate(ability.ItemObject, GM.Player.transform);
+                weaponInstance.GetComponent<MountChanger>().currentTier = _dataMonData.DataMons.GetDataMonIndexInDataArray(_dataMon);
                 break;
 
         }
