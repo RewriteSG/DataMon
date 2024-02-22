@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7cd76db86f1e6c48902b25244c0ea7e, type: 3}
+  m_Name: D_Hybreach
+  m_EditorClassIdentifier: 
+  EvolutionCosts: 
+  Ability: {fileID: 0}
+  AbilityName: 
+  AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
+  DataMons:
+  - DataMonName: Hybreach
+    DataMonPrefab: {fileID: 5800908869738802819, guid: 367ceb3a4c497ea41b15062e020100bf,
+      type: 3}
+    DataMonPrefabName: 
+    UI: {fileID: 0}
+    BaseAttributes:
+      BaseHealth: 80
+      BaseAttack: 60
+      BaseProductionSpeed: 0
+      BaseMoveSpeed: 150
+      BaseAttackRange: 0
+      BaseCaptureChance: 0
+    MonBehaviourState: 2
+  MonRole: 1

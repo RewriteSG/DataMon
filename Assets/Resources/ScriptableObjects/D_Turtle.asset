@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7cd76db86f1e6c48902b25244c0ea7e, type: 3}
+  m_Name: D_Turtle
+  m_EditorClassIdentifier: 
+  EvolutionCosts: 0a00000019000000
+  Ability: {fileID: 0}
+  AbilityName: 
+  AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
+  DataMons:
+  - DataMonName: Turt
+    DataMonPrefab: {fileID: 5621823419656160950, guid: aeb4441831823144c8d81a83e9af7bdc,
+      type: 3}
+    DataMonPrefabName: 
+    UI: {fileID: 0}
+    BaseAttributes:
+      BaseHealth: 12
+      BaseAttack: 5
+      BaseProductionSpeed: 0
+      BaseMoveSpeed: 170
+      BaseAttackRange: 0
+      BaseCaptureChance: 0
+    MonBehaviourState: 2
+  - DataMonName: Turtyst
+    DataMonPrefab: {fileID: 726187970350386918, guid: a131661482287b64d9e8d8cfae3dadb0,
+      type: 3}
+    DataMonPrefabName: 
+    UI: {fileID: 0}
+    BaseAttributes:
+      BaseHealth: 15
+      BaseAttack: 8
+      BaseProductionSpeed: 0
+      BaseMoveSpeed: 170
+      BaseAttackRange: 0
+      BaseCaptureChance: 0
+    MonBehaviourState: 2
+  - DataMonName: Crysturt
+    DataMonPrefab: {fileID: 6312990260497089612, guid: 27de0d69d8bbd4d40bbc9874d030fc9f,
+      type: 3}
+    DataMonPrefabName: 
+    UI: {fileID: 0}
+    BaseAttributes:
+      BaseHealth: 25
+      BaseAttack: 13
+      BaseProductionSpeed: 0
+      BaseMoveSpeed: 170
+      BaseAttackRange: 0
+      BaseCaptureChance: 0
+    MonBehaviourState: 2
+  MonRole: 0

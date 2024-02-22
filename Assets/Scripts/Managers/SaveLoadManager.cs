@@ -108,26 +108,95 @@ public class SaveLoadManager : MonoBehaviour
     {
         return savedData == null;
     }
-    private static bool DeserializeSaveData(out SavedData DeerializedData)
+    private static bool DeserializeSaveData(out SavedData DeserializedData)
     {
-        DeerializedData = null;
+        DeserializedData = null;
         try
         {
 
-            DeerializedData = (SavedData)JsonUtility.FromJson(System.IO.File.ReadAllText(SavesFilePath + ".json"), typeof(SavedData));
+            DeserializedData = (SavedData)JsonUtility.FromJson(System.IO.File.ReadAllText(SavesFilePath + ".json"), typeof(SavedData));
+
+            DeserializedData.playerProgress.savedProgress.AssaultRifle.ItemPrefab = 
+                Resources.Load<GameObject>(DeserializedData.playerProgress.savedProgress.AssaultRifle.prefabName);
+
+            DeserializedData.playerProgress.savedProgress.Shotgun.ItemPrefab =
+                Resources.Load<GameObject>(DeserializedData.playerProgress.savedProgress.AssaultRifle.prefabName);
+
+            DeserializedData.playerProgress.savedProgress.HuntingRifle.ItemPrefab =
+                Resources.Load<GameObject>(DeserializedData.playerProgress.savedProgress.HuntingRifle.prefabName);
+
+            DeserializedData.playerProgress.savedProgress.DataBall.ItemPrefab =
+                Resources.Load<GameObject>(DeserializedData.playerProgress.savedProgress.DataBall.prefabName);
+
+            for (int i = 0; i < DeserializedData.DataMons.DataMons.Length; i++)
+            {
+                DeserializedData.DataMons.DataMons[i].abilities =
+                Resources.Load<AbilitiesScriptableObjects>("ScriptableObjects/" + DeserializedData.DataMons.DataMons[i].abilitiesName);
+
+                DeserializedData.DataMons.DataMons[i].dataMonData =
+                Resources.Load<DataMonsData>("ScriptableObjects/"+DeserializedData.DataMons.DataMons[i].dataMonDataName);
+                for (int x = 0; x < DeserializedData.DataMons.DataMons[i].dataMonAttacks.Length; x++)
+                {
+                    DeserializedData.DataMons.DataMons[i].dataMonAttacks[x].AttackPrefab =
+                Resources.Load<GameObject>("Attacks/" + DeserializedData.DataMons.DataMons[i].dataMonAttacks[x].AttackName);
+                }
+                DeserializedData.DataMons.DataMons[i].dataMon.DataMonPrefab =
+                Resources.Load<GameObject>("DataMons/" + DeserializedData.DataMons.DataMons[i].dataMon.DataMonPrefabName);
+                //for (int x = 0; x < ; x++)
+                //{
+                //    DeserializedData.DataMons.DataMons[i].dataMonAttacks[x].AttackPrefab =
+                //Resources.Load<GameObject>("Attacks/" + DeserializedData.DataMons.DataMons[i].dataMonAttacks[x].AttackName);
+                //}
+            }
+            for (int i = 0; i < DeserializedData.DataMons.DataMonsInTeam.Length; i++)
+            {
+                DeserializedData.DataMons.DataMonsInTeam[i].abilities =
+                Resources.Load<AbilitiesScriptableObjects>("ScriptableObjects/" + DeserializedData.DataMons.DataMons[i].abilitiesName);
+
+                DeserializedData.DataMons.DataMonsInTeam[i].dataMonData =
+                Resources.Load<DataMonsData>("ScriptableObjects/" + DeserializedData.DataMons.DataMons[i].dataMonDataName);
+                for (int x = 0; x < DeserializedData.DataMons.DataMons[i].dataMonAttacks.Length; x++)
+                {
+                    DeserializedData.DataMons.DataMonsInTeam[i].dataMonAttacks[x].AttackPrefab =
+                Resources.Load<GameObject>("Attacks/" + DeserializedData.DataMons.DataMons[i].dataMonAttacks[x].AttackPrefabName);
+                }
+                DeserializedData.DataMons.DataMonsInTeam[i].dataMon.DataMonPrefab =
+                Resources.Load<GameObject>("DataMons/" + DeserializedData.DataMons.DataMons[i].dataMon.DataMonPrefabName);
+                //for (int x = 0; x < ; x++)
+                //{
+                //    DeserializedData.DataMons.DataMons[i].dataMonAttacks[x].AttackPrefab =
+                //Resources.Load<GameObject>("Attacks/" + DeserializedData.DataMons.DataMons[i].dataMonAttacks[x].AttackName);
+                //}
+            }
+
+            DeserializedData.DataballLauncher.Model =
+                Resources.Load<GameObject>(DeserializedData.DataballLauncher.ModelName);
+
+            DeserializedData.AssaultRifle.Model =
+                Resources.Load<GameObject>(DeserializedData.AssaultRifle.ModelName);
+
+            DeserializedData.Shotgun.Model =
+                Resources.Load<GameObject>(DeserializedData.Shotgun.ModelName);
+
+            DeserializedData.HuntingRifle.Model =
+                Resources.Load<GameObject>(DeserializedData.HuntingRifle.ModelName);
+
+
+
         }
         catch (System.IO.FileNotFoundException)
         {
             Debug.Log("oof");
-            DeerializedData = null;
+            DeserializedData = null;
         }
 
-        return DeerializedData != null;
+        return DeserializedData != null;
         
     }
 
     public static void EndExploration()
     {
+        ResourceLoadManager.instance.LoadAllResources();
         for (int i = 0; i < GameManager.instance.DataMonAbilities.Count; i++)
         {
             GameManager.instance.DataMonAbilities[i].Deactivate(GameManager.instance.DataTeam[i].dataMonData, GameManager.instance.DataTeam[i].dataMon
@@ -145,6 +214,7 @@ public class SaveLoadManager : MonoBehaviour
     public void SaveHub()
     {
 
+        ResourceLoadManager.instance.LoadAllResources();
         savedData = new SavedData(GameManager.instance.Databytes, GameManager.instance.Player,
             GameManager.instance.player_progress, GameManager.instance.DataBallLauncher, GameManager.instance.huntingRifle,
             GameManager.instance.shotgun, GameManager.instance.assaultRifle, 
@@ -165,7 +235,14 @@ public class SavedData
     public SavedData(int DataBytes, GameObject Player, PlayerProgress _playerProgress, WeaponType _DataBallLauncher,
         WeaponType _HuntingRifle, WeaponType _Shotgun, WeaponType _AssaultRifle, DataMonHolder[] DataMonsInBank, DataMonHolder[] DataTeam)
     {
+
+        
         playerProgress = new SavedPlayerProgress(_playerProgress, DataBytes);
+
+        //playerProgress.savedProgress.AssaultRifle.prefabName = playerProgress.savedProgress.AssaultRifle.ItemPrefab.name;
+        //playerProgress.savedProgress.AssaultRifle.prefabName = playerProgress.savedProgress.AssaultRifle.ItemPrefab.name;
+        //playerProgress.savedProgress.AssaultRifle.prefabName = playerProgress.savedProgress.AssaultRifle.ItemPrefab.name;
+        //playerProgress.savedProgress.AssaultRifle.prefabName = playerProgress.savedProgress.AssaultRifle.ItemPrefab.name;
 
         DataMons = new SavedDataMons(DataMonsInBank, DataTeam);
 

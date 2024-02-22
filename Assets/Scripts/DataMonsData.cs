@@ -9,8 +9,10 @@ public class DataMonsData : ScriptableObject
     public List<int> EvolutionCosts = new List<int>();
 
     public AbilitiesScriptableObjects Ability;
+    public string AbilityName;
 
     public AttackScriptableObject AttacksObjects;
+    //public string AttacksObjectsName;
 
     [Header("Put DataMons from tier 1 to tier 2, and so on..")]
     public DataMonIndividualData[] DataMons;
@@ -32,6 +34,8 @@ public class DataMonIndividualData
 {
     public string DataMonName;
     public GameObject DataMonPrefab;
+    public string DataMonPrefabName;
+    public GameObject UI;
     public DataMonAttributes BaseAttributes;
     public DataMonBehaviourState MonBehaviourState;
     public DataMonIndividualData()

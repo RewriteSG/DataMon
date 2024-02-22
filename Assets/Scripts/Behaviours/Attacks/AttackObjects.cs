@@ -113,7 +113,7 @@ public class AttackObjects : MonoBehaviour
             EndDestination = (transform.up * MaxDistance) + transform.position;
             return;
         }
-        else if(AttacksByEntityGameObject != GameManager.instance.Player)
+        else if(AttacksByEntityGameObject != GameManager.instance.Player && AttacksByEntity != null)
         {
             //UnityParticleSystem.loop = false;
             transform.parent = isFireBreath ? transform.parent : null;

@@ -19,9 +19,12 @@ public class AbilitiesScriptableObjects : ScriptableObject
     //public string AttackName;
     //public string AttackDescription;
     public GameObject ItemImage;
+    public string ItemImageName;
     public GameObject ItemObject;
+    public string ItemObjectName;
 
     public GameObject AbilityPrefab;
+    public string AbilityPrefabName;
 
 
 
@@ -32,7 +35,7 @@ public class AbilitiesScriptableObjects : ScriptableObject
     //public AffectStatDelegate affectStat;
     //public AffectPlayerStatDelegate<GameManager> affectPlayerStat;
     //public AffectEnemyStatDelegate affectEnemyStat;
-    
+
 
     public enum AbilityType
     {

@@ -17226,6 +17226,71 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1068943258}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1077469431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1077469433}
+  - component: {fileID: 1077469432}
+  m_Layer: 0
+  m_Name: YTes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1077469432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077469431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805755b332b872248b933c3ccfbf7dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilitiesScriptableObjects:
+  - {fileID: 11400000, guid: b45240490fa617244a6ec5f933464f34, type: 2}
+  - {fileID: 11400000, guid: 3c38d67243516a2438f8b9627d67539f, type: 2}
+  - {fileID: 11400000, guid: 33b12aa6414b995429ffe4d75f477512, type: 2}
+  - {fileID: 11400000, guid: 80101ef62a3a87745b6dda34300bff82, type: 2}
+  - {fileID: 11400000, guid: c7a15cf51f5c98f4f8859e5a9ef57e6a, type: 2}
+  - {fileID: 11400000, guid: 9afcd5e23faf69141a2cc5a00e8cadd6, type: 2}
+  - {fileID: 11400000, guid: d2eedbd7bbc8a574fb1cf15c06159f6e, type: 2}
+  AttackScriptableObject: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007,
+    type: 2}
+  dataMonsData:
+  - {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+  - {fileID: 11400000, guid: ad36bfa93f7bd4a4c8ce8bdb57df944e, type: 2}
+  - {fileID: 11400000, guid: 5f65049f8e10caa4ba618524c50db530, type: 2}
+  - {fileID: 11400000, guid: b93de0bbb35c2a94883c1e3e5a3eceea, type: 2}
+  - {fileID: 11400000, guid: a3ea56e2c479e914280499f4387e98f8, type: 2}
+  - {fileID: 11400000, guid: 0809147a19581d3458edc78436e9cbe2, type: 2}
+  - {fileID: 11400000, guid: f69093286d03fc04bb15101da509df7b, type: 2}
+  - {fileID: 11400000, guid: 49d007c20e9b4bd49846e2b3fa9f3e5e, type: 2}
+  - {fileID: 11400000, guid: f1b9dbea49d259145bcf1f953dd54c0e, type: 2}
+  - {fileID: 11400000, guid: b3aa1d998ba6e934399993667423202d, type: 2}
+  gameManager: {fileID: 1381013331916039718}
+--- !u!4 &1077469433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077469431}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 55.671112, y: 53.489857, z: -180.15625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1095567595
 GameObject:
   m_ObjectHideFlags: 0
@@ -27008,6 +27073,8 @@ MonoBehaviour:
         DataMonName: Datantite
         DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 15
           BaseAttack: 7
@@ -27024,6 +27091,8 @@ MonoBehaviour:
         DataMonName: Skorp
         DataMonPrefab: {fileID: 3222224288041919963, guid: c754fc9cf358b8043a08021a9bf37d7b,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 8
           BaseAttack: 14
@@ -27044,6 +27113,8 @@ MonoBehaviour:
         DataMonName: Hammo
         DataMonPrefab: {fileID: 2998886106784667176, guid: 0474259a83f7c2c4998146e6986dac7b,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 15
           BaseAttack: 10
@@ -27060,6 +27131,8 @@ MonoBehaviour:
         DataMonName: Skorp
         DataMonPrefab: {fileID: 3222224288041919963, guid: c754fc9cf358b8043a08021a9bf37d7b,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 8
           BaseAttack: 14
@@ -27075,6 +27148,8 @@ MonoBehaviour:
       DataMon:
         DataMonName: 
         DataMonPrefab: {fileID: 0}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 0
           BaseAttack: 0
@@ -27095,6 +27170,8 @@ MonoBehaviour:
         DataMonName: Turtyst
         DataMonPrefab: {fileID: 726187970350386918, guid: a131661482287b64d9e8d8cfae3dadb0,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 15
           BaseAttack: 8
@@ -27111,6 +27188,8 @@ MonoBehaviour:
         DataMonName: ScraPeter
         DataMonPrefab: {fileID: 4978633443002041284, guid: 8e61f1e77281460468e2bc75cb8542d1,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 15
           BaseAttack: 15
@@ -27127,6 +27206,8 @@ MonoBehaviour:
         DataMonName: Datantite
         DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 15
           BaseAttack: 7
@@ -27147,6 +27228,8 @@ MonoBehaviour:
         DataMonName: Arbox
         DataMonPrefab: {fileID: 1335662195762606950, guid: a1a189a22b453314ba89af933aa44f36,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 20
           BaseAttack: 12
@@ -27163,6 +27246,8 @@ MonoBehaviour:
         DataMonName: Skorpike
         DataMonPrefab: {fileID: 8101047146202943333, guid: 8b20c01d96ab0db418f5395247f26e4e,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 20
           BaseAttack: 30
@@ -27179,6 +27264,8 @@ MonoBehaviour:
         DataMonName: Crysturt
         DataMonPrefab: {fileID: 6312990260497089612, guid: 27de0d69d8bbd4d40bbc9874d030fc9f,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 25
           BaseAttack: 13
@@ -27195,6 +27282,8 @@ MonoBehaviour:
         DataMonName: Hammunition
         DataMonPrefab: {fileID: 9198753192753908654, guid: c885cd06861c7264da196284f03df7db,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 20
           BaseAttack: 15
@@ -27215,6 +27304,8 @@ MonoBehaviour:
         DataMonName: BuzzQueen
         DataMonPrefab: {fileID: 1807219733211062849, guid: e33d147595e5c3742a0555e9ff8956b9,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 14
           BaseAttack: 20
@@ -27231,6 +27322,8 @@ MonoBehaviour:
         DataMonName: ProtoPeter
         DataMonPrefab: {fileID: 8909911149548451120, guid: 29b85658bd60899458a88ddb78ff30be,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 25
           BaseAttack: 25
@@ -27251,6 +27344,8 @@ MonoBehaviour:
         DataMonName: Stampedian
         DataMonPrefab: {fileID: 1974126115556432739, guid: aa2984add5c6db746bdec3b6c4ee4073,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 35
           BaseAttack: 27
@@ -27267,6 +27362,8 @@ MonoBehaviour:
         DataMonName: Centaurius
         DataMonPrefab: {fileID: 3256361934947032024, guid: f14c23a328559f74caf40dbe9a5a9d03,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 25
           BaseAttack: 17
@@ -27283,6 +27380,8 @@ MonoBehaviour:
         DataMonName: Argentidrake
         DataMonPrefab: {fileID: 6611149449202018845, guid: 7596b7a23bdda0b4b97d7f931b088fb8,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 30
           BaseAttack: 35
@@ -27298,6 +27397,8 @@ MonoBehaviour:
       DataMon:
         DataMonName: 
         DataMonPrefab: {fileID: 0}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 0
           BaseAttack: 0
@@ -27318,6 +27419,8 @@ MonoBehaviour:
         DataMonName: Centaurius
         DataMonPrefab: {fileID: 3256361934947032024, guid: f14c23a328559f74caf40dbe9a5a9d03,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 25
           BaseAttack: 17
@@ -27334,6 +27437,8 @@ MonoBehaviour:
         DataMonName: Foliox
         DataMonPrefab: {fileID: 8199447733351373943, guid: 918a46757712ba345bf7956e63309945,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 25
           BaseAttack: 12
@@ -27350,6 +27455,8 @@ MonoBehaviour:
         DataMonName: Peter
         DataMonPrefab: {fileID: 5139332057412728592, guid: 207f5fd8f2a4589409f83cb30cf9a4ea,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 35
           BaseAttack: 35
@@ -27365,6 +27472,8 @@ MonoBehaviour:
       DataMon:
         DataMonName: 
         DataMonPrefab: {fileID: 0}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 0
           BaseAttack: 0
@@ -27385,6 +27494,8 @@ MonoBehaviour:
         DataMonName: Argentidrake
         DataMonPrefab: {fileID: 6611149449202018845, guid: 7596b7a23bdda0b4b97d7f931b088fb8,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 30
           BaseAttack: 35
@@ -27401,6 +27512,8 @@ MonoBehaviour:
         DataMonName: Stampedian
         DataMonPrefab: {fileID: 1974126115556432739, guid: aa2984add5c6db746bdec3b6c4ee4073,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 35
           BaseAttack: 27
@@ -27421,6 +27534,8 @@ MonoBehaviour:
         DataMonName: Hybreach
         DataMonPrefab: {fileID: 5800908869738802819, guid: 367ceb3a4c497ea41b15062e020100bf,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 80
           BaseAttack: 60
@@ -27442,6 +27557,8 @@ MonoBehaviour:
         DataMonName: Datantite
         DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 15
           BaseAttack: 7
@@ -27458,6 +27575,8 @@ MonoBehaviour:
         DataMonName: Skorp
         DataMonPrefab: {fileID: 3222224288041919963, guid: c754fc9cf358b8043a08021a9bf37d7b,
           type: 3}
+        DataMonPrefabName: 
+        UI: {fileID: 0}
         BaseAttributes:
           BaseHealth: 8
           BaseAttack: 14
@@ -27476,6 +27595,8 @@ MonoBehaviour:
       DataMonName: Datantite
       DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
         type: 3}
+      DataMonPrefabName: 
+      UI: {fileID: 0}
       BaseAttributes:
         BaseHealth: 15
         BaseAttack: 7
@@ -27624,6 +27745,61 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1668078786}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1670757914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1670757916}
+  - component: {fileID: 1670757915}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1670757915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670757914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f6391845b60ea64b8d7f8e529614dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instance: {fileID: 0}
+  Explosions:
+  - {fileID: 8300000, guid: 68b85fe0810da044da0195cd1b836199, type: 3}
+  - {fileID: 8300000, guid: 31279c76ff5bbef4a900f64e06bf15c5, type: 3}
+  - {fileID: 8300000, guid: b3499660adf3a714bb1cc7dfd59dacec, type: 3}
+  - {fileID: 8300000, guid: 5f9786ca1d034034d90ac3d2a0cac88c, type: 3}
+  DataMonHurt: {fileID: 0}
+  turtleSpin: {fileID: 0}
+  ShieldFull: {fileID: 0}
+  PlayerDeath: {fileID: 0}
+  Dash: {fileID: 0}
+  Healing: {fileID: 0}
+--- !u!4 &1670757916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670757914}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 58.138977, y: 59.74635, z: -169.7539}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1684842525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31261,6 +31437,133 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1995720614}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1997808626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1997808627}
+  - component: {fileID: 1997808628}
+  m_Layer: 0
+  m_Name: BGM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1997808627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997808626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 46.039646, y: 48.816193, z: -164.05469}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1997808628
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997808626}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c0eaaca27a904f0428dc2115f9bc1dcf, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1998531941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35979,6 +36282,8 @@ MonoBehaviour:
     DataMonName: eeee
     DataMonPrefab: {fileID: 8258848450777015259, guid: 549be21259e953244b9ebabddc679a33,
       type: 3}
+    DataMonPrefabName: 
+    UI: {fileID: 0}
     BaseAttributes:
       BaseHealth: 65.02
       BaseAttack: 5.01
@@ -36656,32 +36961,36 @@ MonoBehaviour:
   ShotgunDelay: 0.5
   AssaultRifleDelay: 0.05
   Fists_weapon:
-    type: 0
+    type: 4
     Model: {fileID: 1279989611}
+    ModelName: 
     ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 2
     reloadTime: 0
     CurrentClipAmount: 0
   DataBallLauncher:
-    type: 0
+    type: 3
     Model: {fileID: 7429580441072810428, guid: a0a2a331202357c4d8a6cb25c9a4be51, type: 3}
+    ModelName: 
     ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 2
     reloadTime: 0
     CurrentClipAmount: 0
   huntingRifle:
-    type: 0
+    type: 2
     Model: {fileID: 7429580441072810428, guid: a0a2a331202357c4d8a6cb25c9a4be51, type: 3}
+    ModelName: 
     ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 5
     reloadTime: 1.7
     CurrentClipAmount: 0
   shotgun:
-    type: 0
+    type: 1
     Model: {fileID: 7429580441072810428, guid: a0a2a331202357c4d8a6cb25c9a4be51, type: 3}
+    ModelName: 
     ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 7
@@ -36690,6 +36999,7 @@ MonoBehaviour:
   assaultRifle:
     type: 0
     Model: {fileID: 7429580441072810428, guid: a0a2a331202357c4d8a6cb25c9a4be51, type: 3}
+    ModelName: 
     ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 32
@@ -36702,6 +37012,7 @@ MonoBehaviour:
     Melee:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
+      prefabName: 
       isUnlocked: 1
       WeaponModifiers:
         CurrentTier: 1
@@ -36713,7 +37024,8 @@ MonoBehaviour:
     DataBall:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
-      isUnlocked: 0
+      prefabName: 
+      isUnlocked: 1
       WeaponModifiers:
         CurrentTier: 1
         fire_Rate: 1
@@ -36724,6 +37036,7 @@ MonoBehaviour:
     HuntingRifle:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
+      prefabName: 
       isUnlocked: 1
       WeaponModifiers:
         CurrentTier: 1
@@ -36735,6 +37048,7 @@ MonoBehaviour:
     Shotgun:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
+      prefabName: 
       isUnlocked: 1
       WeaponModifiers:
         CurrentTier: 1
@@ -36746,6 +37060,7 @@ MonoBehaviour:
     AssaultRifle:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
+      prefabName: 
       isUnlocked: 1
       WeaponModifiers:
         CurrentTier: 1

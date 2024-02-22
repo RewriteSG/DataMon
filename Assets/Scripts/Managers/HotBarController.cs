@@ -43,6 +43,11 @@ public class HotBarController : MonoBehaviour
                 GameManager.instance.playerShootScript.Shoot_AssaultRifle, 
                 GameManager.instance.playerShootScript.StopShooting));
 
+        ItemsInHotbar.Add(new ItemInHotBar(ItemHolding.DataBall,
+                GameManager.instance.player_progress.DataBall.ItemPrefab,
+                GameManager.instance.playerShootScript.Shoot_Databall,
+                GameManager.instance.playerShootScript.StopShooting));
+
         for (int i = 0; i < GameManager.instance.DataMonAbilities.Count; i++)
         {
         Debug.Log("HhAaaAAAaa");

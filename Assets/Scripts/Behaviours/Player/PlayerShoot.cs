@@ -311,6 +311,7 @@ public class WeaponType
     }
     public Type type;
     public GameObject Model;
+    public string ModelName;
     public GameObject ModelInstance;
     public int AmmoAmount;
     public int ClipAmount = 2;

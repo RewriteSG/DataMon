@@ -107,36 +107,46 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
-        Databytes = SaveLoadManager.LoadDataBytes();
-        //if (SaveLoadManager.LoadPlayerProgress().Melee.ItemPrefab != null)
-            player_progress = SaveLoadManager.LoadPlayerProgress();
-        //print((SaveLoadManager.LoadPlayerProgress().AssaultRifle.ItemPrefab != null) + "What is making you do this");
-        WeaponType[] weaponTypes = SaveLoadManager.LoadWeaponTypes();
-        for (int i = 0; i < weaponTypes.Length; i++)
+        if (SaveLoadManager.instance.DoLoadWorld)
         {
-            print(weaponTypes[i].type);
-            if (weaponTypes[i].Model.isNull())
-                continue;
-            if (InHub)
-                weaponTypes[i].ModelInstance = Instantiate(weaponTypes[i].Model, Vector3.zero, Quaternion.identity);
-            else
-                weaponTypes[i].ModelInstance = Instantiate(weaponTypes[i].Model, Player.transform);
-            switch (weaponTypes[i].type)
+            Databytes = SaveLoadManager.LoadDataBytes();
+            player_progress = SaveLoadManager.LoadPlayerProgress();
+            WeaponType[] weaponTypes = SaveLoadManager.LoadWeaponTypes();
+            for (int i = 0; i < weaponTypes.Length; i++)
             {
-                case WeaponType.Type.AssaultRifle:
-                    assaultRifle = weaponTypes[i];
-                    break;
-                case WeaponType.Type.Shotgun:
-                    shotgun = weaponTypes[i];
-                    break;
-                case WeaponType.Type.HuntingRifle:
-                    huntingRifle = weaponTypes[i];
-                    break;
-                case WeaponType.Type.Databall:
-                    DataBallLauncher = weaponTypes[i];
-                    break;
+                print(weaponTypes[i].type);
+                if (weaponTypes[i].Model.isNull())
+                    continue;
+                if (InHub)
+                    weaponTypes[i].ModelInstance = Instantiate(weaponTypes[i].Model, Vector3.zero, Quaternion.identity);
+                else
+                    weaponTypes[i].ModelInstance = Instantiate(weaponTypes[i].Model, Player.transform);
+                switch (weaponTypes[i].type)
+                {
+                    case WeaponType.Type.AssaultRifle:
+                        assaultRifle = weaponTypes[i];
+                        break;
+                    case WeaponType.Type.Shotgun:
+                        shotgun = weaponTypes[i];
+                        break;
+                    case WeaponType.Type.HuntingRifle:
+                        huntingRifle = weaponTypes[i];
+                        break;
+                    case WeaponType.Type.Databall:
+                        DataBallLauncher = weaponTypes[i];
+                        break;
+                }
             }
         }
+        else
+        {
+            assaultRifle.ModelInstance = Instantiate(assaultRifle.Model, Player.transform);
+            shotgun.ModelInstance = Instantiate(shotgun.Model, Player.transform);
+            huntingRifle.ModelInstance = Instantiate(huntingRifle.Model, Player.transform);
+            print(DataBallLauncher.Model.name);
+            DataBallLauncher.ModelInstance = Instantiate(DataBallLauncher.Model, Player.transform);
+        }
+
         if (Player == null || InHub)
             return;
         playerRb = Player.GetComponent<Rigidbody2D>();
@@ -170,10 +180,7 @@ public class GameManager : MonoBehaviour
         //}
         //catch (System.NullReferenceException)
         //{
-        //    assaultRifle.ModelInstance = Instantiate(assaultRifle.Model, Player.transform);
-        //    shotgun.ModelInstance = Instantiate(shotgun.Model, Player.transform);
-        //    huntingRifle.ModelInstance = Instantiate(huntingRifle.Model, Player.transform);
-        //    DataBallLauncher.ModelInstance = Instantiate(DataBallLauncher.Model, Player.transform);
+        //    
         Fists_weapon.ModelInstance = Fists_weapon.Model;
         //}
         for (int i = 0; i < 20; i++)
@@ -327,7 +334,6 @@ public class PlayerProgress
 {
     [Header("-----Melee-------")]
     public Item Melee =  new Item();
-
     [Header("-----DataBall-------")]
     public Item DataBall = new Item();
     //[Header("-----Command-------")]
@@ -355,6 +361,7 @@ public class PlayerProgress
 public class Item
 {
     public GameObject ItemPrefab;
+    public string prefabName;
     //[HideInInspector]public GameObject ItemInstance;
     public bool isUnlocked;
     public WeaponUpgradeModifiers WeaponModifiers;

@@ -4644,12 +4644,12 @@ GameObject:
   - component: {fileID: 371727498}
   - component: {fileID: 371727497}
   m_Layer: 0
-  m_Name: MainPOV (1)
+  m_Name: Evo POV
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &371727497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7391,7 +7391,7 @@ Transform:
   - {fileID: 736297838}
   - {fileID: 1189757093}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &703452974
 GameObject:
@@ -10940,6 +10940,133 @@ Transform:
   m_Father: {fileID: 1038397827}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &941136672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 941136674}
+  - component: {fileID: 941136673}
+  m_Layer: 0
+  m_Name: BGM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &941136673
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941136672}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e8e512bf70cdae74fab07329bf26f097, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &941136674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941136672}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 200, y: 200, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &944033938
 GameObject:
   m_ObjectHideFlags: 0
@@ -11575,6 +11702,71 @@ Transform:
   - {fileID: 334723473}
   m_Father: {fileID: 1604270359}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1007400248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1007400250}
+  - component: {fileID: 1007400249}
+  m_Layer: 0
+  m_Name: YTes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1007400249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007400248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805755b332b872248b933c3ccfbf7dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilitiesScriptableObjects:
+  - {fileID: 11400000, guid: b45240490fa617244a6ec5f933464f34, type: 2}
+  - {fileID: 11400000, guid: 3c38d67243516a2438f8b9627d67539f, type: 2}
+  - {fileID: 11400000, guid: 33b12aa6414b995429ffe4d75f477512, type: 2}
+  - {fileID: 11400000, guid: 80101ef62a3a87745b6dda34300bff82, type: 2}
+  - {fileID: 11400000, guid: c7a15cf51f5c98f4f8859e5a9ef57e6a, type: 2}
+  - {fileID: 11400000, guid: 9afcd5e23faf69141a2cc5a00e8cadd6, type: 2}
+  - {fileID: 11400000, guid: d2eedbd7bbc8a574fb1cf15c06159f6e, type: 2}
+  AttackScriptableObject: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007,
+    type: 2}
+  dataMonsData:
+  - {fileID: 11400000, guid: aa736f1836c4348448d258d0c0311e99, type: 2}
+  - {fileID: 11400000, guid: ad36bfa93f7bd4a4c8ce8bdb57df944e, type: 2}
+  - {fileID: 11400000, guid: 5f65049f8e10caa4ba618524c50db530, type: 2}
+  - {fileID: 11400000, guid: b93de0bbb35c2a94883c1e3e5a3eceea, type: 2}
+  - {fileID: 11400000, guid: a3ea56e2c479e914280499f4387e98f8, type: 2}
+  - {fileID: 11400000, guid: 0809147a19581d3458edc78436e9cbe2, type: 2}
+  - {fileID: 11400000, guid: f69093286d03fc04bb15101da509df7b, type: 2}
+  - {fileID: 11400000, guid: 49d007c20e9b4bd49846e2b3fa9f3e5e, type: 2}
+  - {fileID: 11400000, guid: f1b9dbea49d259145bcf1f953dd54c0e, type: 2}
+  - {fileID: 11400000, guid: b3aa1d998ba6e934399993667423202d, type: 2}
+  gameManager: {fileID: 1092760168}
+--- !u!4 &1007400250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007400248}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 55.671112, y: 53.489857, z: -180.15625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1012146177
 GameObject:
@@ -12626,6 +12818,8 @@ MonoBehaviour:
   DataWorldBorderUpY: 104
   GlitchRespawnTime: 45
   Databytes: 152
+  ParticlesBeforeEveryAttack: {fileID: 0}
+  ParticlesBeforeEveryAttackPool: []
   RenderDistanceTrigger: {fileID: 0}
   RenderDistance: 30.25
   NeutralColor: {r: 1, g: 1, b: 1, a: 1}
@@ -12655,6 +12849,7 @@ MonoBehaviour:
   Fists_weapon:
     type: 4
     Model: {fileID: 0}
+    ModelName: 
     ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 2
@@ -12663,6 +12858,7 @@ MonoBehaviour:
   DataBallLauncher:
     type: 3
     Model: {fileID: 7429580441072810428, guid: a0a2a331202357c4d8a6cb25c9a4be51, type: 3}
+    ModelName: 
     ModelInstance: {fileID: 0}
     AmmoAmount: 0
     ClipAmount: 2
@@ -12671,6 +12867,7 @@ MonoBehaviour:
   huntingRifle:
     type: 2
     Model: {fileID: 7429580441072810428, guid: a0a2a331202357c4d8a6cb25c9a4be51, type: 3}
+    ModelName: 
     ModelInstance: {fileID: 0}
     AmmoAmount: 5
     ClipAmount: 5
@@ -12679,6 +12876,7 @@ MonoBehaviour:
   shotgun:
     type: 1
     Model: {fileID: 7429580441072810428, guid: a0a2a331202357c4d8a6cb25c9a4be51, type: 3}
+    ModelName: 
     ModelInstance: {fileID: 0}
     AmmoAmount: 5
     ClipAmount: 7
@@ -12687,6 +12885,7 @@ MonoBehaviour:
   assaultRifle:
     type: 0
     Model: {fileID: 7429580441072810428, guid: a0a2a331202357c4d8a6cb25c9a4be51, type: 3}
+    ModelName: 
     ModelInstance: {fileID: 0}
     AmmoAmount: 5
     ClipAmount: 32
@@ -12699,6 +12898,7 @@ MonoBehaviour:
     Melee:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
+      prefabName: 
       isUnlocked: 1
       WeaponModifiers:
         CurrentTier: 1
@@ -12710,6 +12910,7 @@ MonoBehaviour:
     DataBall:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
+      prefabName: 
       isUnlocked: 0
       WeaponModifiers:
         CurrentTier: 1
@@ -12721,6 +12922,7 @@ MonoBehaviour:
     HuntingRifle:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
+      prefabName: 
       isUnlocked: 0
       WeaponModifiers:
         CurrentTier: 1
@@ -12732,6 +12934,7 @@ MonoBehaviour:
     Shotgun:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
+      prefabName: 
       isUnlocked: 0
       WeaponModifiers:
         CurrentTier: 1
@@ -12743,6 +12946,7 @@ MonoBehaviour:
     AssaultRifle:
       ItemPrefab: {fileID: 8811564986850450386, guid: f5b7887e627c54f459c0593e012b8703,
         type: 3}
+      prefabName: 
       isUnlocked: 0
       WeaponModifiers:
         CurrentTier: 1
@@ -12751,6 +12955,7 @@ MonoBehaviour:
         ReloadSpeed: 1
         ClipAmountUpgradeModifier: 1
         WeaponUpgradeCostModifier: 1
+  isInteractingNPC: 0
 --- !u!1 &1096675955
 GameObject:
   m_ObjectHideFlags: 0
@@ -13502,7 +13707,7 @@ Transform:
   - {fileID: 371727500}
   - {fileID: 436892282}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1161073259
 GameObject:
@@ -18848,7 +19053,7 @@ Transform:
   - {fileID: 2041505522}
   - {fileID: 1811160167}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1228015636
 GameObject:
@@ -20563,7 +20768,7 @@ Transform:
   - {fileID: 1080581927}
   - {fileID: 1452130826}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1402273016
 GameObject:
@@ -22439,7 +22644,7 @@ Transform:
   - {fileID: 973126097}
   - {fileID: 580460128}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 10.002001, y: 0, z: 180.00002}
 --- !u!1 &1590275059
 GameObject:
@@ -22882,7 +23087,7 @@ Transform:
   - {fileID: 226670506}
   - {fileID: 278978593}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.05}
 --- !u!1 &1608062996
 GameObject:
@@ -25699,7 +25904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FileDirectory: 
   AllSavesFile: []
-  DoLoadWorld: 1
+  DoLoadWorld: 0
 --- !u!1 &1926787243
 GameObject:
   m_ObjectHideFlags: 0
@@ -27733,7 +27938,7 @@ Transform:
   - {fileID: 1538619342}
   - {fileID: 881170027}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2092273299
 GameObject:
@@ -31873,6 +32078,7 @@ MonoBehaviour:
   DataMonProductionTime: 0
   CurrentProductionProgress: 0
   GlitchDamage: 0
+  AttackLaunched: 0
 --- !u!114 &1381013331188506912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31896,6 +32102,8 @@ MonoBehaviour:
     DataMonName: eeee
     DataMonPrefab: {fileID: 8258848450777015259, guid: 549be21259e953244b9ebabddc679a33,
       type: 3}
+    DataMonPrefabName: 
+    UI: {fileID: 0}
     BaseAttributes:
       BaseHealth: 65.02
       BaseAttack: 5.01
@@ -33425,11 +33633,15 @@ MonoBehaviour:
   EvolveButton: {fileID: 1952757128}
   DataMonToEvolve:
     dataMonData: {fileID: 0}
+    dataMonDataName: 
     abilities: {fileID: 0}
+    abilitiesName: 
     dataMonAttacks: []
     dataMon:
       DataMonName: 
       DataMonPrefab: {fileID: 0}
+      DataMonPrefabName: 
+      UI: {fileID: 0}
       BaseAttributes:
         BaseHealth: 0
         BaseAttack: 0
@@ -33463,11 +33675,15 @@ MonoBehaviour:
   - {fileID: 1402273018}
   EvolutionResult:
     dataMonData: {fileID: 0}
+    dataMonDataName: 
     abilities: {fileID: 0}
+    abilitiesName: 
     dataMonAttacks: []
     dataMon:
       DataMonName: 
       DataMonPrefab: {fileID: 0}
+      DataMonPrefabName: 
+      UI: {fileID: 0}
       BaseAttributes:
         BaseHealth: 0
         BaseAttack: 0

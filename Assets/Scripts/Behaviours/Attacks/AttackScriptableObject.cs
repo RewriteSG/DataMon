@@ -39,6 +39,7 @@ public class AttackScriptableObject : ScriptableObject
 public class Attack
 {
     public GameObject AttackPrefab;
+    public string AttackPrefabName;
     public GameObject _gameObject;
     [HideInInspector] public AttackObjects attackObject;
     [HideInInspector]public float CurrentCD;

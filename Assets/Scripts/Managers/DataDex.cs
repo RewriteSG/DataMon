@@ -52,15 +52,19 @@ public class DataDex : MonoBehaviour
         instance = this;
         int DataMonEvoCount;
         GameObject temp;
-        DataMonsInBank = SaveLoadManager.LoadDataMonsInBank();
         print("how");
+        if (SaveLoadManager.instance.DoLoadWorld)
+            DataMonsInBank = SaveLoadManager.LoadDataMonsInBank();
+        else
+            DataMonsInBank = new DataMonHolder[] { };
         for (int i = 0; i < DataMonsInBank.Length; i++)
         {
             ToDataHub.Add(DataMonsInBank[i]);
         }
         if (isExploring)
         {
-            DataTeam = SaveLoadManager.LoadDataTeamFromSave();
+            if (SaveLoadManager.instance.DoLoadWorld)
+                DataTeam = SaveLoadManager.LoadDataTeamFromSave();
             return;
         }
         DataMonListInDex.Clear();
@@ -103,12 +107,17 @@ public class DataDex : MonoBehaviour
             Destroy(DataTeamPanels[DataTeamPanels.Count - 1]);
             DataTeamPanels.RemoveAt(DataTeamPanels.Count - 1);
         }
-        DataMonHolder[] loadedTeam = SaveLoadManager.LoadDataTeamFromSave();
-        DataMonButton tempButton;
-        for (int i = 0; i < loadedTeam.Length; i++)
+
+        if (SaveLoadManager.instance.DoLoadWorld)
         {
-            tempButton = AddToDataDex(loadedTeam[i]);
-            DataDexAddToTeam(tempButton);
+            DataMonHolder[] loadedTeam = SaveLoadManager.LoadDataTeamFromSave();
+
+            DataMonButton tempButton;
+            for (int i = 0; i < loadedTeam.Length; i++)
+            {
+                tempButton = AddToDataDex(loadedTeam[i]);
+                DataDexAddToTeam(tempButton);
+            }
         }
 
         RightClick += DataMonButtonRightClick;
@@ -551,7 +560,9 @@ public class DataDexIO
 public class DataMonHolder
 {
     public DataMonsData dataMonData;
+    public string dataMonDataName;
     public AbilitiesScriptableObjects abilities;
+    public string abilitiesName;
     public Attack[] dataMonAttacks;
     public DataMonIndividualData dataMon;
     public DataMonAttributes dataMonBaseAttributes;
@@ -561,6 +572,8 @@ public class DataMonHolder
     public DataMonHolder(IndividualDataMon.DataMon toHold)
     {
         dataMonData = toHold.dataMonData;
+        dataMonDataName = toHold.dataMonData.name;
+        abilitiesName = dataMonData.Ability.name;
         dataMon = toHold.dataMon;
         dataMonAttacks = new Attack[toHold.attackObjects.Count];
         //Debug.Log("toHold.attackObjects.Count" + toHold.attackObjects.Count);
@@ -569,7 +582,7 @@ public class DataMonHolder
             //Debug.Log("AttacksObjects" + toHold.dataMonData.AttacksObjects.GetAttackByName(toHold.attackObjects[i].AttackName));
 
             dataMonAttacks[i] = toHold.dataMonData.AttacksObjects.GetAttackByName(toHold.attackObjects[i].AttackName);
-
+            dataMonAttacks[i].AttackPrefabName = dataMonAttacks[i].AttackPrefab.name;
             //Debug.Log("dataMonAttacks[i] " + dataMonAttacks[i].AttackName);
         }
 
@@ -582,7 +595,7 @@ public class DataMonHolder
     {
         dataMonData = toHold.dataMonData;
         dataMon = toHold.dataMon;
-        Debug.Log(dataMon.DataMonName);
+        //Debug.Log(dataMon.DataMonName);
         dataMonAttacks = new Attack[toHold.dataMonAttacks.Length];
         //Debug.Log("toHold.attackObjects.Count" + toHold.dataMonAttacks.Length);
         for (int i = 0; i < toHold.dataMonAttacks.Length; i++)
