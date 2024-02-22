@@ -16,6 +16,14 @@ public class PlayerCollision : MonoBehaviour
     {
 
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            SaveLoadManager.EndExploration();
+            print("huh");
+        }
+    }
     AttackObjects attack;
     public void OnTriggerEnter2D(Collider2D collision)
     {

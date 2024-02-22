@@ -9,10 +9,10 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     //public UnityEvent RightClick;
     //public UnityEvent LeftClick;
     public DataMonHolder dataMonHolder;
-    public bool inDataBank;
-    public GameObject DataMonSummoned;
-    public IndividualDataMon.DataMon dataMon;
+    public bool inDataBank, inSacrifice;
+    //public GameObject DataMonSummoned;
     public UnityEngine.UI.Image image;
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         if(eventData.button == PointerEventData.InputButton.Right)
@@ -23,6 +23,11 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         {
             //ClickAndDrag(this);
         }
+        //if((eventData.button == PointerEventData.InputButton.Left || eventData.button == PointerEventData.InputButton.Right) && inSacrifice)
+        //{
+        //    DataDex.instance.AddToDataDex(dataMonHolder);
+
+        //}
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -50,27 +55,27 @@ public class DataMonButton : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        //timer += Time.deltaTime;
         if (dataMonHolder == null)
             return;
-        if (timer>= (inDataBank ? 3 : 1))
-        {
-            timer = 0;
-            dataMonHolder.dataMonCurrentAttributes.CurrentHealth += GameManager.instance.DataMonInDataDexHPRegen;
-            dataMonHolder.dataMonCurrentAttributes.CurrentHealth = Mathf.Clamp(dataMonHolder.dataMonCurrentAttributes.CurrentHealth, -1, dataMonHolder.dataMonBaseAttributes.BaseHealth);
-        }
-        if (!inDataBank && dataMonHolder.dataMonData != null && DataMonSummoned == null && image.color != Color.blue && image.color != Color.green)
-        {
-            image.color = Color.blue;
-            dataMonHolder.dataMonCurrentAttributes.CurrentHealth = 0;
-        }
+        //if (timer>= (inDataBank ? 3 : 1))
+        //{
+        //    timer = 0;
+        //    dataMonHolder.dataMonCurrentAttributes.CurrentHealth += GameManager.instance.DataMonInDataDexHPRegen;
+        //    dataMonHolder.dataMonCurrentAttributes.CurrentHealth = Mathf.Clamp(dataMonHolder.dataMonCurrentAttributes.CurrentHealth, -1, dataMonHolder.dataMonBaseAttributes.BaseHealth);
+        //}
+        //if (!inDataBank && dataMonHolder.dataMonData != null && /*DataMonSummoned == null */&& image.color != Color.blue && image.color != Color.green)
+        //{
+        //    image.color = Color.blue;
+        //    dataMonHolder.dataMonCurrentAttributes.CurrentHealth = 0;
+        //}
+        //if (!inDataBank && dataMonHolder.dataMonData != null &&
+        //    DataDex.instance.datamonEvolution.DataMonToEvolve != null && image.color == Color.green && DataMonSummoned != null)
+        //{
+        //    Destroy(DataMonSummoned);
+        //}
         if (!inDataBank && dataMonHolder.dataMonData != null &&
-            DataDex.instance.datamonEvolution.DataMonToEvolve != null && image.color == Color.green && DataMonSummoned != null)
-        {
-            Destroy(DataMonSummoned);
-        }
-        if (!inDataBank && dataMonHolder.dataMonData != null &&
-            DataDex.instance.datamonEvolution.DataMonToEvolve == null && image.color == Color.green && DataMonSummoned == null)
+            DataDex.instance.datamonEvolution.DataMonToEvolve == null && image.color == Color.green /*&& DataMonSummoned == null*/)
         {
             //DataMonSummoned = DataDex.instance.SpawnCompanionDataMon(this);
             image.color = DataDex.instance.Testcolor;

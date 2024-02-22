@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] public float MovementSpeed;
     private Rigidbody2D rb;
     private Vector2 MovementDirection;
-
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +25,9 @@ public class Movement : MonoBehaviour
     }
     void ToFixedUpdate()
     {
-        rb.MovePosition((Vector2)transform.position+(MovementDirection * MovementSpeed*Time.deltaTime));
+        if (GameManager.instance.PlayerisDashing)
+            return;
+        rb.MovePosition((Vector2)transform.position+(MovementDirection * GameManager.instance.MovementSpeed*Time.deltaTime));
     }
     private void OnDestroy()
     {

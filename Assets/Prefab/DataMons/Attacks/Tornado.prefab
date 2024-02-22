@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 9063612229834506049}
   m_Layer: 0
   m_Name: Tornado
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,23 +129,26 @@ MonoBehaviour:
   DmgBasedOfStat: 1.3
   Damage: 0
   AttackRange: 0
-  StartAttackDelay: 1
+  StartAttackDelay: 1.7
   EndAttackAt: 3
-  AttacksByEntity: {fileID: 0}
-  SpritePNG: {fileID: 8209846115323391027}
-  UnityParticleSystem: {fileID: 0}
-  isMoving: 1
-  isDashAttack: 0
-  isSpinningSprite: 1
-  isSpinningProjectile: 0
-  isCollisionEffect: 0
-  onEndAtSeconds: 0
-  isScaledUp: 0
-  isDelayBeforeAttack: 0
   Speed: 1.76
   RotationSpeed: -800
   MaxDistance: 0
   DashDamp: 0
+  AttacksByEntity: {fileID: 0}
+  AttacksByEntityGameObject: {fileID: 0}
+  SpritePNG: {fileID: 8209846115323391027}
+  UnityParticleSystem: {fileID: 0}
+  isMoving: 1
+  isDashAttack: 0
+  isMoveAtDistance: 0
+  isSpinningSprite: 1
+  isSpinningProjectile: 0
+  isCollisionEffect: 0
+  onEndAtSeconds: 1
+  isScaledUp: 0
+  isDotAttack: 0
+  isFireBreath: 0
 --- !u!58 &9063612229834506049
 CircleCollider2D:
   m_ObjectHideFlags: 0

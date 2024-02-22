@@ -21,6 +21,18 @@ public class AttackScriptableObject : ScriptableObject
         }
         return null;
     }
+    //public string Serialize<T>(T itemModel) where T : AttackScriptableObject
+    //{
+    //    string s = "";
+    //    s = JsonUtility.ToJson(itemModel);
+    //    return s;
+    //}
+
+    //public T DeSerialize<T>(string s, T itemToOverwrite) where T : AttackScriptableObject
+    //{
+    //    JsonUtility.FromJsonOverwrite(s, itemToOverwrite);
+    //    return itemToOverwrite;
+    //}
 
 }
 [System.Serializable]
@@ -35,10 +47,12 @@ public class Attack
     public string AttackName;
     public string AttackDescription;
     public float AttackDelayDataMonAfterFiring = 0.8f;
+    Transform Parent;
     public Attack() { }
-    public void CreateInstance(Transform Parent, IndividualDataMon.DataMon byDataMon)
+    public void CreateInstance(Transform _Parent, IndividualDataMon.DataMon byDataMon)
     {
         _gameObject = Object.Instantiate(AttackPrefab, Parent);
+        Parent = _Parent;
         attackObject = _gameObject.GetComponent<AttackObjects>();
         attackObject.AttacksByEntity = byDataMon; 
         _gameObject.transform.position = Vector3.up * 9999;
@@ -48,7 +62,11 @@ public class Attack
     public void AttackCooldownUpdate()
     {
         if (_gameObject == null)
+        {
+            _gameObject = Object.Instantiate(AttackPrefab, Parent);
+
             return;
+        }
         isAvailable = CurrentCD >= AttackCooldown && !_gameObject.activeSelf;
         if (!isAvailable)
             CurrentCD += Time.deltaTime;

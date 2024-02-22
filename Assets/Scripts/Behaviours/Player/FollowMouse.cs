@@ -14,6 +14,8 @@ public class FollowMouse : MonoBehaviour
     // Update is called once per frame
     void ToUpdate()
     {
+        if (GameManager.instance.PlayerisDashing)
+            return;
         Vector3 objPos = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 mousePos = Input.mousePosition;
         //mousePos.y = Camera.main.transform.position.y - transform.position.y;
@@ -23,6 +25,7 @@ public class FollowMouse : MonoBehaviour
         //print("mos" + mousePos);
         float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
         float RotateSmoothly = Mathf.SmoothDampAngle(transform.rotation.eulerAngles.z, -angle, ref reference, rotateDamp);
+        RotateSmoothly = Mathf.Clamp(RotateSmoothly, float.MinValue, float.MaxValue);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, RotateSmoothly));
     }
     private void OnDestroy()

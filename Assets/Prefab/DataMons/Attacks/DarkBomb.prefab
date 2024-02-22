@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1192665176978225128}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.02, y: -0.04, z: 0}
-  m_LocalScale: {x: 0.16968998, y: 0.16968998, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3623201904519695184}
   m_RootOrder: 0
@@ -4766,7 +4766,7 @@ GameObject:
   - component: {fileID: 6064935188874187610}
   m_Layer: 0
   m_Name: DarkBomb
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4779,8 +4779,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3623201904519695190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09, y: 7.65, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 0.49499, y: 0.49499, z: 0.49499}
   m_Children:
   - {fileID: 5960995800474958103}
   - {fileID: 8958060749650203976}
@@ -4802,23 +4802,26 @@ MonoBehaviour:
   DmgBasedOfStat: 1.3
   Damage: 0
   AttackRange: 3
-  StartAttackDelay: 1
+  StartAttackDelay: 1.7
   EndAttackAt: 3
-  AttacksByEntity: {fileID: 0}
-  SpritePNG: {fileID: 553479851211617365}
-  UnityParticleSystem: {fileID: 8288543685469276078}
-  isMoving: 0
-  isDashAttack: 0
-  isSpinningSprite: 1
-  isSpinningProjectile: 0
-  isCollisionEffect: 0
-  onEndAtSeconds: 0
-  isScaledUp: 0
-  isDelayBeforeAttack: 0
   Speed: 2.75
   RotationSpeed: 700
   MaxDistance: 5
   DashDamp: 0
+  AttacksByEntity: {fileID: 0}
+  AttacksByEntityGameObject: {fileID: 0}
+  SpritePNG: {fileID: 553479851211617365}
+  UnityParticleSystem: {fileID: 8288543685469276078}
+  isMoving: 1
+  isDashAttack: 0
+  isMoveAtDistance: 0
+  isSpinningSprite: 1
+  isSpinningProjectile: 0
+  isCollisionEffect: 1
+  onEndAtSeconds: 0
+  isScaledUp: 0
+  isDotAttack: 0
+  isFireBreath: 0
 --- !u!1 &5795454604371649429
 GameObject:
   m_ObjectHideFlags: 0

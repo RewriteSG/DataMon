@@ -13,14 +13,12 @@ MonoBehaviour:
   m_Name: D_Hybreach
   m_EditorClassIdentifier: 
   EvolutionCosts: 
-  InherentPassives: []
-  InherentAllDataMonAbility: []
+  Ability: {fileID: 0}
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: Hybreach
     DataMonPrefab: {fileID: 5800908869738802819, guid: 367ceb3a4c497ea41b15062e020100bf,
       type: 3}
-    InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 80
       BaseAttack: 60
@@ -28,5 +26,5 @@ MonoBehaviour:
       BaseMoveSpeed: 150
       BaseAttackRange: 0
       BaseCaptureChance: 0
-    MonBehaviourState: 0
-  MonRole: 0
+    MonBehaviourState: 2
+  MonRole: 1

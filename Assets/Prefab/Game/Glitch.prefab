@@ -85,8 +85,8 @@ MonoBehaviour:
   MaxHealth: 10
   DataBytes: {fileID: 6751158497521048345, guid: a48b25debb7b001499836914167097d1,
     type: 3}
-  minRandomRespawn: 4
-  maxRandomRespawn: 7
+  minRandomRespawn: 40
+  maxRandomRespawn: 60
   radius: 1.38
 --- !u!1 &8924299828212118569
 GameObject:

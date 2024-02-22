@@ -24,6 +24,15 @@ public static class Extensions
         }
         return list;
     }
+    public static List<T> Add<T>(this List<T> list, T[] toAdd)
+    {
+
+        for (int i = 0; i < toAdd.Length; i++)
+        {
+            list.Add(toAdd[i]);
+        }
+        return list;
+    }
 }
 
 public static class TransformExtensions
@@ -106,8 +115,10 @@ public static class DataMonHolderExtensions
 {
     public static bool isNull(this DataMonHolder holder)
     {
+#if UNITY_EDITOR
         if (holder != null)
-            return holder.dataMon.DataMonPrefab == null;
+            return holder.dataMonData == null;
+#endif
         return holder == null;
     }
     public static DataMonHolder[] RemoveNullReferencesFromArray(this DataMonHolder[] array)
@@ -171,6 +182,15 @@ public static class ArrayExtensions
             temp.Add(array[i]);
         }
         return temp;
+    }
+    public static T[] Add<T>(this T[] array, T[] ToAdd)
+    {
+        if (ToAdd.Length == 0)
+            return array;
+        List<T> temp = new List<T> ();
+        temp = temp.Add(array);
+        temp = temp.Add(ToAdd);
+        return temp.ToArray();
     }
 }
 public static class DataMonsDataExtensions

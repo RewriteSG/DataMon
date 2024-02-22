@@ -13,15 +13,12 @@ MonoBehaviour:
   m_Name: D_Ant
   m_EditorClassIdentifier: 
   EvolutionCosts: 0500000014000000
-  InherentPassives:
-  - {fileID: 11400000, guid: 3eb4063afb2de0c4fa20cd765e717821, type: 2}
-  InherentAllDataMonAbility: []
+  Ability: {fileID: 11400000, guid: d2eedbd7bbc8a574fb1cf15c06159f6e, type: 2}
   AttacksObjects: {fileID: 11400000, guid: 3b7f15cf43dfb8e4bae280b8a0be4007, type: 2}
   DataMons:
   - DataMonName: Datant
     DataMonPrefab: {fileID: 145781175407673768, guid: 67a9c31a78d2533408d939ecb8dc2e3d,
       type: 3}
-    InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 8
       BaseAttack: 5
@@ -33,7 +30,6 @@ MonoBehaviour:
   - DataMonName: Datantite
     DataMonPrefab: {fileID: 7349728296091633160, guid: cbcc3a1a64bb65e40bbd670b0356fb2f,
       type: 3}
-    InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 15
       BaseAttack: 7
@@ -45,7 +41,6 @@ MonoBehaviour:
   - DataMonName: Datantaur
     DataMonPrefab: {fileID: 209965498595768710, guid: a750213a5d6068143b7150b0d1f66701,
       type: 3}
-    InherentDataMonAbility: []
     BaseAttributes:
       BaseHealth: 25
       BaseAttack: 12

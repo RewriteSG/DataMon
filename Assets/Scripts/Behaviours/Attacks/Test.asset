@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   abilityDescriptions: []
-  passiveType: 0
+  _AbilityType: 0
   ModifiersByEvolution: []
+  AbilityCooldown: []
+  ItemImage: {fileID: 0}
+  AbilityPrefab: {fileID: 0}

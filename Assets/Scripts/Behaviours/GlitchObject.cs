@@ -50,6 +50,10 @@ public class GlitchObject : MonoBehaviour
         if (!isShakingGlitch)
             StartCoroutine(ShakeObject());
     }
+    private void OnParticleTrigger()
+    {
+        print("triggered");
+    }
     float random;
     Databytes databyte;
     IEnumerator ShakeObject()

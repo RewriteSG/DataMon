@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2093790221913121740}
   m_Layer: 0
   m_Name: ChargeDashAttack1
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,21 +100,24 @@ MonoBehaviour:
   AttackRange: 6
   StartAttackDelay: 1
   EndAttackAt: 3
+  Speed: 22.81
+  RotationSpeed: 0
+  MaxDistance: 10
+  DashDamp: 0.2
   AttacksByEntity: {fileID: 0}
+  AttacksByEntityGameObject: {fileID: 0}
   SpritePNG: {fileID: 0}
   UnityParticleSystem: {fileID: 0}
   isMoving: 0
   isDashAttack: 1
+  isMoveAtDistance: 0
   isSpinningSprite: 0
   isSpinningProjectile: 0
   isCollisionEffect: 0
   onEndAtSeconds: 0
   isScaledUp: 0
-  isDelayBeforeAttack: 1
-  Speed: 22.81
-  RotationSpeed: 0
-  MaxDistance: 10
-  DashDamp: 0.2
+  isDotAttack: 0
+  isFireBreath: 0
 --- !u!58 &2093790221913121740
 CircleCollider2D:
   m_ObjectHideFlags: 0

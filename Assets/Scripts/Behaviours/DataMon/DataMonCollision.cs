@@ -8,7 +8,7 @@ public class DataMonCollision : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        DataMon = transform.parent.GetComponent<IndividualDataMon.DataMon>();
+        DataMon = transform.GetComponentInParent<IndividualDataMon.DataMon>();
         if (GetComponent<Animator>() != null)
             Destroy(GetComponent<Animator>());
 

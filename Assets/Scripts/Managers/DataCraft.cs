@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+[DefaultExecutionOrder(2)]
 public class DataCraft : MonoBehaviour
 {
     public static DataCraft instance;
@@ -45,15 +46,19 @@ public class DataCraft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (DataDex.instance.isExploring)
         {
-            DisplayDataPad = !DisplayDataPad;
-        }
-        if (DisplayDataPad)
-            CameraFollow.isAiming = false;
-        DataPad.SetActive(DisplayDataPad);
+            if (Input.GetKeyDown(KeyCode.Tab) && !GameManager.instance.isInteractingNPC)
+            {
+                //DisplayDataPad = !DisplayDataPad;
+            }
+            if (DisplayDataPad)
+                CameraFollow.isAiming = false;
+            DataPad.SetActive(DisplayDataPad);
 
-        DataBall.UpdateUI(GameManager.instance.DataBallLauncher.AmmoAmount);
+
+        }
+            DataBall.UpdateUI(GameManager.instance.DataBallLauncher.AmmoAmount);
         //if (GameManager.instance.player_progress.HuntingRifle.isUnlocked)
         //{
         //    HuntingRifle.UpdateUI("Tier: " + GameManager.instance.player_progress.HuntingRifle.WeaponModifiers.CurrentTier);
@@ -68,14 +73,14 @@ public class DataCraft : MonoBehaviour
 
         //}
         //else
-            Shotgun.UpdateUI(GameManager.instance.huntingRifle.AmmoAmount);
+            Shotgun.UpdateUI(GameManager.instance.shotgun.AmmoAmount);
         //if (GameManager.instance.player_progress.AssaultRifle.isUnlocked)
         //{
         //    AssaultRifle.UpdateUI("Tier: "+GameManager.instance.player_progress.AssaultRifle.WeaponModifiers.CurrentTier);
 
         //}
         //else
-            AssaultRifle.UpdateUI(GameManager.instance.huntingRifle.AmmoAmount);
+            AssaultRifle.UpdateUI(GameManager.instance.assaultRifle.AmmoAmount);
 
         if (SelectedtoCraft == SelectedItemToCraft.None)
         {
@@ -108,7 +113,7 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.Databytes != 0)
                     CraftingQuantity =
                     Mathf.Clamp(CraftingQuantity, 0, GameManager.instance.Databytes / HuntingRifle.craftRecipe.DataBytesRequired);
-                //DataBytesReq = HuntingRifle.craftRecipe.DataBytesRequired * CraftingQuantity;
+                DataBytesReq = HuntingRifle.craftRecipe.DataBytesRequired * CraftingQuantity;
 
                 if (GameManager.instance.player_progress.HuntingRifle.isUnlocked)
                 {
@@ -123,7 +128,7 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.Databytes != 0)
                     CraftingQuantity =
                     Mathf.Clamp(CraftingQuantity, 0, GameManager.instance.Databytes / Shotgun.craftRecipe.DataBytesRequired );
-                //DataBytesReq = Shotgun.craftRecipe.DataBytesRequired * CraftingQuantity;
+                DataBytesReq = Shotgun.craftRecipe.DataBytesRequired * CraftingQuantity;
 
                 if (GameManager.instance.player_progress.Shotgun.isUnlocked)
                 {
@@ -139,7 +144,7 @@ public class DataCraft : MonoBehaviour
                 if (GameManager.instance.Databytes != 0)
                     CraftingQuantity =
                     Mathf.Clamp(CraftingQuantity, 0, GameManager.instance.Databytes / AssaultRifle.craftRecipe.DataBytesRequired);
-                //DataBytesReq = AssaultRifle.craftRecipe.DataBytesRequired * CraftingQuantity;
+                DataBytesReq = AssaultRifle.craftRecipe.DataBytesRequired * CraftingQuantity;
 
                 if (GameManager.instance.player_progress.AssaultRifle.isUnlocked)
                 {
@@ -167,6 +172,10 @@ public class DataCraft : MonoBehaviour
                 GameManager.instance.DataBallLauncher.AmmoAmount+= CraftingQuantity;
                 if (!GameManager.instance.player_progress.DataBall.isUnlocked)
                 {
+                    HotBarController.ItemsInHotbar.Add(new ItemInHotBar(ItemHolding.DataBall,
+                        GameManager.instance.player_progress.DataBall.ItemPrefab,
+                        GameManager.instance.playerShootScript.Shoot_Databall, null));
+
                     GameManager.instance.player_progress.DataBall.isUnlocked = true;
                 }
                     break;

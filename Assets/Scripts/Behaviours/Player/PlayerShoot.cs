@@ -35,7 +35,8 @@ public class PlayerShoot : MonoBehaviour
     bool isReloading;
     FistAttack fistsAttack;
     float timeToShootAnother;
-    
+
+    float prevPlayerMoveSpeed;
     private void Start()
     {
         fistsAttack = Fists.GetComponent<FistAttack>();
@@ -46,7 +47,7 @@ public class PlayerShoot : MonoBehaviour
         shotgun = GameManager.instance.shotgun;
         assaultRifle = GameManager.instance.assaultRifle;
         fistsCollision.gameObject.SetActive(false);
-        isReloading = false;
+        isReloading = false; prevPlayerMoveSpeed = GameManager.instance.MovementSpeed;
     }
     void Update()
     {
@@ -92,6 +93,9 @@ public class PlayerShoot : MonoBehaviour
 
     void UpdateAmmoUI()
     {
+        if (HotBarController.ItemsInHotbar[HotBarController.selectedItem] == null)
+            return;
+
         switch (HotBarController.ItemsInHotbar[HotBarController.selectedItem].item)
         {
             case ItemHolding.DataBall:
@@ -118,30 +122,34 @@ public class PlayerShoot : MonoBehaviour
                 SetWeaponModelActive(huntingRifle, false);
                 SetWeaponModelActive(shotgun, false);
                 SetWeaponModelActive(assaultRifle, false);
+                //gunPoint = Fists_weapon.ModelInstance.transform.Find("GunPoint").gameObject;
                 break;
             case ItemHolding.DataBall:
 
                 SetWeaponModelActive(Fists_weapon, false);
+                SetWeaponModelActive(huntingRifle, false);
+                SetWeaponModelActive(shotgun, false);
+                SetWeaponModelActive(assaultRifle, false);
                 SetWeaponModelActive(DataBallLauncher, true);
-                //SetWeaponModelActive(huntingRifle, false);
-                //SetWeaponModelActive(shotgun, false);
-                //SetWeaponModelActive(assaultRifle, false);
+                gunPoint = DataBallLauncher.ModelInstance.transform.Find("GunPoint").gameObject;
                 break;
             case ItemHolding.HuntingRifle:
                 SetWeaponModelActive(Fists_weapon, false);
 
                 SetWeaponModelActive(DataBallLauncher, false);
+                SetWeaponModelActive(shotgun, false);
+                SetWeaponModelActive(assaultRifle, false);
                 SetWeaponModelActive(huntingRifle, true);
-                //SetWeaponModelActive(shotgun, false);
-                //SetWeaponModelActive(assaultRifle, false);
+                gunPoint = huntingRifle.ModelInstance.transform.Find("GunPoint").gameObject;
                 break;
             case ItemHolding.Shotgun:
                 SetWeaponModelActive(Fists_weapon, false);
 
                 SetWeaponModelActive(DataBallLauncher, false);
                 SetWeaponModelActive(huntingRifle, false);
+                SetWeaponModelActive(assaultRifle, false);
                 SetWeaponModelActive(shotgun, true);
-                //SetWeaponModelActive(assaultRifle, false);
+                gunPoint = shotgun.ModelInstance.transform.Find("GunPoint").gameObject;
                 break;
             case ItemHolding.AssaultRifle:
                 SetWeaponModelActive(Fists_weapon, false);
@@ -150,12 +158,22 @@ public class PlayerShoot : MonoBehaviour
                 SetWeaponModelActive(huntingRifle, false);
                 SetWeaponModelActive(shotgun, false);
                 SetWeaponModelActive(assaultRifle, true);
+                gunPoint = assaultRifle.ModelInstance.transform.Find("GunPoint").gameObject;
+                break;
+            case ItemHolding.None:
+
+                SetWeaponModelActive(Fists_weapon, false);
+
+                SetWeaponModelActive(DataBallLauncher, false);
+                SetWeaponModelActive(huntingRifle, false);
+                SetWeaponModelActive(shotgun, false);
+                SetWeaponModelActive(assaultRifle, false);
                 break;
         }
     }
     void SetWeaponModelActive(WeaponType weapon, bool isActive)
     {
-        weapon.Model.SetActive(isActive);
+        weapon.ModelInstance.SetActive(isActive);
     }
     void Reload(ref WeaponType CurrentWepAmmo)
     {
@@ -163,12 +181,15 @@ public class PlayerShoot : MonoBehaviour
     }
     IEnumerator ReloadCoroutine(WeaponType CurrentWepAmmo)
     {
+
         if (CurrentWepAmmo.CurrentClipAmount == CurrentWepAmmo.ClipAmount || CurrentWepAmmo.AmmoAmount == 0)
             yield break;
         isReloading = true;
         timer = 0;
         ReloadTime = CurrentWepAmmo.reloadTime;
+        GameManager.instance.MovementSpeed = 2;
         yield return new WaitForSeconds(CurrentWepAmmo.reloadTime);
+        GameManager.instance.MovementSpeed = prevPlayerMoveSpeed;
         isReloading = false;
         if (CurrentWepAmmo.CurrentClipAmount != 0)
         {
@@ -228,6 +249,10 @@ public class PlayerShoot : MonoBehaviour
             Instantiate(DataBall, gunPoint.transform.position, gunPoint.transform.rotation);
         }
     }
+    public void StopShooting()
+    {
+        GameManager.instance.MovementSpeed = prevPlayerMoveSpeed;
+    }
     BulletInstance bullet;
     public void Shoot_Shotgun()
     {
@@ -244,6 +269,7 @@ public class PlayerShoot : MonoBehaviour
                 bullet.transform.Rotate(Vector3.forward * Random.Range(-25, 26));
                 bullet.SetDamageAndSpeed(SGBullet.Damage * GameManager.instance.player_progress.Shotgun.WeaponModifiers.Damage, SGBullet.speed);
             }
+            GameManager.instance.MovementSpeed = 2;
         }
     }
     public void Shoot_HuntingRifle()
@@ -259,6 +285,7 @@ public class PlayerShoot : MonoBehaviour
             bullet.SetDamageAndSpeed(HRBullet.Damage * GameManager.instance.player_progress.HuntingRifle.WeaponModifiers.Damage, HRBullet.speed);
             bullet.HRBulletCheckPath();
             bullet.isHR = true;
+            GameManager.instance.MovementSpeed = 2;
         }
     }
     public void Shoot_AssaultRifle()
@@ -278,7 +305,13 @@ public class PlayerShoot : MonoBehaviour
 [System.Serializable]
 public class WeaponType
 {
+    public enum Type
+    {
+        AssaultRifle, Shotgun, HuntingRifle, Databall, Fists
+    }
+    public Type type;
     public GameObject Model;
+    public GameObject ModelInstance;
     public int AmmoAmount;
     public int ClipAmount = 2;
     public float reloadTime;

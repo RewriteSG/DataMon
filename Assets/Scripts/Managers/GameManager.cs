@@ -8,17 +8,31 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public static int TotalDataMonIDs;
     public static int HostileDataMons;
+
+    [Header("Important: Set this true if its in DataHub")]
+    public bool InHub = false;
+
     [Header("Player Variables")]
+
     public GameObject Player;
+    public Canvas canvas;
+    public HotBarController hotBarController;
+    public int NumberOfDataMonsInTeam = 1;
     [HideInInspector] public PlayerShoot playerShootScript;
     [HideInInspector] public Rigidbody2D playerRb;
     public List<GameObject> HostileDataMonsGOs = new List<GameObject>();
+    [SerializeField] public float MovementSpeed = 6;
     public float PlayerDataMonPatrolMinDist;
     public float PlayerDataMonPatrolMaxDist;
     public float DataMonSpawnRadiusFromPlayer, DataMonEnableRbInRadius;
     public float MaxDistForCompanionDataMon;
     public float CaptureDelay = 1;
-    public int NumberOfDataMonsInTeam = 1;
+    public bool PlayerisRiding, PlayerisDashing;
+    public GameObject ridingDataMonAttackPoint, DataMonMount, DataMonHotBar;
+
+    public DataMonHolder[] DataTeam = new DataMonHolder[] { };
+    public List<AbilitiesScriptableObjects> DataMonAbilities = new List<AbilitiesScriptableObjects>();
+
     [Header("====================")]
 
     public float DataMonsTargetingRotationSpeed = 40;
@@ -30,10 +44,12 @@ public class GameManager : MonoBehaviour
     public float GlitchRespawnTime = 45;
 
     public int Databytes = 0;
+    public ParticleSystem ParticlesBeforeEveryAttack;
+    public List<ParticleSystem> ParticlesBeforeEveryAttackPool = new List<ParticleSystem>();
     public GameObject RenderDistanceTrigger;
     public float RenderDistance = 10f;
     public Color NeutralColor, HostileColor, CompanionColor;
-    public LayerMask GlitchLayerMask;
+    public LayerMask GlitchLayerMask, PlayerLayer, DataMonLayer;
     public delegate void DataMonAIBehaviourStart(DataMonAI dataMonAI);
     public delegate void DataMonAIBehaviourUpdate();
     public delegate void EntityUpdates();
@@ -41,6 +57,8 @@ public class GameManager : MonoBehaviour
     public DataMonAIBehaviourUpdate DataMon_UpdateAI;
     public EntityUpdates Entity_Updates;
     public EntityUpdates Entity_FixedUpdates;
+
+
 
     [Header("Affects by DataMons Passives")]
     public bool isShielded;
@@ -78,6 +96,8 @@ public class GameManager : MonoBehaviour
     public PassivesAbilitiesEffects onAttackEffectPassive;
     public PassivesAbilitiesEffects onStartPassive;
 
+    public bool isInteractingNPC;
+
     private void Awake()
     {
         instance = this;
@@ -87,7 +107,37 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         instance = this;
-        if (Player == null)
+        Databytes = SaveLoadManager.LoadDataBytes();
+        //if (SaveLoadManager.LoadPlayerProgress().Melee.ItemPrefab != null)
+            player_progress = SaveLoadManager.LoadPlayerProgress();
+        //print((SaveLoadManager.LoadPlayerProgress().AssaultRifle.ItemPrefab != null) + "What is making you do this");
+        WeaponType[] weaponTypes = SaveLoadManager.LoadWeaponTypes();
+        for (int i = 0; i < weaponTypes.Length; i++)
+        {
+            print(weaponTypes[i].type);
+            if (weaponTypes[i].Model.isNull())
+                continue;
+            if (InHub)
+                weaponTypes[i].ModelInstance = Instantiate(weaponTypes[i].Model, Vector3.zero, Quaternion.identity);
+            else
+                weaponTypes[i].ModelInstance = Instantiate(weaponTypes[i].Model, Player.transform);
+            switch (weaponTypes[i].type)
+            {
+                case WeaponType.Type.AssaultRifle:
+                    assaultRifle = weaponTypes[i];
+                    break;
+                case WeaponType.Type.Shotgun:
+                    shotgun = weaponTypes[i];
+                    break;
+                case WeaponType.Type.HuntingRifle:
+                    huntingRifle = weaponTypes[i];
+                    break;
+                case WeaponType.Type.Databall:
+                    DataBallLauncher = weaponTypes[i];
+                    break;
+            }
+        }
+        if (Player == null || InHub)
             return;
         playerRb = Player.GetComponent<Rigidbody2D>();
         playerShootScript = Player.GetComponent<PlayerShoot>();
@@ -100,25 +150,56 @@ public class GameManager : MonoBehaviour
             unactiveBullets[unactiveBullets.Count - 1].gameObject.SetActive(false);
         }
         BulletsPool.Add(false, unactiveBullets);
-        BulletsPool.Add(true, new List<BulletInstance>()); 
+        BulletsPool.Add(true, new List<BulletInstance>());
+#if UNITY_EDITOR
         ReferencePlayerRenderDistTrigger();
+#endif
         HostileDataMonsGOs.Clear();
         DataMon_StartAI = StartAI;
 
+        DataTeam = SaveLoadManager.LoadDataTeamFromSave();
+
+        for (int i = 0; i < DataTeam.Length; i++)
+        {
+            DataMonAbilities.Add(DataTeam[i].dataMonData.Ability);
+        }
+
+        //try
+        //{
+        
+        //}
+        //catch (System.NullReferenceException)
+        //{
+        //    assaultRifle.ModelInstance = Instantiate(assaultRifle.Model, Player.transform);
+        //    shotgun.ModelInstance = Instantiate(shotgun.Model, Player.transform);
+        //    huntingRifle.ModelInstance = Instantiate(huntingRifle.Model, Player.transform);
+        //    DataBallLauncher.ModelInstance = Instantiate(DataBallLauncher.Model, Player.transform);
+        Fists_weapon.ModelInstance = Fists_weapon.Model;
+        //}
+        for (int i = 0; i < 20; i++)
+        {
+            ParticlesBeforeEveryAttackPool.Add(Instantiate(ParticlesBeforeEveryAttack.gameObject, Vector3.up * 500, Quaternion.identity).GetComponent<ParticleSystem>());
+        }
+        isInteractingNPC = false;
     }
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
-        if (Player == null)
+        if (Player == null || InHub)
             return;
         ReferencePlayerRenderDistTrigger();
         if (RenderDistanceTrigger == null)
             return;
         RenderDistanceTrigger.transform.localScale = Player.transform.InverseTransformVector(Vector3.one * RenderDistance);
     }
+#endif
 
+#if UNITY_EDITOR
     private void ReferencePlayerRenderDistTrigger()
     {
+        if (InHub)
+            return;
         if (RenderDistanceTrigger == null || RenderDistanceTrigger.transform.parent != Player.transform)
         {
             RenderDistanceTrigger = Player.transform.FindChildByTag("PlayerRenderDist").gameObject;
@@ -126,20 +207,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
+#endif
     // Update is called once per frame
     void Update()
     {
+        if (InHub)
+            return;
         NumberOfDataMonsInTeam = Mathf.Clamp(NumberOfDataMonsInTeam, 1, NumberOfDataMonsInTeam+1);
+       
+
         if (Entity_Updates != null)
             Entity_Updates();
     }
     private void FixedUpdate()
     {
-        if (Entity_FixedUpdates != null)
+        if (InHub)
+            return;
+            if (Entity_FixedUpdates != null)
             Entity_FixedUpdates();
     }
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
+        if (InHub)
+            return;
         Gizmos.DrawWireSphere(Player.transform.position, PlayerDataMonPatrolMinDist);
         Gizmos.DrawWireSphere(Player.transform.position, PlayerDataMonPatrolMaxDist);
         Gizmos.DrawWireSphere(Player.transform.position, MaxDistForCompanionDataMon);
@@ -152,6 +243,7 @@ public class GameManager : MonoBehaviour
         Gizmos.DrawWireSphere(Player.transform.position, RenderDistance);
 
     }
+#endif
     BulletInstance b_instance;
     public BulletInstance GetAvailableBullet()
     {
@@ -177,6 +269,22 @@ public class GameManager : MonoBehaviour
             DataMon_UpdateAI();
             yield return new WaitForSeconds(1f);
         }
+    }
+    public bool GetParticleFromPool(float delay, out ParticleSystem ps)
+    {
+        ps = null;
+        if (ParticlesBeforeEveryAttackPool.Count == 0)
+            return false;
+        ps = ParticlesBeforeEveryAttackPool[0];
+        StartCoroutine(SetParticleToPool(ps, delay));
+        ParticlesBeforeEveryAttackPool.RemoveAt(0);
+        return true;
+    }
+    IEnumerator SetParticleToPool(ParticleSystem ps, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ps.gameObject.transform.position = Vector3.up * 500;
+        ParticlesBeforeEveryAttackPool.Add(ps);
     }
     Collider2D[] Glitches;
     public bool CheckForGlitchesInProximity(out Collider2D Glitch)
@@ -213,7 +321,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         glitch.SetActive(true);
     }
-
 }
 [System.Serializable]
 public class PlayerProgress
@@ -223,28 +330,43 @@ public class PlayerProgress
 
     [Header("-----DataBall-------")]
     public Item DataBall = new Item();
-    [Header("-----Command-------")]
-    public Item Command = new Item();
+    //[Header("-----Command-------")]
+    //public Item Command = new Item();
     [Header("-----HuntingRifle-------")]
     public Item HuntingRifle = new Item();
     [Header("-----Shotgun-------")]
     public Item Shotgun = new Item();
     [Header("-----AssaultRifle-------")]
     public Item AssaultRifle = new Item();
-    public PlayerProgress() { }
+    public PlayerProgress() 
+    {
+        Melee = new Item(); DataBall = new Item(); HuntingRifle = new Item(); Shotgun = new Item(); AssaultRifle = new Item();
+    }
+    public PlayerProgress(Item _Melee, Item _DataBall, Item _HuntingRifle, Item _Shotgun,Item _AssaultRifle)
+    {
+        Melee = _Melee;
+        DataBall = _DataBall;
+        HuntingRifle = _HuntingRifle;
+        Shotgun = _Shotgun;
+        AssaultRifle = _AssaultRifle;
+    }
 }
 [System.Serializable]
 public class Item
 {
     public GameObject ItemPrefab;
-    [HideInInspector]public GameObject ItemInstance;
+    //[HideInInspector]public GameObject ItemInstance;
     public bool isUnlocked;
     public WeaponUpgradeModifiers WeaponModifiers;
-    public Item() { }
-    public void InstantiatePrefab(Transform Hotbar)
+    public Item() 
     {
-        ItemInstance = Object.Instantiate(ItemPrefab, Hotbar);
+        isUnlocked = false;
+        WeaponModifiers = new WeaponUpgradeModifiers();
     }
+    //public void InstantiatePrefab(Transform Hotbar)
+    //{
+    //    ItemInstance = Object.Instantiate(ItemPrefab, Hotbar);
+    //}
 }
 [System.Serializable]
 public class WeaponUpgradeModifiers
@@ -255,4 +377,8 @@ public class WeaponUpgradeModifiers
     public float ReloadSpeed = 1;
     public float ClipAmountUpgradeModifier = 1;
     public float WeaponUpgradeCostModifier = 1;
+    public WeaponUpgradeModifiers()
+    {
+        CurrentTier = 1; fire_Rate = 1; Damage = 1; ReloadSpeed = 1; ClipAmountUpgradeModifier = 1; WeaponUpgradeCostModifier = 1;
+    }
 }

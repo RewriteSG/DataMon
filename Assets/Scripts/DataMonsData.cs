@@ -8,8 +8,8 @@ public class DataMonsData : ScriptableObject
 
     public List<int> EvolutionCosts = new List<int>();
 
-    public AbilitiesScriptableObjects Passives;
-    public Attack DataMonAbility;
+    public AbilitiesScriptableObjects Ability;
+
     public AttackScriptableObject AttacksObjects;
 
     [Header("Put DataMons from tier 1 to tier 2, and so on..")]

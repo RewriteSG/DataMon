@@ -28,6 +28,7 @@ public class DataMonAI : MonoBehaviour
     GameObject ItemCrafted;
     GlitchObject glitch;
 
+    public bool AttackLaunched;
     // Start is called before the first frame update
     void Awake()
     {
@@ -36,7 +37,7 @@ public class DataMonAI : MonoBehaviour
         DataMon = GetComponent<IndividualDataMon.DataMon>();
         DataMon.dataMonAI = this;
         gameObject.AddComponent<AggroSystem>();
-        timerToChangeTarget = 999;
+        //timerToChangeTarget = 999;
         //InvokeRepeating("TestAI", 0, .5f);
         
     }
@@ -50,8 +51,9 @@ public class DataMonAI : MonoBehaviour
         GameManager.instance.DataMon_StartAI(this);
         GameManager.instance.Entity_Updates += ToUpdate;
         GameManager.instance.Entity_FixedUpdates += ToFixedUpdate;
+        
     }
-    float timerToChangeTarget;
+    //float timerToChangeTarget;
     // Update is called once per frame
     void ToUpdate()
     {
@@ -335,7 +337,7 @@ public class DataMonAI : MonoBehaviour
         
 
 
-        if ((AI_state == AI_State.Produce || AI_state == AI_State.Attack && !doingSomething) && Target !=null)
+        if ((AI_state == AI_State.Produce || AI_state == AI_State.Attack && !doingSomething || !AttackLaunched) && Target !=null )
         {
             Dir = (transform.position - Target.position).normalized;
             toRotate = Quaternion.LookRotation(transform.forward, -Dir);
@@ -424,22 +426,25 @@ public class DataMonAI : MonoBehaviour
                 Dir = (transform.position - Target.position).normalized;
                 toRotate = Quaternion.LookRotation(transform.forward, -Dir);
                 //newRotation = Quaternion.RotateTowards(transform.rotation, toRotate, GameManager.instance.DataMonsTargetingRotationSpeed * Time.fixedDeltaTime);
+                
                 if (!doingSomething && Vector2.Distance(Target.position, transform.position) < DataMon.attackObjects[DataMon.currentAttackIndex].attackObject.AttackRange * NextWaypointDist &&
-                    DataMon.attackObjects[DataMon.currentAttackIndex].isAvailable && Quaternion.Angle(transform.rotation, toRotate) < 20)
+                DataMon.attackObjects[DataMon.currentAttackIndex].isAvailable && Quaternion.Angle(transform.rotation, toRotate) < 20)
                 {
                     doingSomething = true;
                     currentAttackingTime = 0;
                     DataMon.StartAttack(Target);
-                    print("Still Attacking");
+                    AttackLaunched = false;
+                    //print("Still Attacking");
                 }
                 if (!doingSomething)
                     return;
 
-                if (currentAttackingTime >= DataMon.attackObjects[DataMon.currentAttackIndex].AttackDelayDataMonAfterFiring)
+                if (currentAttackingTime >= DataMon.attackObjects[DataMon.currentAttackIndex].AttackDelayDataMonAfterFiring &&
+                    AttackLaunched)
                 {
                     doingSomething = false;
                 }
-                else
+                else if(AttackLaunched)
                     currentAttackingTime += Time.deltaTime;
                 // Instantiate Attack
                 break;
@@ -499,7 +504,6 @@ public class DataMonAI : MonoBehaviour
         GameManager.instance.DataMon_UpdateAI -= UpdateDatamonAI;
         GameManager.instance.Entity_Updates -= ToUpdate;
         GameManager.instance.Entity_FixedUpdates -= ToFixedUpdate;
-
     }
     public void CraftedItem()
     {

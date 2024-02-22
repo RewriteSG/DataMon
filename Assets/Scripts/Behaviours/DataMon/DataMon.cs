@@ -18,6 +18,7 @@ namespace IndividualDataMon
         [HideInInspector] public List<string> DataMonNames = new List<string>();
 
         public DataMonIndividualData dataMon;
+
         [HideInInspector]public DataMonAI dataMonAI;
         [HideInInspector] public Databytes _databytes;
         public DataMonAttributes baseAttributes;
@@ -57,6 +58,7 @@ namespace IndividualDataMon
                 if (isBoss)
                     NamePlate.transform.SetParent(null);
             }
+
             DataMonAttacksID = GameManager.TotalDataMonIDs++;
             
         }
@@ -283,12 +285,21 @@ namespace IndividualDataMon
         public void SetDataMon(DataMonIndividualData ToDataMon)
         {
             tier = dataMonData.DataMons.GetDataMonIndexInDataArray(ToDataMon);
-
             dataMon = DataMonIndividualData.CloneDataMonClass(ToDataMon);
+
             CurrentAttributes = new DataMonInstancedAttributes(baseAttributes);
 
 
-            
+            if (isBoss)
+            {
+                NamePlateText.text = dataMon.DataMonName;
+                healthBar = NamePlate.GetComponentInChildren<HealthBarScript>();
+                baseAttributes = DataMonAttributes.CopyDataMonAttributes(dataMon.BaseAttributes);
+                healthBar.SetMaxHealth(Mathf.RoundToInt(baseAttributes.BaseHealth));
+                NamePlate.transform.SetParent(null);
+
+            }
+
 
 
         }
@@ -348,8 +359,7 @@ namespace IndividualDataMon
 
         public void SetDataMonHostile()
         {
-            if (dataMon.MonBehaviourState != DataMonBehaviourState.isHostile)
-                GameManager.HostileDataMons++;
+            GameManager.HostileDataMons++;
             dataMon.MonBehaviourState = DataMonBehaviourState.isHostile;
             NamePlateText.color = GameManager.instance.HostileColor;
             GameManager.instance.HostileDataMonsGOs.Add(gameObject);
@@ -428,10 +438,10 @@ namespace IndividualDataMon
             baseAttributes.BaseAttack = dataMon.BaseAttributes.BaseAttack * modifier;
             healthBar.SetMaxHealth(Mathf.RoundToInt(baseAttributes.BaseHealth));
 
-            if (CurrentAttributes.CurrentHealth >= dataMon.BaseAttributes.BaseHealth)
-            {
-                CurrentAttributes.CurrentHealth = baseAttributes.BaseHealth;
-            }
+            CurrentAttributes.CurrentHealth = baseAttributes.BaseHealth;
+            //if (CurrentAttributes.CurrentHealth >= dataMon.BaseAttributes.BaseHealth)
+            //{
+            //}
         }
         //public void DataMonStartBuff(float buffDuration, float Modifer)
         //{
