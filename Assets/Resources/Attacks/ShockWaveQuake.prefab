@@ -100,13 +100,14 @@ MonoBehaviour:
   AttackRange: 5
   StartAttackDelay: 1.7
   EndAttackAt: 1
-  Speed: 3
+  Speed: 1.5
   RotationSpeed: 0
   MaxDistance: 0
   DashDamp: 0
   AttacksByEntity: {fileID: 0}
   AttacksByEntityGameObject: {fileID: 0}
   ExplosionAnimation: {fileID: 0}
+  target: {fileID: 0}
   SpritePNG: {fileID: 0}
   UnityParticleSystem: {fileID: 0}
   isMoving: 0
@@ -121,6 +122,7 @@ MonoBehaviour:
   isFireBreath: 0
   isExplosion: 0
   ALLcollider: []
+  timerToEnd: 0
 --- !u!58 &1076529425671817547
 CircleCollider2D:
   m_ObjectHideFlags: 0

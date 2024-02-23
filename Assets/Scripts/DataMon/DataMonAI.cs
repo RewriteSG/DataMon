@@ -344,6 +344,17 @@ public class DataMonAI : MonoBehaviour
             newRotation = Quaternion.RotateTowards(transform.rotation, toRotate, GameManager.instance.DataMonsTargetingRotationSpeed * Time.fixedDeltaTime);
             transform.rotation = newRotation;
         }
+        if ((!AttackLaunched && AI_state == AI_State.Attack) && doingSomething && Target != null)
+        {
+            Vector2 Dir = (DataMon.attackObjects[DataMon.currentAttackIndex]._gameObject.transform.position - Target.position).normalized;
+            Quaternion toRotate = Quaternion.LookRotation(transform.forward, -Dir);
+            DataMon.attackObjects[DataMon.currentAttackIndex]._gameObject.transform.rotation = toRotate;
+            //DataMon.attackObjects[DataMon.currentAttackIndex]._gameObject.SetActive(true);
+            //DataMon.attackObjects[DataMon.currentAttackIndex]._gameObject.tag = "EnemyAttack";
+            //DataMon.attackObjects[DataMon.currentAttackIndex].CurrentCD = 0;
+            //DataMon.attackObjects[DataMon.currentAttackIndex].attackObject.Damage =
+            //    DataMon.attackObjects[DataMon.currentAttackIndex].attackObject.DmgBasedOfStat * DataMon.CurrentAttributes.CurrentAttack;
+        }
         if (path == null)
         {
             return;

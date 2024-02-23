@@ -13,6 +13,7 @@ public class AttackObjects : MonoBehaviour
     public IndividualDataMon.DataMon AttacksByEntity;
     public GameObject AttacksByEntityGameObject;
     public Animation ExplosionAnimation;
+    public GameObject target;
     public SpriteRenderer SpritePNG;
     SpriteRenderer[] allSpritePNG;
     public ParticleSystem UnityParticleSystem;
@@ -30,6 +31,7 @@ public class AttackObjects : MonoBehaviour
     public const float ScaledOfDataMon = 0.7054937403162723f;
     //float tLerp;
     float timer = 0;
+    public float timerToEnd;
     private void OnEnable()
     {
 
@@ -84,21 +86,29 @@ public class AttackObjects : MonoBehaviour
         //delayAfterAttack = EndAttackAt;
         if (AttacksByEntity == null)
             return;
+
+        timerToEnd = EndAttackAt;
+
         ALLcollider = transform.GetComponentsInChildren<Collider2D>();
         timer = StartAttackDelay;
+
         if(GameManager.instance.GetParticleFromPool(StartAttackDelay,out ParticleSystem particleSystem))
         {
             ParticleBeforeAttack = particleSystem;
+            ParticleBeforeAttack.gameObject.SetActive(true);
             ParticleBeforeAttack.Play();
             
             //ParticleBeforeAttack.loop = true;
         }
+
         for (int i = 0; i < ALLcollider.Length; i++)
         {
             ALLcollider[i].enabled = false;
         }
+
+
+
         gameObject.GetComponent<Collider2D>().enabled = false;
-        
         AttacksByEntity.dataMonAI.AttackLaunched = false;
         allSpritePNG = transform.GetComponentsInChildren<SpriteRenderer>();
         for (int i = 0; i < allSpritePNG.Length; i++)
@@ -107,11 +117,13 @@ public class AttackObjects : MonoBehaviour
         }
     }
 
+    bool once;
     //float delayAfterAttack;
     private void Update()
     {
-        if(timer > 0 && AttacksByEntityGameObject != GameManager.instance.Player)
+        if(timer >= 0 && AttacksByEntityGameObject != GameManager.instance.Player)
         {
+            once = false;
             timer -= Time.deltaTime;
             if(ParticleBeforeAttack != null)
             ParticleBeforeAttack.transform.position = transform.position;
@@ -129,20 +141,23 @@ public class AttackObjects : MonoBehaviour
             EndDestination = (transform.up * MaxDistance) + transform.position;
             return;
         }
-        else if(AttacksByEntityGameObject != GameManager.instance.Player && AttacksByEntity != null)
+        if(AttacksByEntityGameObject != GameManager.instance.Player && AttacksByEntity != null && timer<0)
         {
             //UnityParticleSystem.loop = false;
             transform.parent = isFireBreath ? transform.parent : null;
             //print(AttacksByEntity.dataMonAI == null);
-            if (!AttacksByEntity.dataMonAI.AttackLaunched)
+            if (!once)
             {
                 for (int i = 0; i < ALLcollider.Length; i++)
                 {
                     ALLcollider[i].enabled = true;
                 }
-
                 gameObject.GetComponent<Collider2D>().enabled = true;
+                print("uh Wut");
+                once = true;
             }
+
+
             AttacksByEntity.dataMonAI.AttackLaunched = true;
             ParticleBeforeAttack.transform.position = Vector3.up * 500;
         }
@@ -175,22 +190,22 @@ public class AttackObjects : MonoBehaviour
         if (isExplosion)
         {
 
-            if (EndAttackAt <= 0 && onEndAtSeconds)
+            if (timerToEnd <= 0 && onEndAtSeconds)
             {
                 ExplosionPlay();
             }
             else
-                EndAttackAt -= Time.deltaTime;
+                timerToEnd -= Time.deltaTime;
 
             return;
         }
 
-        if (EndAttackAt <= 0 && onEndAtSeconds)
+        if (timerToEnd <= 0 && onEndAtSeconds)
         {
             AttackFinished();
         }
         else
-            EndAttackAt -= Time.deltaTime;
+            timerToEnd -= Time.deltaTime;
 
     }
     private void OnDisable()

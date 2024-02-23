@@ -99,6 +99,7 @@ namespace IndividualDataMon
                 attackObjects.Add(attackInstance);
 
                 //print(" Model size" + Model.transform.lossyScale.x + " Divided by math " + (Model.transform.lossyScale.x / 0.7054937403162723f));
+                if(!isBoss)
                 attackInstance.attackObject.transform.localScale = Vector3.one * (Model.transform.lossyScale.x / 0.7054937403162723f);
                 GameManager.instance.Entity_Updates += attackInstance.AttackCooldownUpdate;
             }
@@ -148,7 +149,7 @@ namespace IndividualDataMon
         }
         public void StartAttack(Transform Target)
         {
-            if (dataMon.DataMonName == "Hybreach") // 3 headed dragon rawr
+            if (isBoss) // 3 headed dragon rawr
             {
                 int Rand = Random.Range(0, 3);
                 switch (Rand)
@@ -171,14 +172,15 @@ namespace IndividualDataMon
             {
                 attackObjects[currentAttackIndex]._gameObject.transform.position = AttackPoint.transform.position;
             }
-            Vector2 Dir = (transform.position - Target.position).normalized;
+
+            Vector2 Dir = (attackObjects[currentAttackIndex]._gameObject.transform.position - Target.position).normalized;
             Quaternion toRotate = Quaternion.LookRotation(transform.forward, -Dir);
             attackObjects[currentAttackIndex]._gameObject.transform.rotation = toRotate;
             attackObjects[currentAttackIndex]._gameObject.SetActive(true);
             attackObjects[currentAttackIndex]._gameObject.tag = "EnemyAttack";
             attackObjects[currentAttackIndex].CurrentCD = 0;
-            attackObjects[currentAttackIndex].attackObject.Damage = attackObjects[currentAttackIndex].attackObject.DmgBasedOfStat * CurrentAttributes.CurrentAttack;
-
+            attackObjects[currentAttackIndex].attackObject.Damage =
+            attackObjects[currentAttackIndex].attackObject.DmgBasedOfStat * CurrentAttributes.CurrentAttack;
 
             currentAttackIndex++;
             if (currentAttackIndex >= attackObjects.Count)
@@ -198,8 +200,8 @@ namespace IndividualDataMon
 
             //}
 
-            if (isBoss)
-                ResetAttributes();
+            //if (isBoss)
+            //    ResetAttributes();
             GameManager.instance.Entity_Updates += ToUpdate;
 
         }
@@ -230,7 +232,7 @@ namespace IndividualDataMon
                 timeToShockWave = Random.Range(randomMinShockWaveStartTime, randomMaxShockWaveStartTime);
                 AttackObjects temp = Instantiate(ShockWave, transform.position, Quaternion.identity).GetComponent<AttackObjects>();
                 temp.Damage = temp.DmgBasedOfStat * CurrentAttributes.CurrentAttack;
-                temp.EndAttackAt = 7f;
+                temp.timerToEnd = 4.5f;
                 
             }
             else if( isInVicinity && isBoss)

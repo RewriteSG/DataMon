@@ -367,7 +367,7 @@ public class GameManager : MonoBehaviour
             playerHealth.TakeDamage(-PlayerRegenerationRatePerSecond);
             if(isHealedByNatureGuy && !AudioManager.instance.audioSrc2.isPlaying)
             AudioManager.instance.PlayAudioClip(AudioManager.instance.Healing);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(5);
         }
     }
 }
